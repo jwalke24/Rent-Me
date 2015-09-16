@@ -1,6 +1,6 @@
 ﻿namespace Rent_Me_Inventory_Management_Solutions
 {
-    partial class loginForm
+    partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,6 +35,8 @@
             this.serverLabel = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // serverTextBox
@@ -96,7 +98,17 @@
             this.passwordLabel.TabIndex = 6;
             this.passwordLabel.Text = "Password";
             // 
-            // loginForm
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Rent_Me_Inventory_Management_Solutions.Properties.Resources.create_thumb1;
+            this.pictureBox1.Location = new System.Drawing.Point(74, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(141, 100);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -108,8 +120,10 @@
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.serverTextBox);
-            this.Name = "loginForm";
+            this.Controls.Add(this.pictureBox1);
+            this.Name = "LoginForm";
             this.Text = "RentMe Login";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,6 +138,7 @@
         private System.Windows.Forms.Label serverLabel;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label passwordLabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

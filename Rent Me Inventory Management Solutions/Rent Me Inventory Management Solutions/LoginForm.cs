@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Rent_Me_Inventory_Management_Solutions
 {
-    public partial class loginForm : Form
+    public partial class LoginForm : Form
     {
-        public loginForm()
+        public LoginForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void lblServer_Click(object sender, EventArgs e)

@@ -59,5 +59,15 @@ namespace Rent_Me_Inventory_Management_Solutions.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap create_thumb1 {
+            get {
+                object obj = ResourceManager.GetObject("create_thumb1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
