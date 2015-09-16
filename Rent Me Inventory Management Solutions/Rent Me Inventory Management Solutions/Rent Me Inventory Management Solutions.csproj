@@ -82,10 +82,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Image1.png" />
+    <None Include="Resources\create_thumb1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\create_thumb1.png" />
+    <Folder Include="Controller\" />
+    <Folder Include="Model\" />
+    <Folder Include="Network\" />
+    <Folder Include="Persistance\" />
+    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
