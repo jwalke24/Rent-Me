@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.View;
 
 namespace Rent_Me_Inventory_Management_Solutions
 {
@@ -16,7 +17,7 @@ namespace Rent_Me_Inventory_Management_Solutions
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            Application.Run(new MainWindow());
         }
     }
 }

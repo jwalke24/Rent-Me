@@ -35,7 +35,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 488);
+            this.Enabled = false;
             this.Name = "MainWindow";
+            this.Opacity = 0D;
             this.Text = "Rent Me Database Management Software";
             this.ResumeLayout(false);
 

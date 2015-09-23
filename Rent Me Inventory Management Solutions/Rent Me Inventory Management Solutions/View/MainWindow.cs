@@ -15,6 +15,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         public MainWindow()
         {
             InitializeComponent();
+            this.loginUser();
+        }
+
+        private void loginUser()
+        {
+            var loginWindow = new LoginForm();
+            DialogResult loginResult = loginWindow.ShowDialog(this);
+            if (loginResult == DialogResult.OK)
+            {
+                this.Enabled = true;
+                this.Opacity = 100;
+            }
+            else
+            {
+                Application.Exit();
+            }
+            
         }
     }
 }
