@@ -17,7 +17,15 @@ namespace Rent_Me_Inventory_Management_Solutions
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+            try
+            {
+                Application.Run(new MainWindow());
+            }
+            catch (ObjectDisposedException)
+            {
+                
+            }
+
         }
     }
 }

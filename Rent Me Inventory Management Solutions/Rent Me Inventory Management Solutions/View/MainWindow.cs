@@ -29,7 +29,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             }
             else
             {
-                Application.Exit();
+                this.Close();
             }
             
         }

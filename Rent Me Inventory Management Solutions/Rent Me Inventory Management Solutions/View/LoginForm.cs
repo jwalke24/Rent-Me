@@ -15,17 +15,6 @@ namespace Rent_Me_Inventory_Management_Solutions
         public LoginForm()
         {
             this.InitializeComponent();
-            this.FormClosing += formClosing;
-        }
-
-        private void formClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason != CloseReason.ApplicationExitCall || e.CloseReason != CloseReason.FormOwnerClosing)
-            {
-                this.DialogResult = DialogResult.Abort;
-            }
-
-        
         }
 
         private void lblServer_Click(object sender, EventArgs e)
