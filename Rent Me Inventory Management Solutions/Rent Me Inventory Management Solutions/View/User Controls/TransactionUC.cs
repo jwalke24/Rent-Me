@@ -6,7 +6,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
     internal enum TransactionStates
     {
         Main,
-        AddItem
+        AddItem,
+        Hiding,
+        Deleting
     }
 
     public partial class TransactionUserControl : UserControl
@@ -14,6 +16,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         public DataGridView DataGrid { get; set; }
 
         public event EventHandler StateChanged;
+
+        public UserControls switchTo { get; private set; }
+
+
 
 
         public TransactionUserControl()
@@ -110,6 +116,18 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             {
                 handler(this, EventArgs.Empty);
             }
+        }
+
+        private void customerButton_Click(object sender, EventArgs e)
+        {
+            this.switchTo = UserControls.Customer;
+            this.CurrentState = TransactionStates.Hiding;
+        }
+
+        private void inventoryButton_Click(object sender, EventArgs e)
+        {
+            this.switchTo = UserControls.Inventory;
+            this.CurrentState = TransactionStates.Hiding;
         }
     }
 }

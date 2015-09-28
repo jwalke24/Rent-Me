@@ -182,6 +182,7 @@
             this.customerButton.TabIndex = 13;
             this.customerButton.Text = "Customers";
             this.customerButton.UseVisualStyleBackColor = true;
+            this.customerButton.Click += new System.EventHandler(this.customerButton_Click);
             // 
             // inventoryButton
             // 
@@ -191,6 +192,7 @@
             this.inventoryButton.TabIndex = 14;
             this.inventoryButton.Text = "Inventory";
             this.inventoryButton.UseVisualStyleBackColor = true;
+            this.inventoryButton.Click += new System.EventHandler(this.inventoryButton_Click);
             // 
             // addItemButton
             // 
