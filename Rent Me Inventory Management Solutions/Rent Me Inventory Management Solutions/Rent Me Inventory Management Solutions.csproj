@@ -47,10 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="View\CustomerUserControl.cs">
+    <Compile Include="View\User Controls\AdminUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\CustomerUserControl.Designer.cs">
+    <Compile Include="View\User Controls\AdminUserControl.Designer.cs">
+      <DependentUpon>AdminUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\User Controls\CustomerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\User Controls\CustomerUserControl.Designer.cs">
       <DependentUpon>CustomerUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\LoginForm.cs">
@@ -67,13 +73,22 @@
     <Compile Include="View\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\TransactionUserControl.cs">
+    <Compile Include="View\User Controls\InventoryUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\TransactionUserControl.Designer.cs">
+    <Compile Include="View\User Controls\InventoryUserControl.Designer.cs">
+      <DependentUpon>InventoryUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\User Controls\TransactionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\User Controls\TransactionUserControl.Designer.cs">
       <DependentUpon>TransactionUserControl.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\CustomerUserControl.resx">
+    <EmbeddedResource Include="View\User Controls\AdminUserControl.resx">
+      <DependentUpon>AdminUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User Controls\CustomerUserControl.resx">
       <DependentUpon>CustomerUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LoginForm.resx">
@@ -92,7 +107,10 @@
     <EmbeddedResource Include="View\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\TransactionUserControl.resx">
+    <EmbeddedResource Include="View\User Controls\InventoryUserControl.resx">
+      <DependentUpon>InventoryUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User Controls\TransactionUserControl.resx">
       <DependentUpon>TransactionUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

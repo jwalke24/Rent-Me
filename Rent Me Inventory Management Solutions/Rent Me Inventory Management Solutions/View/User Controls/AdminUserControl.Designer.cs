@@ -1,6 +1,6 @@
-﻿namespace Rent_Me_Inventory_Management_Solutions.View
+﻿namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
-    partial class CustomerUserControl
+    partial class AdminUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,13 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // CustomerUserControl
+            // AdminUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Name = "CustomerUserControl";
-            this.Size = new System.Drawing.Size(674, 136);
+            this.Name = "AdminUserControl";
+            this.Size = new System.Drawing.Size(676, 138);
             this.ResumeLayout(false);
 
         }
