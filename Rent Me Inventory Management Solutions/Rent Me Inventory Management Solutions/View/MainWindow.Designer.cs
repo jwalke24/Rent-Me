@@ -129,8 +129,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
             this.Enabled = false;
+            this.MaximumSize = new System.Drawing.Size(881, 526);
+            this.MinimumSize = new System.Drawing.Size(881, 526);
             this.Name = "MainWindow";
             this.Opacity = 0D;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rent Me Database Management Software";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

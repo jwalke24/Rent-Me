@@ -41,7 +41,8 @@
             this.totalLabel = new System.Windows.Forms.Label();
             this.voidTransactionButton = new System.Windows.Forms.Button();
             this.submitTransactionButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.customerButton = new System.Windows.Forms.Button();
+            this.inventoryButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // numItemsDispLabel
@@ -152,7 +153,7 @@
             // 
             // voidTransactionButton
             // 
-            this.voidTransactionButton.Location = new System.Drawing.Point(565, 89);
+            this.voidTransactionButton.Location = new System.Drawing.Point(565, 83);
             this.voidTransactionButton.Name = "voidTransactionButton";
             this.voidTransactionButton.Size = new System.Drawing.Size(108, 23);
             this.voidTransactionButton.TabIndex = 11;
@@ -168,21 +169,31 @@
             this.submitTransactionButton.Text = "Submit Transaction";
             this.submitTransactionButton.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // customerButton
             // 
-            this.button1.Location = new System.Drawing.Point(565, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.customerButton.Location = new System.Drawing.Point(565, 4);
+            this.customerButton.Name = "customerButton";
+            this.customerButton.Size = new System.Drawing.Size(108, 23);
+            this.customerButton.TabIndex = 13;
+            this.customerButton.Text = "Customers";
+            this.customerButton.UseVisualStyleBackColor = true;
+            // 
+            // inventoryButton
+            // 
+            this.inventoryButton.Location = new System.Drawing.Point(565, 33);
+            this.inventoryButton.Name = "inventoryButton";
+            this.inventoryButton.Size = new System.Drawing.Size(108, 23);
+            this.inventoryButton.TabIndex = 14;
+            this.inventoryButton.Text = "Inventory";
+            this.inventoryButton.UseVisualStyleBackColor = true;
             // 
             // TransactionUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.inventoryButton);
+            this.Controls.Add(this.customerButton);
             this.Controls.Add(this.submitTransactionButton);
             this.Controls.Add(this.voidTransactionButton);
             this.Controls.Add(this.totalLabel);
@@ -218,6 +229,7 @@
         private System.Windows.Forms.Label totalLabel;
         private System.Windows.Forms.Button voidTransactionButton;
         private System.Windows.Forms.Button submitTransactionButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button customerButton;
+        private System.Windows.Forms.Button inventoryButton;
     }
 }
