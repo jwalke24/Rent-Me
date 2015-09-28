@@ -1,6 +1,6 @@
 ﻿namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
-    partial class InventoryUserControl
+    partial class InventoryUC
     {
         /// <summary> 
         /// Required designer variable.

@@ -14,8 +14,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.loginUser();
+
+            this.transactionUserControl1.DataGrid = this.dataGridView;
         }
 
         private void loginUser()
@@ -33,5 +35,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             }
             
         }
+
     }
 }

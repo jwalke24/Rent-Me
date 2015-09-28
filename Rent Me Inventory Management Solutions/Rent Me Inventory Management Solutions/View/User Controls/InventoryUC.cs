@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
-    public partial class AdminUserControl : UserControl
+    public partial class InventoryUC : UserControl
     {
-        public AdminUserControl()
+        public InventoryUC()
         {
             InitializeComponent();
         }

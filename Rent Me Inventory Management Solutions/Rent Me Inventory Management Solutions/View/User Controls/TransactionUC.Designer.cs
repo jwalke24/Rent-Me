@@ -200,6 +200,7 @@
             this.addItemButton.TabIndex = 15;
             this.addItemButton.Text = "Add Item";
             this.addItemButton.UseVisualStyleBackColor = true;
+            this.addItemButton.Click += new System.EventHandler(this.addItemButton_Click);
             // 
             // voidItemButton
             // 
@@ -230,6 +231,7 @@
             this.addItemConfirmButton.Text = "Add Item";
             this.addItemConfirmButton.UseVisualStyleBackColor = true;
             this.addItemConfirmButton.Visible = false;
+            this.addItemConfirmButton.Click += new System.EventHandler(this.addItemConfirmButton_Click);
             // 
             // cancelItemConfirmButton
             // 
@@ -241,6 +243,7 @@
             this.cancelItemConfirmButton.Text = "Cancel";
             this.cancelItemConfirmButton.UseVisualStyleBackColor = true;
             this.cancelItemConfirmButton.Visible = false;
+            this.cancelItemConfirmButton.Click += new System.EventHandler(this.cancelItemConfirmButton_Click);
             // 
             // TransactionUserControl
             // 

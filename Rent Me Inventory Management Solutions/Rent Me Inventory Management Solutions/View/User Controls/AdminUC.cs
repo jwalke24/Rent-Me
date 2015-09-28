@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Rent_Me_Inventory_Management_Solutions.View
+namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
-    public partial class TransactionUserControl : UserControl
+    public partial class AdminUC : UserControl
     {
-        public TransactionUserControl()
+        public AdminUC()
         {
             InitializeComponent();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

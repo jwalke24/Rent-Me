@@ -47,17 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="View\User Controls\AdminUserControl.cs">
+    <Compile Include="View\User Controls\AdminUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\User Controls\AdminUserControl.Designer.cs">
-      <DependentUpon>AdminUserControl.cs</DependentUpon>
+    <Compile Include="View\User Controls\AdminUC.Designer.cs">
+      <DependentUpon>AdminUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\User Controls\CustomerUserControl.cs">
+    <Compile Include="View\User Controls\CustomerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\User Controls\CustomerUserControl.Designer.cs">
-      <DependentUpon>CustomerUserControl.cs</DependentUpon>
+    <Compile Include="View\User Controls\CustomerUC.Designer.cs">
+      <DependentUpon>CustomerUC.cs</DependentUpon>
     </Compile>
     <Compile Include="View\LoginForm.cs">
       <SubType>Form</SubType>
@@ -73,23 +73,23 @@
     <Compile Include="View\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\User Controls\InventoryUserControl.cs">
+    <Compile Include="View\User Controls\InventoryUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\User Controls\InventoryUserControl.Designer.cs">
-      <DependentUpon>InventoryUserControl.cs</DependentUpon>
+    <Compile Include="View\User Controls\InventoryUC.Designer.cs">
+      <DependentUpon>InventoryUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\User Controls\TransactionUserControl.cs">
+    <Compile Include="View\User Controls\TransactionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\User Controls\TransactionUserControl.Designer.cs">
-      <DependentUpon>TransactionUserControl.cs</DependentUpon>
+    <Compile Include="View\User Controls\TransactionUC.Designer.cs">
+      <DependentUpon>TransactionUC.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\User Controls\AdminUserControl.resx">
-      <DependentUpon>AdminUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="View\User Controls\AdminUC.resx">
+      <DependentUpon>AdminUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\User Controls\CustomerUserControl.resx">
-      <DependentUpon>CustomerUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="View\User Controls\CustomerUC.resx">
+      <DependentUpon>CustomerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -107,11 +107,11 @@
     <EmbeddedResource Include="View\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\User Controls\InventoryUserControl.resx">
-      <DependentUpon>InventoryUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="View\User Controls\InventoryUC.resx">
+      <DependentUpon>InventoryUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\User Controls\TransactionUserControl.resx">
-      <DependentUpon>TransactionUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="View\User Controls\TransactionUC.resx">
+      <DependentUpon>TransactionUC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
