@@ -37,12 +37,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.transactionUserControl1 = new Rent_Me_Inventory_Management_Solutions.View.TransactionUserControl();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1});
             this.dataGridView.Location = new System.Drawing.Point(13, 13);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(840, 316);
@@ -111,11 +114,17 @@
             // transactionUserControl1
             // 
             this.transactionUserControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.transactionUserControl1.ControlType = Rent_Me_Inventory_Management_Solutions.View.UserControls.Transaction;
             this.transactionUserControl1.DataGrid = null;
             this.transactionUserControl1.Location = new System.Drawing.Point(13, 336);
             this.transactionUserControl1.Name = "transactionUserControl1";
             this.transactionUserControl1.Size = new System.Drawing.Size(678, 140);
             this.transactionUserControl1.TabIndex = 4;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Column1";
+            this.Column1.Name = "Column1";
             // 
             // MainWindow
             // 
@@ -153,5 +162,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }
