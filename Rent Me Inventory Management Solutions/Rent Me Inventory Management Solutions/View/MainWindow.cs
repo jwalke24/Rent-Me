@@ -51,21 +51,25 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             {
                 TransactionUserControl transactionUserControl = (TransactionUserControl) theSender;
 
-                transactionUserControl.Enabled = false;
-                transactionUserControl.Visible = false;
-                transactionUserControl.StateChanged -= this.StateChange;
-
-                this.Controls.Remove(transactionUserControl);
-
-                if (transactionUserControl.switchTo == UserControls.Customer)
+                if (transactionUserControl.CurrentState == TransactionStates.Hiding)
                 {
-                    this.displayCustomer();
-                    
-                    
+                    transactionUserControl.Enabled = false;
+                    transactionUserControl.Visible = false;
+                    transactionUserControl.StateChanged -= this.StateChange;
 
-                } else if (transactionUserControl.switchTo == UserControls.Inventory)
-                {
-                    this.displayInventory();
+                    this.Controls.Remove(transactionUserControl);
+
+                    if (transactionUserControl.switchTo == UserControls.Customer)
+                    {
+                        this.displayCustomer();
+
+
+
+                    }
+                    else if (transactionUserControl.switchTo == UserControls.Inventory)
+                    {
+                        this.displayInventory();
+                    }
                 }
             }
         }

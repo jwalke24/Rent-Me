@@ -24,14 +24,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private TransactionStates currentState;
 
-
-        public TransactionUserControl()
-        {
-            this.InitializeComponent();
-        }
-
-        
-        private TransactionStates CurrentState
+        internal TransactionStates CurrentState
         {
             get { return this.currentState; }
             set
@@ -51,6 +44,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                 this.OnStateChanged();
             }
         }
+
+        public TransactionUserControl()
+        {
+            this.InitializeComponent();
+        }
+
+        
+        
 
         private void changeToAddItemState()
         {
