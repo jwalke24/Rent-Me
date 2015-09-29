@@ -26,7 +26,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private DataGridView currentDataGridView;
 
-        private IRentMeUcInterface currentUC;
+        private List<IRentMeUcInterface> userControlStack; 
         
 
         public MainWindow()
@@ -37,6 +37,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
             this.transactionUserControl1.DataGrid = this.dataGridView;
             this.transactionUserControl1.StateChanged += this.StateChange;
+
+            userControlStack = new List<IRentMeUcInterface>();
+            userControlStack.Add(this.transactionUserControl1);
             
         }
 
@@ -48,13 +51,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             {
                 TransactionUserControl transactionUserControl = (TransactionUserControl) theSender;
 
+                transactionUserControl.Enabled = false;
+                transactionUserControl.Visible = false;
+                transactionUserControl.StateChanged -= this.StateChange;
+
+                this.Controls.Remove(transactionUserControl);
+
                 if (transactionUserControl.switchTo == UserControls.Customer)
                 {
-                    transactionUserControl.Enabled = false;
-                    transactionUserControl.Visible = false;
-                    this.Controls.Remove(transactionUserControl);
-                    
                     this.displayCustomer();
+                    
                     
 
                 } else if (transactionUserControl.switchTo == UserControls.Inventory)
@@ -73,11 +79,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             custUC.Visible = true;
             custUC.Location = this.userControlLocation;
 
-            this.currentUC = custUC;
-
             this.Controls.Add(custUC);
 
             this.swapDataGridView(newGrid);
+            this.userControlStack.Add(custUC);
 
 
         }
