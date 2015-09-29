@@ -87,6 +87,22 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         }
 
+
+        private void displayInventory()
+        {
+            DataGridView newGrid = this.cloneNewDataGridView();
+            InventoryUC inventoryUc = new InventoryUC();
+            inventoryUc.DataGrid = newGrid;
+            inventoryUc.Enabled = true;
+            inventoryUc.Visible = true;
+            inventoryUc.Location = this.userControlLocation;
+
+            this.Controls.Add(inventoryUc);
+
+            this.swapDataGridView(newGrid);
+            this.userControlStack.Add(inventoryUc);
+        }
+
         private DataGridView swapDataGridView(DataGridView newView)
         {
             DataGridView oldView = this.currentDataGridView;
@@ -104,10 +120,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             return oldView;
         }
 
-        private void displayInventory()
-        {
-            
-        }
 
         private DataGridView cloneNewDataGridView()
         {
