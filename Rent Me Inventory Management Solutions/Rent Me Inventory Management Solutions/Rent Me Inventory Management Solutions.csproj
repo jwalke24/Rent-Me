@@ -79,6 +79,7 @@
     <Compile Include="View\User Controls\InventoryUC.Designer.cs">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\User Controls\RentMeUCInterface.cs" />
     <Compile Include="View\User Controls\TransactionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>

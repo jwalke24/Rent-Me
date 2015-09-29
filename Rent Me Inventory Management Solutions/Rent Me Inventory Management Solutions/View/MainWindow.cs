@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
 
 namespace Rent_Me_Inventory_Management_Solutions.View
 {
@@ -35,7 +36,20 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void StateChange(object sender, EventArgs e)
         {
+            IRentMeUcInterface theSender = (IRentMeUcInterface) sender;
 
+            if (theSender.ControlType == UserControls.Transaction)
+            {
+                TransactionUserControl transactionUserControl = (TransactionUserControl) theSender;
+
+                if (transactionUserControl.switchTo == UserControls.Customer)
+                {
+                    
+                } else if (transactionUserControl.switchTo == UserControls.Inventory)
+                {
+                    
+                }
+            }
         }
 
         private void loginUser()

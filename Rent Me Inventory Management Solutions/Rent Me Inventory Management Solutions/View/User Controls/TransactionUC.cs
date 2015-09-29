@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
 
 namespace Rent_Me_Inventory_Management_Solutions.View
 {
@@ -11,7 +12,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         Deleting
     }
 
-    public partial class TransactionUserControl : UserControl
+    public partial class TransactionUserControl : UserControl, IRentMeUcInterface
     {
         public DataGridView DataGrid { get; set; }
 
@@ -19,7 +20,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         public UserControls switchTo { get; private set; }
 
+        public UserControls ControlType { get; set; }
 
+        private TransactionStates currentState;
 
 
         public TransactionUserControl()
@@ -27,7 +30,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.InitializeComponent();
         }
 
-        private TransactionStates currentState;
+        
         private TransactionStates CurrentState
         {
             get { return this.currentState; }
@@ -129,5 +132,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.switchTo = UserControls.Inventory;
             this.CurrentState = TransactionStates.Hiding;
         }
+
+        
     }
 }

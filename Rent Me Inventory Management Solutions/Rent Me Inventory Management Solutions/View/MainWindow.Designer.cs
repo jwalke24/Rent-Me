@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -110,6 +111,7 @@
             // transactionUserControl1
             // 
             this.transactionUserControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.transactionUserControl1.DataGrid = null;
             this.transactionUserControl1.Location = new System.Drawing.Point(13, 336);
             this.transactionUserControl1.Name = "transactionUserControl1";
             this.transactionUserControl1.Size = new System.Drawing.Size(678, 140);
@@ -119,7 +121,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 488);
+            this.ClientSize = new System.Drawing.Size(865, 487);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
@@ -129,6 +131,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
             this.Enabled = false;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(881, 526);
             this.MinimumSize = new System.Drawing.Size(881, 526);
             this.Name = "MainWindow";
