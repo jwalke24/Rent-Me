@@ -34,7 +34,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.saveCustomerButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.ucCancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -94,21 +94,21 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Visible = false;
             // 
-            // button4
+            // ucCancelButton
             // 
-            this.button4.Location = new System.Drawing.Point(459, 110);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(103, 23);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.ucCancelButton.Location = new System.Drawing.Point(459, 110);
+            this.ucCancelButton.Name = "ucCancelButton";
+            this.ucCancelButton.Size = new System.Drawing.Size(103, 23);
+            this.ucCancelButton.TabIndex = 6;
+            this.ucCancelButton.Text = "Cancel";
+            this.ucCancelButton.UseVisualStyleBackColor = true;
             // 
             // CustomerUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.ucCancelButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveCustomerButton);
             this.Controls.Add(this.textBox1);
@@ -130,6 +130,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button saveCustomerButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button ucCancelButton;
     }
 }
