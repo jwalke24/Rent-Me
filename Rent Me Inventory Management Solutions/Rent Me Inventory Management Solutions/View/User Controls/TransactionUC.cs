@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
 
@@ -14,15 +15,43 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
     public partial class TransactionUserControl : UserControl, IRentMeUcInterface
     {
+        private const double TAX_RATE = 0.07;
+
+        #region Properties And Variables
         public DataGridView DataGrid { get; set; }
 
         public event EventHandler StateChanged;
 
-        public UserControls switchTo { get; private set; }
+        public UserControls SwitchTo { get; private set; }
 
         public UserControls ControlType { get; set; }
 
         private TransactionStates currentState;
+
+        private string customerID
+        {
+            get { return this.customerIDLabel.Text; }
+
+            set { this.customerIDLabel.Text = value; }
+        }
+
+        private double subtotal;
+
+        private double Subtotal
+        {
+            get { return this.subtotal; }
+            set
+            {
+                this.subtotal = value;
+                this.taxLabel.Text = (value*TAX_RATE).ToString("C", CultureInfo.CurrentCulture);
+                this.subtotalLabel.Text = this.subtotal.ToString("C",CultureInfo.CurrentCulture);
+                this.totalLabel.Text = (value * (1+ TAX_RATE)).ToString("C", CultureInfo.CurrentCulture);
+            }
+        }
+
+
+
+        #endregion
 
         internal TransactionStates CurrentState
         {
@@ -48,6 +77,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         public TransactionUserControl()
         {
             this.InitializeComponent();
+            this.Subtotal = 41985.323568;
         }
 
         
@@ -124,16 +154,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void customerButton_Click(object sender, EventArgs e)
         {
-            this.switchTo = UserControls.Customer;
+            this.SwitchTo = UserControls.Customer;
             this.CurrentState = TransactionStates.Hiding;
         }
 
         private void inventoryButton_Click(object sender, EventArgs e)
         {
-            this.switchTo = UserControls.Inventory;
+            this.SwitchTo = UserControls.Inventory;
             this.CurrentState = TransactionStates.Hiding;
         }
-
-        
     }
 }

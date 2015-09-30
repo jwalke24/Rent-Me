@@ -63,14 +63,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
                     this.Controls.Remove(transactionUserControl);
 
-                    if (transactionUserControl.switchTo == UserControls.Customer)
+                    if (transactionUserControl.SwitchTo == UserControls.Customer)
                     {
                         this.displayCustomer();
 
 
 
                     }
-                    else if (transactionUserControl.switchTo == UserControls.Inventory)
+                    else if (transactionUserControl.SwitchTo == UserControls.Inventory)
                     {
                         this.displayInventory();
                     }

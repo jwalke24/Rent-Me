@@ -32,8 +32,6 @@
             this.numItemsLabel = new System.Windows.Forms.Label();
             this.subtotalDispLabel = new System.Windows.Forms.Label();
             this.subtotalLabel = new System.Windows.Forms.Label();
-            this.discountsCreditsDispLabel = new System.Windows.Forms.Label();
-            this.discountCreditsLabel = new System.Windows.Forms.Label();
             this.taxDispLabel = new System.Windows.Forms.Label();
             this.taxPercentLabel = new System.Windows.Forms.Label();
             this.taxLabel = new System.Windows.Forms.Label();
@@ -48,6 +46,9 @@
             this.itemToAddTextBox = new System.Windows.Forms.TextBox();
             this.addItemConfirmButton = new System.Windows.Forms.Button();
             this.cancelItemConfirmButton = new System.Windows.Forms.Button();
+            this.selectedCustomerLabel = new System.Windows.Forms.Label();
+            this.customerIDLabel = new System.Windows.Forms.Label();
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.SuspendLayout();
             // 
             // numItemsDispLabel
@@ -71,7 +72,7 @@
             // subtotalDispLabel
             // 
             this.subtotalDispLabel.AutoSize = true;
-            this.subtotalDispLabel.Location = new System.Drawing.Point(4, 81);
+            this.subtotalDispLabel.Location = new System.Drawing.Point(4, 93);
             this.subtotalDispLabel.Name = "subtotalDispLabel";
             this.subtotalDispLabel.Size = new System.Drawing.Size(52, 13);
             this.subtotalDispLabel.TabIndex = 2;
@@ -80,33 +81,12 @@
             // subtotalLabel
             // 
             this.subtotalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.subtotalLabel.AutoSize = true;
-            this.subtotalLabel.Location = new System.Drawing.Point(121, 81);
+            this.subtotalLabel.Location = new System.Drawing.Point(62, 94);
             this.subtotalLabel.Name = "subtotalLabel";
-            this.subtotalLabel.Size = new System.Drawing.Size(46, 13);
+            this.subtotalLabel.Size = new System.Drawing.Size(105, 12);
             this.subtotalLabel.TabIndex = 3;
             this.subtotalLabel.Text = "$999.99";
             this.subtotalLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // discountsCreditsDispLabel
-            // 
-            this.discountsCreditsDispLabel.AutoSize = true;
-            this.discountsCreditsDispLabel.Location = new System.Drawing.Point(4, 94);
-            this.discountsCreditsDispLabel.Name = "discountsCreditsDispLabel";
-            this.discountsCreditsDispLabel.Size = new System.Drawing.Size(103, 13);
-            this.discountsCreditsDispLabel.TabIndex = 4;
-            this.discountsCreditsDispLabel.Text = "Discounts / Credits: ";
-            // 
-            // discountCreditsLabel
-            // 
-            this.discountCreditsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.discountCreditsLabel.AutoSize = true;
-            this.discountCreditsLabel.Location = new System.Drawing.Point(121, 94);
-            this.discountCreditsLabel.Name = "discountCreditsLabel";
-            this.discountCreditsLabel.Size = new System.Drawing.Size(46, 13);
-            this.discountCreditsLabel.TabIndex = 5;
-            this.discountCreditsLabel.Text = "$999.99";
-            this.discountCreditsLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // taxDispLabel
             // 
@@ -129,10 +109,9 @@
             // taxLabel
             // 
             this.taxLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.taxLabel.AutoSize = true;
-            this.taxLabel.Location = new System.Drawing.Point(121, 107);
+            this.taxLabel.Location = new System.Drawing.Point(86, 107);
             this.taxLabel.Name = "taxLabel";
-            this.taxLabel.Size = new System.Drawing.Size(46, 13);
+            this.taxLabel.Size = new System.Drawing.Size(81, 13);
             this.taxLabel.TabIndex = 8;
             this.taxLabel.Text = "$999.99";
             this.taxLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -149,12 +128,12 @@
             // totalLabel
             // 
             this.totalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalLabel.AutoSize = true;
-            this.totalLabel.Location = new System.Drawing.Point(121, 120);
+            this.totalLabel.Location = new System.Drawing.Point(44, 120);
             this.totalLabel.Name = "totalLabel";
-            this.totalLabel.Size = new System.Drawing.Size(46, 13);
+            this.totalLabel.Size = new System.Drawing.Size(123, 13);
             this.totalLabel.TabIndex = 10;
             this.totalLabel.Text = "$999.99";
+            this.totalLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // voidTransactionButton
             // 
@@ -247,11 +226,31 @@
             this.cancelItemConfirmButton.Visible = false;
             this.cancelItemConfirmButton.Click += new System.EventHandler(this.cancelItemConfirmButton_Click);
             // 
+            // selectedCustomerLabel
+            // 
+            this.selectedCustomerLabel.AutoSize = true;
+            this.selectedCustomerLabel.Location = new System.Drawing.Point(4, 17);
+            this.selectedCustomerLabel.Name = "selectedCustomerLabel";
+            this.selectedCustomerLabel.Size = new System.Drawing.Size(99, 13);
+            this.selectedCustomerLabel.TabIndex = 20;
+            this.selectedCustomerLabel.Text = "Selected Customer:";
+            // 
+            // customerIDLabel
+            // 
+            this.customerIDLabel.AutoSize = true;
+            this.customerIDLabel.Location = new System.Drawing.Point(105, 17);
+            this.customerIDLabel.Name = "customerIDLabel";
+            this.customerIDLabel.Size = new System.Drawing.Size(67, 13);
+            this.customerIDLabel.TabIndex = 21;
+            this.customerIDLabel.Text = "0000000000";
+            // 
             // TransactionUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.customerIDLabel);
+            this.Controls.Add(this.selectedCustomerLabel);
             this.Controls.Add(this.cancelItemConfirmButton);
             this.Controls.Add(this.addItemConfirmButton);
             this.Controls.Add(this.itemToAddTextBox);
@@ -266,8 +265,6 @@
             this.Controls.Add(this.taxLabel);
             this.Controls.Add(this.taxPercentLabel);
             this.Controls.Add(this.taxDispLabel);
-            this.Controls.Add(this.discountCreditsLabel);
-            this.Controls.Add(this.discountsCreditsDispLabel);
             this.Controls.Add(this.subtotalLabel);
             this.Controls.Add(this.subtotalDispLabel);
             this.Controls.Add(this.numItemsLabel);
@@ -285,8 +282,6 @@
         private System.Windows.Forms.Label numItemsLabel;
         private System.Windows.Forms.Label subtotalDispLabel;
         private System.Windows.Forms.Label subtotalLabel;
-        private System.Windows.Forms.Label discountsCreditsDispLabel;
-        private System.Windows.Forms.Label discountCreditsLabel;
         private System.Windows.Forms.Label taxDispLabel;
         private System.Windows.Forms.Label taxPercentLabel;
         private System.Windows.Forms.Label taxLabel;
@@ -301,5 +296,8 @@
         private System.Windows.Forms.TextBox itemToAddTextBox;
         private System.Windows.Forms.Button addItemConfirmButton;
         private System.Windows.Forms.Button cancelItemConfirmButton;
+        private System.Windows.Forms.Label selectedCustomerLabel;
+        private System.Windows.Forms.Label customerIDLabel;
+        private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
     }
 }
