@@ -32,6 +32,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         public MainWindow()
         {
             this.InitializeComponent();
+            this.setUpWindow();
+        }
+
+        private void setUpWindow()
+        {
             this.currentDataGridView = this.dataGridView;
             this.loginUser();
 
@@ -40,7 +45,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
             userControlStack = new List<IRentMeUcInterface>();
             userControlStack.Add(this.transactionUserControl1);
-            
         }
 
         private void StateChange(object sender, EventArgs e)
@@ -150,6 +154,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                 this.Close();
             }
             
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            //TODO Ensure network requests are fulfilled.
+            System.Diagnostics.Process.Start(Application.ExecutablePath);
+            this.Close();
         }
 
     }
