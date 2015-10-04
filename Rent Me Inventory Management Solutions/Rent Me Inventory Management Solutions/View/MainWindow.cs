@@ -14,7 +14,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
     public partial class MainWindow : Form
     {
-        private readonly Point userControlLocation = new Point(13, 336);
+        private readonly Point userControlLocation = new Point( 13, 336);
+
+        private readonly Point dataGridViewLocation = new Point( 13, 13);
+
+        private readonly Size dataGridViewSize = new Size( 840, 316);
 
         private DataGridView currentDataGridView;
 
@@ -29,7 +33,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void setUpWindow()
         {
-            this.currentDataGridView = this.dataGridView;
             this.loginUser();
      
             userControlStack = new List<IRentMeUcInterface>();
@@ -113,7 +116,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewCustomer()
         {
-            DataGridView newGrid = this.cloneNewDataGridView();
+            DataGridView newGrid = this.createNewDataGridView();
             CustomerUserControl custUC = new CustomerUserControl();
             custUC.DataGrid = newGrid;
 
@@ -127,7 +130,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewInventory()
         {
-            DataGridView newGrid = this.cloneNewDataGridView();
+            DataGridView newGrid = this.createNewDataGridView();
             InventoryUC inventoryUc = new InventoryUC();
             inventoryUc.DataGrid = newGrid;
 
@@ -138,7 +141,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewTransaction()
         {
-            DataGridView newGrid = this.cloneNewDataGridView();
+            DataGridView newGrid = this.createNewDataGridView();
             TransactionUC transactionUc = new TransactionUC();
             transactionUc.DataGrid = newGrid;
 
@@ -147,29 +150,31 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.addUCToDisplay(transactionUc);
         }
 
-        private DataGridView swapDataGridView(DataGridView newView)
+        private void swapDataGridView(DataGridView newView)
         {
-            DataGridView oldView = this.currentDataGridView;
+            if (this.currentDataGridView != null)
+            {
+                DataGridView oldView = this.currentDataGridView;
+                oldView.Visible = false;
+                oldView.Enabled = false;
+                this.Controls.Remove(oldView);
+            }
+            
             this.currentDataGridView = newView;
-            oldView.Visible = false;
-            oldView.Enabled = false;
             newView.Enabled = true;
             newView.Visible = true;
 
-            this.Controls.Remove(oldView);
             this.Controls.Add(newView);
 
             this.Invalidate();
-
-            return oldView;
         }
 
 
-        private DataGridView cloneNewDataGridView()
+        private DataGridView createNewDataGridView()
         {
             DataGridView theNewView = new DataGridView();
-            theNewView.Location = this.currentDataGridView.Location;
-            theNewView.Size = this.currentDataGridView.Size;
+            theNewView.Location = this.dataGridViewLocation;
+            theNewView.Size = this.dataGridViewSize;
             theNewView.Visible = true;
             theNewView.Enabled = true;
 

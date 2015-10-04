@@ -15,6 +15,7 @@ namespace Rent_Me_Inventory_Management_Solutions
         public LoginForm()
         {
             this.InitializeComponent();
+            this.TopMost = false;
         }
 
         private void lblServer_Click(object sender, EventArgs e)
