@@ -24,7 +24,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         public InventoryUC()
         {
             InitializeComponent();
-            this.ControlType = UserControls.Inventory;
+            this.UserControlType = UserControls.Inventory;
         }
 
         /// <summary>
@@ -33,19 +33,22 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// <value>
         /// The type of the control.
         /// </value>
-        public UserControls ControlType { get; set; }
+        public UserControls UserControlType { get; set; }
 
-        public InventoryStates currentState;
+        public RentMeUserControlPrimaryStates currentState;
 
-        public InventoryStates CurrentState
+        public RentMeUserControlPrimaryStates CurrentState
         {
             get { return this.currentState; }
-            set
+            private set
             {
                 this.currentState = value;
                 this.OnStateChanged();
             }
         }
+
+        public UserControls SwitchTo { get; private set; }
+
         /// <summary>
         /// Gets or sets the data grid.
         /// </summary>
@@ -68,7 +71,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void ucCancelButton_Click(object sender, EventArgs e)
         {
-            this.CurrentState = InventoryStates.Deleting;
+            this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
         }
     }
 }

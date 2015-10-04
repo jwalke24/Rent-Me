@@ -1,4 +1,6 @@
-﻿namespace Rent_Me_Inventory_Management_Solutions.View
+﻿using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
+
+namespace Rent_Me_Inventory_Management_Solutions.View
 {
     partial class MainWindow
     {
@@ -30,14 +32,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.transactionUserControl1 = new Rent_Me_Inventory_Management_Solutions.View.TransactionUserControl();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,11 +51,6 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(840, 316);
             this.dataGridView.TabIndex = 1;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
             // 
             // label1
             // 
@@ -117,15 +113,10 @@
             this.label4.Text = "10:44 PM";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // transactionUserControl1
+            // Column1
             // 
-            this.transactionUserControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.transactionUserControl1.ControlType = Rent_Me_Inventory_Management_Solutions.View.UserControls.Transaction;
-            this.transactionUserControl1.DataGrid = null;
-            this.transactionUserControl1.Location = new System.Drawing.Point(13, 336);
-            this.transactionUserControl1.Name = "transactionUserControl1";
-            this.transactionUserControl1.Size = new System.Drawing.Size(678, 140);
-            this.transactionUserControl1.TabIndex = 4;
+            this.Column1.HeaderText = "If you are seeing this, our software is broken.";
+            this.Column1.Name = "Column1";
             // 
             // MainWindow
             // 
@@ -136,7 +127,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.logoutButton);
-            this.Controls.Add(this.transactionUserControl1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
@@ -158,7 +148,6 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private TransactionUserControl transactionUserControl1;
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;

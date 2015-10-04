@@ -15,6 +15,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         public AdminUC()
         {
             InitializeComponent();
+            this.UserControlType = UserControls.Admin;
         }
 
         /// <summary>
@@ -23,7 +24,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// <value>
         /// The type of the control.
         /// </value>
-        public UserControls ControlType { get; set; }
+        public UserControls UserControlType { get; private set; }
         /// <summary>
         /// Gets or sets the data grid.
         /// </summary>
@@ -31,6 +32,20 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// The data grid.
         /// </value>
         public DataGridView DataGrid { get; set; }
+
+        private RentMeUserControlPrimaryStates currentState;
+        public RentMeUserControlPrimaryStates CurrentState
+        {
+            get { return this.currentState; }
+            private set
+            {
+                this.currentState = value;
+                this.OnStateChanged();
+            }
+        }
+
+        public UserControls SwitchTo { get; private set; }
+
         /// <summary>
         /// Occurs when [state changed].
         /// </summary>

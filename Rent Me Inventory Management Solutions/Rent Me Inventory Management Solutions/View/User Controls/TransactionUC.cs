@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
-using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
 
-namespace Rent_Me_Inventory_Management_Solutions.View
+namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
     internal enum TransactionStates
     {
         Main,
-        AddItem,
-        Hiding,
-        Deleting
+        AddItem
     }
 
-    public partial class TransactionUserControl : UserControl, IRentMeUcInterface
+    public partial class TransactionUC : UserControl, IRentMeUcInterface
     {
 
 
@@ -47,9 +44,27 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         /// <value>
         /// The type of the control.
         /// </value>
-        public UserControls ControlType { get; set; }
+        public UserControls UserControlType { get; private set; }
 
-        private TransactionStates currentState;
+        private RentMeUserControlPrimaryStates currentState;
+        private TransactionStates internalState;
+
+        private TransactionStates InternalState
+        {
+            get { return this.internalState; }
+            set
+            {
+                this.internalState = value;
+
+                if (value == TransactionStates.Main)
+                {
+                    this.changeToMainState();
+                } else if (value == TransactionStates.AddItem)
+                {
+                    this.changeToAddItemState();
+                }
+            }
+        }
 
         private string customerID
         {
@@ -73,23 +88,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         }
 
 
-        internal TransactionStates CurrentState
+        public RentMeUserControlPrimaryStates CurrentState
         {
             get { return this.currentState; }
-            set
+            private set
             {
                 this.currentState = value;
-
-                switch (this.currentState)
-                {
-                    case TransactionStates.Main:
-                        this.changeToMainState();
-                        break;
-                    case TransactionStates.AddItem:
-                        this.changeToAddItemState();
-                        break;
-                }
-
                 this.OnStateChanged();
             }
         }
@@ -97,13 +101,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         #endregion
 
 
-        public TransactionUserControl()
+        public TransactionUC()
         {
             this.InitializeComponent();
             this.Subtotal = 0;
             this.selectedCustomerLabel.Text = "0";
             this.numItemsLabel.Text = "0";
-            this.ControlType = UserControls.Transaction;
+            this.UserControlType = UserControls.Transaction;
         }
 
         
@@ -156,17 +160,17 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void addItemButton_Click(object sender, EventArgs e)
         {
-            this.CurrentState = TransactionStates.AddItem;
+            this.InternalState = TransactionStates.AddItem;
         }
 
         private void addItemConfirmButton_Click(object sender, EventArgs e)
         {
-            this.CurrentState = TransactionStates.Main;
+            this.InternalState = TransactionStates.Main;
         }
 
         private void cancelItemConfirmButton_Click(object sender, EventArgs e)
         {
-            this.CurrentState = TransactionStates.Main;
+            this.InternalState = TransactionStates.Main;
         }
 
         protected virtual void OnStateChanged()
@@ -181,13 +185,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         private void customerButton_Click(object sender, EventArgs e)
         {
             this.SwitchTo = UserControls.Customer;
-            this.CurrentState = TransactionStates.Hiding;
+            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
 
         private void inventoryButton_Click(object sender, EventArgs e)
         {
             this.SwitchTo = UserControls.Inventory;
-            this.CurrentState = TransactionStates.Hiding;
+            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
     }
 }

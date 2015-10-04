@@ -1,38 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
 
-namespace Rent_Me_Inventory_Management_Solutions.View
+namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
-    public enum CustomerStates
+    internal enum CustomerStates
     {
-        Main,
-        Deleting
+        Main
     }
 
     public partial class CustomerUserControl : UserControl, IRentMeUcInterface
     {
 
-        public UserControls ControlType { get; set; }
+        public UserControls UserControlType { get; private set; }
         public DataGridView DataGrid { get; set; }
+        public UserControls SwitchTo { get; private set; }
+
         /// <summary>
         /// Occurs when [state changed].
         /// </summary>
         public event EventHandler StateChanged;
 
-        private CustomerStates currentState;
+        private RentMeUserControlPrimaryStates currentState;
 
-        public CustomerStates CurrentState
+        public RentMeUserControlPrimaryStates CurrentState
         {
             get { return this.currentState; }
-            set
+            private set
             {
                 this.currentState = value;
                 this.OnStateChanged();
@@ -41,13 +34,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         public CustomerUserControl()
         {
             this.InitializeComponent();
-            this.ControlType = UserControls.Customer;
+            this.UserControlType = UserControls.Customer;
         }
 
 
         private void ucCancelButton_Click(object sender, EventArgs e)
         {
-            this.CurrentState = CustomerStates.Deleting;
+            this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
         }
 
         protected virtual void OnStateChanged()

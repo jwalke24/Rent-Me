@@ -12,17 +12,6 @@ using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
 namespace Rent_Me_Inventory_Management_Solutions.View
 {
 
-    /// <summary>
-    /// Different types of user controls. 
-    /// </summary>
-    public enum UserControls
-    {
-        Transaction,
-        Admin,
-        Inventory,
-        Customer
-    }
-
     public partial class MainWindow : Form
     {
         private readonly Point userControlLocation = new Point(13, 336);
@@ -42,54 +31,35 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         {
             this.currentDataGridView = this.dataGridView;
             this.loginUser();
-
-            this.transactionUserControl1.DataGrid = this.dataGridView;
-            this.transactionUserControl1.StateChanged += this.StateChange;
-
+     
             userControlStack = new List<IRentMeUcInterface>();
-            userControlStack.Add(this.transactionUserControl1);
+
+            this.displayNewTransaction();
         }
 
         private void StateChange(object sender, EventArgs e)
         {
             IRentMeUcInterface theSender = (IRentMeUcInterface) sender;
 
-            if (theSender.ControlType == UserControls.Transaction)
+            if (theSender.CurrentState == RentMeUserControlPrimaryStates.Hiding)
             {
-                TransactionUserControl transactionUserControl = (TransactionUserControl) theSender;
+                this.removeUCFromDisplay(theSender);
 
-                if (transactionUserControl.CurrentState == TransactionStates.Hiding)
+                switch (theSender.SwitchTo)
                 {
-                    this.removeUCFromDisplay(theSender);
-
-                    if (transactionUserControl.SwitchTo == UserControls.Customer)
-                    {
-                        this.displayNewCustomer();
-                    }
-                    else if (transactionUserControl.SwitchTo == UserControls.Inventory)
-                    {
+                    case UserControls.Inventory:
                         this.displayNewInventory();
-                    }
+                        break;
+                    case UserControls.Customer:
+                        this.displayNewCustomer();
+                        break;
                 }
-            } else if (theSender.ControlType == UserControls.Customer)
+            } else if (theSender.CurrentState == RentMeUserControlPrimaryStates.Deleting)
             {
-                CustomerUserControl customerUserControl = (CustomerUserControl) theSender;
-
-                if (customerUserControl.CurrentState == CustomerStates.Deleting)
-                {
-                    this.removeUCFromDisplay(theSender);
-                    this.popOffUserControlStack(customerUserControl);
-                }
-            } else if (theSender.ControlType == UserControls.Inventory)
-            {
-                InventoryUC inventoryUserControl = (InventoryUC) theSender;
-
-                if (inventoryUserControl.CurrentState == InventoryStates.Deleting)
-                {
-                    this.removeUCFromDisplay(theSender);
-                    this.popOffUserControlStack(theSender);
-                }
+                this.removeUCFromDisplay(theSender);
+                this.popOffUserControlStack(theSender);
             }
+
         }
 
         private void removeUCFromDisplay(IRentMeUcInterface userControl)
@@ -164,6 +134,17 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.userControlStack.Add(inventoryUc);
 
             this.addUCToDisplay(inventoryUc);
+        }
+
+        private void displayNewTransaction()
+        {
+            DataGridView newGrid = this.cloneNewDataGridView();
+            TransactionUC transactionUc = new TransactionUC();
+            transactionUc.DataGrid = newGrid;
+
+            this.userControlStack.Add(transactionUc);
+
+            this.addUCToDisplay(transactionUc);
         }
 
         private DataGridView swapDataGridView(DataGridView newView)

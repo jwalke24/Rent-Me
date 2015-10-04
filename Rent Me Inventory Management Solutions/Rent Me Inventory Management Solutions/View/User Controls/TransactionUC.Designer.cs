@@ -1,6 +1,6 @@
-﻿namespace Rent_Me_Inventory_Management_Solutions.View
+﻿namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
-    partial class TransactionUserControl
+    partial class TransactionUC
     {
         /// <summary> 
         /// Required designer variable.
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -244,7 +244,7 @@
             this.customerIDLabel.TabIndex = 21;
             this.customerIDLabel.Text = "0000000000";
             // 
-            // TransactionUserControl
+            // TransactionUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -269,7 +269,7 @@
             this.Controls.Add(this.subtotalDispLabel);
             this.Controls.Add(this.numItemsLabel);
             this.Controls.Add(this.numItemsDispLabel);
-            this.Name = "TransactionUserControl";
+            this.Name = "TransactionUC";
             this.Size = new System.Drawing.Size(676, 138);
             this.ResumeLayout(false);
             this.PerformLayout();
