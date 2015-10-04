@@ -31,31 +31,33 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.transactionNumberLabel = new System.Windows.Forms.Label();
+            this.transactionNumberActualLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.dateLabel = new System.Windows.Forms.Label();
+            this.timeLabel = new System.Windows.Forms.Label();
+            this.enterButtonForEvent = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // transactionNumberLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(697, 332);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Transcation #:";
+            this.transactionNumberLabel.AutoSize = true;
+            this.transactionNumberLabel.Location = new System.Drawing.Point(697, 332);
+            this.transactionNumberLabel.Name = "transactionNumberLabel";
+            this.transactionNumberLabel.Size = new System.Drawing.Size(76, 13);
+            this.transactionNumberLabel.TabIndex = 2;
+            this.transactionNumberLabel.Text = "Transcation #:";
             // 
-            // label2
+            // transactionNumberActualLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(779, 332);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "0000000000";
+            this.transactionNumberActualLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.transactionNumberActualLabel.Location = new System.Drawing.Point(773, 332);
+            this.transactionNumberActualLabel.Name = "transactionNumberActualLabel";
+            this.transactionNumberActualLabel.Size = new System.Drawing.Size(80, 13);
+            this.transactionNumberActualLabel.TabIndex = 3;
+            this.transactionNumberActualLabel.Text = "0000000000";
+            this.transactionNumberActualLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // logoutButton
             // 
@@ -78,39 +80,49 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
             // 
-            // label3
+            // dateLabel
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(750, 355);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "9/27/2015";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateLabel.Location = new System.Drawing.Point(782, 355);
+            this.dateLabel.Name = "dateLabel";
+            this.dateLabel.Size = new System.Drawing.Size(71, 13);
+            this.dateLabel.TabIndex = 7;
+            this.dateLabel.Text = "9/27/2015";
+            this.dateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label4
+            // timeLabel
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(750, 368);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "10:44 PM";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.timeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeLabel.Location = new System.Drawing.Point(779, 368);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(74, 13);
+            this.timeLabel.TabIndex = 8;
+            this.timeLabel.Text = "10:44 PM";
+            this.timeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // enterButtonForEvent
+            // 
+            this.enterButtonForEvent.Location = new System.Drawing.Point(288, 109);
+            this.enterButtonForEvent.Name = "enterButtonForEvent";
+            this.enterButtonForEvent.Size = new System.Drawing.Size(187, 23);
+            this.enterButtonForEvent.TabIndex = 9;
+            this.enterButtonForEvent.Text = "Enter button for events";
+            this.enterButtonForEvent.UseVisualStyleBackColor = true;
+            this.enterButtonForEvent.Visible = false;
             // 
             // MainWindow
             // 
+            this.AcceptButton = this.enterButtonForEvent;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 487);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.enterButtonForEvent);
+            this.Controls.Add(this.timeLabel);
+            this.Controls.Add(this.dateLabel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.logoutButton);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.transactionNumberActualLabel);
+            this.Controls.Add(this.transactionNumberLabel);
             this.Enabled = false;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -120,17 +132,19 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rent Me Database Management Software";
+            this.Click += new System.EventHandler(this.MainWindow_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label transactionNumberLabel;
+        private System.Windows.Forms.Label transactionNumberActualLabel;
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label dateLabel;
+        private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Button enterButtonForEvent;
     }
 }

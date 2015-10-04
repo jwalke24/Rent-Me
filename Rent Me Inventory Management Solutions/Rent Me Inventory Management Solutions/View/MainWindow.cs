@@ -22,14 +22,25 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private DataGridView currentDataGridView;
 
-        private List<IRentMeUcInterface> userControlStack; 
-        
+        private List<IRentMeUcInterface> userControlStack;
+
+        private Timer dateTimeTimer;
+
+
 
         public MainWindow()
         {
             this.InitializeComponent();
             this.setUpWindow();
+
+            this.dateTimeTimer = new Timer();
+            this.dateTimeTimer.Interval = 5000;
+            this.dateTimeTimer.Enabled = true;
+            this.dateTimeTimer.Tick += DateTimeTimerOnTick;
+            this.DateTimeTimerOnTick(null, null);
+
         }
+
 
         private void setUpWindow()
         {
@@ -38,6 +49,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             userControlStack = new List<IRentMeUcInterface>();
 
             this.displayNewTransaction();
+        }
+
+        private void DateTimeTimerOnTick(object sender, EventArgs eventArgs)
+        {
+            this.dateLabel.Text = DateTime.Now.ToShortDateString();
+            this.timeLabel.Text = DateTime.Now.ToShortTimeString();
         }
 
         private void StateChange(object sender, EventArgs e)
@@ -204,5 +221,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.Close();
         }
 
+        private void MainWindow_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
