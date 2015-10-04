@@ -59,6 +59,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void StateChange(object sender, EventArgs e)
         {
+            if (sender == null)
+            {
+                this.removeUCFromDisplay(this.userControlStack[this.userControlStack.Count - 1]);
+                this.displayNewAdmin();
+                return;
+            }
+
             IRentMeUcInterface theSender = (IRentMeUcInterface) sender;
 
             if (theSender.CurrentState == RentMeUserControlPrimaryStates.Hiding)
@@ -133,9 +140,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewCustomer()
         {
-            DataGridView newGrid = this.createNewDataGridView();
             CustomerUserControl custUC = new CustomerUserControl();
-            custUC.DataGrid = newGrid;
+            custUC.DataGrid = this.createNewDataGridView();
 
             this.userControlStack.Add(custUC);
 
@@ -147,9 +153,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewInventory()
         {
-            DataGridView newGrid = this.createNewDataGridView();
             InventoryUC inventoryUc = new InventoryUC();
-            inventoryUc.DataGrid = newGrid;
+            inventoryUc.DataGrid = this.createNewDataGridView();
 
             this.userControlStack.Add(inventoryUc);
 
@@ -158,13 +163,22 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewTransaction()
         {
-            DataGridView newGrid = this.createNewDataGridView();
             TransactionUC transactionUc = new TransactionUC();
-            transactionUc.DataGrid = newGrid;
+            transactionUc.DataGrid = this.createNewDataGridView();
 
             this.userControlStack.Add(transactionUc);
 
             this.addUCToDisplay(transactionUc);
+        }
+
+        private void displayNewAdmin()
+        {
+            AdminUC adminUc = new AdminUC();
+            adminUc.DataGrid = this.createNewDataGridView();
+
+            this.userControlStack.Add(adminUc);
+
+            this.addUCToDisplay(adminUc);
         }
 
         private void swapDataGridView(DataGridView newView)
@@ -221,9 +235,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.Close();
         }
 
-        private void MainWindow_Click(object sender, EventArgs e)
+        private void adminOptionButton_Click(object sender, EventArgs e)
         {
-
+            this.StateChange(null, null);
         }
     }
 }

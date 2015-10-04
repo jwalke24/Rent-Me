@@ -34,7 +34,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.transactionNumberLabel = new System.Windows.Forms.Label();
             this.transactionNumberActualLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.adminOptionButton = new System.Windows.Forms.Button();
             this.dateLabel = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
             this.enterButtonForEvent = new System.Windows.Forms.Button();
@@ -69,16 +69,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
-            // button1
+            // adminOptionButton
             // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(700, 452);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Administrative Options";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
+            this.adminOptionButton.Location = new System.Drawing.Point(700, 452);
+            this.adminOptionButton.Name = "adminOptionButton";
+            this.adminOptionButton.Size = new System.Drawing.Size(153, 23);
+            this.adminOptionButton.TabIndex = 6;
+            this.adminOptionButton.Text = "Administrative Options";
+            this.adminOptionButton.UseVisualStyleBackColor = true;
+            this.adminOptionButton.Click += new System.EventHandler(this.adminOptionButton_Click);
             // 
             // dateLabel
             // 
@@ -119,7 +118,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.Controls.Add(this.enterButtonForEvent);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.dateLabel);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.adminOptionButton);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.transactionNumberActualLabel);
             this.Controls.Add(this.transactionNumberLabel);
@@ -132,7 +131,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rent Me Database Management Software";
-            this.Click += new System.EventHandler(this.MainWindow_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,7 +140,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         private System.Windows.Forms.Label transactionNumberLabel;
         private System.Windows.Forms.Label transactionNumberActualLabel;
         private System.Windows.Forms.Button logoutButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button adminOptionButton;
         private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.Button enterButtonForEvent;

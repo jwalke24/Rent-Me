@@ -58,5 +58,28 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             this.StateChanged?.Invoke(this, EventArgs.Empty);
         }
+
+        private void returnEmployeeButton_Click(object sender, EventArgs e)
+        {
+            this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+        }
+
+        private void editCustomersButton_Click(object sender, EventArgs e)
+        {
+            this.SwitchTo = UserControls.Customer;
+            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
+        }
+
+        private void editEmployeesButton_Click(object sender, EventArgs e)
+        {
+            this.SwitchTo = UserControls.Customer;
+            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
+        }
+
+        private void editInventoryButton_Click(object sender, EventArgs e)
+        {
+            this.SwitchTo = UserControls.Inventory;
+            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
+        }
     }
 }
