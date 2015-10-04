@@ -49,13 +49,14 @@
   <ItemGroup>
     <Compile Include="Controller\DatabaseController.cs" />
     <Compile Include="Controller\NetworkController.cs" />
-    <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\Customer.cs" />
-    <Compile Include="Model\Employee.cs" />
-    <Compile Include="Model\Furniture.cs" />
-    <Compile Include="Model\ReturnTransaction.cs" />
-    <Compile Include="Model\Style.cs" />
-    <Compile Include="Model\Transcaction.cs" />
+    <Compile Include="Model\Database Objects\Category.cs" />
+    <Compile Include="Model\Database Objects\Customer.cs" />
+    <Compile Include="Model\Database Objects\Employee.cs" />
+    <Compile Include="Model\Database Objects\Furniture.cs" />
+    <Compile Include="Model\Database Objects\ReturnTransaction.cs" />
+    <Compile Include="Model\Database Objects\Style.cs" />
+    <Compile Include="Model\Database Objects\Transcaction.cs" />
+    <Compile Include="Model\LoginSession.cs" />
     <Compile Include="View\User Controls\AdminUC.cs">
       <SubType>UserControl</SubType>
     </Compile>

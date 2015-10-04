@@ -11,7 +11,10 @@ using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
 
 namespace Rent_Me_Inventory_Management_Solutions.View
 {
-    
+
+    /// <summary>
+    /// Different types of user controls. 
+    /// </summary>
     public enum UserControls
     {
         Transaction,
@@ -57,58 +60,110 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
                 if (transactionUserControl.CurrentState == TransactionStates.Hiding)
                 {
-                    transactionUserControl.Enabled = false;
-                    transactionUserControl.Visible = false;
-                    transactionUserControl.StateChanged -= this.StateChange;
-
-                    this.Controls.Remove(transactionUserControl);
+                    this.removeUCFromDisplay(theSender);
 
                     if (transactionUserControl.SwitchTo == UserControls.Customer)
                     {
-                        this.displayCustomer();
-
-
-
+                        this.displayNewCustomer();
                     }
                     else if (transactionUserControl.SwitchTo == UserControls.Inventory)
                     {
-                        this.displayInventory();
+                        this.displayNewInventory();
                     }
+                }
+            } else if (theSender.ControlType == UserControls.Customer)
+            {
+                CustomerUserControl customerUserControl = (CustomerUserControl) theSender;
+
+                if (customerUserControl.CurrentState == CustomerStates.Deleting)
+                {
+                    this.removeUCFromDisplay(theSender);
+                    this.popOffUserControlStack(customerUserControl);
+                }
+            } else if (theSender.ControlType == UserControls.Inventory)
+            {
+                InventoryUC inventoryUserControl = (InventoryUC) theSender;
+
+                if (inventoryUserControl.CurrentState == InventoryStates.Deleting)
+                {
+                    this.removeUCFromDisplay(theSender);
+                    this.popOffUserControlStack(theSender);
                 }
             }
         }
 
-        private void displayCustomer()
+        private void removeUCFromDisplay(IRentMeUcInterface userControl)
+        {
+            UserControl uc = (UserControl) userControl;
+
+            uc.Enabled = false;
+            uc.Visible = false;
+
+            this.Controls.Remove(uc);
+
+            userControl.StateChanged -= this.StateChange;
+        }
+
+        private void addUCToDisplay(IRentMeUcInterface ucInterface)
+        {
+            UserControl userControl = (UserControl) ucInterface;
+
+            userControl.Enabled = true;
+            userControl.Visible = true;
+            userControl.Location = this.userControlLocation;
+
+            this.swapDataGridView(ucInterface.DataGrid);
+            ucInterface.StateChanged += this.StateChange;
+            
+            this.Controls.Add(userControl);
+        }
+
+        private void popOffUserControlStack(IRentMeUcInterface customerUserControl)
+        {
+
+            if (this.userControlStack.Count < 2)
+            {
+                return;
+            }
+            
+            this.userControlStack.RemoveAt(this.userControlStack.Count - 1);
+
+            IRentMeUcInterface newUcInterface = this.userControlStack[this.userControlStack.Count - 1];
+            UserControl newUserControl = (UserControl) newUcInterface;
+            newUserControl.Enabled = true;
+            newUserControl.Visible = true;
+            newUserControl.Location = this.userControlLocation;
+
+            this.swapDataGridView(newUcInterface.DataGrid);
+            newUcInterface.StateChanged += this.StateChange;
+
+            this.Controls.Add(newUserControl);
+
+        }
+
+        private void displayNewCustomer()
         {
             DataGridView newGrid = this.cloneNewDataGridView();
             CustomerUserControl custUC = new CustomerUserControl();
             custUC.DataGrid = newGrid;
-            custUC.Enabled = true;
-            custUC.Visible = true;
-            custUC.Location = this.userControlLocation;
 
-            this.Controls.Add(custUC);
-
-            this.swapDataGridView(newGrid);
             this.userControlStack.Add(custUC);
+
+            this.addUCToDisplay(custUC);
 
 
         }
 
 
-        private void displayInventory()
+        private void displayNewInventory()
         {
             DataGridView newGrid = this.cloneNewDataGridView();
             InventoryUC inventoryUc = new InventoryUC();
             inventoryUc.DataGrid = newGrid;
-            inventoryUc.Enabled = true;
-            inventoryUc.Visible = true;
-            inventoryUc.Location = this.userControlLocation;
 
-            this.Controls.Add(inventoryUc);
-
-            this.swapDataGridView(newGrid);
             this.userControlStack.Add(inventoryUc);
+
+            this.addUCToDisplay(inventoryUc);
         }
 
         private DataGridView swapDataGridView(DataGridView newView)

@@ -63,7 +63,7 @@
             // numItemsLabel
             // 
             this.numItemsLabel.AutoSize = true;
-            this.numItemsLabel.Location = new System.Drawing.Point(102, 4);
+            this.numItemsLabel.Location = new System.Drawing.Point(105, 4);
             this.numItemsLabel.Name = "numItemsLabel";
             this.numItemsLabel.Size = new System.Drawing.Size(25, 13);
             this.numItemsLabel.TabIndex = 1;

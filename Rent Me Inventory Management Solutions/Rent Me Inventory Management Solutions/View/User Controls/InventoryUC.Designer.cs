@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.ucCancelButton = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,14 +42,15 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // ucCancelButton
             // 
-            this.button1.Location = new System.Drawing.Point(542, 110);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ucCancelButton.Location = new System.Drawing.Point(542, 110);
+            this.ucCancelButton.Name = "ucCancelButton";
+            this.ucCancelButton.Size = new System.Drawing.Size(129, 23);
+            this.ucCancelButton.TabIndex = 0;
+            this.ucCancelButton.Text = "Cancel";
+            this.ucCancelButton.UseVisualStyleBackColor = true;
+            this.ucCancelButton.Click += new System.EventHandler(this.ucCancelButton_Click);
             // 
             // comboBox1
             // 
@@ -152,7 +153,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ucCancelButton);
             this.Name = "InventoryUC";
             this.Size = new System.Drawing.Size(674, 136);
             this.panel1.ResumeLayout(false);
@@ -164,7 +165,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ucCancelButton;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label1;

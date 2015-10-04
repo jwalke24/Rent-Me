@@ -15,15 +15,38 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
     public partial class TransactionUserControl : UserControl, IRentMeUcInterface
     {
-        private const double TAX_RATE = 0.07;
+
 
         #region Properties And Variables
+
+        private const double TAX_RATE = 0.07;
+        /// <summary>
+        /// Gets or sets the data grid.
+        /// </summary>
+        /// <value>
+        /// The data grid.
+        /// </value>
         public DataGridView DataGrid { get; set; }
 
+        /// <summary>
+        /// Occurs when [state changed].
+        /// </summary>
         public event EventHandler StateChanged;
 
+        /// <summary>
+        /// Lets the parent program know which UC needs to be presented when this one closes. 
+        /// </summary>
+        /// <value>
+        /// The switch to.
+        /// </value>
         public UserControls SwitchTo { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the type of the control.
+        /// </summary>
+        /// <value>
+        /// The type of the control.
+        /// </value>
         public UserControls ControlType { get; set; }
 
         private TransactionStates currentState;
@@ -50,9 +73,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         }
 
 
-
-        #endregion
-
         internal TransactionStates CurrentState
         {
             get { return this.currentState; }
@@ -63,10 +83,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                 switch (this.currentState)
                 {
                     case TransactionStates.Main:
-                        changeToMainState();
+                        this.changeToMainState();
                         break;
                     case TransactionStates.AddItem:
-                        changeToAddItemState();
+                        this.changeToAddItemState();
                         break;
                 }
 
@@ -74,10 +94,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             }
         }
 
+        #endregion
+
+
         public TransactionUserControl()
         {
             this.InitializeComponent();
-            this.Subtotal = 41985.323568;
+            this.Subtotal = 0;
+            this.selectedCustomerLabel.Text = "0";
+            this.numItemsLabel.Text = "0";
+            this.ControlType = UserControls.Transaction;
         }
 
         

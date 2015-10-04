@@ -102,6 +102,7 @@
             this.ucCancelButton.TabIndex = 6;
             this.ucCancelButton.Text = "Cancel";
             this.ucCancelButton.UseVisualStyleBackColor = true;
+            this.ucCancelButton.Click += new System.EventHandler(this.ucCancelButton_Click);
             // 
             // CustomerUserControl
             // 

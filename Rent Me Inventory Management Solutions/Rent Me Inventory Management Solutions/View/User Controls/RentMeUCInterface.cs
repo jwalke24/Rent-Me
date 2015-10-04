@@ -20,6 +20,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             get; set;
         }
 
-        
+        event EventHandler StateChanged;
+
+
     }
 }
