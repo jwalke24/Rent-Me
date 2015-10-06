@@ -25,10 +25,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// </value>
         public DataGridView DataGrid { get; set; }
 
+        public IRentMeUcInterface ParameterPassedToChild { get; set; }
+
         /// <summary>
         /// Occurs when [state changed].
         /// </summary>
         public event EventHandler StateChanged;
+
 
         /// <summary>
         /// Lets the parent program know which UC needs to be presented when this one closes. 
@@ -37,6 +40,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// The switch to.
         /// </value>
         public UserControls SwitchTo { get; private set; }
+
+        public IRentMeUcInterface ChildReturned { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the control.
@@ -192,6 +197,49 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             this.SwitchTo = UserControls.Inventory;
             this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
+        }
+
+
+        /// <summary>
+        /// Processes the child.
+        /// </summary>
+        /// <exception cref="Exception">Invalid child type.</exception>
+        public void processChild()
+        {
+            if (ChildReturned == null)
+            {
+                return;
+            }
+
+
+            switch (ChildReturned.UserControlType)
+            {
+                case UserControls.Transaction:
+                    throw new Exception("Invalid child type.");
+                    break;
+                case UserControls.Customer:
+                    this.processCustomerChild();
+                    break;
+                case UserControls.Inventory:
+                    this.processInventoryChild();
+                    break;
+            }
+                
+        }
+
+        public void processParameter()
+        {
+            
+        }
+
+        private void processInventoryChild()
+        {
+            
+        }
+
+        private void processCustomerChild()
+        {
+            
         }
     }
 }

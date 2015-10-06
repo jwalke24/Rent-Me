@@ -113,6 +113,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             ucInterface.StateChanged += this.StateChange;
             
             this.Controls.Add(userControl);
+
+            if (this.userControlStack.Count >= 2)
+            {
+                ucInterface.ParameterPassedToChild = this.userControlStack[this.userControlStack.Count - 2];
+                ucInterface.processParameter();
+
+            }
+
         }
 
         private void popOffUserControlStack(IRentMeUcInterface customerUserControl)
@@ -122,7 +130,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             {
                 return;
             }
-            
+
+            IRentMeUcInterface previousUC = this.userControlStack[this.userControlStack.Count - 1];
+
             this.userControlStack.RemoveAt(this.userControlStack.Count - 1);
 
             IRentMeUcInterface newUcInterface = this.userControlStack[this.userControlStack.Count - 1];
@@ -131,10 +141,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             newUserControl.Visible = true;
             newUserControl.Location = this.userControlLocation;
 
+            newUcInterface.ChildReturned = previousUC;
+
             this.swapDataGridView(newUcInterface.DataGrid);
             newUcInterface.StateChanged += this.StateChange;
 
             this.Controls.Add(newUserControl);
+
+            newUcInterface.processChild();
 
         }
 

@@ -15,11 +15,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         public UserControls UserControlType { get; private set; }
         public DataGridView DataGrid { get; set; }
         public UserControls SwitchTo { get; private set; }
+        public IRentMeUcInterface ChildReturned { get; set; }
+        public IRentMeUcInterface ParameterPassedToChild { get; set; }
 
         /// <summary>
         /// Occurs when [state changed].
         /// </summary>
         public event EventHandler StateChanged;
+
+        public void processChild()
+        {
+            
+        }
+
+        public void processParameter()
+        {
+            
+        }
 
         private RentMeUserControlPrimaryStates currentState;
 

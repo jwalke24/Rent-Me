@@ -45,11 +45,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         }
 
         public UserControls SwitchTo { get; private set; }
+        public IRentMeUcInterface ChildReturned { get; set; }
+        public IRentMeUcInterface ParameterPassedToChild { get; set; }
 
         /// <summary>
         /// Occurs when [state changed].
         /// </summary>
         public event EventHandler StateChanged;
+
+        public void processChild()
+        {
+            
+        }
+
+        public void processParameter()
+        {
+            
+        }
 
         /// <summary>
         /// Called when [state changed].
