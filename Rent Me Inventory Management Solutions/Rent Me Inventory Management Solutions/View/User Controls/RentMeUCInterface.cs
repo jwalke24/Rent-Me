@@ -91,7 +91,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// <value>
         /// The parameter passed to child.
         /// </value>
-        IRentMeUcInterface ParameterPassedToChild { get; set; }
+        IRentMeUcInterface ParentParameter { get; set; }
 
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// <summary>
         /// Processes the parameters.
         /// </summary>
-        void processParameter();
+        void processParentIntention();
 
     }
 }

@@ -116,8 +116,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
             if (this.userControlStack.Count >= 2)
             {
-                ucInterface.ParameterPassedToChild = this.userControlStack[this.userControlStack.Count - 2];
-                ucInterface.processParameter();
+                ucInterface.ParentParameter = this.userControlStack[this.userControlStack.Count - 2];
+                ucInterface.processParentIntention();
 
             }
 

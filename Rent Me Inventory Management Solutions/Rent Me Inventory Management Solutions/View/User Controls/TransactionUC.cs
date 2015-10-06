@@ -25,7 +25,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// </value>
         public DataGridView DataGrid { get; set; }
 
-        public IRentMeUcInterface ParameterPassedToChild { get; set; }
+        public IRentMeUcInterface ParentParameter { get; set; }
 
         /// <summary>
         /// Occurs when [state changed].
@@ -227,7 +227,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 
         }
 
-        public void processParameter()
+        public void processParentIntention()
         {
             
         }
