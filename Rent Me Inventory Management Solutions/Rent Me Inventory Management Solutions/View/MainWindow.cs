@@ -61,6 +61,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         {
             if (sender == null)
             {
+                
+                foreach(var item in userControlStack)
+                {
+                    if (item.UserControlType == UserControls.Admin)
+                    {
+                        return;
+                    }
+                }
+
                 this.removeUCFromDisplay(this.userControlStack[this.userControlStack.Count - 1]);
                 this.displayNewAdmin();
                 return;
