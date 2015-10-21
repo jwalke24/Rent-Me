@@ -25,22 +25,16 @@ namespace Rent_Me_Inventory_Management_Solutions
             NetworkController theController = new NetworkController();
             int id = 0;
             Console.WriteLine(this.usernameTextBox.Text);
-            try
+
+            Int32.TryParse(this.usernameTextBox.Text, out id);
+
+            if (id == 0)
             {
-                id = Int32.Parse(this.usernameTextBox.Text);
-            } catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                return;
-                //generate message for numbers only.
+                this.DialogResult = DialogResult.Retry;
+                this.Close();
             }
 
             LoginSession theUser = theController.ValidateUserOnNetwork(id, this.passwordTextBox.Text);
-
-            if (theUser.isAuthenticated == false)
-            {
-                return;
-            }
 
             this.Tag = theUser;
 

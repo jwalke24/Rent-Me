@@ -16,7 +16,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Network
 
         public LoginSession loginEmployeeToDatabase(LoginSession theSession)
         {
-            string sqlStatement = "SELECT id FROM EMPLOYEE WHERE id = @Username AND password = @Password";
+            string sqlStatement = "SELECT id FROM Employee WHERE id = @Username AND password = @Password";
 
             if (theSession == null)
             {
