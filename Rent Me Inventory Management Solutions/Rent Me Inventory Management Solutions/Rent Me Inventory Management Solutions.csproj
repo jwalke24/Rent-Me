@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -57,6 +58,7 @@
     <Compile Include="Model\Database Objects\Style.cs" />
     <Compile Include="Model\Database Objects\Transcaction.cs" />
     <Compile Include="Model\LoginSession.cs" />
+    <Compile Include="Network\SQLNetwork.cs" />
     <Compile Include="View\User Controls\AdminUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,9 +142,7 @@
   <ItemGroup>
     <None Include="Resources\create_thumb1.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Network\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
