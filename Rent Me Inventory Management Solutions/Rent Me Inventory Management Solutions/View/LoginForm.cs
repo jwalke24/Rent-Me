@@ -24,24 +24,36 @@ namespace Rent_Me_Inventory_Management_Solutions
         {
             NetworkController theController = new NetworkController();
             int id = 0;
-            Console.WriteLine(this.usernameTextBox.Text);
 
             Int32.TryParse(this.usernameTextBox.Text, out id);
 
-            if (id == 0)
+            this.DialogResult = DialogResult.None;
+
+            if (id != 0)
             {
-                this.DialogResult = DialogResult.Retry;
-                this.Close();
+
+                LoginSession theUser = theController.ValidateUserOnNetwork(id, this.passwordTextBox.Text);
+
+                if (theUser.isAuthenticated)
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    
+                }
+                
             }
 
-            LoginSession theUser = theController.ValidateUserOnNetwork(id, this.passwordTextBox.Text);
-
-            this.Tag = theUser;
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
         }
 
-        
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult == DialogResult.None)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

@@ -239,6 +239,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         {
             var loginWindow = new LoginForm();
             DialogResult loginResult = loginWindow.ShowDialog(this);
+
             if (loginResult == DialogResult.OK)
             {
                 this.Enabled = true;
