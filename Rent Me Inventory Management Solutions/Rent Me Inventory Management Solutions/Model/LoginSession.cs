@@ -27,6 +27,8 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
 
         public bool isAuthenticated { get; set; }
 
+        public bool isAdmin { get; set; }
+
         public string Password
         {
             get

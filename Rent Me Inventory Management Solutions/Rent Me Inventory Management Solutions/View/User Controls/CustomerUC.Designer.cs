@@ -35,6 +35,13 @@
             this.saveCustomerButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.ucCancelButton = new System.Windows.Forms.Button();
+            this.fnameTextBox = new System.Windows.Forms.TextBox();
+            this.minitTextBox = new System.Windows.Forms.TextBox();
+            this.lNameTextBox = new System.Windows.Forms.TextBox();
+            this.phoneTextBox = new System.Windows.Forms.TextBox();
+            this.addressTextBox = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // enrollCustomerButton
@@ -105,11 +112,60 @@
             this.ucCancelButton.UseVisualStyleBackColor = true;
             this.ucCancelButton.Click += new System.EventHandler(this.ucCancelButton_Click);
             // 
+            // fnameTextBox
+            // 
+            this.fnameTextBox.Location = new System.Drawing.Point(3, 3);
+            this.fnameTextBox.Name = "fnameTextBox";
+            this.fnameTextBox.Size = new System.Drawing.Size(111, 20);
+            this.fnameTextBox.TabIndex = 7;
+            // 
+            // minitTextBox
+            // 
+            this.minitTextBox.Location = new System.Drawing.Point(3, 29);
+            this.minitTextBox.Name = "minitTextBox";
+            this.minitTextBox.Size = new System.Drawing.Size(111, 20);
+            this.minitTextBox.TabIndex = 8;
+            // 
+            // lNameTextBox
+            // 
+            this.lNameTextBox.Location = new System.Drawing.Point(3, 51);
+            this.lNameTextBox.Name = "lNameTextBox";
+            this.lNameTextBox.Size = new System.Drawing.Size(111, 20);
+            this.lNameTextBox.TabIndex = 9;
+            // 
+            // phoneTextBox
+            // 
+            this.phoneTextBox.Location = new System.Drawing.Point(234, 2);
+            this.phoneTextBox.Name = "phoneTextBox";
+            this.phoneTextBox.Size = new System.Drawing.Size(111, 20);
+            this.phoneTextBox.TabIndex = 10;
+            // 
+            // addressTextBox
+            // 
+            this.addressTextBox.Location = new System.Drawing.Point(234, 28);
+            this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.Size = new System.Drawing.Size(111, 20);
+            this.addressTextBox.TabIndex = 11;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.fnameTextBox);
+            this.panel1.Controls.Add(this.addressTextBox);
+            this.panel1.Controls.Add(this.minitTextBox);
+            this.panel1.Controls.Add(this.phoneTextBox);
+            this.panel1.Controls.Add(this.lNameTextBox);
+            this.panel1.Location = new System.Drawing.Point(4, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(430, 100);
+            this.panel1.TabIndex = 12;
+            this.panel1.Visible = false;
+            // 
             // CustomerUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.ucCancelButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveCustomerButton);
@@ -119,6 +175,8 @@
             this.Controls.Add(this.enrollCustomerButton);
             this.Name = "CustomerUserControl";
             this.Size = new System.Drawing.Size(674, 136);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,5 +191,11 @@
         private System.Windows.Forms.Button saveCustomerButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button ucCancelButton;
+        private System.Windows.Forms.TextBox fnameTextBox;
+        private System.Windows.Forms.TextBox minitTextBox;
+        private System.Windows.Forms.TextBox lNameTextBox;
+        private System.Windows.Forms.TextBox phoneTextBox;
+        private System.Windows.Forms.TextBox addressTextBox;
+        private System.Windows.Forms.Panel panel1;
     }
 }

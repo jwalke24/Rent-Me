@@ -48,8 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\DatabaseController.cs" />
     <Compile Include="Controller\NetworkController.cs" />
+    <Compile Include="Model\Database Objects\Address.cs" />
     <Compile Include="Model\Database Objects\Category.cs" />
     <Compile Include="Model\Database Objects\Customer.cs" />
     <Compile Include="Model\Database Objects\Employee.cs" />
