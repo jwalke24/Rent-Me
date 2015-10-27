@@ -50,7 +50,7 @@
             this.enrollCustomerButton.Name = "enrollCustomerButton";
             this.enrollCustomerButton.Size = new System.Drawing.Size(103, 23);
             this.enrollCustomerButton.TabIndex = 0;
-            this.enrollCustomerButton.Text = "Enroll Customer";
+            this.enrollCustomerButton.Text = "Enroll Member";
             this.enrollCustomerButton.UseVisualStyleBackColor = true;
             this.enrollCustomerButton.Click += new System.EventHandler(this.enrollCustomerButton_Click);
             // 
@@ -70,7 +70,7 @@
             this.selectCustomerButton.Name = "selectCustomerButton";
             this.selectCustomerButton.Size = new System.Drawing.Size(103, 23);
             this.selectCustomerButton.TabIndex = 2;
-            this.selectCustomerButton.Text = "Select Customer";
+            this.selectCustomerButton.Text = "Select Member";
             this.selectCustomerButton.UseVisualStyleBackColor = true;
             // 
             // searchTextBox
@@ -86,7 +86,7 @@
             this.saveCustomerButton.Name = "saveCustomerButton";
             this.saveCustomerButton.Size = new System.Drawing.Size(103, 23);
             this.saveCustomerButton.TabIndex = 4;
-            this.saveCustomerButton.Text = "Save Customer";
+            this.saveCustomerButton.Text = "Save Member";
             this.saveCustomerButton.UseVisualStyleBackColor = true;
             this.saveCustomerButton.Visible = false;
             this.saveCustomerButton.Click += new System.EventHandler(this.saveCustomerButton_Click);

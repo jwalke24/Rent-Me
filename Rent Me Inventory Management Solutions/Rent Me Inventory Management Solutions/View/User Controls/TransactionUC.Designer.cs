@@ -233,7 +233,7 @@
             this.selectedCustomerLabel.Name = "selectedCustomerLabel";
             this.selectedCustomerLabel.Size = new System.Drawing.Size(99, 13);
             this.selectedCustomerLabel.TabIndex = 20;
-            this.selectedCustomerLabel.Text = "Selected Customer:";
+            this.selectedCustomerLabel.Text = "Selected Member:";
             // 
             // customerIDLabel
             // 

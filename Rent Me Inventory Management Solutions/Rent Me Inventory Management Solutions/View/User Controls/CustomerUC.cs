@@ -2,6 +2,7 @@
 using System.Runtime.Versioning;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Model;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -124,11 +125,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private void saveCustomerButton_Click(object sender, EventArgs e)
         {
             this.InternalState = CustomerStates.Main;
-            Customer theCustomer = new Customer();
-            theCustomer.Fname = this.fnameTextBox.Text;
-            theCustomer.Minit = this.minitTextBox.Text;
-            theCustomer.Lname = this.lNameTextBox.Text;
-            theCustomer.PhoneNumber = this.phoneTextBox.Text;
+            Member theMember = new Member();
+            theMember.Fname = this.fnameTextBox.Text;
+            theMember.Minit = this.minitTextBox.Text;
+            theMember.Lname = this.lNameTextBox.Text;
+            theMember.PhoneNumber = this.phoneTextBox.Text;
 
             
 
