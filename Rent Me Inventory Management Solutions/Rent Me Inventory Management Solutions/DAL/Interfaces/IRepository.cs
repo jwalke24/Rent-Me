@@ -8,6 +8,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
 {
     interface IRepository<T>
     {
+
         void AddOne(T item);
 
         void AddList(IList<T> theList);
