@@ -22,7 +22,7 @@ namespace Rent_Me_Inventory_Management_Solutions
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            NetworkController theController = new NetworkController();
+            EmployeeController theController = new EmployeeController();
             int id = 0;
 
             Int32.TryParse(this.usernameTextBox.Text, out id);

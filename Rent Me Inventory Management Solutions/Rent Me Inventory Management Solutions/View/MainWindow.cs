@@ -44,10 +44,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void setUpWindow()
         {
-            //this.loginUser();
-            this.Visible = true;
-            this.Opacity = 100;
-            this.Enabled = true;
+            this.loginUser();
+            //this.Visible = true;
+            //this.Opacity = 100;
+            //this.Enabled = true;
      
             userControlStack = new List<IRentMeUcInterface>();
 

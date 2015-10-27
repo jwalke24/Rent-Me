@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.9.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\NetworkController.cs" />
+    <Compile Include="Controller\EmployeeController.cs" />
+    <Compile Include="DAL\DBConnection.cs" />
+    <Compile Include="DAL\Interfaces\IRepository.cs" />
+    <Compile Include="DAL\Repositories\EmployeeRepository.cs" />
     <Compile Include="Model\Database Objects\Address.cs" />
     <Compile Include="Model\Database Objects\Category.cs" />
     <Compile Include="Model\Database Objects\Customer.cs" />
@@ -58,7 +62,6 @@
     <Compile Include="Model\Database Objects\Style.cs" />
     <Compile Include="Model\Database Objects\Transcaction.cs" />
     <Compile Include="Model\LoginSession.cs" />
-    <Compile Include="Network\SQLNetwork.cs" />
     <Compile Include="View\User Controls\AdminUC.cs">
       <SubType>UserControl</SubType>
     </Compile>

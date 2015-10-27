@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model;
-using Rent_Me_Inventory_Management_Solutions.Network;
 
 namespace Rent_Me_Inventory_Management_Solutions.Controller
 {
-    class NetworkController
+    class EmployeeController
     {
-        private SqlNetwork theNetwork;
+        private EmployeeRepository employeeRepository;
 
-        public NetworkController()
+        public EmployeeController()
         {
-            this.theNetwork = new SqlNetwork();
+            this.employeeRepository = new EmployeeRepository();
         }
 
         public LoginSession ValidateUserOnNetwork(int id, string password)
@@ -24,15 +24,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
                 throw new NullReferenceException();
             }
 
-
-
-
-
-
-            return this.theNetwork.loginEmployeeToDatabase(new LoginSession(id, password));
+            return this.employeeRepository.LoginEmployeeToDatabase(new LoginSession(id, password));
         }
-
-
-        
     }
 }

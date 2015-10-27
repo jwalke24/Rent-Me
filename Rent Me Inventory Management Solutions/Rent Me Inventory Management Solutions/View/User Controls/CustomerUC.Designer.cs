@@ -114,21 +114,21 @@
             // 
             // fnameTextBox
             // 
-            this.fnameTextBox.Location = new System.Drawing.Point(3, 3);
+            this.fnameTextBox.Location = new System.Drawing.Point(3, 2);
             this.fnameTextBox.Name = "fnameTextBox";
             this.fnameTextBox.Size = new System.Drawing.Size(111, 20);
             this.fnameTextBox.TabIndex = 7;
             // 
             // minitTextBox
             // 
-            this.minitTextBox.Location = new System.Drawing.Point(3, 29);
+            this.minitTextBox.Location = new System.Drawing.Point(3, 28);
             this.minitTextBox.Name = "minitTextBox";
             this.minitTextBox.Size = new System.Drawing.Size(111, 20);
             this.minitTextBox.TabIndex = 8;
             // 
             // lNameTextBox
             // 
-            this.lNameTextBox.Location = new System.Drawing.Point(3, 51);
+            this.lNameTextBox.Location = new System.Drawing.Point(3, 54);
             this.lNameTextBox.Name = "lNameTextBox";
             this.lNameTextBox.Size = new System.Drawing.Size(111, 20);
             this.lNameTextBox.TabIndex = 9;
