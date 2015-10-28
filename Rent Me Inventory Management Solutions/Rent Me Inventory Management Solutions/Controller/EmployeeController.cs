@@ -26,5 +26,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
 
             return this.employeeRepository.LoginEmployeeToDatabase(new LoginSession(id, password));
         }
+
+        public void AddEmployee(Employee employee, string password)
+        {
+            this.employeeRepository.AddOne(employee, new LoginSession(0,password));
+        }
     }
 }

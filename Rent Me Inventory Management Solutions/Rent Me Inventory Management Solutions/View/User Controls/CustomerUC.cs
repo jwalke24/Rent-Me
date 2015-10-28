@@ -34,7 +34,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             using (AddressUC temp = this.ChildReturned as AddressUC)
             {
-                this.addressTextBox.Text = temp.AddressID;
+                if (temp != null)
+                {
+                    this.addressTextBox.Text = temp.AddressID;
+                }
             }
         }
 

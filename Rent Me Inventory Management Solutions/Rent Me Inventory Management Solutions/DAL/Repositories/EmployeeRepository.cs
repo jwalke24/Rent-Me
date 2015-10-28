@@ -37,6 +37,42 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        internal void AddOne(Employee employee, LoginSession loginSession)
+        {
+            if (employee == null || loginSession == null || loginSession.Password == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            const string statement = "INSERT INTO Employee (fname, lname, phone, Address_id, isAdmin, ssn, password)" +
+                                        " VALUES (@Fname, @Lname, @Phone, @Address, @Admin, @Ssn, @Password)";
+
+            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (MySqlCommand command = new MySqlCommand(statement))
+            {
+                command.Parameters.AddWithValue("@Fname", employee.FirstName);
+                command.Parameters.AddWithValue("@Lname", employee.LastName);
+                command.Parameters.AddWithValue("@Phone", employee.PhoneNumber);
+                command.Parameters.AddWithValue("@Address", employee.AddressId);
+                command.Parameters.AddWithValue("@Admin", employee.isAdmin);
+                command.Parameters.AddWithValue("@Ssn", employee.SSN);
+                command.Parameters.AddWithValue("@Password", loginSession.Password);
+
+                command.Connection = connection;
+
+                try
+                {
+                    command.Connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+        }
+
         public void DeleteById(string id)
         {
             throw new NotImplementedException();

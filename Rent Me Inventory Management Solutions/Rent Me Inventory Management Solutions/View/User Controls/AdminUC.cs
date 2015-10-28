@@ -84,7 +84,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void editEmployeesButton_Click(object sender, EventArgs e)
         {
-            this.SwitchTo = UserControls.Customer;
+            this.SwitchTo = UserControls.Employee;
             this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
 

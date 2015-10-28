@@ -25,7 +25,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         Admin,
         Inventory,
         Customer,
-        Address
+        Address,
+        Employee
     }
 
 
