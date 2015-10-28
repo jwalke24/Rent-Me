@@ -36,12 +36,9 @@ namespace Rent_Me_Inventory_Management_Solutions
 
                 if (theUser.isAuthenticated)
                 {
+                    this.Tag = theUser;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
-                }
-                else
-                {
-                    
                 }
                 
             }
