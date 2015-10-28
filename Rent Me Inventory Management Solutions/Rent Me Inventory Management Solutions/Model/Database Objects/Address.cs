@@ -11,6 +11,16 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 
         private string state;
         private string zip;
+        private int id;
+
+        public int Id
+        {
+            get { return this.id; }
+            set
+            {
+                this.id = value;
+            }
+        }
 
         public string Street1 { get; set; }
 

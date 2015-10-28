@@ -10,6 +10,6 @@
 
         public string PhoneNumber { get; set; }
 
-        public Address TheAddress { get; set; }
+        public string AddressId { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 throw new ArgumentNullException();
             }
 
-            const string statement = "INSERT INTO Customer (fname, lname, minit, phone, AddressId)" +
+            const string statement = "INSERT INTO Customer (fname, lname, minit, phone, Address_id)" +
                                         " VALUES (@Fname, @Lname, @Minit, @Phone, @Address)";
 
             MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
@@ -41,7 +41,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 command.Parameters.AddWithValue("@Lname", item.Lname);
                 command.Parameters.AddWithValue("@Minit", item.Minit);
                 command.Parameters.AddWithValue("@Phone", item.PhoneNumber);
-                command.Parameters.AddWithValue("@Address", item.TheAddress);
+                command.Parameters.AddWithValue("@Address", item.AddressId);
 
                 command.Connection = connection;
 
@@ -49,10 +49,6 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 {
                     command.Connection.Open();
                     command.ExecuteNonQuery();
-                }
-                catch (MySqlException mse)
-                {
-
                 }
                 finally
                 {

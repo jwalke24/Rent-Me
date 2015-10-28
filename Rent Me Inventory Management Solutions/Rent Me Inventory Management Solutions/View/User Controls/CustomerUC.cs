@@ -128,7 +128,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void saveCustomerButton_Click(object sender, EventArgs e)
         {
-            this.InternalState = CustomerStates.Main;
 
             if (this.fnameTextBox.Text == String.Empty || this.lNameTextBox.Text == String.Empty ||
                 this.minitTextBox.Text == String.Empty || this.phoneTextBox.Text == String.Empty ||
@@ -142,8 +141,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             theMember.Minit = this.minitTextBox.Text;
             theMember.Lname = this.lNameTextBox.Text;
             theMember.PhoneNumber = this.phoneTextBox.Text;
+            theMember.AddressId = this.addressTextBox.Text;
 
-            //this.controller.AddMember(theMember);
+            this.controller.AddMember(theMember);
+
+
+            this.InternalState = CustomerStates.Main;
 
         }
 
@@ -159,7 +162,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void selectAddressButton_Click(object sender, EventArgs e)
         {
-            //TODO: Put code to summon Address entry form here.
+            AddressForm addressForm = new AddressForm();
+            var result = addressForm.ShowDialog(this);
+            
+            if (result == DialogResult.OK)
+            {
+                this.addressTextBox.Text = addressForm.AddressID.ToString();
+                this.addressTextBox.Enabled = false;
+            }
+                
         }
     }
 }

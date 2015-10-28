@@ -59,6 +59,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                     while (reader.Read())
                     {
                         Address anAddress = new Address();
+                        anAddress.Id = (int)reader["id"];
                         anAddress.Street1 = reader["street1"] == DBNull.Value ? String.Empty : (string)reader["street1"];
                         anAddress.Street2 = reader["street2"] == DBNull.Value ? String.Empty : (string)reader["street2"];
                         anAddress.City = reader["city"] == DBNull.Value ? String.Empty : (string)reader["city"];
@@ -69,7 +70,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 }
                 catch (MySqlException mse)
                 {
-
+                    Console.WriteLine(mse.InnerException.Message);
                 }
                 finally
                 {
