@@ -156,5 +156,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             this.InternalState = CustomerStates.EnrollCustomer;
         }
+
+        private void selectAddressButton_Click(object sender, EventArgs e)
+        {
+            //TODO: Put code to summon Address entry form here.
+        }
     }
 }

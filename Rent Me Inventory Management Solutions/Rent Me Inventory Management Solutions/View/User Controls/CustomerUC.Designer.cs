@@ -41,6 +41,7 @@
             this.phoneTextBox = new System.Windows.Forms.TextBox();
             this.addressTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.selectAddressButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,6 +150,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.selectAddressButton);
             this.panel1.Controls.Add(this.fnameTextBox);
             this.panel1.Controls.Add(this.addressTextBox);
             this.panel1.Controls.Add(this.minitTextBox);
@@ -159,6 +161,16 @@
             this.panel1.Size = new System.Drawing.Size(430, 100);
             this.panel1.TabIndex = 12;
             this.panel1.Visible = false;
+            // 
+            // selectAddressButton
+            // 
+            this.selectAddressButton.Location = new System.Drawing.Point(352, 29);
+            this.selectAddressButton.Name = "selectAddressButton";
+            this.selectAddressButton.Size = new System.Drawing.Size(62, 23);
+            this.selectAddressButton.TabIndex = 12;
+            this.selectAddressButton.Text = "Select";
+            this.selectAddressButton.UseVisualStyleBackColor = true;
+            this.selectAddressButton.Click += new System.EventHandler(this.selectAddressButton_Click);
             // 
             // CustomerUserControl
             // 
@@ -197,5 +209,6 @@
         private System.Windows.Forms.TextBox phoneTextBox;
         private System.Windows.Forms.TextBox addressTextBox;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button selectAddressButton;
     }
 }
