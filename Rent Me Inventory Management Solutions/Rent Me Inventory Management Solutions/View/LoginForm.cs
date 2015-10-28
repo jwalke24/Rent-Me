@@ -31,8 +31,16 @@ namespace Rent_Me_Inventory_Management_Solutions
 
             if (id != 0)
             {
-
-                LoginSession theUser = theController.ValidateUserOnNetwork(id, this.passwordTextBox.Text);
+                LoginSession theUser = new LoginSession();
+                try
+                {
+                    theUser = theController.ValidateUserOnNetwork(id, this.passwordTextBox.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Unable to connect to SQL Database. Please try again.", "Network Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
 
                 if (theUser.isAuthenticated)
                 {
@@ -40,8 +48,19 @@ namespace Rent_Me_Inventory_Management_Solutions
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
-                
+                else
+                {
+                    MessageBox.Show("Invalid login information. Please try again.", "Login Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Hand);
+                }
+
             }
+            else
+            {
+                MessageBox.Show("Invalid login information. Please try again.", "Login Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Hand);
+            }
+
 
         }
 
