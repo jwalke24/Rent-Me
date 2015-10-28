@@ -66,11 +66,11 @@
     <Compile Include="Model\Database Objects\Style.cs" />
     <Compile Include="Model\Database Objects\Transcaction.cs" />
     <Compile Include="Model\LoginSession.cs" />
-    <Compile Include="View\AddressForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="View\User Controls\AddressUC.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\AddressForm.Designer.cs">
-      <DependentUpon>AddressForm.cs</DependentUpon>
+    <Compile Include="View\User Controls\AddressUC.Designer.cs">
+      <DependentUpon>AddressUC.cs</DependentUpon>
     </Compile>
     <Compile Include="View\User Controls\AdminUC.cs">
       <SubType>UserControl</SubType>
@@ -111,8 +111,8 @@
     <Compile Include="View\User Controls\TransactionUC.Designer.cs">
       <DependentUpon>TransactionUC.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\AddressForm.resx">
-      <DependentUpon>AddressForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\User Controls\AddressUC.resx">
+      <DependentUpon>AddressUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\User Controls\AdminUC.resx">
       <DependentUpon>AdminUC.cs</DependentUpon>

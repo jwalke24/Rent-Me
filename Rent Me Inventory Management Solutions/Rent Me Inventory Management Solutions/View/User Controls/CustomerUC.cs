@@ -31,7 +31,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         public void processChild()
         {
-            
+            using (AddressUC temp = this.ChildReturned as AddressUC)
+            {
+                this.addressTextBox.Text = temp.AddressID;
+            }
         }
 
         public void processParentIntention()
@@ -162,6 +165,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void selectAddressButton_Click(object sender, EventArgs e)
         {
+            /*
             AddressForm addressForm = new AddressForm();
             var result = addressForm.ShowDialog(this);
             
@@ -170,7 +174,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 this.addressTextBox.Text = addressForm.AddressID.ToString();
                 this.addressTextBox.Enabled = false;
             }
-                
+            */
+            this.SwitchTo = UserControls.Address;
+            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
     }
 }

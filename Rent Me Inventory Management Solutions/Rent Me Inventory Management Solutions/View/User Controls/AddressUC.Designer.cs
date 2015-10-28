@@ -1,13 +1,13 @@
-﻿namespace Rent_Me_Inventory_Management_Solutions.View
+﻿namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
-    partial class AddressForm
+    partial class AddressUC
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,54 +20,53 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.addressDataGridView = new System.Windows.Forms.DataGridView();
             this.selectAddressButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.addressDataGridView)).BeginInit();
+            this.createAddressButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // addressDataGridView
-            // 
-            this.addressDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.addressDataGridView.Location = new System.Drawing.Point(12, 12);
-            this.addressDataGridView.Name = "addressDataGridView";
-            this.addressDataGridView.Size = new System.Drawing.Size(475, 153);
-            this.addressDataGridView.TabIndex = 0;
             // 
             // selectAddressButton
             // 
-            this.selectAddressButton.Location = new System.Drawing.Point(202, 216);
+            this.selectAddressButton.Location = new System.Drawing.Point(567, 110);
             this.selectAddressButton.Name = "selectAddressButton";
-            this.selectAddressButton.Size = new System.Drawing.Size(103, 23);
-            this.selectAddressButton.TabIndex = 1;
+            this.selectAddressButton.Size = new System.Drawing.Size(104, 23);
+            this.selectAddressButton.TabIndex = 0;
             this.selectAddressButton.Text = "Select Address";
             this.selectAddressButton.UseVisualStyleBackColor = true;
             this.selectAddressButton.Click += new System.EventHandler(this.selectAddressButton_Click);
             // 
-            // AddressForm
+            // createAddressButton
+            // 
+            this.createAddressButton.Location = new System.Drawing.Point(567, 3);
+            this.createAddressButton.Name = "createAddressButton";
+            this.createAddressButton.Size = new System.Drawing.Size(104, 23);
+            this.createAddressButton.TabIndex = 1;
+            this.createAddressButton.Text = "Create Address";
+            this.createAddressButton.UseVisualStyleBackColor = true;
+            // 
+            // AddressUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 329);
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.createAddressButton);
             this.Controls.Add(this.selectAddressButton);
-            this.Controls.Add(this.addressDataGridView);
-            this.Name = "AddressForm";
-            this.Text = "AddressForm";
-            ((System.ComponentModel.ISupportInitialize)(this.addressDataGridView)).EndInit();
+            this.Name = "AddressUC";
+            this.Size = new System.Drawing.Size(674, 136);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView addressDataGridView;
         private System.Windows.Forms.Button selectAddressButton;
+        private System.Windows.Forms.Button createAddressButton;
     }
 }

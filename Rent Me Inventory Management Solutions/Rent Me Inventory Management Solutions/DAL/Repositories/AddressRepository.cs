@@ -68,10 +68,6 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                         addresses.Add(anAddress);
                     }
                 }
-                catch (MySqlException mse)
-                {
-                    Console.WriteLine(mse.InnerException.Message);
-                }
                 finally
                 {
                     command.Connection.Close();

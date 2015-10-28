@@ -143,6 +143,7 @@
             // 
             // addressTextBox
             // 
+            this.addressTextBox.Enabled = false;
             this.addressTextBox.Location = new System.Drawing.Point(234, 28);
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.Size = new System.Drawing.Size(111, 20);

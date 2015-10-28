@@ -92,6 +92,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                     case UserControls.Customer:
                         this.displayNewCustomer();
                         break;
+                    case UserControls.Address:
+                        this.displayNewAddress();
+                        break;
                 }
             } else if (theSender.CurrentState == RentMeUserControlPrimaryStates.Deleting)
             {
@@ -100,6 +103,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             }
 
         }
+
+       
 
         private void removeUCFromDisplay(IRentMeUcInterface userControl)
         {
@@ -174,6 +179,17 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.addUCToDisplay(custUC);
 
 
+        }
+
+        private void displayNewAddress()
+        {
+            AddressUC addressUc = new AddressUC(this.createNewDataGridView());
+
+            this.userControlStack.Add(addressUc);
+
+            this.addUCToDisplay(addressUc);
+
+            
         }
 
 
