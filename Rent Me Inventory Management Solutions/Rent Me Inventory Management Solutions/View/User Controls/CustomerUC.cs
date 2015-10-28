@@ -3,6 +3,7 @@ using System.Runtime.Versioning;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
+using Rent_Me_Inventory_Management_Solutions.Controller;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -14,6 +15,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
     public partial class CustomerUserControl : UserControl, IRentMeUcInterface
     {
+
+        private MemberController controller;
 
         public UserControls UserControlType { get; private set; }
         public DataGridView DataGrid { get; set; }
@@ -73,6 +76,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             this.InitializeComponent();
             this.UserControlType = UserControls.Customer;
+            this.controller = new MemberController();
         }
 
 
@@ -125,13 +129,21 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private void saveCustomerButton_Click(object sender, EventArgs e)
         {
             this.InternalState = CustomerStates.Main;
+
+            if (this.fnameTextBox.Text == String.Empty || this.lNameTextBox.Text == String.Empty ||
+                this.minitTextBox.Text == String.Empty || this.phoneTextBox.Text == String.Empty ||
+                this.addressTextBox.Text == String.Empty)
+            {
+                MessageBox.Show("Please enter member information into every textbox.");
+            }
+
             Member theMember = new Member();
             theMember.Fname = this.fnameTextBox.Text;
             theMember.Minit = this.minitTextBox.Text;
             theMember.Lname = this.lNameTextBox.Text;
             theMember.PhoneNumber = this.phoneTextBox.Text;
 
-            
+            //this.controller.AddMember(theMember);
 
         }
 

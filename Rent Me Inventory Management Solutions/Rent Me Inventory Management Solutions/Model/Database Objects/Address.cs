@@ -8,5 +8,38 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 {
     class Address
     {
+
+        private string state;
+        private string zip;
+
+        public string Street1 { get; set; }
+
+        public string Street2 { get; set; }
+
+        public string City { get; set; }
+
+        public string State {
+            get { return this.state; }
+            set
+            {
+                if (value.Length != 2)
+                {
+                    throw new ArgumentException();
+                }
+                this.state = value;
+            }
+        }
+
+        public string Zip {
+            get { return this.zip; }
+            set
+            {
+                if (value.Length != 5)
+                {
+                    throw new ArgumentException();
+                }
+                this.zip = value;
+            }
+        }
     }
 }
