@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.Model;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
@@ -48,43 +49,45 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public LoginSession LoginEmployeeToDatabase(LoginSession theSession)
         {
-            string sqlStatement = "SELECT id FROM Employee WHERE id = @Username AND password = @Password";
+            string sqlStatement = "SELECT id, isAdmin FROM Employee WHERE id = @Username AND password = @Password";
 
-            if (theSession == null)
-            {
-                throw new NullReferenceException();
-            }
+            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
 
-            MySqlConnection conn = new MySqlConnection(this.CONNECTION_STRING);
+            MySqlCommand command = new MySqlCommand(sqlStatement);
 
-            MySqlCommand cmd = new MySqlCommand(sqlStatement);
+            command.Parameters.AddWithValue("@Username", theSession.Id);
+            command.Parameters.AddWithValue("@Password", theSession.Password);
 
-            cmd.Parameters.AddWithValue("@Username", theSession.Id);
-            cmd.Parameters.AddWithValue("@Password", theSession.Password);
-
-            cmd.Connection = conn;
+            command.Connection = connection;
 
             try
             {
-                cmd.Connection.Open();
-                var empID = cmd.ExecuteScalar();
+                command.Connection.Open();
 
-                if (empID == null || ((int)empID) != theSession.Id)
-                {
-                    theSession.isAuthenticated = false;
-                }
-                else
-                {
-                    theSession.isAuthenticated = true;
-                }
-            }
-            catch (Exception e)
-            {
+                MySqlDataReader reader = command.ExecuteReader();
+
                 theSession.isAuthenticated = false;
+                theSession.isAdmin = false;
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    if (theSession.Id == (int)reader["id"])
+                    {
+                        theSession.isAuthenticated = true;
+
+                        if ((bool)reader["isAdmin"])
+                        {
+                            theSession.isAdmin = true;
+
+                        }
+                    }
+                }
             }
             finally
             {
-                cmd.Connection.Close();
+                command.Connection.Close();
             }
 
             return theSession;
