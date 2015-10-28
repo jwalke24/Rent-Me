@@ -59,8 +59,6 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                     command.Connection.Close();
                 }
             }
-
-            throw new NotImplementedException();
         }
 
         public void Delete(Member item)
