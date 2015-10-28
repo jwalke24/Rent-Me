@@ -21,5 +21,18 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             return this.addressRepository.GetAll();
         }
+
+        public void AddAddress(string street1, string street2, string city, string state, string zip)
+        {
+            Address newAddress = new Address
+            {
+                City = street1,
+                State = state,
+                Street1 = street1,
+                Street2 = street2,
+                Zip = zip
+            };
+            this.addressRepository.AddOne(newAddress);
+        }
     }
 }

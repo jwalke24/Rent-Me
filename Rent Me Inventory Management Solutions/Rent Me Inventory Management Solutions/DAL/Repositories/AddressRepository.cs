@@ -25,7 +25,36 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public void AddOne(Address item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            const string statement = "INSERT INTO Address (street1, street2, city, state, zip)" +
+                                        " VALUES (@street1, @street2, @city, @state, @zip)";
+
+            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (MySqlCommand command = new MySqlCommand(statement))
+            {
+                command.Parameters.AddWithValue("@street1", item.Street1);
+                command.Parameters.AddWithValue("@street2", item.Street2);
+                command.Parameters.AddWithValue("@city", item.City);
+                command.Parameters.AddWithValue("@state", item.State);
+                command.Parameters.AddWithValue("@zip", item.Zip);
+
+                command.Connection = connection;
+
+                try
+                {
+                    command.Connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
         }
 
         public void Delete(Address item)
