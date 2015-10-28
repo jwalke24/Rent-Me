@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
 
 namespace Rent_Me_Inventory_Management_Solutions.View
@@ -25,7 +26,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         private List<IRentMeUcInterface> userControlStack;
 
         private Timer dateTimeTimer;
-
+        private LoginSession loginSession;
 
 
         public MainWindow()
@@ -265,12 +266,26 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             {
                 this.Enabled = true;
                 this.Opacity = 100;
+                this.loginSession = loginWindow.Tag as LoginSession;
+                this.verifyAdminRights();
             }
             else
             {
                 this.Close();
             }
             
+        }
+
+        private void verifyAdminRights()
+        {
+            if (this.loginSession.isAdmin)
+            {
+                this.adminOptionButton.Visible = true;
+            }
+            else
+            {
+                this.adminOptionButton.Visible = false;
+            }
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -282,7 +297,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void adminOptionButton_Click(object sender, EventArgs e)
         {
-            this.StateChange(null, null);
+            if (this.loginSession.isAdmin)
+            {
+                this.StateChange(null, null);
+            }
         }
     }
 }
