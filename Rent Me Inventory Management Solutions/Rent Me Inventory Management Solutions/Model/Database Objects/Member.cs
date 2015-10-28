@@ -2,6 +2,7 @@
 {
     class Member
     {
+        public int Id { get; set; }
         public string Fname { get; set; }
 
         public string Minit { get; set; }
@@ -11,5 +12,7 @@
         public string PhoneNumber { get; set; }
 
         public string AddressId { get; set; }
+
+        
     }
 }

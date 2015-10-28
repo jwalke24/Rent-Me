@@ -21,5 +21,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             this.memberRepository.AddOne(aMember);
         }
+
+        public IList<Member> GetAll()
+        {
+            return this.memberRepository.GetAll();
+        }
     }
 }

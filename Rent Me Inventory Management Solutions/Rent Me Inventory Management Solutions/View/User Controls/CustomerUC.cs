@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Model;
@@ -75,11 +76,20 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         }
 
 
-        public CustomerUserControl()
+        public CustomerUserControl(DataGridView theGrid)
         {
+            this.DataGrid = theGrid;
             this.InitializeComponent();
             this.UserControlType = UserControls.Customer;
             this.controller = new MemberController();
+            this.loadMembers();
+        }
+
+        private void loadMembers()
+        {
+            BindingList<Member> theList = new BindingList<Member>(this.controller.GetAll());
+
+            this.DataGrid.DataSource = theList;
         }
 
 

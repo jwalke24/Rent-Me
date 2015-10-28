@@ -25,6 +25,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         public AddressUC(DataGridView theGrid)
         {
+            this.UserControlType = UserControls.Address;
             this.DataGrid = theGrid;
 
             InitializeComponent();

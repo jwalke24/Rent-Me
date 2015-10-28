@@ -171,8 +171,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewCustomer()
         {
-            CustomerUserControl custUC = new CustomerUserControl();
-            custUC.DataGrid = this.createNewDataGridView();
+            CustomerUserControl custUC = new CustomerUserControl(this.createNewDataGridView());
 
             this.userControlStack.Add(custUC);
 
@@ -250,6 +249,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             theNewView.Size = this.dataGridViewSize;
             theNewView.Visible = true;
             theNewView.Enabled = true;
+            theNewView.ReadOnly = true;
+            theNewView.BackgroundColor = DefaultBackColor;
+            
 
             return theNewView;
         }

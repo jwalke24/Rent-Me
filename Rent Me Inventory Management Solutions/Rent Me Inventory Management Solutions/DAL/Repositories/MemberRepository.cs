@@ -69,7 +69,41 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public IList<Member> GetAll()
         {
-            throw new NotImplementedException();
+            List<Member> members = new List<Member>();
+
+            const string query = "SELECT * FROM Customer";
+
+            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (MySqlCommand command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+
+                try
+                {
+                    command.Connection.Open();
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Member theMember = new Member();
+                        theMember.Id = (int)reader["id"];
+                        theMember.Fname = reader["fname"] == DBNull.Value ? String.Empty : (string)reader["fname"];
+                        theMember.Minit = reader["minit"] == DBNull.Value ? String.Empty : (string)reader["minit"];
+                        theMember.Lname = reader["lname"] == DBNull.Value ? String.Empty : (string)reader["lname"];
+                        theMember.PhoneNumber = reader["phone"] == DBNull.Value ? String.Empty : (string)reader["phone"];
+                        theMember.AddressId = reader["Address_id"] == DBNull.Value ? String.Empty : ((int)reader["Address_id"]).ToString();
+                        members.Add(theMember);
+                    }
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+
+            return members;
         }
 
         public Member GetById(string id)

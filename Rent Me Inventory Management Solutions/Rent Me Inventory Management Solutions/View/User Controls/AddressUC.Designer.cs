@@ -86,7 +86,7 @@
             // 
             // saveAddressButton
             // 
-            this.saveAddressButton.Location = new System.Drawing.Point(567, 42);
+            this.saveAddressButton.Location = new System.Drawing.Point(567, 45);
             this.saveAddressButton.Name = "saveAddressButton";
             this.saveAddressButton.Size = new System.Drawing.Size(104, 23);
             this.saveAddressButton.TabIndex = 0;
@@ -97,7 +97,7 @@
             // 
             // cancelAddressButton
             // 
-            this.cancelAddressButton.Location = new System.Drawing.Point(567, 71);
+            this.cancelAddressButton.Location = new System.Drawing.Point(567, 74);
             this.cancelAddressButton.Name = "cancelAddressButton";
             this.cancelAddressButton.Size = new System.Drawing.Size(104, 23);
             this.cancelAddressButton.TabIndex = 1;
