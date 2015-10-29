@@ -32,23 +32,23 @@
             this.backButton = new System.Windows.Forms.Button();
             this.deleteEmployeeButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lastNameTextBox = new System.Windows.Forms.TextBox();
-            this.ssnTextBox = new System.Windows.Forms.TextBox();
-            this.firstNameTextBox = new System.Windows.Forms.TextBox();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.addressTextBox = new System.Windows.Forms.TextBox();
-            this.phoneTextBox = new System.Windows.Forms.TextBox();
-            this.firstNameLabel = new System.Windows.Forms.Label();
-            this.lastNameLabel = new System.Windows.Forms.Label();
-            this.phoneLabel = new System.Windows.Forms.Label();
-            this.passwordLabel = new System.Windows.Forms.Label();
-            this.addressLabel = new System.Windows.Forms.Label();
-            this.ssnLabel = new System.Windows.Forms.Label();
-            this.selectButton = new System.Windows.Forms.Button();
-            this.adminCheckBox = new System.Windows.Forms.CheckBox();
-            this.adminLabel = new System.Windows.Forms.Label();
-            this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.adminLabel = new System.Windows.Forms.Label();
+            this.adminCheckBox = new System.Windows.Forms.CheckBox();
+            this.selectButton = new System.Windows.Forms.Button();
+            this.ssnLabel = new System.Windows.Forms.Label();
+            this.addressLabel = new System.Windows.Forms.Label();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.phoneLabel = new System.Windows.Forms.Label();
+            this.lastNameLabel = new System.Windows.Forms.Label();
+            this.firstNameLabel = new System.Windows.Forms.Label();
+            this.phoneTextBox = new System.Windows.Forms.TextBox();
+            this.addressTextBox = new System.Windows.Forms.TextBox();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.firstNameTextBox = new System.Windows.Forms.TextBox();
+            this.ssnTextBox = new System.Windows.Forms.TextBox();
+            this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,6 +80,7 @@
             this.deleteEmployeeButton.TabIndex = 2;
             this.deleteEmployeeButton.Text = "Delete Employee";
             this.deleteEmployeeButton.UseVisualStyleBackColor = true;
+            this.deleteEmployeeButton.Click += new System.EventHandler(this.deleteEmployeeButton_Click);
             // 
             // panel1
             // 
@@ -106,132 +107,15 @@
             this.panel1.TabIndex = 3;
             this.panel1.Visible = false;
             // 
-            // lastNameTextBox
+            // cancelButton
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(82, 31);
-            this.lastNameTextBox.Name = "lastNameTextBox";
-            this.lastNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.lastNameTextBox.TabIndex = 0;
-            // 
-            // ssnTextBox
-            // 
-            this.ssnTextBox.Location = new System.Drawing.Point(82, 57);
-            this.ssnTextBox.MaxLength = 10;
-            this.ssnTextBox.Name = "ssnTextBox";
-            this.ssnTextBox.Size = new System.Drawing.Size(100, 20);
-            this.ssnTextBox.TabIndex = 1;
-            // 
-            // firstNameTextBox
-            // 
-            this.firstNameTextBox.Location = new System.Drawing.Point(82, 5);
-            this.firstNameTextBox.Name = "firstNameTextBox";
-            this.firstNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.firstNameTextBox.TabIndex = 2;
-            // 
-            // passwordTextBox
-            // 
-            this.passwordTextBox.Location = new System.Drawing.Point(248, 5);
-            this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(100, 20);
-            this.passwordTextBox.TabIndex = 3;
-            // 
-            // addressTextBox
-            // 
-            this.addressTextBox.Enabled = false;
-            this.addressTextBox.Location = new System.Drawing.Point(248, 57);
-            this.addressTextBox.Name = "addressTextBox";
-            this.addressTextBox.Size = new System.Drawing.Size(45, 20);
-            this.addressTextBox.TabIndex = 4;
-            // 
-            // phoneTextBox
-            // 
-            this.phoneTextBox.Location = new System.Drawing.Point(248, 31);
-            this.phoneTextBox.MaxLength = 10;
-            this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.Size = new System.Drawing.Size(100, 20);
-            this.phoneTextBox.TabIndex = 5;
-            // 
-            // firstNameLabel
-            // 
-            this.firstNameLabel.AutoSize = true;
-            this.firstNameLabel.Location = new System.Drawing.Point(3, 5);
-            this.firstNameLabel.Name = "firstNameLabel";
-            this.firstNameLabel.Size = new System.Drawing.Size(60, 13);
-            this.firstNameLabel.TabIndex = 6;
-            this.firstNameLabel.Text = "First Name:";
-            // 
-            // lastNameLabel
-            // 
-            this.lastNameLabel.AutoSize = true;
-            this.lastNameLabel.Location = new System.Drawing.Point(3, 34);
-            this.lastNameLabel.Name = "lastNameLabel";
-            this.lastNameLabel.Size = new System.Drawing.Size(61, 13);
-            this.lastNameLabel.TabIndex = 7;
-            this.lastNameLabel.Text = "Last Name:";
-            // 
-            // phoneLabel
-            // 
-            this.phoneLabel.AutoSize = true;
-            this.phoneLabel.Location = new System.Drawing.Point(188, 35);
-            this.phoneLabel.Name = "phoneLabel";
-            this.phoneLabel.Size = new System.Drawing.Size(41, 13);
-            this.phoneLabel.TabIndex = 8;
-            this.phoneLabel.Text = "Phone:";
-            // 
-            // passwordLabel
-            // 
-            this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(188, 8);
-            this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(56, 13);
-            this.passwordLabel.TabIndex = 9;
-            this.passwordLabel.Text = "Password:";
-            // 
-            // addressLabel
-            // 
-            this.addressLabel.AutoSize = true;
-            this.addressLabel.Location = new System.Drawing.Point(188, 60);
-            this.addressLabel.Name = "addressLabel";
-            this.addressLabel.Size = new System.Drawing.Size(48, 13);
-            this.addressLabel.TabIndex = 10;
-            this.addressLabel.Text = "Address:";
-            // 
-            // ssnLabel
-            // 
-            this.ssnLabel.AutoSize = true;
-            this.ssnLabel.Location = new System.Drawing.Point(3, 60);
-            this.ssnLabel.Name = "ssnLabel";
-            this.ssnLabel.Size = new System.Drawing.Size(32, 13);
-            this.ssnLabel.TabIndex = 11;
-            this.ssnLabel.Text = "SSN:";
-            // 
-            // selectButton
-            // 
-            this.selectButton.Location = new System.Drawing.Point(299, 55);
-            this.selectButton.Name = "selectButton";
-            this.selectButton.Size = new System.Drawing.Size(48, 23);
-            this.selectButton.TabIndex = 12;
-            this.selectButton.Text = "Select";
-            this.selectButton.UseVisualStyleBackColor = true;
-            this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
-            // 
-            // adminCheckBox
-            // 
-            this.adminCheckBox.AutoSize = true;
-            this.adminCheckBox.Location = new System.Drawing.Point(82, 82);
-            this.adminCheckBox.Name = "adminCheckBox";
-            this.adminCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.adminCheckBox.TabIndex = 13;
-            this.adminCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // adminLabel
-            // 
-            this.adminLabel.AutoSize = true;
-            this.adminLabel.Location = new System.Drawing.Point(6, 83);
-            this.adminLabel.Name = "adminLabel";
-            this.adminLabel.Size = new System.Drawing.Size(39, 13);
-            this.adminLabel.TabIndex = 14;
-            this.adminLabel.Text = "Admin:";
+            this.cancelButton.Location = new System.Drawing.Point(368, 105);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 16;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // saveButton
             // 
@@ -243,15 +127,132 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // cancelButton
+            // adminLabel
             // 
-            this.cancelButton.Location = new System.Drawing.Point(368, 105);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 16;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.adminLabel.AutoSize = true;
+            this.adminLabel.Location = new System.Drawing.Point(6, 83);
+            this.adminLabel.Name = "adminLabel";
+            this.adminLabel.Size = new System.Drawing.Size(39, 13);
+            this.adminLabel.TabIndex = 14;
+            this.adminLabel.Text = "Admin:";
+            // 
+            // adminCheckBox
+            // 
+            this.adminCheckBox.AutoSize = true;
+            this.adminCheckBox.Location = new System.Drawing.Point(82, 82);
+            this.adminCheckBox.Name = "adminCheckBox";
+            this.adminCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.adminCheckBox.TabIndex = 13;
+            this.adminCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // selectButton
+            // 
+            this.selectButton.Location = new System.Drawing.Point(299, 55);
+            this.selectButton.Name = "selectButton";
+            this.selectButton.Size = new System.Drawing.Size(48, 23);
+            this.selectButton.TabIndex = 12;
+            this.selectButton.Text = "Select";
+            this.selectButton.UseVisualStyleBackColor = true;
+            this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
+            // 
+            // ssnLabel
+            // 
+            this.ssnLabel.AutoSize = true;
+            this.ssnLabel.Location = new System.Drawing.Point(3, 60);
+            this.ssnLabel.Name = "ssnLabel";
+            this.ssnLabel.Size = new System.Drawing.Size(32, 13);
+            this.ssnLabel.TabIndex = 11;
+            this.ssnLabel.Text = "SSN:";
+            // 
+            // addressLabel
+            // 
+            this.addressLabel.AutoSize = true;
+            this.addressLabel.Location = new System.Drawing.Point(188, 60);
+            this.addressLabel.Name = "addressLabel";
+            this.addressLabel.Size = new System.Drawing.Size(48, 13);
+            this.addressLabel.TabIndex = 10;
+            this.addressLabel.Text = "Address:";
+            // 
+            // passwordLabel
+            // 
+            this.passwordLabel.AutoSize = true;
+            this.passwordLabel.Location = new System.Drawing.Point(188, 8);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(56, 13);
+            this.passwordLabel.TabIndex = 9;
+            this.passwordLabel.Text = "Password:";
+            // 
+            // phoneLabel
+            // 
+            this.phoneLabel.AutoSize = true;
+            this.phoneLabel.Location = new System.Drawing.Point(188, 35);
+            this.phoneLabel.Name = "phoneLabel";
+            this.phoneLabel.Size = new System.Drawing.Size(41, 13);
+            this.phoneLabel.TabIndex = 8;
+            this.phoneLabel.Text = "Phone:";
+            // 
+            // lastNameLabel
+            // 
+            this.lastNameLabel.AutoSize = true;
+            this.lastNameLabel.Location = new System.Drawing.Point(3, 34);
+            this.lastNameLabel.Name = "lastNameLabel";
+            this.lastNameLabel.Size = new System.Drawing.Size(61, 13);
+            this.lastNameLabel.TabIndex = 7;
+            this.lastNameLabel.Text = "Last Name:";
+            // 
+            // firstNameLabel
+            // 
+            this.firstNameLabel.AutoSize = true;
+            this.firstNameLabel.Location = new System.Drawing.Point(3, 5);
+            this.firstNameLabel.Name = "firstNameLabel";
+            this.firstNameLabel.Size = new System.Drawing.Size(60, 13);
+            this.firstNameLabel.TabIndex = 6;
+            this.firstNameLabel.Text = "First Name:";
+            // 
+            // phoneTextBox
+            // 
+            this.phoneTextBox.Location = new System.Drawing.Point(248, 31);
+            this.phoneTextBox.MaxLength = 10;
+            this.phoneTextBox.Name = "phoneTextBox";
+            this.phoneTextBox.Size = new System.Drawing.Size(100, 20);
+            this.phoneTextBox.TabIndex = 5;
+            // 
+            // addressTextBox
+            // 
+            this.addressTextBox.Enabled = false;
+            this.addressTextBox.Location = new System.Drawing.Point(248, 57);
+            this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.Size = new System.Drawing.Size(45, 20);
+            this.addressTextBox.TabIndex = 4;
+            // 
+            // passwordTextBox
+            // 
+            this.passwordTextBox.Location = new System.Drawing.Point(248, 5);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(100, 20);
+            this.passwordTextBox.TabIndex = 3;
+            // 
+            // firstNameTextBox
+            // 
+            this.firstNameTextBox.Location = new System.Drawing.Point(82, 5);
+            this.firstNameTextBox.Name = "firstNameTextBox";
+            this.firstNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.firstNameTextBox.TabIndex = 2;
+            // 
+            // ssnTextBox
+            // 
+            this.ssnTextBox.Location = new System.Drawing.Point(82, 57);
+            this.ssnTextBox.MaxLength = 10;
+            this.ssnTextBox.Name = "ssnTextBox";
+            this.ssnTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ssnTextBox.TabIndex = 1;
+            // 
+            // lastNameTextBox
+            // 
+            this.lastNameTextBox.Location = new System.Drawing.Point(82, 31);
+            this.lastNameTextBox.Name = "lastNameTextBox";
+            this.lastNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.lastNameTextBox.TabIndex = 0;
             // 
             // EmployeeUC
             // 

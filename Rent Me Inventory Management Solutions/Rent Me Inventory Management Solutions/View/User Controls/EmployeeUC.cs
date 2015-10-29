@@ -136,5 +136,24 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             this.InternalState = EmployeeStates.Main;
         }
+
+        private void deleteEmployeeButton_Click(object sender, EventArgs e)
+        {
+            if (this.DataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(@"Please select an employee to delete.");
+            }
+            else
+            {
+
+                string deleteId = ((string)this.DataGrid.SelectedRows[0].Cells["ID"].Value);
+
+                this.theController.DeleteEmployeeById(deleteId);
+
+                this.loadEmployees();
+
+
+            }
+        }
     }
 }

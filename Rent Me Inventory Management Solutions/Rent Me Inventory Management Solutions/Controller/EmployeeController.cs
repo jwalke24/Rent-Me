@@ -36,5 +36,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             return this.employeeRepository.GetAll();
         }
+
+        public void DeleteEmployeeById(string deleteId)
+        {
+            this.employeeRepository.DeleteById(deleteId);
+        }
     }
 }

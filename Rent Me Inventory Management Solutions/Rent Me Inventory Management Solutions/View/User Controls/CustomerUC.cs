@@ -134,6 +134,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             this.controller.AddMember(theMember);
 
+            this.loadMembers();
 
             this.InternalState = CustomerStates.Main;
 
@@ -151,16 +152,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void selectAddressButton_Click(object sender, EventArgs e)
         {
-            /*
-            AddressForm addressForm = new AddressForm();
-            var result = addressForm.ShowDialog(this);
             
-            if (result == DialogResult.OK)
-            {
-                this.addressTextBox.Text = addressForm.AddressID.ToString();
-                this.addressTextBox.Enabled = false;
-            }
-            */
             this.SwitchTo = UserControls.Address;
             this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
