@@ -29,7 +29,43 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public IList<Employee> GetAll()
         {
-            throw new NotImplementedException();
+            List<Employee> employees = new List<Employee>();
+
+            const string query = "SELECT fname, lname, ssn, phone, isAdmin, id, Address_id FROM Employee";
+
+            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (MySqlCommand command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+
+                try
+                {
+                    command.Connection.Open();
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Employee employee = new Employee();
+                        employee.ID = ((int)reader["id"]).ToString();
+                        employee.FirstName = reader["fname"] == DBNull.Value ? String.Empty : (string)reader["fname"];
+                        employee.LastName = reader["lname"] == DBNull.Value ? String.Empty : (string)reader["lname"];
+                        employee.PhoneNumber = reader["phone"] == DBNull.Value ? String.Empty : (string)reader["phone"];
+                        employee.AddressId = reader["Address_id"] == DBNull.Value ? String.Empty : ((int)reader["Address_id"]).ToString();
+                        employee.SSN = reader["ssn"] == DBNull.Value ? String.Empty : (string)reader["ssn"];
+                        employee.isAdmin = reader["isAdmin"] == DBNull.Value ? false : (bool)reader["isAdmin"];
+
+                        employees.Add(employee);
+                    }
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+
+            return employees;
         }
 
         public Employee GetById(string id)

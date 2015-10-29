@@ -31,5 +31,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             this.employeeRepository.AddOne(employee, new LoginSession(0,password));
         }
+
+        public IList<Employee> GetAll()
+        {
+            return this.employeeRepository.GetAll();
+        }
     }
 }

@@ -26,6 +26,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.DataGrid = theGrid;
             InitializeComponent();
             this.theController = new EmployeeController();
+            this.loadEmployees();
+        }
+
+        private void loadEmployees()
+        {
+            BindingList<Employee> theList = new BindingList<Employee>(this.theController.GetAll());
+
+            this.DataGrid.DataSource = theList;
         }
 
         private void createEmployeeButton_Click(object sender, EventArgs e)
@@ -141,7 +149,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 isAdmin = this.adminCheckBox.Checked
             }, this.passwordTextBox.Text);
 
+            this.loadEmployees();
             this.InternalState = EmployeeStates.Main;
+            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
