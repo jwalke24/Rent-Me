@@ -1,10 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.Versioning;
 using System.Windows.Forms;
-using Rent_Me_Inventory_Management_Solutions.Model;
-using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 using Rent_Me_Inventory_Management_Solutions.Controller;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -14,30 +12,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         EnrollCustomer
     }
 
-    public partial class CustomerUserControl :BSMiddleClass
+    public partial class CustomerUserControl : BSMiddleClass
     {
-
-        private MemberController controller;
-
-        public override void processChild()
-        {
-            using (AddressUC temp = this.ChildReturned as AddressUC)
-            {
-                if (temp != null)
-                {
-                    this.addressTextBox.Text = temp.AddressID;
-                }
-            }
-        }
-
-        public override  void processParentIntention()
-        {
-            
-        }
-
-
-        private CustomerStates internalState;
-
         private CustomerStates InternalState
         {
             get { return this.internalState; }
@@ -46,42 +22,59 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 this.internalState = value;
                 switch (value)
                 {
-                     case CustomerStates.EnrollCustomer:
+                    case CustomerStates.EnrollCustomer:
                         this.changeToEnrollCustomerState();
                         break;
-                     case CustomerStates.Main:
+                    case CustomerStates.Main:
                         this.changeToMainState();
                         break;
                 }
             }
         }
 
+        private readonly MemberController controller;
+        private CustomerStates internalState;
 
         public CustomerUserControl(DataGridView theGrid)
         {
-            this.DataGrid = theGrid;
+            DataGrid = theGrid;
             this.InitializeComponent();
-            this.UserControlType = UserControls.Customer;
+            UserControlType = UserControls.Customer;
             this.controller = new MemberController();
             this.loadMembers();
         }
 
-        private void loadMembers()
-        {
-            BindingList<Member> theList = new BindingList<Member>(this.controller.GetAll());
+        public string CustomerID { get; private set; }
 
-            this.DataGrid.DataSource = theList;
+        public override void processChild()
+        {
+            using (var temp = ChildReturned as AddressUC)
+            {
+                if (temp != null)
+                {
+                    this.addressTextBox.Text = temp.AddressID;
+                }
+            }
         }
 
+        public override void processParentIntention()
+        {
+        }
+
+        private void loadMembers()
+        {
+            var theList = new BindingList<Member>(this.controller.GetAll());
+
+            DataGrid.DataSource = theList;
+        }
 
         private void ucCancelButton_Click(object sender, EventArgs e)
         {
-            this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+            CurrentState = RentMeUserControlPrimaryStates.Deleting;
         }
 
-
         /// <summary>
-        /// Changes the visual state of to main.
+        ///     Changes the visual state of to main.
         /// </summary>
         private void changeToMainState()
         {
@@ -98,7 +91,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         }
 
         /// <summary>
-        /// Changes the visual state of to enroll customer.
+        ///     Changes the visual state of to enroll customer.
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
         private void changeToEnrollCustomerState()
@@ -117,15 +110,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void saveCustomerButton_Click(object sender, EventArgs e)
         {
-
-            if (this.fnameTextBox.Text == String.Empty || this.lNameTextBox.Text == String.Empty ||
-                this.minitTextBox.Text == String.Empty || this.phoneTextBox.Text == String.Empty ||
-                this.addressTextBox.Text == String.Empty)
+            if (this.fnameTextBox.Text == string.Empty || this.lNameTextBox.Text == string.Empty ||
+                this.minitTextBox.Text == string.Empty || this.phoneTextBox.Text == string.Empty ||
+                this.addressTextBox.Text == string.Empty)
             {
                 MessageBox.Show("Please enter member information into every textbox.");
             }
 
-            Member theMember = new Member();
+            var theMember = new Member();
             theMember.Fname = this.fnameTextBox.Text;
             theMember.Minit = this.minitTextBox.Text;
             theMember.Lname = this.lNameTextBox.Text;
@@ -137,7 +129,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.loadMembers();
 
             this.InternalState = CustomerStates.Main;
-
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -152,9 +143,21 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void selectAddressButton_Click(object sender, EventArgs e)
         {
-            
-            this.SwitchTo = UserControls.Address;
-            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
+            SwitchTo = UserControls.Address;
+            CurrentState = RentMeUserControlPrimaryStates.Hiding;
+        }
+
+        private void selectCustomerButton_Click(object sender, EventArgs e)
+        {
+            if (DataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(@"Please select a customer for the transaction.");
+            }
+            else
+            {
+                this.CustomerID = ((int) DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
+                this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+            }
         }
     }
 }

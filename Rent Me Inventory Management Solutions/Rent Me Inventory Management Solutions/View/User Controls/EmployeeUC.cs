@@ -23,6 +23,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private EmployeeController theController;
         public EmployeeUC(DataGridView theGrid)
         {
+            this.UserControlType = UserControls.Employee;
             this.DataGrid = theGrid;
             InitializeComponent();
             this.theController = new EmployeeController();

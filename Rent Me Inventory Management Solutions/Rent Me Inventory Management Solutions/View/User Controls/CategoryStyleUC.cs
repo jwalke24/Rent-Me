@@ -14,6 +14,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
     {
         public CategoryStyleUC(DataGridView theGrid)
         {
+            this.UserControlType = UserControls.CategoryStyle;
             InitializeComponent();
             this.DataGrid = theGrid;
         }

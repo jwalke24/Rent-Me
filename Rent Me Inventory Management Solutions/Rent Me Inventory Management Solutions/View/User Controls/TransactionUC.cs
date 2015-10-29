@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -66,7 +67,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             this.InitializeComponent();
             this.Subtotal = 0;
-            this.selectedCustomerLabel.Text = "0";
+            
             this.numItemsLabel.Text = "0";
             this.UserControlType = UserControls.Transaction;
         }
@@ -161,10 +162,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             switch (ChildReturned.UserControlType)
             {
+                case UserControls.Customer:
+                    this.processCustomerChild(ChildReturned as CustomerUserControl);
+                    break;
                 case UserControls.Transaction:
                     throw new Exception("Invalid child type.");
+                
+
             }
                 
+        }
+
+        private void processCustomerChild(CustomerUserControl theUC)
+        {
+            if (theUC != null && theUC.CustomerID != null)
+            {
+                this.customerID = theUC.CustomerID;
+            }
         }
 
         public override void processParentIntention()

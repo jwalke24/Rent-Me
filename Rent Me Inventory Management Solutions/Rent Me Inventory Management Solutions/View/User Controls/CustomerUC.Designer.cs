@@ -41,12 +41,12 @@
             this.phoneTextBox = new System.Windows.Forms.TextBox();
             this.addressTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.selectAddressButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.selectAddressButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,13 +71,13 @@
             // 
             // selectCustomerButton
             // 
-            this.selectCustomerButton.Enabled = false;
             this.selectCustomerButton.Location = new System.Drawing.Point(568, 110);
             this.selectCustomerButton.Name = "selectCustomerButton";
             this.selectCustomerButton.Size = new System.Drawing.Size(103, 23);
             this.selectCustomerButton.TabIndex = 2;
             this.selectCustomerButton.Text = "Select Member";
             this.selectCustomerButton.UseVisualStyleBackColor = true;
+            this.selectCustomerButton.Click += new System.EventHandler(this.selectCustomerButton_Click);
             // 
             // searchTextBox
             // 
@@ -174,42 +174,14 @@
             this.panel1.TabIndex = 12;
             this.panel1.Visible = false;
             // 
-            // selectAddressButton
+            // label5
             // 
-            this.selectAddressButton.Location = new System.Drawing.Point(352, 25);
-            this.selectAddressButton.Name = "selectAddressButton";
-            this.selectAddressButton.Size = new System.Drawing.Size(62, 23);
-            this.selectAddressButton.TabIndex = 12;
-            this.selectAddressButton.Text = "Select";
-            this.selectAddressButton.UseVisualStyleBackColor = true;
-            this.selectAddressButton.Click += new System.EventHandler(this.selectAddressButton_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "First Name:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Middle Initial:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 51);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Last Name:";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(206, 26);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(62, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Address ID:";
             // 
             // label4
             // 
@@ -220,14 +192,42 @@
             this.label4.TabIndex = 16;
             this.label4.Text = "Phone Number:";
             // 
-            // label5
+            // label3
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(206, 26);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Address ID:";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(4, 51);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Last Name:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(4, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Middle Initial:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "First Name:";
+            // 
+            // selectAddressButton
+            // 
+            this.selectAddressButton.Location = new System.Drawing.Point(352, 25);
+            this.selectAddressButton.Name = "selectAddressButton";
+            this.selectAddressButton.Size = new System.Drawing.Size(62, 23);
+            this.selectAddressButton.TabIndex = 12;
+            this.selectAddressButton.Text = "Select";
+            this.selectAddressButton.UseVisualStyleBackColor = true;
+            this.selectAddressButton.Click += new System.EventHandler(this.selectAddressButton_Click);
             // 
             // CustomerUserControl
             // 
