@@ -50,5 +50,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.SwitchTo = UserControls.Inventory;
             this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
+
+        private void editCatStyleButton_Click(object sender, EventArgs e)
+        {
+            this.SwitchTo = UserControls.CategoryStyle;
+            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
+        }
     }
 }

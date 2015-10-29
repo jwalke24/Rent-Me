@@ -46,9 +46,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         private void setUpWindow()
         {
             this.loginUser();
-            //this.Visible = true;
-            //this.Opacity = 100;
-            //this.Enabled = true;
+            
      
             userControlStack = new List<RentMeUserControl>();
 
@@ -98,6 +96,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                         break;
                     case UserControls.Employee:
                         this.displayNewEmployee();
+                        break;
+                    case UserControls.CategoryStyle:
+                        this.displayNewCategoryStyle();
                         break;
                 }
             } else if (theSender.CurrentState == RentMeUserControlPrimaryStates.Deleting)
@@ -183,6 +184,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.addUCToDisplay(custUC);
 
 
+        }
+
+        private void displayNewCategoryStyle()
+        {
+            CategoryStyleUC categoryUC = new CategoryStyleUC(this.createNewDataGridView());
+
+            this.userControlStack.Add(categoryUC);
+
+            this.addUCToDisplay(categoryUC);
         }
 
         private void displayNewEmployee()

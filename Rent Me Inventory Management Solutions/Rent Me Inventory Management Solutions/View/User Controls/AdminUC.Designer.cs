@@ -34,6 +34,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.editCustomersButton = new System.Windows.Forms.Button();
             this.editEmployeesButton = new System.Windows.Forms.Button();
             this.editInventoryButton = new System.Windows.Forms.Button();
+            this.editCatStyleButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // returnEmployeeButton
@@ -76,11 +77,22 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.editInventoryButton.UseVisualStyleBackColor = true;
             this.editInventoryButton.Click += new System.EventHandler(this.editInventoryButton_Click);
             // 
+            // editCatStyleButton
+            // 
+            this.editCatStyleButton.Location = new System.Drawing.Point(389, 3);
+            this.editCatStyleButton.Name = "editCatStyleButton";
+            this.editCatStyleButton.Size = new System.Drawing.Size(138, 23);
+            this.editCatStyleButton.TabIndex = 4;
+            this.editCatStyleButton.Text = "Edit Categories and Styles";
+            this.editCatStyleButton.UseVisualStyleBackColor = true;
+            this.editCatStyleButton.Click += new System.EventHandler(this.editCatStyleButton_Click);
+            // 
             // AdminUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.editCatStyleButton);
             this.Controls.Add(this.editInventoryButton);
             this.Controls.Add(this.editEmployeesButton);
             this.Controls.Add(this.editCustomersButton);
@@ -97,5 +109,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private System.Windows.Forms.Button editCustomersButton;
         private System.Windows.Forms.Button editEmployeesButton;
         private System.Windows.Forms.Button editInventoryButton;
+        private Button editCatStyleButton;
     }
 }
