@@ -10,48 +10,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         AddItem
     }
 
-    public partial class TransactionUC : UserControl, IRentMeUcInterface
+    public partial class TransactionUC : RentMeUserControl
     {
 
 
         #region Properties And Variables
 
         private const double TAX_RATE = 0.07;
-        /// <summary>
-        /// Gets or sets the data grid.
-        /// </summary>
-        /// <value>
-        /// The data grid.
-        /// </value>
-        public DataGridView DataGrid { get; set; }
 
-        public IRentMeUcInterface ParentParameter { get; set; }
-
-        /// <summary>
-        /// Occurs when [state changed].
-        /// </summary>
-        public event EventHandler StateChanged;
-
-
-        /// <summary>
-        /// Lets the parent program know which UC needs to be presented when this one closes. 
-        /// </summary>
-        /// <value>
-        /// The switch to.
-        /// </value>
-        public UserControls SwitchTo { get; private set; }
-
-        public IRentMeUcInterface ChildReturned { get; set; }
-
-        /// <summary>
-        /// Gets or sets the type of the control.
-        /// </summary>
-        /// <value>
-        /// The type of the control.
-        /// </value>
-        public UserControls UserControlType { get; private set; }
-
-        private RentMeUserControlPrimaryStates currentState;
         private TransactionStates internalState;
 
         private TransactionStates InternalState
@@ -92,16 +58,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
-
-        public RentMeUserControlPrimaryStates CurrentState
-        {
-            get { return this.currentState; }
-            private set
-            {
-                this.currentState = value;
-                this.OnStateChanged();
-            }
-        }
 
         #endregion
 
@@ -178,15 +134,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.InternalState = TransactionStates.Main;
         }
 
-        protected virtual void OnStateChanged()
-        {
-            var handler = this.StateChanged;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
-
         private void customerButton_Click(object sender, EventArgs e)
         {
             this.SwitchTo = UserControls.Customer;
@@ -204,7 +151,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// Processes the child.
         /// </summary>
         /// <exception cref="Exception">Invalid child type.</exception>
-        public void processChild()
+        public override void processChild()
         {
             if (ChildReturned == null)
             {
@@ -216,28 +163,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 case UserControls.Transaction:
                     throw new Exception("Invalid child type.");
-                    break;
-                case UserControls.Customer:
-                    this.processCustomerChild();
-                    break;
-                case UserControls.Inventory:
-                    this.processInventoryChild();
-                    break;
             }
                 
         }
 
-        public void processParentIntention()
-        {
-            
-        }
-
-        private void processInventoryChild()
-        {
-            
-        }
-
-        private void processCustomerChild()
+        public override void processParentIntention()
         {
             
         }

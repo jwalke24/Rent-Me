@@ -18,7 +18,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         Main,
         AddEmployee
     }
-    public partial class EmployeeUC : UserControl, IRentMeUcInterface
+    public partial class EmployeeUC :RentMeUserControl
     {
         private EmployeeController theController;
         public EmployeeUC(DataGridView theGrid)
@@ -40,25 +40,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             this.InternalState = EmployeeStates.AddEmployee;
         }
-
-        public UserControls UserControlType { get; }
-        public DataGridView DataGrid { get; set; }
-        public RentMeUserControlPrimaryStates CurrentState
-        {
-            get { return this.currentState; }
-            private set
-            {
-                this.currentState = value;
-                this.OnStateChanged();
-            }
-        }
-        public UserControls SwitchTo { get; private set; }
-        public IRentMeUcInterface ChildReturned { get; set; }
-        public IRentMeUcInterface ParentParameter { get; set; }
-        public event EventHandler StateChanged;
-
         private EmployeeStates internalState;
-        private RentMeUserControlPrimaryStates currentState;
 
         private EmployeeStates InternalState
         {
@@ -105,18 +87,19 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         }
 
-        public void processChild()
+        public override void processChild()
         {
-            using (AddressUC test = this.ChildReturned as AddressUC)
+            switch (ChildReturned.UserControlType)
             {
-                if (test != null)
-                {
+                case UserControls.Address:
+                    AddressUC test = (AddressUC) this.ChildReturned;
                     this.addressTextBox.Text = test.AddressID;
-                }
+                    break;
+
             }
         }
 
-        public void processParentIntention()
+        public override void processParentIntention()
         {
             
         }
@@ -124,11 +107,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private void backButton_Click(object sender, EventArgs e)
         {
             this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
-        }
-
-        protected virtual void OnStateChanged()
-        {
-            this.StateChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void selectButton_Click(object sender, EventArgs e)

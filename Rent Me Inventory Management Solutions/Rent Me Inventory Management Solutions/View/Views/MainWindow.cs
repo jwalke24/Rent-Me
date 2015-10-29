@@ -23,7 +23,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private DataGridView currentDataGridView;
 
-        private List<IRentMeUcInterface> userControlStack;
+        private List<RentMeUserControl> userControlStack;
 
         private Timer dateTimeTimer;
         private LoginSession loginSession;
@@ -50,7 +50,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             //this.Opacity = 100;
             //this.Enabled = true;
      
-            userControlStack = new List<IRentMeUcInterface>();
+            userControlStack = new List<RentMeUserControl>();
 
             this.displayNewTransaction();
         }
@@ -79,7 +79,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                 return;
             }
 
-            IRentMeUcInterface theSender = (IRentMeUcInterface) sender;
+            RentMeUserControl theSender = (RentMeUserControl) sender;
 
             if (theSender.CurrentState == RentMeUserControlPrimaryStates.Hiding)
             {
@@ -111,7 +111,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
        
 
 
-        private void removeUCFromDisplay(IRentMeUcInterface userControl)
+        private void removeUCFromDisplay(RentMeUserControl userControl)
         {
             UserControl uc = (UserControl) userControl;
 
@@ -123,7 +123,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             userControl.StateChanged -= this.StateChange;
         }
 
-        private void addUCToDisplay(IRentMeUcInterface ucInterface)
+        private void addUCToDisplay(RentMeUserControl ucInterface)
         {
             UserControl userControl = (UserControl) ucInterface;
 
@@ -145,7 +145,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         }
 
-        private void popOffUserControlStack(IRentMeUcInterface customerUserControl)
+        private void popOffUserControlStack(RentMeUserControl customerUserControl)
         {
 
             if (this.userControlStack.Count < 2)
@@ -153,11 +153,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                 return;
             }
 
-            IRentMeUcInterface previousUC = this.userControlStack[this.userControlStack.Count - 1];
+            RentMeUserControl previousUC = this.userControlStack[this.userControlStack.Count - 1];
 
             this.userControlStack.RemoveAt(this.userControlStack.Count - 1);
 
-            IRentMeUcInterface newUcInterface = this.userControlStack[this.userControlStack.Count - 1];
+            RentMeUserControl newUcInterface = this.userControlStack[this.userControlStack.Count - 1];
             UserControl newUserControl = (UserControl) newUcInterface;
             newUserControl.Enabled = true;
             newUserControl.Visible = true;

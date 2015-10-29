@@ -14,23 +14,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         EnrollCustomer
     }
 
-    public partial class CustomerUserControl : UserControl, IRentMeUcInterface
+    public partial class CustomerUserControl :RentMeUserControl
     {
 
         private MemberController controller;
 
-        public UserControls UserControlType { get; private set; }
-        public DataGridView DataGrid { get; set; }
-        public UserControls SwitchTo { get; private set; }
-        public IRentMeUcInterface ChildReturned { get; set; }
-        public IRentMeUcInterface ParentParameter { get; set; }
-
-        /// <summary>
-        /// Occurs when [state changed].
-        /// </summary>
-        public event EventHandler StateChanged;
-
-        public void processChild()
+        public override void processChild()
         {
             using (AddressUC temp = this.ChildReturned as AddressUC)
             {
@@ -41,22 +30,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
-        public void processParentIntention()
+        public override  void processParentIntention()
         {
             
         }
 
-        private RentMeUserControlPrimaryStates currentState;
-
-        public RentMeUserControlPrimaryStates CurrentState
-        {
-            get { return this.currentState; }
-            private set
-            {
-                this.currentState = value;
-                this.OnStateChanged();
-            }
-        }
 
         private CustomerStates internalState;
 
@@ -135,11 +113,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.cancelButton.Visible = true;
 
             this.panel1.Visible = true;
-        }
-
-        protected virtual void OnStateChanged()
-        {
-            this.StateChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void saveCustomerButton_Click(object sender, EventArgs e)

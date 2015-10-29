@@ -18,7 +18,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         AddAddress
     }
 
-    public partial class AddressUC : UserControl,IRentMeUcInterface
+    public partial class AddressUC :RentMeUserControl
     {
         private AddressController theController;
 
@@ -42,20 +42,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.DataGrid.DataSource = theAddresses;
         }
 
-        public UserControls UserControlType { get; }
-        public DataGridView DataGrid { get; set; }
-
-        private RentMeUserControlPrimaryStates currentState;
-
-        public RentMeUserControlPrimaryStates CurrentState {
-            get { return this.currentState; }
-            private set
-            {
-                this.currentState = value;
-                this.OnStateChanged();
-            }
-        }
-
         private AddressStates internalState;
 
         private AddressStates InternalState
@@ -76,21 +62,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
-
-        public UserControls SwitchTo { get; }
-        public IRentMeUcInterface ChildReturned { get; set; }
-        public IRentMeUcInterface ParentParameter { get; set; }
-        public event EventHandler StateChanged;
-
         public string AddressID { get; private set; }
 
 
-        public void processChild()
+        public override void processChild()
         {
             
         }
 
-        public void processParentIntention()
+        public override void processParentIntention()
         {
             
         }
@@ -107,11 +87,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 this.AddressID = ((int)this.DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
                 this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
             }
-        }
-
-        protected virtual void OnStateChanged()
-        {
-            this.StateChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void createAddressButton_Click(object sender, EventArgs e)

@@ -30,18 +30,19 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
     }
 
 
-    public interface IRentMeUcInterface
+    public abstract class RentMeUserControl: UserControl
     {
+        private RentMeUserControlPrimaryStates currentState;
+
         /// <summary>
         /// Gets the type of the user control.
         /// </summary>
         /// <value>
         /// The type of the user control.
         /// </value>
-        UserControls UserControlType
+        public UserControls UserControlType
         {
-            get;
-        }
+            get; protected set; }
 
         /// <summary>
         /// Gets or sets the data grid.
@@ -49,7 +50,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// <value>
         /// The data grid.
         /// </value>
-        DataGridView DataGrid
+        public DataGridView DataGrid
         {
             get; set;
         }
@@ -60,9 +61,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// <value>
         /// The state of the current.
         /// </value>
-        RentMeUserControlPrimaryStates CurrentState
+        public RentMeUserControlPrimaryStates CurrentState
         {
-            get;
+            get { return this.currentState; }
+            protected set
+            {
+                this.currentState = value;
+                this.OnStateChanged();
+            }
         }
 
         /// <summary>
@@ -71,10 +77,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// <value>
         /// The switch to.
         /// </value>
-        UserControls SwitchTo
-        {
-            get;
-        }
+        public UserControls SwitchTo { get; protected set; }
 
         /// <summary>
         /// This object is for storing the child UC that is called from this UC.
@@ -82,7 +85,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// <value>
         /// The child returned.
         /// </value>
-        IRentMeUcInterface ChildReturned
+        public RentMeUserControl ChildReturned
         {
             get; set;
         }
@@ -93,23 +96,27 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// <value>
         /// The parameter passed to child.
         /// </value>
-        IRentMeUcInterface ParentParameter { get; set; }
+        public RentMeUserControl ParentParameter { get; set; }
 
 
         /// <summary>
         /// Occurs when external [state changed].
         /// </summary>
-        event EventHandler StateChanged;
+        public event EventHandler StateChanged;
 
         /// <summary>
         /// Processes the child element in the parent class.
         /// </summary>
-        void processChild();
+        public abstract void processChild();
 
         /// <summary>
         /// Processes the parameters.
         /// </summary>
-        void processParentIntention();
+        public abstract void  processParentIntention();
 
+        protected virtual void OnStateChanged()
+        {
+            this.StateChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
