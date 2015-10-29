@@ -16,7 +16,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         Deleting
     }
 
-    public partial class InventoryUC : RentMeUserControl
+    public partial class InventoryUC : BSMiddleClass
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InventoryUC"/> class.

@@ -14,7 +14,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         EnrollCustomer
     }
 
-    public partial class CustomerUserControl :RentMeUserControl
+    public partial class CustomerUserControl :BSMiddleClass
     {
 
         private MemberController controller;

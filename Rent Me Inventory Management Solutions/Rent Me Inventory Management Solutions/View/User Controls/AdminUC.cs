@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
-    public partial class AdminUC :RentMeUserControl
+    public partial class AdminUC :BSMiddleClass
     {
         public AdminUC()
         {

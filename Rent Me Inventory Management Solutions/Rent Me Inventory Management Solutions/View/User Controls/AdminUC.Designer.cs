@@ -1,4 +1,6 @@
-﻿namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
+﻿using System.Windows.Forms;
+
+namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
     partial class AdminUC
     {

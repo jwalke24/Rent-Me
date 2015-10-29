@@ -18,7 +18,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         Main,
         AddEmployee
     }
-    public partial class EmployeeUC :RentMeUserControl
+    public partial class EmployeeUC :BSMiddleClass
     {
         private EmployeeController theController;
         public EmployeeUC(DataGridView theGrid)

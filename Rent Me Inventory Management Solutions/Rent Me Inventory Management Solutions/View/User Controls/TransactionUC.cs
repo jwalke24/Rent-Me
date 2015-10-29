@@ -10,7 +10,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         AddItem
     }
 
-    public partial class TransactionUC : RentMeUserControl
+    public partial class TransactionUC : BSMiddleClass
     {
 
 

@@ -78,6 +78,9 @@
     <Compile Include="View\User Controls\AdminUC.Designer.cs">
       <DependentUpon>AdminUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\User Controls\BSMiddleClass.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="View\User Controls\CustomerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -110,7 +113,7 @@
     <Compile Include="View\User Controls\InventoryUC.Designer.cs">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\RentMeUCInterface.cs">
+    <Compile Include="View\RentMeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\User Controls\TransactionUC.cs">

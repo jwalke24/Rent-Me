@@ -18,7 +18,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         AddAddress
     }
 
-    public partial class AddressUC :RentMeUserControl
+    public partial class AddressUC :BSMiddleClass
     {
         private AddressController theController;
 
