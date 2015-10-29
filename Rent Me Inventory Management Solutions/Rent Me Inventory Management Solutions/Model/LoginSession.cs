@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Rent_Me_Inventory_Management_Solutions.Model
 {
-    class LoginSession
+    public class LoginSession
     {
         public LoginSession(int id, string password)
         {

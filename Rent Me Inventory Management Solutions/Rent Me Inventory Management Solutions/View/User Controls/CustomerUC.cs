@@ -59,6 +59,25 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         public override void processParentIntention()
         {
+            if (this.ParentParameter == null)
+            {
+                return;
+            }
+
+            switch (this.ParentParameter.UserControlType)
+            {
+                  case UserControls.Admin:
+                    this.proccessAdminParent(this.ParentParameter as AdminUC);
+                    break;
+            }
+        }
+
+        private void proccessAdminParent(AdminUC adminUc)
+        {
+            if (adminUc != null && adminUc.theSession.isAdmin && adminUc.theSession.isAuthenticated)
+            {
+                this.deleteMemberButton.Visible = true;
+            }
         }
 
         private void loadMembers()
@@ -157,6 +176,22 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 this.CustomerID = ((int) DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
                 this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+            }
+        }
+
+        private void deleteMemberButton_Click(object sender, EventArgs e)
+        {
+            if (DataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(@"Please select a customer to delete.");
+            }
+            else
+            {
+
+                string customerID = ((int)DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
+                this.controller.DeleteMemberById(customerID);
+
+                this.loadMembers();
             }
         }
     }

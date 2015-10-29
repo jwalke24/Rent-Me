@@ -26,5 +26,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             return this.memberRepository.GetAll();
         }
+
+        public void DeleteMemberById(string customerId)
+        {
+            this.memberRepository.DeleteById(customerId);
+        }
     }
 }

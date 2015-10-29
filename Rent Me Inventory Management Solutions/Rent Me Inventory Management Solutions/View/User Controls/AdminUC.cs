@@ -7,16 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.Model;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
     public partial class AdminUC :BSMiddleClass
     {
-        public AdminUC()
+        public AdminUC(DataGridView theGrid, LoginSession theSession)
         {
-            InitializeComponent();
-            this.UserControlType = UserControls.Admin;
+            if (theSession.isAdmin == true && theSession.isAuthenticated == true)
+            {
+                this.DataGrid = theGrid;
+                InitializeComponent();
+                this.UserControlType = UserControls.Admin;
+                this.theSession = theSession;
+            }
         }
+
+        public LoginSession theSession { get; private set; }
 
         public override void processChild()
         {

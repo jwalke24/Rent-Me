@@ -47,6 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.selectAddressButton = new System.Windows.Forms.Button();
+            this.deleteMemberButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -229,11 +230,23 @@
             this.selectAddressButton.UseVisualStyleBackColor = true;
             this.selectAddressButton.Click += new System.EventHandler(this.selectAddressButton_Click);
             // 
+            // deleteMemberButton
+            // 
+            this.deleteMemberButton.Location = new System.Drawing.Point(459, 4);
+            this.deleteMemberButton.Name = "deleteMemberButton";
+            this.deleteMemberButton.Size = new System.Drawing.Size(103, 23);
+            this.deleteMemberButton.TabIndex = 13;
+            this.deleteMemberButton.Text = "Delete Member";
+            this.deleteMemberButton.UseVisualStyleBackColor = true;
+            this.deleteMemberButton.Visible = false;
+            this.deleteMemberButton.Click += new System.EventHandler(this.deleteMemberButton_Click);
+            // 
             // CustomerUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.deleteMemberButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ucCancelButton);
             this.Controls.Add(this.cancelButton);
@@ -272,5 +285,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button deleteMemberButton;
     }
 }

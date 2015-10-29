@@ -238,9 +238,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewAdmin()
         {
-            AdminUC adminUc = new AdminUC();
-            adminUc.DataGrid = this.createNewDataGridView();
-
+            AdminUC adminUc = new AdminUC(this.createNewDataGridView(), this.loginSession);
+            
             this.userControlStack.Add(adminUc);
 
             this.addUCToDisplay(adminUc);
