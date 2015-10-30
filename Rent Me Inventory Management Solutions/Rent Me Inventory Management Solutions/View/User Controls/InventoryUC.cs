@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.Controller;
+using Rent_Me_Inventory_Management_Solutions.Model;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -18,13 +20,25 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
     public partial class InventoryUC : BSMiddleClass
     {
+
+        private FurnitureController theController;
         /// <summary>
         /// Initializes a new instance of the <see cref="InventoryUC"/> class.
         /// </summary>
-        public InventoryUC()
+        public InventoryUC(DataGridView theGrid)
         {
+            this.DataGrid = theGrid;
+            theController = new FurnitureController();
             InitializeComponent();
             this.UserControlType = UserControls.Inventory;
+            this.loadInventory();
+        }
+
+        private void loadInventory()
+        {
+            BindingList<Furniture> theList = new BindingList<Furniture>(this.theController.GetAll());
+
+            this.DataGrid.DataSource = theList;
         }
 
         private void ucCancelButton_Click(object sender, EventArgs e)

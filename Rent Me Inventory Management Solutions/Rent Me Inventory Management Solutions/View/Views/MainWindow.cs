@@ -218,8 +218,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewInventory()
         {
-            InventoryUC inventoryUc = new InventoryUC();
-            inventoryUc.DataGrid = this.createNewDataGridView();
+            InventoryUC inventoryUc = new InventoryUC(this.createNewDataGridView());
 
             this.userControlStack.Add(inventoryUc);
 
