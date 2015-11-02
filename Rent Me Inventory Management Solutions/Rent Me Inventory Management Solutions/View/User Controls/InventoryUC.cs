@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -32,6 +33,25 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             InitializeComponent();
             this.UserControlType = UserControls.Inventory;
             this.loadInventory();
+            this.LoadCategories();
+            this.LoadStyles();
+        }
+
+        private void LoadStyles()
+        {
+            
+        }
+
+        private void LoadCategories()
+        {
+            CategoryStyleController catController = new CategoryStyleController();
+            
+            IList<Category> categories = catController.GetAllCategories();
+
+            foreach (var category in categories)
+            {
+                this.categoryComboBox.Items.Add(category.Name);
+            }
         }
 
         private void loadInventory()

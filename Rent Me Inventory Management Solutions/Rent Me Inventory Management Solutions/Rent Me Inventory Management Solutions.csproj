@@ -50,15 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\AddressController.cs" />
+    <Compile Include="Controller\CategoryStyleController.cs" />
     <Compile Include="Controller\EmployeeController.cs" />
     <Compile Include="Controller\FurnitureController.cs" />
     <Compile Include="Controller\MemberController.cs" />
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="DAL\Interfaces\IRepository.cs" />
     <Compile Include="DAL\Repositories\AddressRepository.cs" />
+    <Compile Include="DAL\Repositories\CategoryRepository.cs" />
     <Compile Include="DAL\Repositories\EmployeeRepository.cs" />
     <Compile Include="DAL\Repositories\FurnitureRepository.cs" />
     <Compile Include="DAL\Repositories\MemberRepository.cs" />
+    <Compile Include="DAL\Repositories\StyleRepository.cs" />
     <Compile Include="Model\Database Objects\Address.cs" />
     <Compile Include="Model\Database Objects\Category.cs" />
     <Compile Include="Model\Database Objects\Member.cs" />
