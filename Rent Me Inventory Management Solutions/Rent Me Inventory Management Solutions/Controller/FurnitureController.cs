@@ -12,10 +12,17 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
     {
         private FurnitureRepository theRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FurnitureController"/> class.
+        /// </summary>
         public FurnitureController()
         {
             theRepository = new FurnitureRepository();
         }
+        /// <summary>
+        /// Gets all the furniture items from the database.
+        /// </summary>
+        /// <returns></returns>
         public IList<Furniture> GetAll()
         {
             return this.theRepository.GetAll();

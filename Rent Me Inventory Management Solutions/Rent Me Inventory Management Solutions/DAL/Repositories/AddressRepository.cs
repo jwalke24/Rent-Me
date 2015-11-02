@@ -13,6 +13,9 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
     {
         private readonly string CONNECTION_STRING;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddressRepository"/> class.
+        /// </summary>
         public AddressRepository()
         {
             this.CONNECTION_STRING = DBConnection.GetConnectionString();
@@ -23,6 +26,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Adds one item to the database.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void AddOne(Address item)
         {
             if (item == null)
@@ -67,6 +75,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets all the items in the database.
+        /// </summary>
+        /// <returns></returns>
         public IList<Address> GetAll()
         {
             List<Address> addresses = new List<Address>();

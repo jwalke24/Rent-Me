@@ -12,21 +12,36 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
     {
         private MemberRepository memberRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MemberController"/> class.
+        /// </summary>
         public MemberController()
         {
             this.memberRepository = new MemberRepository();
         }
 
+        /// <summary>
+        /// Adds the member to the database.
+        /// </summary>
+        /// <param name="aMember">a member.</param>
         public void AddMember(Member aMember)
         {
             this.memberRepository.AddOne(aMember);
         }
 
+        /// <summary>
+        /// Gets all the members from the database.
+        /// </summary>
+        /// <returns></returns>
         public IList<Member> GetAll()
         {
             return this.memberRepository.GetAll();
         }
 
+        /// <summary>
+        /// Deletes the member by identifier.
+        /// </summary>
+        /// <param name="customerId">The customer identifier.</param>
         public void DeleteMemberById(string customerId)
         {
             this.memberRepository.DeleteById(customerId);

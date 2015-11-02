@@ -14,6 +14,17 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
     public partial class CustomerUserControl : BSMiddleClass
     {
+        
+
+        public CustomerUserControl(DataGridView theGrid)
+        {
+            DataGrid = theGrid;
+            this.InitializeComponent();
+            UserControlType = UserControls.Customer;
+            this.controller = new MemberController();
+            this.loadMembers();
+        }
+
         private CustomerStates InternalState
         {
             get { return this.internalState; }
@@ -35,15 +46,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private readonly MemberController controller;
         private CustomerStates internalState;
 
-        public CustomerUserControl(DataGridView theGrid)
-        {
-            DataGrid = theGrid;
-            this.InitializeComponent();
-            UserControlType = UserControls.Customer;
-            this.controller = new MemberController();
-            this.loadMembers();
-        }
-
+        /// <summary>
+        /// Gets the customer identifier.
+        /// </summary>
+        /// <value>
+        /// The customer identifier.
+        /// </value>
         public string CustomerID { get; private set; }
 
         public override void processChild()

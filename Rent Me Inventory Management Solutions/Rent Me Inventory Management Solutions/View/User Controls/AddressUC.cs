@@ -62,6 +62,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
+        /// <summary>
+        /// Gets the address identifier.
+        /// </summary>
+        /// <value>
+        /// The address identifier.
+        /// </value>
         public string AddressID { get; private set; }
 
 

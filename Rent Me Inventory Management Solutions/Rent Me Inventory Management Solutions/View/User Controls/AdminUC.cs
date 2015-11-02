@@ -24,6 +24,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
+        /// <summary>
+        /// Gets the session.
+        /// </summary>
+        /// <value>
+        /// The session.
+        /// </value>
         public LoginSession theSession { get; private set; }
 
         public override void processChild()

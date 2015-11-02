@@ -13,6 +13,9 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
     {
         private readonly string CONNECTION_STRING;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MemberRepository"/> class.
+        /// </summary>
         public MemberRepository()
         {
             this.CONNECTION_STRING = DBConnection.GetConnectionString();
@@ -23,6 +26,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Adds one item to the database.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void AddOne(Member item)
         {
             if (item == null)
@@ -62,6 +70,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Deletes the item from the database by the identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
         public void DeleteById(string id)
         {
             string sqlStatement = "DELETE FROM Customer WHERE id = @id";
@@ -87,6 +99,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets all the items in the database.
+        /// </summary>
+        /// <returns></returns>
         public IList<Member> GetAll()
         {
             List<Member> members = new List<Member>();

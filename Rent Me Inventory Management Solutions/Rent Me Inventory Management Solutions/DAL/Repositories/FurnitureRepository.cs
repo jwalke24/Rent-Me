@@ -12,6 +12,9 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
     class FurnitureRepository : IRepository<Furniture>
     {
         private readonly string CONNECTION_STRING;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FurnitureRepository"/> class.
+        /// </summary>
         public FurnitureRepository()
         {
             this.CONNECTION_STRING = DBConnection.GetConnectionString();
@@ -26,6 +29,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets all the items in the database.
+        /// </summary>
+        /// <returns></returns>
         public IList<Furniture> GetAll()
         {
             List<Furniture> furnitures = new List<Furniture>();

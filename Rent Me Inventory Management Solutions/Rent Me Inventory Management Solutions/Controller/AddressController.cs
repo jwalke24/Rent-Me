@@ -12,16 +12,31 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
     {
         private AddressRepository addressRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddressController"/> class.
+        /// </summary>
         public AddressController()
         {
             this.addressRepository = new AddressRepository();
         }
 
+        /// <summary>
+        /// Gets all addresses.
+        /// </summary>
+        /// <returns></returns>
         public IList<Address> GetAllAddresses()
         {
             return this.addressRepository.GetAll();
         }
 
+        /// <summary>
+        /// Adds the address.
+        /// </summary>
+        /// <param name="street1">The street1.</param>
+        /// <param name="street2">The street2.</param>
+        /// <param name="city">The city.</param>
+        /// <param name="state">The state.</param>
+        /// <param name="zip">The zip.</param>
         public void AddAddress(string street1, string street2, string city, string state, string zip)
         {
             Address newAddress = new Address

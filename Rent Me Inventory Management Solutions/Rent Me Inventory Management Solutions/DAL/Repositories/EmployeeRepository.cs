@@ -11,6 +11,9 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
     {
         private readonly string CONNECTION_STRING;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeeRepository"/> class.
+        /// </summary>
         public EmployeeRepository()
         {
             this.CONNECTION_STRING = DBConnection.GetConnectionString();
@@ -27,6 +30,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets all the items in the database.
+        /// </summary>
+        /// <returns></returns>
         public IList<Employee> GetAll()
         {
             List<Employee> employees = new List<Employee>();
@@ -73,6 +80,12 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Adds the one.
+        /// </summary>
+        /// <param name="employee">The employee.</param>
+        /// <param name="loginSession">The login session.</param>
+        /// <exception cref="ArgumentNullException"></exception>
         internal void AddOne(Employee employee, LoginSession loginSession)
         {
             if (employee == null || loginSession == null || loginSession.Password == null)
@@ -109,6 +122,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Deletes the item from the database by the identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
         public void DeleteById(string id)
         {
             string sqlStatement = "DELETE FROM Employee WHERE id = @id";
@@ -139,6 +156,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Logs in the employee to database.
+        /// </summary>
+        /// <param name="theSession">The session.</param>
+        /// <returns></returns>
         public LoginSession LoginEmployeeToDatabase(LoginSession theSession)
         {
             string sqlStatement = "SELECT id, isAdmin FROM Employee WHERE id = @Username AND password = @Password";
