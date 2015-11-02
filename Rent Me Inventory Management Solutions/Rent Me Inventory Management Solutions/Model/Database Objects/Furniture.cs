@@ -21,7 +21,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
         /// <value>
         /// The quantity.
         /// </value>
-        public int Quantity { get; set; }
+        public uint Quantity { get; set; }
         /// <summary>
         /// Gets or sets the name.
         /// </summary>

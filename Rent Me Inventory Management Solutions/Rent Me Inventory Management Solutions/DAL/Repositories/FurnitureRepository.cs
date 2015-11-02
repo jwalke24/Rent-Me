@@ -55,7 +55,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                     {
                         Furniture furniture = new Furniture();
                         furniture.ID = ((int) reader["id"]).ToString();
-                        furniture.Quantity = reader["quantity"] as int? ?? Int32.MinValue;
+                        furniture.Quantity = reader["quantity"] as uint? ?? uint.MinValue;
                         furniture.Name = reader["name"] == DBNull.Value ? String.Empty : (string) reader["name"];
                         furniture.Description = reader["description"] == DBNull.Value
                             ? String.Empty

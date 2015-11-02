@@ -92,7 +92,7 @@
             this.saveCustomerButton.Location = new System.Drawing.Point(568, 32);
             this.saveCustomerButton.Name = "saveCustomerButton";
             this.saveCustomerButton.Size = new System.Drawing.Size(103, 23);
-            this.saveCustomerButton.TabIndex = 4;
+            this.saveCustomerButton.TabIndex = 0;
             this.saveCustomerButton.Text = "Save Member";
             this.saveCustomerButton.UseVisualStyleBackColor = true;
             this.saveCustomerButton.Visible = false;
@@ -103,7 +103,7 @@
             this.cancelButton.Location = new System.Drawing.Point(568, 61);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(103, 23);
-            this.cancelButton.TabIndex = 5;
+            this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Visible = false;
@@ -124,21 +124,21 @@
             this.fnameTextBox.Location = new System.Drawing.Point(83, 1);
             this.fnameTextBox.Name = "fnameTextBox";
             this.fnameTextBox.Size = new System.Drawing.Size(111, 20);
-            this.fnameTextBox.TabIndex = 7;
+            this.fnameTextBox.TabIndex = 0;
             // 
             // minitTextBox
             // 
             this.minitTextBox.Location = new System.Drawing.Point(83, 25);
             this.minitTextBox.Name = "minitTextBox";
             this.minitTextBox.Size = new System.Drawing.Size(111, 20);
-            this.minitTextBox.TabIndex = 8;
+            this.minitTextBox.TabIndex = 1;
             // 
             // lNameTextBox
             // 
             this.lNameTextBox.Location = new System.Drawing.Point(83, 51);
             this.lNameTextBox.Name = "lNameTextBox";
             this.lNameTextBox.Size = new System.Drawing.Size(111, 20);
-            this.lNameTextBox.TabIndex = 9;
+            this.lNameTextBox.TabIndex = 2;
             // 
             // phoneTextBox
             // 
@@ -146,7 +146,7 @@
             this.phoneTextBox.MaxLength = 10;
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.Size = new System.Drawing.Size(111, 20);
-            this.phoneTextBox.TabIndex = 10;
+            this.phoneTextBox.TabIndex = 3;
             // 
             // addressTextBox
             // 
@@ -225,7 +225,7 @@
             this.selectAddressButton.Location = new System.Drawing.Point(352, 25);
             this.selectAddressButton.Name = "selectAddressButton";
             this.selectAddressButton.Size = new System.Drawing.Size(62, 23);
-            this.selectAddressButton.TabIndex = 12;
+            this.selectAddressButton.TabIndex = 4;
             this.selectAddressButton.Text = "Select";
             this.selectAddressButton.UseVisualStyleBackColor = true;
             this.selectAddressButton.Click += new System.EventHandler(this.selectAddressButton_Click);

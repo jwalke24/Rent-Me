@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
+using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
@@ -45,6 +46,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private readonly MemberController controller;
         private CustomerStates internalState;
+        private LoginSession theSession;
 
         /// <summary>
         /// Gets the customer identifier.
@@ -84,7 +86,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (adminUc != null && adminUc.theSession.isAdmin && adminUc.theSession.isAuthenticated)
             {
-                this.deleteMemberButton.Visible = true;
+                this.theSession = adminUc.theSession;
+                this.verifyAdminButtonsMainState();
             }
         }
 
@@ -115,6 +118,18 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.cancelButton.Visible = false;
 
             this.panel1.Visible = false;
+
+            this.verifyAdminButtonsMainState();
+
+
+        }
+
+        private void verifyAdminButtonsMainState()
+        {
+            if (this.theSession != null && this.theSession.isAuthenticated && this.theSession.isAdmin)
+            {
+                this.deleteMemberButton.Visible = true;
+            }
         }
 
         /// <summary>
@@ -133,6 +148,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.cancelButton.Visible = true;
 
             this.panel1.Visible = true;
+            this.deleteMemberButton.Visible = false;
         }
 
         private void saveCustomerButton_Click(object sender, EventArgs e)
