@@ -11,15 +11,21 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
     class CategoryStyleController
     {
         private CategoryRepository categoryRepository;
+        private StyleRepository styleRepository;
         public CategoryStyleController ()
         {
             this.categoryRepository = new CategoryRepository();
+            this.styleRepository = new StyleRepository();
         }
 
         public IList<Category> GetAllCategories()
         {
             return this.categoryRepository.GetAll();
-        } 
+        }
 
+        public IList<Style> GetAllStyles()
+        {
+            return this.styleRepository.GetAll();
+        }
     }
 }

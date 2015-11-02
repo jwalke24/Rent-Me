@@ -14,7 +14,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
         /// <value>
         /// The identifier.
         /// </value>
-        public int ID { get; set; }
+        public string ID { get; set; }
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
@@ -29,5 +29,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
         /// The description.
         /// </value>
         public string Description { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

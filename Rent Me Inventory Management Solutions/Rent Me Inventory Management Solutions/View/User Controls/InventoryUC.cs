@@ -29,8 +29,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         public InventoryUC(DataGridView theGrid)
         {
             this.DataGrid = theGrid;
-            theController = new FurnitureController();
-            InitializeComponent();
+            this.theController = new FurnitureController();
+            this.InitializeComponent();
             this.UserControlType = UserControls.Inventory;
             this.loadInventory();
             this.LoadCategories();
@@ -39,23 +39,39 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void LoadStyles()
         {
+            this.styleComboBox.Items.Add("All");
             
+            CategoryStyleController catController = new CategoryStyleController();
+
+            IList<Style> styles = catController.GetAllStyles();
+
+            
+            foreach (var style in styles)
+            {
+                this.styleComboBox.Items.Add(style);
+            }
+
+            this.styleComboBox.SelectedIndex = 0;
         }
 
         private void LoadCategories()
         {
+            this.categoryComboBox.Items.Add("All");
             CategoryStyleController catController = new CategoryStyleController();
             
             IList<Category> categories = catController.GetAllCategories();
 
             foreach (var category in categories)
             {
-                this.categoryComboBox.Items.Add(category.Name);
+                this.categoryComboBox.Items.Add(category);
             }
+
+            this.categoryComboBox.SelectedIndex = 0;
         }
 
         private void loadInventory()
         {
+            
             BindingList<Furniture> theList = new BindingList<Furniture>(this.theController.GetAll());
 
             this.DataGrid.DataSource = theList;

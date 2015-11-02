@@ -28,7 +28,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public IList<Category> GetAll()
         {
-            List<Category> furnitures = new List<Category>();
+            List<Category> categories = new List<Category>();
 
             const string query = "SELECT * FROM Category";
 
@@ -53,7 +53,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                             ? String.Empty
                             : (string)reader["description"];
 
-                        furnitures.Add(category);
+                        categories.Add(category);
                     }
                 }
                 finally
@@ -61,7 +61,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                     command.Connection.Close();
                 }
 
-                return furnitures;
+                return categories;
             }
         }
 

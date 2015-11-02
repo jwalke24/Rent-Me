@@ -29,5 +29,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
         /// The description.
         /// </value>
         public string Description { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
