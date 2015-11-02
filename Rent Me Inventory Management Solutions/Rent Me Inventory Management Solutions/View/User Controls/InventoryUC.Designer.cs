@@ -37,7 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -122,18 +122,18 @@
             this.button2.Text = "Go";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // searchButton
             // 
-            this.button3.Location = new System.Drawing.Point(6, 98);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(118, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Search";
-            this.button3.UseVisualStyleBackColor = true;
+            this.searchButton.Location = new System.Drawing.Point(6, 98);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(118, 23);
+            this.searchButton.TabIndex = 8;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // button4
             // 
-            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(542, 3);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(129, 23);
@@ -147,7 +147,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.searchButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -174,7 +174,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button button4;
     }
 }

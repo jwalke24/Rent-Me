@@ -27,5 +27,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             return this.theRepository.GetAll();
         }
+
+        public IList<Furniture> GetItemsByCategoryStyle(Category category, Style style)
+        {
+            return this.theRepository.GetAllByCategoryStyleCriteria(category, style);
+        }
     }
 }

@@ -32,6 +32,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.theController = new FurnitureController();
             this.InitializeComponent();
             this.UserControlType = UserControls.Inventory;
+            this.loadAllData();
+        }
+
+        private void loadAllData()
+        {
             this.loadInventory();
             this.LoadCategories();
             this.LoadStyles();
@@ -90,6 +95,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         public override void processParentIntention()
         {
             
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            IList<Furniture> result = this.theController.GetItemsByCategoryStyle(this.categoryComboBox.SelectedItem as Category, this.styleComboBox.SelectedItem as Style);
+            this.DataGrid.DataSource = new BindingList<Furniture>(result);
         }
     }
 }

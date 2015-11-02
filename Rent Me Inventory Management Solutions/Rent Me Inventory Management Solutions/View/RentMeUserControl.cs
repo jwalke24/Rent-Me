@@ -30,7 +30,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
     public abstract class RentMeUserControl: UserControl
     {
         private RentMeUserControlPrimaryStates currentState;
-
+        
         /// <summary>
         /// Gets the type of the user control.
         /// </summary>
