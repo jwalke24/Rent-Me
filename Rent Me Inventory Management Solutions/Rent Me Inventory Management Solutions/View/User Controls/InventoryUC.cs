@@ -64,49 +64,72 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void loadAllData()
         {
-            this.loadInventory();
-            this.LoadCategories();
-            this.LoadStyles();
+                this.loadInventory();
+                this.LoadCategories();
+                this.LoadStyles();
         }
 
         private void LoadStyles()
         {
-            this.styleComboBox.Items.Add("All");
-            
-            CategoryStyleController catController = new CategoryStyleController();
-
-            IList<Style> styles = catController.GetAllStyles();
-
-            
-            foreach (var style in styles)
+            try
             {
-                this.styleComboBox.Items.Add(style);
-            }
+                this.styleComboBox.Items.Add("All");
 
-            this.styleComboBox.SelectedIndex = 0;
+                CategoryStyleController catController = new CategoryStyleController();
+
+
+                IList<Style> styles = catController.GetAllStyles();
+
+
+                foreach (var style in styles)
+                {
+                    this.styleComboBox.Items.Add(style);
+                }
+
+                this.styleComboBox.SelectedIndex = 0;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("An error occured while loading this form.");
+                
+            }
         }
 
         private void LoadCategories()
         {
-            this.categoryComboBox.Items.Add("All");
-            CategoryStyleController catController = new CategoryStyleController();
-            
-            IList<Category> categories = catController.GetAllCategories();
-
-            foreach (var category in categories)
+            try
             {
-                this.categoryComboBox.Items.Add(category);
-            }
+                this.categoryComboBox.Items.Add("All");
+                CategoryStyleController catController = new CategoryStyleController();
 
-            this.categoryComboBox.SelectedIndex = 0;
-        }
+                IList<Category> categories = catController.GetAllCategories();
+
+                foreach (var category in categories)
+                {
+                    this.categoryComboBox.Items.Add(category);
+                }
+
+                this.categoryComboBox.SelectedIndex = 0;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(@"An error occured while loading this form.");
+                
+            }
+}
 
         private void loadInventory()
         {
-            
+            try {
             BindingList<Furniture> theList = new BindingList<Furniture>(this.theController.GetAll());
 
             this.DataGrid.DataSource = theList;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(@"An error occured while loading this form.");
+                
+            }
         }
 
         private void ucCancelButton_Click(object sender, EventArgs e)
@@ -251,9 +274,17 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 MessageBox.Show(@"Please enter a valid quantity.");
                 return;
             }
-
-            this.theController.AddItem(theCategory, theStyle, this.nameTextBox.Text, this.descriptionTextBox.Text, price,
-                quantity);
+            try
+            {
+                this.theController.AddItem(theCategory, theStyle, this.nameTextBox.Text, this.descriptionTextBox.Text,
+                    price,
+                    quantity);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(@"Failed to add item to inventory. Please try again.");
+                
+            }
 
             this.loadAllData();
 
