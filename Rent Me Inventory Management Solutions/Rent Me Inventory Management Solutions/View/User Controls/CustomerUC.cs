@@ -149,6 +149,17 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             this.panel1.Visible = true;
             this.deleteMemberButton.Visible = false;
+
+            this.clearTextBoxes();
+        }
+
+        private void clearTextBoxes()
+        {
+            this.fnameTextBox.Text = string.Empty;
+            this.lNameTextBox.Text = string.Empty;
+            this.minitTextBox.Text = string.Empty;
+            this.phoneTextBox.Text = string.Empty;
+            this.addressTextBox.Text = string.Empty;
         }
 
         private void saveCustomerButton_Click(object sender, EventArgs e)
@@ -158,6 +169,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 this.addressTextBox.Text == string.Empty)
             {
                 MessageBox.Show("Please enter member information into every textbox.");
+                return;
+            }
+
+            if (this.phoneTextBox.Text.Length != 10)
+            {
+                MessageBox.Show("A phone number must have 10 digits.");
+                return;
             }
 
             var theMember = new Member();

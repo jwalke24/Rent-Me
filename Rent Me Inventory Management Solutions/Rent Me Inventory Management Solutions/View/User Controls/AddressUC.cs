@@ -112,14 +112,20 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void cancelAddressButton_Click(object sender, EventArgs e)
         {
-            this.InternalState = AddressStates.Main;
+            if (this.InternalState == AddressStates.Main)
+            {
+                this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+            }
+            else
+            {
+                this.InternalState = AddressStates.Main;
+            }
         }
 
         private void changeToAddAddressState()
         {
             this.mainPanel.Visible = true;
             this.saveAddressButton.Visible = true;
-            this.cancelAddressButton.Visible = true;
 
             this.selectAddressButton.Visible = false;
             this.createAddressButton.Visible = false;
@@ -129,7 +135,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             this.mainPanel.Visible = false;
             this.saveAddressButton.Visible = false;
-            this.cancelAddressButton.Visible = false;
 
             this.selectAddressButton.Visible = true;
             this.createAddressButton.Visible = true;
