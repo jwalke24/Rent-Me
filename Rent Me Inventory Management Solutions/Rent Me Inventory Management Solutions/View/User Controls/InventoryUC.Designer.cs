@@ -166,6 +166,7 @@
             this.addItemButton.TabIndex = 10;
             this.addItemButton.Text = "Add Item";
             this.addItemButton.UseVisualStyleBackColor = true;
+            this.addItemButton.Visible = false;
             this.addItemButton.Click += new System.EventHandler(this.addItemButton_Click);
             // 
             // addPanel

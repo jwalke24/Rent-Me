@@ -26,6 +26,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private FurnitureController theController;
 
         private InventoryStates internalState;
+        private LoginSession theSession;
 
         private InventoryStates InternalState
         {
@@ -46,34 +47,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
-        private void changeToAddingState()
-        {
-            this.searchButton.Visible = false;
-            this.itemPanel.Visible = false;
-            this.selectItemButton.Visible = false;
-            this.addItemButton.Visible = false;
-
-            this.addPanel.Visible = true;
-            this.saveItemButton.Visible = true;
-
-            this.categoryStylePanel.Location = this.itemPanel.Location;
-
-
-        }
-
-        private void changeToMainState()
-        {
-            this.searchButton.Visible = true;
-            this.itemPanel.Visible = true;
-            this.selectItemButton.Visible = true;
-            this.addItemButton.Visible = true;
-
-            this.addPanel.Visible = false;
-            this.saveItemButton.Visible = false;
-
-            this.categoryStylePanel.Location = this.categoryStyleDefaultLocation;
-
-        }
+       
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InventoryUC"/> class.
@@ -154,7 +128,64 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         public override void processParentIntention()
         {
-            
+            if (this.ParentParameter == null)
+            {
+                return;
+            }
+
+            switch (this.ParentParameter.UserControlType)
+            {
+                case UserControls.Admin:
+                    this.proccessAdminParent(this.ParentParameter as AdminUC);
+                    break;
+            }
+        }
+
+        private void proccessAdminParent(AdminUC adminUc)
+        {
+            if (adminUc != null && adminUc.theSession.isAdmin && adminUc.theSession.isAuthenticated)
+            {
+                this.theSession = adminUc.theSession;
+                this.verifyAdminButtonsMainState();
+            }
+        }
+
+        private void changeToAddingState()
+        {
+            this.searchButton.Visible = false;
+            this.itemPanel.Visible = false;
+            this.selectItemButton.Visible = false;
+            this.addItemButton.Visible = false;
+
+            this.addPanel.Visible = true;
+            this.saveItemButton.Visible = true;
+
+            this.categoryStylePanel.Location = this.itemPanel.Location;
+
+
+        }
+
+        private void changeToMainState()
+        {
+            this.searchButton.Visible = true;
+            this.itemPanel.Visible = true;
+            this.selectItemButton.Visible = true;
+
+            this.addPanel.Visible = false;
+            this.saveItemButton.Visible = false;
+
+            this.categoryStylePanel.Location = this.categoryStyleDefaultLocation;
+
+            this.verifyAdminButtonsMainState();
+
+        }
+
+        private void verifyAdminButtonsMainState()
+        {
+            if (this.theSession != null && this.theSession.isAuthenticated && this.theSession.isAdmin)
+            {
+                this.addItemButton.Visible = true;
+            }
         }
 
         private void searchButton_Click(object sender, EventArgs e)
