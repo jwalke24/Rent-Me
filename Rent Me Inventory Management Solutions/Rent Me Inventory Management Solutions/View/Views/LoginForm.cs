@@ -36,10 +36,9 @@ namespace Rent_Me_Inventory_Management_Solutions
                 {
                     theUser = theController.ValidateUserOnNetwork(id, this.passwordTextBox.Text);
                 }
-                catch (Exception)
+                catch (Exception exception)
                 {
-                    MessageBox.Show("Unable to connect to SQL Database. Please try again.", "Network Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    ErrorHandler.DisplayErrorMessageToUserAndLog("Network Error", "Unable to connect to SQL Database. Please try again.", exception);
                 }
 
                 if (theUser.isAuthenticated)
@@ -50,15 +49,13 @@ namespace Rent_Me_Inventory_Management_Solutions
                 }
                 else
                 {
-                    MessageBox.Show("Invalid login information. Please try again.", "Login Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Hand);
+                    ErrorHandler.displayErrorBox("Login Error", "Invalid login information. Please try again.");
                 }
 
             }
             else
             {
-                MessageBox.Show("Invalid login information. Please try again.", "Login Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Hand);
+                ErrorHandler.displayErrorBox("Login Error", "Invalid login information. Please try again.");
             }
 
 

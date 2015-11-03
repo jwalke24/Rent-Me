@@ -62,6 +62,7 @@
     <Compile Include="DAL\Repositories\FurnitureRepository.cs" />
     <Compile Include="DAL\Repositories\MemberRepository.cs" />
     <Compile Include="DAL\Repositories\StyleRepository.cs" />
+    <Compile Include="Static\ErrorHandler.cs" />
     <Compile Include="Model\Database Objects\Address.cs" />
     <Compile Include="Model\Database Objects\Category.cs" />
     <Compile Include="Model\Database Objects\Member.cs" />
