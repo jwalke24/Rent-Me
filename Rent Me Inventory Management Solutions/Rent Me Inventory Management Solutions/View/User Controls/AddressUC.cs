@@ -117,6 +117,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             catch (Exception exception)
             {
                 ErrorHandler.displayErrorBox("Error", "Please enter a valid zip code.");
+                return;
+            }
+
+            if (this.stateTextBox.Text.Length != 2)
+            {
+                ErrorHandler.displayErrorBox("Error", "Please enter a valid state.");
             }
 
 
@@ -131,6 +137,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             catch (Exception exception)
             {
                 ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to add address to database. Please try again.", exception);
+                return;
             }
         }
 

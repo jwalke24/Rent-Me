@@ -242,7 +242,7 @@
             // ssnTextBox
             // 
             this.ssnTextBox.Location = new System.Drawing.Point(82, 57);
-            this.ssnTextBox.MaxLength = 10;
+            this.ssnTextBox.MaxLength = 9;
             this.ssnTextBox.Name = "ssnTextBox";
             this.ssnTextBox.Size = new System.Drawing.Size(100, 20);
             this.ssnTextBox.TabIndex = 1;
