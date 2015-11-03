@@ -90,8 +90,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                MessageBox.Show("An error occured while loading this form.");
-                
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database", "An error occured while loading this form.", exception);
             }
         }
 
@@ -113,8 +112,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                MessageBox.Show(@"An error occured while loading this form.");
-                
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database", "An error occured while loading this form.", exception);
+
             }
 }
 
@@ -127,8 +126,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                MessageBox.Show(@"An error occured while loading this form.");
-                
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database", "An error occured while loading this form.", exception);
             }
         }
 
@@ -257,7 +255,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             try
             {
-                price = Decimal.Parse(this.priceTextBox.Text);
+                price = decimal.Parse(this.priceTextBox.Text);
             }
             catch
             {
@@ -267,7 +265,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             try
             {
-                quantity = UInt32.Parse(this.quantityTextBox.Text);
+                quantity = uint.Parse(this.quantityTextBox.Text);
             }
             catch
             {
@@ -282,8 +280,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                MessageBox.Show(@"Failed to add item to inventory. Please try again.");
-                
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error","Failed to add item to inventory. Please try again.", exception);
             }
 
             this.loadAllData();
