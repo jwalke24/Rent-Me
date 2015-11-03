@@ -118,19 +118,66 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            this.theController.AddEmployee(new Employee
+            if (this.addressTextBox.Text == String.Empty || this.firstNameTextBox.Text == String.Empty ||
+                this.lastNameTextBox.Text == String.Empty || this.phoneTextBox.Text == String.Empty ||
+                this.ssnTextBox.Text == String.Empty || this.passwordTextBox.Text == String.Empty)
             {
-                AddressId = this.addressTextBox.Text,
-                FirstName = this.firstNameTextBox.Text,
-                LastName = this.lastNameTextBox.Text,
-                PhoneNumber = this.phoneTextBox.Text,
-                SSN = this.ssnTextBox.Text,
-                isAdmin = this.adminCheckBox.Checked
-            }, this.passwordTextBox.Text);
+                MessageBox.Show(@"Please enter a value for every field.");
+                return;
+            }
 
-            this.loadEmployees();
-            this.InternalState = EmployeeStates.Main;
-            
+            if (this.phoneTextBox.Text.Length != 10)
+            {
+                ErrorHandler.displayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
+                return;
+            }
+
+            try
+            {
+                long.Parse(this.phoneTextBox.Text);
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.displayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
+                return;
+            }
+
+            if (this.ssnTextBox.Text.Length != 9)
+            {
+                ErrorHandler.displayErrorBox("SSN Invalid", "Please enter a valid 9 digit SSN.");
+                return;
+            }
+
+            try
+            {
+                uint.Parse(this.ssnTextBox.Text);
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.displayErrorBox("SSN Invalid", "Please enter a valid 9 digit SSN.");
+                return;
+            }
+
+            try
+            {
+                this.theController.AddEmployee(new Employee
+                {
+                    AddressId = this.addressTextBox.Text,
+                    FirstName = this.firstNameTextBox.Text,
+                    LastName = this.lastNameTextBox.Text,
+                    PhoneNumber = this.phoneTextBox.Text,
+                    SSN = this.ssnTextBox.Text,
+                    isAdmin = this.adminCheckBox.Checked
+                }, this.passwordTextBox.Text);
+
+                this.loadEmployees();
+                this.InternalState = EmployeeStates.Main;
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to add employee to database. Please try again.", exception);
+            }
+
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -142,19 +189,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (this.DataGrid.SelectedRows.Count == 0)
             {
-                MessageBox.Show(@"Please select an employee to delete.");
+                ErrorHandler.displayErrorBox("Error", "Please select an employee to delete.");
+                return;
             }
-            else
-            {
 
-                string deleteId = ((string)this.DataGrid.SelectedRows[0].Cells["ID"].Value);
+            try
+            {
+                string deleteId = ((string) this.DataGrid.SelectedRows[0].Cells["ID"].Value);
 
                 this.theController.DeleteEmployeeById(deleteId);
 
                 this.loadEmployees();
-
-
             }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error","Failed to delete employee from database.",exception);
+            }
+
         }
     }
 }

@@ -129,8 +129,9 @@
             // minitTextBox
             // 
             this.minitTextBox.Location = new System.Drawing.Point(83, 25);
+            this.minitTextBox.MaxLength = 1;
             this.minitTextBox.Name = "minitTextBox";
-            this.minitTextBox.Size = new System.Drawing.Size(111, 20);
+            this.minitTextBox.Size = new System.Drawing.Size(34, 20);
             this.minitTextBox.TabIndex = 1;
             // 
             // lNameTextBox

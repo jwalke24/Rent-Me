@@ -103,10 +103,35 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void saveAddressButton_Click(object sender, EventArgs e)
         {
-            this.theController.AddAddress(this.street1TextBox.Text, this.street2TextBox.Text, this.cityTextBox.Text, this.stateTextBox.Text, this.zipTextBox.Text);
+            if (this.street1TextBox.Text == string.Empty || this.cityTextBox.Text == String.Empty ||
+                this.stateTextBox.Text == String.Empty || this.zipTextBox.Text == String.Empty)
+            {
+                ErrorHandler.displayErrorBox("Error", "Please enter a value for required fields.");
+                return;
+            }
 
-            this.loadAddresses();
-            this.InternalState = AddressStates.Main;
+            try
+            {
+                int.Parse(zipTextBox.Text);
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.displayErrorBox("Error", "Please enter a valid zip code.");
+            }
+
+
+            try
+            {
+                this.theController.AddAddress(this.street1TextBox.Text, this.street2TextBox.Text, this.cityTextBox.Text,
+                    this.stateTextBox.Text, this.zipTextBox.Text);
+
+                this.loadAddresses();
+                this.InternalState = AddressStates.Main;
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to add address to database. Please try again.", exception);
+            }
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
@@ -93,9 +94,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void loadMembers()
         {
-            var theList = new BindingList<Member>(this.controller.GetAll());
+            try
+            {
+                var theList = new BindingList<Member>(this.controller.GetAll());
 
-            DataGrid.DataSource = theList;
+                DataGrid.DataSource = theList;
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database", "An error occured while loading this form.", exception);
+            }
         }
 
         private void ucCancelButton_Click(object sender, EventArgs e)
@@ -165,31 +173,50 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private void saveCustomerButton_Click(object sender, EventArgs e)
         {
             if (this.fnameTextBox.Text == string.Empty || this.lNameTextBox.Text == string.Empty ||
-                this.minitTextBox.Text == string.Empty || this.phoneTextBox.Text == string.Empty ||
+                this.phoneTextBox.Text == string.Empty ||
                 this.addressTextBox.Text == string.Empty)
             {
-                MessageBox.Show("Please enter member information into every textbox.");
+                ErrorHandler.displayErrorBox("Invalid Data", "Please enter member information into every textbox.");
                 return;
             }
 
             if (this.phoneTextBox.Text.Length != 10)
             {
-                MessageBox.Show("A phone number must have 10 digits.");
+                ErrorHandler.displayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
                 return;
             }
 
-            var theMember = new Member();
-            theMember.Fname = this.fnameTextBox.Text;
-            theMember.Minit = this.minitTextBox.Text;
-            theMember.Lname = this.lNameTextBox.Text;
-            theMember.PhoneNumber = this.phoneTextBox.Text;
-            theMember.AddressId = this.addressTextBox.Text;
+            try
+            {
+                long.Parse(this.phoneTextBox.Text);
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.displayErrorBox("Phone Number Invalid","Please enter a valid 10 digit phone number.");
+                return;
+            }
 
-            this.controller.AddMember(theMember);
+            var theMember = new Member
+            {
+                Fname = this.fnameTextBox.Text,
+                Minit = this.minitTextBox.Text,
+                Lname = this.lNameTextBox.Text,
+                PhoneNumber = this.phoneTextBox.Text,
+                AddressId = this.addressTextBox.Text
+            };
 
-            this.loadMembers();
+            try
+            {
+                this.controller.AddMember(theMember);
 
-            this.InternalState = CustomerStates.Main;
+                this.loadMembers();
+
+                this.InternalState = CustomerStates.Main;
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to add member to database. Please try again.", exception);
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -225,15 +252,20 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (DataGrid.SelectedRows.Count == 0)
             {
-                MessageBox.Show(@"Please select a customer to delete.");
+                ErrorHandler.displayErrorBox("Error", "Please select a customer to delete.");
+                return;
             }
-            else
-            {
 
-                string customerID = ((int)DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
+            try
+            {
+                string customerID = ((int) DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
                 this.controller.DeleteMemberById(customerID);
 
                 this.loadMembers();
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to delete employee from database.", exception);
             }
         }
     }
