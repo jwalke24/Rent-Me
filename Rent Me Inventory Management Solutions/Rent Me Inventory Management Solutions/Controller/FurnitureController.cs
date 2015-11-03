@@ -32,5 +32,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             return this.theRepository.GetAllByCategoryStyleCriteria(category, style);
         }
+
+        public IList<Furniture> GetItemsFromIDWildcard(int id)
+        {
+            return this.theRepository.GetAllByIDPrefix(id);
+        }
     }
 }

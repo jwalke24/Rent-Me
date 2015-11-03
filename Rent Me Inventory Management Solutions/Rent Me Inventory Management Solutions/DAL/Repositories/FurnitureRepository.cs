@@ -97,23 +97,6 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             List<Furniture> furnitures = new List<Furniture>();
 
             const string query = "SELECT * FROM Furniture WHERE Category_id LIKE @cat AND Style_id LIKE @style";
-            /*
-            if (category != null && style != null)
-            {
-                query = "SELECT * FROM Furniture WHERE Category_id = @cat AND tyle";
-            }
-            else if (category == null && style == null)
-            {
-                
-            }else if (category == null)
-            {
-
-            }
-            else
-            {
-                
-            }
-            */
 
             MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
 
@@ -138,7 +121,52 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                         furniture.Description = reader["description"] == DBNull.Value
                             ? String.Empty
                             : (string)reader["description"];
-                        furniture.Price = reader["price"] as Decimal? ?? Decimal.Zero;
+                        furniture.Price = reader["price"] as decimal? ?? decimal.Zero;
+                        ;
+                        furniture.CategoryID = reader["Category_id"] as int? ?? Int32.MinValue;
+                        furniture.StyleID = reader["Style_id"] as int? ?? Int32.MinValue;
+
+                        furnitures.Add(furniture);
+                    }
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+
+                return furnitures;
+            }
+        }
+
+        public IList<Furniture> GetAllByIDPrefix(int id)
+        {
+            List<Furniture> furnitures = new List<Furniture>();
+
+            const string query = "SELECT * FROM Furniture WHERE id LIKE @id";
+
+            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (MySqlCommand command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+
+                command.Parameters.AddWithValue("@id", id.ToString() + "%");
+                try
+                {
+                    command.Connection.Open();
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Furniture furniture = new Furniture();
+                        furniture.ID = ((int)reader["id"]).ToString();
+                        furniture.Quantity = reader["quantity"] as uint? ?? uint.MinValue;
+                        furniture.Name = reader["name"] == DBNull.Value ? String.Empty : (string)reader["name"];
+                        furniture.Description = reader["description"] == DBNull.Value
+                            ? String.Empty
+                            : (string)reader["description"];
+                        furniture.Price = reader["price"] as decimal? ?? decimal.Zero;
                         ;
                         furniture.CategoryID = reader["Category_id"] as int? ?? Int32.MinValue;
                         furniture.StyleID = reader["Style_id"] as int? ?? Int32.MinValue;

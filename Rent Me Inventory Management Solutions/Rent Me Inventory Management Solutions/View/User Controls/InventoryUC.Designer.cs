@@ -33,10 +33,10 @@
             this.styleComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.idSearchTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.idGoButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -86,12 +86,13 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Style:";
             // 
-            // textBox1
+            // idSearchTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 24);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 5;
+            this.idSearchTextBox.Location = new System.Drawing.Point(3, 24);
+            this.idSearchTextBox.MaxLength = 10;
+            this.idSearchTextBox.Name = "idSearchTextBox";
+            this.idSearchTextBox.Size = new System.Drawing.Size(100, 20);
+            this.idSearchTextBox.TabIndex = 5;
             // 
             // label3
             // 
@@ -105,22 +106,23 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.idGoButton);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.idSearchTextBox);
             this.panel1.Location = new System.Drawing.Point(130, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(108, 129);
             this.panel1.TabIndex = 7;
             // 
-            // button2
+            // idGoButton
             // 
-            this.button2.Location = new System.Drawing.Point(4, 51);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(99, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Go";
-            this.button2.UseVisualStyleBackColor = true;
+            this.idGoButton.Location = new System.Drawing.Point(4, 51);
+            this.idGoButton.Name = "idGoButton";
+            this.idGoButton.Size = new System.Drawing.Size(99, 23);
+            this.idGoButton.TabIndex = 7;
+            this.idGoButton.Text = "Go";
+            this.idGoButton.UseVisualStyleBackColor = true;
+            this.idGoButton.Click += new System.EventHandler(this.idGoButton_Click);
             // 
             // searchButton
             // 
@@ -170,10 +172,10 @@
         private System.Windows.Forms.ComboBox styleComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox idSearchTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button idGoButton;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button button4;
     }

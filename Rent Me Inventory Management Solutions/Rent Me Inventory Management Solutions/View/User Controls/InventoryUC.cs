@@ -102,5 +102,21 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             IList<Furniture> result = this.theController.GetItemsByCategoryStyle(this.categoryComboBox.SelectedItem as Category, this.styleComboBox.SelectedItem as Style);
             this.DataGrid.DataSource = new BindingList<Furniture>(result);
         }
+
+        private void idGoButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = Int32.Parse(this.idSearchTextBox.Text);
+                IList<Furniture> result = this.theController.GetItemsFromIDWildcard(id);
+                this.DataGrid.DataSource = new BindingList<Furniture>(result);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(@"Please enter a numerical value.");
+            }
+            
+            
+        }
     }
 }
