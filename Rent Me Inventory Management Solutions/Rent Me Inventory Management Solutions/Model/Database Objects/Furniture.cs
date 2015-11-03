@@ -49,13 +49,13 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
         /// <value>
         /// The category identifier.
         /// </value>
-        public int CategoryID { get; set; }
+        public string CategoryID { get; set; }
         /// <summary>
         /// Gets or sets the style identifier.
         /// </summary>
         /// <value>
         /// The style identifier.
         /// </value>
-        public int StyleID { get; set; }
+        public string StyleID { get; set; }
     }
 }

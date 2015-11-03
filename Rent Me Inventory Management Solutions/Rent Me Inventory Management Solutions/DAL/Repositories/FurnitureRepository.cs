@@ -21,7 +21,38 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         }
         public void AddOne(Furniture item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                throw new ArgumentNullException(@"Item is null");
+            }
+
+            const string statement = "INSERT INTO Furniture (quantity, name, description, price, Category_id, Style_id)" +
+                                        " VALUES (@quantity, @name, @description, @price, @cat, @style)";
+
+            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (MySqlCommand command = new MySqlCommand(statement))
+            {
+                command.Parameters.AddWithValue("@quantity", item.Quantity);
+                command.Parameters.AddWithValue("@name", item.Name);
+                command.Parameters.AddWithValue("@description", item.Description);
+                command.Parameters.AddWithValue("@price", item.Price);
+                command.Parameters.AddWithValue("@cat", item.CategoryID);
+                command.Parameters.AddWithValue("@style", item.StyleID);
+
+
+                command.Connection = connection;
+
+                try
+                {
+                    command.Connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
         }
 
         public void AddList(IList<Furniture> theList)
@@ -62,8 +93,8 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                             : (string) reader["description"];
                         furniture.Price = reader["price"] as Decimal? ?? Decimal.Zero;
                         ;
-                        furniture.CategoryID = reader["Category_id"] as int? ?? Int32.MinValue;
-                        furniture.StyleID = reader["Style_id"] as int? ?? Int32.MinValue;
+                        furniture.CategoryID = (reader["Category_id"] as int? ?? Int32.MinValue).ToString();
+                        furniture.StyleID = (reader["Style_id"] as int? ?? Int32.MinValue).ToString();
 
                         furnitures.Add(furniture);
                     }
@@ -123,8 +154,8 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                             : (string)reader["description"];
                         furniture.Price = reader["price"] as decimal? ?? decimal.Zero;
                         ;
-                        furniture.CategoryID = reader["Category_id"] as int? ?? Int32.MinValue;
-                        furniture.StyleID = reader["Style_id"] as int? ?? Int32.MinValue;
+                        furniture.CategoryID = (reader["Category_id"] as int? ?? Int32.MinValue).ToString();
+                        furniture.StyleID = (reader["Style_id"] as int? ?? Int32.MinValue).ToString();
 
                         furnitures.Add(furniture);
                     }
@@ -168,8 +199,8 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                             : (string)reader["description"];
                         furniture.Price = reader["price"] as decimal? ?? decimal.Zero;
                         ;
-                        furniture.CategoryID = reader["Category_id"] as int? ?? Int32.MinValue;
-                        furniture.StyleID = reader["Style_id"] as int? ?? Int32.MinValue;
+                        furniture.CategoryID = (reader["Category_id"] as int? ?? Int32.MinValue).ToString();
+                        furniture.StyleID = (reader["Style_id"] as int? ?? Int32.MinValue).ToString();
 
                         furnitures.Add(furniture);
                     }

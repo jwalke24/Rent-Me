@@ -37,5 +37,19 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             return this.theRepository.GetAllByIDPrefix(id);
         }
+
+        public void AddItem(Category theCategory, Style theStyle, string name, string description, decimal price, uint quantity)
+        {
+            Furniture tempFurniture = new Furniture
+            {
+                Name = name,
+                Description = description,
+                Price = price,
+                Quantity = quantity,
+                CategoryID = theCategory.ID,
+                StyleID = theStyle.ID
+            };
+            this.theRepository.AddOne(tempFurniture);
+        }
     }
 }
