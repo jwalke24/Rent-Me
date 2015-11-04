@@ -101,7 +101,26 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public void DeleteById(string id)
         {
-            throw new NotImplementedException();
+            var sqlStatement = "DELETE FROM Furniture WHERE id = @id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            var command = new MySqlCommand(sqlStatement);
+
+            command.Parameters.AddWithValue("@id", id);
+
+            command.Connection = connection;
+
+            try
+            {
+                command.Connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+            finally
+            {
+                command.Connection.Close();
+            }
         }
 
         public void Delete(Furniture item)
