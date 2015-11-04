@@ -52,6 +52,8 @@
             this.nameLabel = new System.Windows.Forms.Label();
             this.saveItemButton = new System.Windows.Forms.Button();
             this.categoryStylePanel = new System.Windows.Forms.Panel();
+            this.lateFeeTextBox = new System.Windows.Forms.TextBox();
+            this.lateFeeLabel = new System.Windows.Forms.Label();
             this.itemPanel.SuspendLayout();
             this.addPanel.SuspendLayout();
             this.categoryStylePanel.SuspendLayout();
@@ -171,6 +173,8 @@
             // 
             // addPanel
             // 
+            this.addPanel.Controls.Add(this.lateFeeTextBox);
+            this.addPanel.Controls.Add(this.lateFeeLabel);
             this.addPanel.Controls.Add(this.descriptionLabel);
             this.addPanel.Controls.Add(this.label4);
             this.addPanel.Controls.Add(this.descriptionTextBox);
@@ -189,7 +193,7 @@
             // descriptionLabel
             // 
             this.descriptionLabel.AutoSize = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(6, 34);
+            this.descriptionLabel.Location = new System.Drawing.Point(3, 49);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.Size = new System.Drawing.Size(63, 13);
             this.descriptionLabel.TabIndex = 9;
@@ -205,10 +209,10 @@
             // 
             // descriptionTextBox
             // 
-            this.descriptionTextBox.Location = new System.Drawing.Point(6, 55);
+            this.descriptionTextBox.Location = new System.Drawing.Point(6, 65);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(282, 72);
+            this.descriptionTextBox.Size = new System.Drawing.Size(282, 62);
             this.descriptionTextBox.TabIndex = 3;
             // 
             // priceTextBox
@@ -220,9 +224,9 @@
             // 
             // quantityTextBox
             // 
-            this.quantityTextBox.Location = new System.Drawing.Point(204, 31);
+            this.quantityTextBox.Location = new System.Drawing.Point(58, 28);
             this.quantityTextBox.Name = "quantityTextBox";
-            this.quantityTextBox.Size = new System.Drawing.Size(73, 20);
+            this.quantityTextBox.Size = new System.Drawing.Size(82, 20);
             this.quantityTextBox.TabIndex = 2;
             // 
             // nameTextBox
@@ -244,7 +248,7 @@
             // quantityLabel
             // 
             this.quantityLabel.AutoSize = true;
-            this.quantityLabel.Location = new System.Drawing.Point(149, 34);
+            this.quantityLabel.Location = new System.Drawing.Point(3, 32);
             this.quantityLabel.Name = "quantityLabel";
             this.quantityLabel.Size = new System.Drawing.Size(49, 13);
             this.quantityLabel.TabIndex = 2;
@@ -280,6 +284,22 @@
             this.categoryStylePanel.Name = "categoryStylePanel";
             this.categoryStylePanel.Size = new System.Drawing.Size(109, 107);
             this.categoryStylePanel.TabIndex = 12;
+            // 
+            // lateFeeTextBox
+            // 
+            this.lateFeeTextBox.Location = new System.Drawing.Point(204, 29);
+            this.lateFeeTextBox.Name = "lateFeeTextBox";
+            this.lateFeeTextBox.Size = new System.Drawing.Size(73, 20);
+            this.lateFeeTextBox.TabIndex = 10;
+            // 
+            // lateFeeLabel
+            // 
+            this.lateFeeLabel.AutoSize = true;
+            this.lateFeeLabel.Location = new System.Drawing.Point(146, 32);
+            this.lateFeeLabel.Name = "lateFeeLabel";
+            this.lateFeeLabel.Size = new System.Drawing.Size(52, 13);
+            this.lateFeeLabel.TabIndex = 11;
+            this.lateFeeLabel.Text = "Late Fee:";
             // 
             // InventoryUC
             // 
@@ -332,5 +352,7 @@
         private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel categoryStylePanel;
+        private System.Windows.Forms.TextBox lateFeeTextBox;
+        private System.Windows.Forms.Label lateFeeLabel;
     }
 }

@@ -38,7 +38,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
             return this.theRepository.GetAllByIDPrefix(id);
         }
 
-        public void AddItem(Category theCategory, Style theStyle, string name, string description, decimal price, uint quantity)
+        public void AddItem(Category theCategory, Style theStyle, string name, string description, decimal price, uint quantity, decimal lateFee)
         {
             Furniture tempFurniture = new Furniture
             {
@@ -47,7 +47,8 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
                 Price = price,
                 Quantity = quantity,
                 CategoryID = theCategory.ID,
-                StyleID = theStyle.ID
+                StyleID = theStyle.ID,
+                LateFee = lateFee
             };
             this.theRepository.AddOne(tempFurniture);
         }

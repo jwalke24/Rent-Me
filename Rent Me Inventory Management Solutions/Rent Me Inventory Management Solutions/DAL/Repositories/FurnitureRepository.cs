@@ -26,8 +26,8 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 throw new ArgumentNullException(@"Item is null");
             }
 
-            const string statement = "INSERT INTO Furniture (quantity, name, description, price, Category_id, Style_id)" +
-                                        " VALUES (@quantity, @name, @description, @price, @cat, @style)";
+            const string statement = "INSERT INTO Furniture (quantity, name, description, price, lateFee, Category_id, Style_id)" +
+                                        " VALUES (@quantity, @name, @description, @price, @late, @cat, @style)";
 
             MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
 
@@ -37,6 +37,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 command.Parameters.AddWithValue("@name", item.Name);
                 command.Parameters.AddWithValue("@description", item.Description);
                 command.Parameters.AddWithValue("@price", item.Price);
+                command.Parameters.AddWithValue("@late", item.LateFee);
                 command.Parameters.AddWithValue("@cat", item.CategoryID);
                 command.Parameters.AddWithValue("@style", item.StyleID);
 
@@ -82,22 +83,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
                     MySqlDataReader reader = command.ExecuteReader();
 
-                    while (reader.Read())
-                    {
-                        Furniture furniture = new Furniture();
-                        furniture.ID = ((int) reader["id"]).ToString();
-                        furniture.Quantity = reader["quantity"] as uint? ?? uint.MinValue;
-                        furniture.Name = reader["name"] == DBNull.Value ? String.Empty : (string) reader["name"];
-                        furniture.Description = reader["description"] == DBNull.Value
-                            ? String.Empty
-                            : (string) reader["description"];
-                        furniture.Price = reader["price"] as Decimal? ?? Decimal.Zero;
-                        ;
-                        furniture.CategoryID = (reader["Category_id"] as int? ?? Int32.MinValue).ToString();
-                        furniture.StyleID = (reader["Style_id"] as int? ?? Int32.MinValue).ToString();
-
-                        furnitures.Add(furniture);
-                    }
+                    furnitureLoader(reader, furnitures);
                 }
                 finally
                 {
@@ -105,6 +91,26 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 }
 
                 return furnitures;
+            }
+        }
+
+        private void furnitureLoader(MySqlDataReader reader, List<Furniture> furnitures)
+        {
+            while (reader.Read())
+            {
+                Furniture furniture = new Furniture();
+                furniture.ID = ((int) reader["id"]).ToString();
+                furniture.Quantity = reader["quantity"] as uint? ?? uint.MinValue;
+                furniture.Name = reader["name"] == DBNull.Value ? String.Empty : (string) reader["name"];
+                furniture.Description = reader["description"] == DBNull.Value
+                    ? String.Empty
+                    : (string) reader["description"];
+                furniture.Price = reader["price"] as Decimal? ?? Decimal.Zero;
+                furniture.LateFee = reader["lateFee"] as Decimal? ?? Decimal.Zero;
+                furniture.CategoryID = (reader["Category_id"] as int? ?? Int32.MinValue).ToString();
+                furniture.StyleID = (reader["Style_id"] as int? ?? Int32.MinValue).ToString();
+
+                furnitures.Add(furniture);
             }
         }
 
@@ -143,22 +149,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
                     MySqlDataReader reader = command.ExecuteReader();
 
-                    while (reader.Read())
-                    {
-                        Furniture furniture = new Furniture();
-                        furniture.ID = ((int)reader["id"]).ToString();
-                        furniture.Quantity = reader["quantity"] as uint? ?? uint.MinValue;
-                        furniture.Name = reader["name"] == DBNull.Value ? String.Empty : (string)reader["name"];
-                        furniture.Description = reader["description"] == DBNull.Value
-                            ? String.Empty
-                            : (string)reader["description"];
-                        furniture.Price = reader["price"] as decimal? ?? decimal.Zero;
-                        ;
-                        furniture.CategoryID = (reader["Category_id"] as int? ?? Int32.MinValue).ToString();
-                        furniture.StyleID = (reader["Style_id"] as int? ?? Int32.MinValue).ToString();
-
-                        furnitures.Add(furniture);
-                    }
+                    this.furnitureLoader(reader, furnitures);
                 }
                 finally
                 {
@@ -188,22 +179,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
                     MySqlDataReader reader = command.ExecuteReader();
 
-                    while (reader.Read())
-                    {
-                        Furniture furniture = new Furniture();
-                        furniture.ID = ((int)reader["id"]).ToString();
-                        furniture.Quantity = reader["quantity"] as uint? ?? uint.MinValue;
-                        furniture.Name = reader["name"] == DBNull.Value ? String.Empty : (string)reader["name"];
-                        furniture.Description = reader["description"] == DBNull.Value
-                            ? String.Empty
-                            : (string)reader["description"];
-                        furniture.Price = reader["price"] as decimal? ?? decimal.Zero;
-                        ;
-                        furniture.CategoryID = (reader["Category_id"] as int? ?? Int32.MinValue).ToString();
-                        furniture.StyleID = (reader["Style_id"] as int? ?? Int32.MinValue).ToString();
-
-                        furnitures.Add(furniture);
-                    }
+                    this.furnitureLoader(reader, furnitures);
                 }
                 finally
                 {

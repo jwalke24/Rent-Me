@@ -43,6 +43,14 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
         /// The price.
         /// </value>
         public decimal Price { get; set; }
+
+        /// <summary>
+        /// Gets or sets the late fee.
+        /// </summary>
+        /// <value>
+        /// The late fee.
+        /// </value>
+        public decimal LateFee { get; set; }
         /// <summary>
         /// Gets or sets the category identifier.
         /// </summary>

@@ -243,7 +243,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             Style theStyle = this.styleComboBox.SelectedItem as Style;
             decimal price;
             uint quantity;
-
+            decimal lateFee;
             if (theCategory == null || theStyle == null || this.nameTextBox.Text == string.Empty ||
                 this.priceTextBox.Text == string.Empty || this.quantityTextBox.Text == string.Empty ||
                 this.descriptionTextBox.Text == string.Empty)
@@ -265,6 +265,18 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             try
             {
+                lateFee = decimal.Parse(this.lateFeeTextBox.Text);
+            }
+            catch
+            {
+                lateFee = Decimal.Zero;
+                return;
+            }
+
+
+
+            try
+            {
                 quantity = uint.Parse(this.quantityTextBox.Text);
             }
             catch
@@ -276,7 +288,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 this.theController.AddItem(theCategory, theStyle, this.nameTextBox.Text, this.descriptionTextBox.Text,
                     price,
-                    quantity);
+                    quantity, lateFee);
             }
             catch (Exception exception)
             {
