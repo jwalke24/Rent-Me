@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model;
 

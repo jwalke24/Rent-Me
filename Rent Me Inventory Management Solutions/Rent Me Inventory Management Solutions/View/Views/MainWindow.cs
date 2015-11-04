@@ -245,6 +245,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             theNewView.Visible = true;
             theNewView.Enabled = true;
             theNewView.ReadOnly = true;
+            theNewView.MultiSelect = false;
+            theNewView.AllowUserToAddRows = false;
             theNewView.BackgroundColor = DefaultBackColor;
 
 
