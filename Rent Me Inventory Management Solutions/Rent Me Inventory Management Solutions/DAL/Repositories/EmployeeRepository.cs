@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.Model;
-using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
-    class EmployeeRepository : IRepository<Employee>
+    internal class EmployeeRepository : IRepository<Employee>
     {
         private readonly string CONNECTION_STRING;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EmployeeRepository"/> class.
+        ///     Initializes a new instance of the <see cref="EmployeeRepository" /> class.
         /// </summary>
         public EmployeeRepository()
         {
             this.CONNECTION_STRING = DBConnection.GetConnectionString();
         }
-
 
         public void AddOne(Employee item)
         {
@@ -31,18 +29,18 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         }
 
         /// <summary>
-        /// Gets all the items in the database.
+        ///     Gets all the items in the database.
         /// </summary>
         /// <returns></returns>
         public IList<Employee> GetAll()
         {
-            List<Employee> employees = new List<Employee>();
+            var employees = new List<Employee>();
 
             const string query = "SELECT fname, lname, ssn, phone, isAdmin, id, Address_id FROM Employee";
 
-            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
 
-            using (MySqlCommand command = new MySqlCommand(query))
+            using (var command = new MySqlCommand(query))
             {
                 command.Connection = connection;
 
@@ -50,18 +48,20 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 {
                     command.Connection.Open();
 
-                    MySqlDataReader reader = command.ExecuteReader();
+                    var reader = command.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Employee employee = new Employee();
-                        employee.ID = ((int)reader["id"]).ToString();
-                        employee.FirstName = reader["fname"] == DBNull.Value ? String.Empty : (string)reader["fname"];
-                        employee.LastName = reader["lname"] == DBNull.Value ? String.Empty : (string)reader["lname"];
-                        employee.PhoneNumber = reader["phone"] == DBNull.Value ? String.Empty : (string)reader["phone"];
-                        employee.AddressId = reader["Address_id"] == DBNull.Value ? String.Empty : ((int)reader["Address_id"]).ToString();
-                        employee.SSN = reader["ssn"] == DBNull.Value ? String.Empty : (string)reader["ssn"];
-                        employee.isAdmin = reader["isAdmin"] == DBNull.Value ? false : (bool)reader["isAdmin"];
+                        var employee = new Employee();
+                        employee.ID = ((int) reader["id"]).ToString();
+                        employee.FirstName = reader["fname"] == DBNull.Value ? string.Empty : (string) reader["fname"];
+                        employee.LastName = reader["lname"] == DBNull.Value ? string.Empty : (string) reader["lname"];
+                        employee.PhoneNumber = reader["phone"] == DBNull.Value ? string.Empty : (string) reader["phone"];
+                        employee.AddressId = reader["Address_id"] == DBNull.Value
+                            ? string.Empty
+                            : ((int) reader["Address_id"]).ToString();
+                        employee.SSN = reader["ssn"] == DBNull.Value ? string.Empty : (string) reader["ssn"];
+                        employee.isAdmin = reader["isAdmin"] == DBNull.Value ? false : (bool) reader["isAdmin"];
 
                         employees.Add(employee);
                     }
@@ -81,7 +81,40 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         }
 
         /// <summary>
-        /// Adds the one.
+        ///     Deletes the item from the database by the identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        public void DeleteById(string id)
+        {
+            var sqlStatement = "DELETE FROM Employee WHERE id = @id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            var command = new MySqlCommand(sqlStatement);
+
+            command.Parameters.AddWithValue("@id", id);
+
+            command.Connection = connection;
+
+            try
+            {
+                command.Connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+            finally
+            {
+                command.Connection.Close();
+            }
+        }
+
+        public void Delete(Employee item)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        ///     Adds the one.
         /// </summary>
         /// <param name="employee">The employee.</param>
         /// <param name="loginSession">The login session.</param>
@@ -94,11 +127,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
 
             const string statement = "INSERT INTO Employee (fname, lname, phone, Address_id, isAdmin, ssn, password)" +
-                                        " VALUES (@Fname, @Lname, @Phone, @Address, @Admin, @Ssn, @Password)";
+                                     " VALUES (@Fname, @Lname, @Phone, @Address, @Admin, @Ssn, @Password)";
 
-            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
 
-            using (MySqlCommand command = new MySqlCommand(statement))
+            using (var command = new MySqlCommand(statement))
             {
                 command.Parameters.AddWithValue("@Fname", employee.FirstName);
                 command.Parameters.AddWithValue("@Lname", employee.LastName);
@@ -123,51 +156,17 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         }
 
         /// <summary>
-        /// Deletes the item from the database by the identifier.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        public void DeleteById(string id)
-        {
-            string sqlStatement = "DELETE FROM Employee WHERE id = @id";
-
-            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
-
-            MySqlCommand command = new MySqlCommand(sqlStatement);
-
-            command.Parameters.AddWithValue("@id", id);
-
-            command.Connection = connection;
-
-            try
-            {
-                command.Connection.Open();
-
-                command.ExecuteNonQuery();
-
-            }
-            finally
-            {
-                command.Connection.Close();
-            }
-        }
-
-        public void Delete(Employee item)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Logs in the employee to database.
+        ///     Logs in the employee to database.
         /// </summary>
         /// <param name="theSession">The session.</param>
         /// <returns></returns>
         public LoginSession LoginEmployeeToDatabase(LoginSession theSession)
         {
-            string sqlStatement = "SELECT id, isAdmin FROM Employee WHERE id = @Username AND password = @Password";
+            var sqlStatement = "SELECT id, isAdmin FROM Employee WHERE id = @Username AND password = @Password";
 
-            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
 
-            MySqlCommand command = new MySqlCommand(sqlStatement);
+            var command = new MySqlCommand(sqlStatement);
 
             command.Parameters.AddWithValue("@Username", theSession.Id);
             command.Parameters.AddWithValue("@Password", theSession.Password);
@@ -178,7 +177,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             {
                 command.Connection.Open();
 
-                MySqlDataReader reader = command.ExecuteReader();
+                var reader = command.ExecuteReader();
 
                 theSession.isAuthenticated = false;
                 theSession.isAdmin = false;
@@ -187,14 +186,13 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 {
                     reader.Read();
 
-                    if (theSession.Id == (int)reader["id"])
+                    if (theSession.Id == (int) reader["id"])
                     {
                         theSession.isAuthenticated = true;
 
-                        if ((bool)reader["isAdmin"])
+                        if ((bool) reader["isAdmin"])
                         {
                             theSession.isAdmin = true;
-
                         }
                     }
                 }

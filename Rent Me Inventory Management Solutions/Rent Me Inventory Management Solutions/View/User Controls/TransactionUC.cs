@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows.Forms;
-using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -13,67 +11,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
     public partial class TransactionUC : BSMiddleClass
     {
-
-
-        #region Properties And Variables
-
-        private const double TAX_RATE = 0.07;
-
-        private TransactionStates internalState;
-
-        private TransactionStates InternalState
-        {
-            get { return this.internalState; }
-            set
-            {
-                this.internalState = value;
-
-                if (value == TransactionStates.Main)
-                {
-                    this.changeToMainState();
-                } else if (value == TransactionStates.AddItem)
-                {
-                    this.changeToAddItemState();
-                }
-            }
-        }
-
-        private string customerID
-        {
-            get { return this.customerIDLabel.Text; }
-
-            set { this.customerIDLabel.Text = value; }
-        }
-
-        private double subtotal;
-
-        private double Subtotal
-        {
-            get { return this.subtotal; }
-            set
-            {
-                this.subtotal = value;
-                this.taxLabel.Text = (value*TAX_RATE).ToString("C", CultureInfo.CurrentCulture);
-                this.subtotalLabel.Text = this.subtotal.ToString("C",CultureInfo.CurrentCulture);
-                this.totalLabel.Text = (value * (1+ TAX_RATE)).ToString("C", CultureInfo.CurrentCulture);
-            }
-        }
-
-
-        #endregion
-
-
         public TransactionUC()
         {
             this.InitializeComponent();
             this.Subtotal = 0;
-            
-            this.numItemsLabel.Text = "0";
-            this.UserControlType = UserControls.Transaction;
-        }
 
-        
-        
+            this.numItemsLabel.Text = "0";
+            UserControlType = UserControls.Transaction;
+        }
 
         private void changeToAddItemState()
         {
@@ -86,14 +31,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.itemToAddTextBox.Visible = true;
 
             //Disable
-            this.DataGrid.Enabled = false;
+            DataGrid.Enabled = false;
             this.addItemButton.Enabled = false;
             this.voidItemButton.Enabled = false;
             this.voidTransactionButton.Enabled = false;
             this.submitTransactionButton.Enabled = false;
             this.customerButton.Enabled = false;
             this.inventoryButton.Enabled = false;
-
         }
 
         private void changeToMainState()
@@ -107,7 +51,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.itemToAddTextBox.Visible = false;
 
             //Enable
-            this.DataGrid.Enabled = true;
+            DataGrid.Enabled = true;
             this.addItemButton.Enabled = true;
             this.voidItemButton.Enabled = true;
             this.voidTransactionButton.Enabled = true;
@@ -137,19 +81,18 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void customerButton_Click(object sender, EventArgs e)
         {
-            this.SwitchTo = UserControls.Customer;
-            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
+            SwitchTo = UserControls.Customer;
+            CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
 
         private void inventoryButton_Click(object sender, EventArgs e)
         {
-            this.SwitchTo = UserControls.Inventory;
-            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
+            SwitchTo = UserControls.Inventory;
+            CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
 
-
         /// <summary>
-        /// Processes the child.
+        ///     Processes the child.
         /// </summary>
         /// <exception cref="Exception">Invalid child type.</exception>
         public override void processChild()
@@ -167,10 +110,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                     break;
                 case UserControls.Transaction:
                     throw new Exception("Invalid child type.");
-                
-
             }
-                
         }
 
         private void processCustomerChild(CustomerUserControl theUC)
@@ -183,7 +123,53 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         public override void processParentIntention()
         {
-            
         }
+
+        #region Properties And Variables
+
+        private const double TAX_RATE = 0.07;
+
+        private TransactionStates internalState;
+
+        private TransactionStates InternalState
+        {
+            get { return this.internalState; }
+            set
+            {
+                this.internalState = value;
+
+                if (value == TransactionStates.Main)
+                {
+                    this.changeToMainState();
+                }
+                else if (value == TransactionStates.AddItem)
+                {
+                    this.changeToAddItemState();
+                }
+            }
+        }
+
+        private string customerID
+        {
+            get { return this.customerIDLabel.Text; }
+
+            set { this.customerIDLabel.Text = value; }
+        }
+
+        private double subtotal;
+
+        private double Subtotal
+        {
+            get { return this.subtotal; }
+            set
+            {
+                this.subtotal = value;
+                this.taxLabel.Text = (value*TAX_RATE).ToString("C", CultureInfo.CurrentCulture);
+                this.subtotalLabel.Text = this.subtotal.ToString("C", CultureInfo.CurrentCulture);
+                this.totalLabel.Text = (value*(1 + TAX_RATE)).ToString("C", CultureInfo.CurrentCulture);
+            }
+        }
+
+        #endregion
     }
 }

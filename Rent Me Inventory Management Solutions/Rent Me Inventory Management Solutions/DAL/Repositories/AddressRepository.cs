@@ -1,20 +1,17 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System;
+using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
-    class AddressRepository : IRepository<Address>
+    internal class AddressRepository : IRepository<Address>
     {
         private readonly string CONNECTION_STRING;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddressRepository"/> class.
+        ///     Initializes a new instance of the <see cref="AddressRepository" /> class.
         /// </summary>
         public AddressRepository()
         {
@@ -27,7 +24,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         }
 
         /// <summary>
-        /// Adds one item to the database.
+        ///     Adds one item to the database.
         /// </summary>
         /// <param name="item">The item.</param>
         /// <exception cref="ArgumentNullException"></exception>
@@ -39,11 +36,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
 
             const string statement = "INSERT INTO Address (street1, street2, city, state, zip)" +
-                                        " VALUES (@street1, @street2, @city, @state, @zip)";
+                                     " VALUES (@street1, @street2, @city, @state, @zip)";
 
-            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
 
-            using (MySqlCommand command = new MySqlCommand(statement))
+            using (var command = new MySqlCommand(statement))
             {
                 command.Parameters.AddWithValue("@street1", item.Street1);
                 command.Parameters.AddWithValue("@street2", item.Street2);
@@ -76,18 +73,18 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         }
 
         /// <summary>
-        /// Gets all the items in the database.
+        ///     Gets all the items in the database.
         /// </summary>
         /// <returns></returns>
         public IList<Address> GetAll()
         {
-            List<Address> addresses = new List<Address>();
+            var addresses = new List<Address>();
 
             const string query = "SELECT * FROM Address";
 
-            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
 
-            using (MySqlCommand command = new MySqlCommand(query))
+            using (var command = new MySqlCommand(query))
             {
                 command.Connection = connection;
 
@@ -95,17 +92,21 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 {
                     command.Connection.Open();
 
-                    MySqlDataReader reader = command.ExecuteReader();
+                    var reader = command.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Address anAddress = new Address();
-                        anAddress.Id = (int)reader["id"];
-                        anAddress.Street1 = reader["street1"] == DBNull.Value ? String.Empty : (string)reader["street1"];
-                        anAddress.Street2 = reader["street2"] == DBNull.Value ? String.Empty : (string)reader["street2"];
-                        anAddress.City = reader["city"] == DBNull.Value ? String.Empty : (string)reader["city"];
-                        anAddress.State = reader["state"] == DBNull.Value ? String.Empty : (string)reader["state"];
-                        anAddress.Zip = reader["zip"] == DBNull.Value ? String.Empty : (string)reader["zip"];
+                        var anAddress = new Address();
+                        anAddress.Id = (int) reader["id"];
+                        anAddress.Street1 = reader["street1"] == DBNull.Value
+                            ? string.Empty
+                            : (string) reader["street1"];
+                        anAddress.Street2 = reader["street2"] == DBNull.Value
+                            ? string.Empty
+                            : (string) reader["street2"];
+                        anAddress.City = reader["city"] == DBNull.Value ? string.Empty : (string) reader["city"];
+                        anAddress.State = reader["state"] == DBNull.Value ? string.Empty : (string) reader["state"];
+                        anAddress.Zip = reader["zip"] == DBNull.Value ? string.Empty : (string) reader["zip"];
                         addresses.Add(anAddress);
                     }
                 }

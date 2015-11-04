@@ -1,33 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
 
 namespace Rent_Me_Inventory_Management_Solutions.View
 {
-
     public partial class MainWindow : Form
     {
-        private readonly Point userControlLocation = new Point( 13, 336);
-
-        private readonly Point dataGridViewLocation = new Point( 13, 13);
-
-        private readonly Size dataGridViewSize = new Size( 840, 316);
-
+        private readonly Point dataGridViewLocation = new Point(13, 13);
+        private readonly Size dataGridViewSize = new Size(840, 316);
+        private readonly Timer dateTimeTimer;
+        private readonly Point userControlLocation = new Point(13, 336);
         private DataGridView currentDataGridView;
-
-        private List<RentMeUserControl> userControlStack;
-
-        private Timer dateTimeTimer;
         private LoginSession loginSession;
-
+        private List<RentMeUserControl> userControlStack;
 
         public MainWindow()
         {
@@ -37,18 +26,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.dateTimeTimer = new Timer();
             this.dateTimeTimer.Interval = 5000;
             this.dateTimeTimer.Enabled = true;
-            this.dateTimeTimer.Tick += DateTimeTimerOnTick;
+            this.dateTimeTimer.Tick += this.DateTimeTimerOnTick;
             this.DateTimeTimerOnTick(null, null);
-
         }
-
 
         private void setUpWindow()
         {
             this.loginUser();
-            
-     
-            userControlStack = new List<RentMeUserControl>();
+
+
+            this.userControlStack = new List<RentMeUserControl>();
 
             this.displayNewTransaction();
         }
@@ -63,8 +50,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         {
             if (sender == null)
             {
-                
-                foreach(var item in userControlStack)
+                foreach (var item in this.userControlStack)
                 {
                     if (item.UserControlType == UserControls.Admin)
                     {
@@ -77,7 +63,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                 return;
             }
 
-            RentMeUserControl theSender = (RentMeUserControl) sender;
+            var theSender = (RentMeUserControl) sender;
 
             if (theSender.CurrentState == RentMeUserControlPrimaryStates.Hiding)
             {
@@ -101,32 +87,29 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                         this.displayNewCategoryStyle();
                         break;
                 }
-            } else if (theSender.CurrentState == RentMeUserControlPrimaryStates.Deleting)
+            }
+            else if (theSender.CurrentState == RentMeUserControlPrimaryStates.Deleting)
             {
                 this.removeUCFromDisplay(theSender);
                 this.popOffUserControlStack(theSender);
             }
-
         }
-
-       
-
 
         private void removeUCFromDisplay(RentMeUserControl userControl)
         {
-            UserControl uc = (UserControl) userControl;
+            UserControl uc = userControl;
 
             uc.Enabled = false;
             uc.Visible = false;
 
-            this.Controls.Remove(uc);
+            Controls.Remove(uc);
 
             userControl.StateChanged -= this.StateChange;
         }
 
         private void addUCToDisplay(RentMeUserControl ucInterface)
         {
-            UserControl userControl = (UserControl) ucInterface;
+            UserControl userControl = ucInterface;
 
             userControl.Enabled = true;
             userControl.Visible = true;
@@ -134,32 +117,29 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
             this.swapDataGridView(ucInterface.DataGrid);
             ucInterface.StateChanged += this.StateChange;
-            
-            this.Controls.Add(userControl);
+
+            Controls.Add(userControl);
 
             if (this.userControlStack.Count >= 2)
             {
                 ucInterface.ParentParameter = this.userControlStack[this.userControlStack.Count - 2];
                 ucInterface.processParentIntention();
-
             }
-
         }
 
         private void popOffUserControlStack(RentMeUserControl customerUserControl)
         {
-
             if (this.userControlStack.Count < 2)
             {
                 return;
             }
 
-            RentMeUserControl previousUC = this.userControlStack[this.userControlStack.Count - 1];
+            var previousUC = this.userControlStack[this.userControlStack.Count - 1];
 
             this.userControlStack.RemoveAt(this.userControlStack.Count - 1);
 
-            RentMeUserControl newUcInterface = this.userControlStack[this.userControlStack.Count - 1];
-            UserControl newUserControl = (UserControl) newUcInterface;
+            var newUcInterface = this.userControlStack[this.userControlStack.Count - 1];
+            UserControl newUserControl = newUcInterface;
             newUserControl.Enabled = true;
             newUserControl.Visible = true;
             newUserControl.Location = this.userControlLocation;
@@ -169,26 +149,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.swapDataGridView(newUcInterface.DataGrid);
             newUcInterface.StateChanged += this.StateChange;
 
-            this.Controls.Add(newUserControl);
+            Controls.Add(newUserControl);
 
             newUcInterface.processChild();
-
         }
 
         private void displayNewCustomer()
         {
-            CustomerUserControl custUC = new CustomerUserControl(this.createNewDataGridView());
+            var custUC = new CustomerUserControl(this.createNewDataGridView());
 
             this.userControlStack.Add(custUC);
 
             this.addUCToDisplay(custUC);
-
-
         }
 
         private void displayNewCategoryStyle()
         {
-            CategoryStyleUC categoryUC = new CategoryStyleUC(this.createNewDataGridView());
+            var categoryUC = new CategoryStyleUC(this.createNewDataGridView());
 
             this.userControlStack.Add(categoryUC);
 
@@ -197,7 +174,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewEmployee()
         {
-            EmployeeUC employeeUC = new EmployeeUC(this.createNewDataGridView());
+            var employeeUC = new EmployeeUC(this.createNewDataGridView());
 
             this.userControlStack.Add(employeeUC);
 
@@ -206,19 +183,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewAddress()
         {
-            AddressUC addressUc = new AddressUC(this.createNewDataGridView());
+            var addressUc = new AddressUC(this.createNewDataGridView());
 
             this.userControlStack.Add(addressUc);
 
             this.addUCToDisplay(addressUc);
-
-            
         }
-
 
         private void displayNewInventory()
         {
-            InventoryUC inventoryUc = new InventoryUC(this.createNewDataGridView());
+            var inventoryUc = new InventoryUC(this.createNewDataGridView());
 
             this.userControlStack.Add(inventoryUc);
 
@@ -227,7 +201,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewTransaction()
         {
-            TransactionUC transactionUc = new TransactionUC();
+            var transactionUc = new TransactionUC();
             transactionUc.DataGrid = this.createNewDataGridView();
 
             this.userControlStack.Add(transactionUc);
@@ -237,8 +211,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewAdmin()
         {
-            AdminUC adminUc = new AdminUC(this.createNewDataGridView(), this.loginSession);
-            
+            var adminUc = new AdminUC(this.createNewDataGridView(), this.loginSession);
+
             this.userControlStack.Add(adminUc);
 
             this.addUCToDisplay(adminUc);
@@ -248,32 +222,31 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         {
             if (this.currentDataGridView != null)
             {
-                DataGridView oldView = this.currentDataGridView;
+                var oldView = this.currentDataGridView;
                 oldView.Visible = false;
                 oldView.Enabled = false;
-                this.Controls.Remove(oldView);
+                Controls.Remove(oldView);
             }
-            
+
             this.currentDataGridView = newView;
             newView.Enabled = true;
             newView.Visible = true;
 
-            this.Controls.Add(newView);
+            Controls.Add(newView);
 
-            this.Invalidate();
+            Invalidate();
         }
-
 
         private DataGridView createNewDataGridView()
         {
-            DataGridView theNewView = new DataGridView();
+            var theNewView = new DataGridView();
             theNewView.Location = this.dataGridViewLocation;
             theNewView.Size = this.dataGridViewSize;
             theNewView.Visible = true;
             theNewView.Enabled = true;
             theNewView.ReadOnly = true;
             theNewView.BackgroundColor = DefaultBackColor;
-            
+
 
             return theNewView;
         }
@@ -281,20 +254,19 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         private void loginUser()
         {
             var loginWindow = new LoginForm();
-            DialogResult loginResult = loginWindow.ShowDialog(this);
+            var loginResult = loginWindow.ShowDialog(this);
 
             if (loginResult == DialogResult.OK)
             {
-                this.Enabled = true;
-                this.Opacity = 100;
+                Enabled = true;
+                Opacity = 100;
                 this.loginSession = loginWindow.Tag as LoginSession;
                 this.verifyAdminRights();
             }
             else
             {
-                this.Close();
+                Close();
             }
-            
         }
 
         private void verifyAdminRights()
@@ -312,8 +284,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         private void logoutButton_Click(object sender, EventArgs e)
         {
             //TODO Ensure network requests are fulfilled.
-            System.Diagnostics.Process.Start(Application.ExecutablePath);
-            this.Close();
+            Process.Start(Application.ExecutablePath);
+            Close();
         }
 
         private void adminOptionButton_Click(object sender, EventArgs e)

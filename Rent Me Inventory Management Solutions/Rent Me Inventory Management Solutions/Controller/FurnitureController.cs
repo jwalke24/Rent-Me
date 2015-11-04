@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model;
 
 namespace Rent_Me_Inventory_Management_Solutions.Controller
 {
-    class FurnitureController
+    internal class FurnitureController
     {
-        private FurnitureRepository theRepository;
+        private readonly FurnitureRepository theRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FurnitureController"/> class.
+        ///     Initializes a new instance of the <see cref="FurnitureController" /> class.
         /// </summary>
         public FurnitureController()
         {
-            theRepository = new FurnitureRepository();
+            this.theRepository = new FurnitureRepository();
         }
+
         /// <summary>
-        /// Gets all the furniture items from the database.
+        ///     Gets all the furniture items from the database.
         /// </summary>
         /// <returns></returns>
         public IList<Furniture> GetAll()
@@ -38,9 +35,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
             return this.theRepository.GetAllByIDPrefix(id);
         }
 
-        public void AddItem(Category theCategory, Style theStyle, string name, string description, decimal price, uint quantity, decimal lateFee)
+        public void AddItem(Category theCategory, Style theStyle, string name, string description, decimal price,
+            uint quantity, decimal lateFee)
         {
-            Furniture tempFurniture = new Furniture
+            var tempFurniture = new Furniture
             {
                 Name = name,
                 Description = description,
@@ -51,6 +49,11 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
                 LateFee = lateFee
             };
             this.theRepository.AddOne(tempFurniture);
+        }
+
+        public void DeleteFurnitureById(string deleteId)
+        {
+            this.theRepository.DeleteById(deleteId);
         }
     }
 }

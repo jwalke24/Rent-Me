@@ -1,19 +1,15 @@
-﻿using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
+﻿using System.Collections.Generic;
+using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rent_Me_Inventory_Management_Solutions.Controller
 {
-    class AddressController
+    internal class AddressController
     {
-        private AddressRepository addressRepository;
+        private readonly AddressRepository addressRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddressController"/> class.
+        ///     Initializes a new instance of the <see cref="AddressController" /> class.
         /// </summary>
         public AddressController()
         {
@@ -21,7 +17,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         }
 
         /// <summary>
-        /// Gets all addresses.
+        ///     Gets all addresses.
         /// </summary>
         /// <returns></returns>
         public IList<Address> GetAllAddresses()
@@ -30,7 +26,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         }
 
         /// <summary>
-        /// Adds the address.
+        ///     Adds the address.
         /// </summary>
         /// <param name="street1">The street1.</param>
         /// <param name="street2">The street2.</param>
@@ -39,7 +35,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         /// <param name="zip">The zip.</param>
         public void AddAddress(string street1, string street2, string city, string state, string zip)
         {
-            Address newAddress = new Address
+            var newAddress = new Address
             {
                 City = street1,
                 State = state,

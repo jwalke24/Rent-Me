@@ -41,6 +41,8 @@
             this.selectItemButton = new System.Windows.Forms.Button();
             this.addItemButton = new System.Windows.Forms.Button();
             this.addPanel = new System.Windows.Forms.Panel();
+            this.lateFeeTextBox = new System.Windows.Forms.TextBox();
+            this.lateFeeLabel = new System.Windows.Forms.Label();
             this.descriptionLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
@@ -52,8 +54,8 @@
             this.nameLabel = new System.Windows.Forms.Label();
             this.saveItemButton = new System.Windows.Forms.Button();
             this.categoryStylePanel = new System.Windows.Forms.Panel();
-            this.lateFeeTextBox = new System.Windows.Forms.TextBox();
-            this.lateFeeLabel = new System.Windows.Forms.Label();
+            this.editButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.itemPanel.SuspendLayout();
             this.addPanel.SuspendLayout();
             this.categoryStylePanel.SuspendLayout();
@@ -190,6 +192,22 @@
             this.addPanel.TabIndex = 11;
             this.addPanel.Visible = false;
             // 
+            // lateFeeTextBox
+            // 
+            this.lateFeeTextBox.Location = new System.Drawing.Point(204, 29);
+            this.lateFeeTextBox.Name = "lateFeeTextBox";
+            this.lateFeeTextBox.Size = new System.Drawing.Size(73, 20);
+            this.lateFeeTextBox.TabIndex = 10;
+            // 
+            // lateFeeLabel
+            // 
+            this.lateFeeLabel.AutoSize = true;
+            this.lateFeeLabel.Location = new System.Drawing.Point(146, 32);
+            this.lateFeeLabel.Name = "lateFeeLabel";
+            this.lateFeeLabel.Size = new System.Drawing.Size(52, 13);
+            this.lateFeeLabel.TabIndex = 11;
+            this.lateFeeLabel.Text = "Late Fee:";
+            // 
             // descriptionLabel
             // 
             this.descriptionLabel.AutoSize = true;
@@ -285,27 +303,34 @@
             this.categoryStylePanel.Size = new System.Drawing.Size(109, 107);
             this.categoryStylePanel.TabIndex = 12;
             // 
-            // lateFeeTextBox
+            // editButton
             // 
-            this.lateFeeTextBox.Location = new System.Drawing.Point(204, 29);
-            this.lateFeeTextBox.Name = "lateFeeTextBox";
-            this.lateFeeTextBox.Size = new System.Drawing.Size(73, 20);
-            this.lateFeeTextBox.TabIndex = 10;
+            this.editButton.Location = new System.Drawing.Point(542, 32);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(58, 23);
+            this.editButton.TabIndex = 13;
+            this.editButton.Text = "Edit";
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Visible = false;
             // 
-            // lateFeeLabel
+            // deleteButton
             // 
-            this.lateFeeLabel.AutoSize = true;
-            this.lateFeeLabel.Location = new System.Drawing.Point(146, 32);
-            this.lateFeeLabel.Name = "lateFeeLabel";
-            this.lateFeeLabel.Size = new System.Drawing.Size(52, 13);
-            this.lateFeeLabel.TabIndex = 11;
-            this.lateFeeLabel.Text = "Late Fee:";
+            this.deleteButton.Location = new System.Drawing.Point(606, 32);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(64, 23);
+            this.deleteButton.TabIndex = 14;
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Visible = false;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.deleteButton);
+            this.Controls.Add(this.editButton);
             this.Controls.Add(this.categoryStylePanel);
             this.Controls.Add(this.saveItemButton);
             this.Controls.Add(this.addPanel);
@@ -354,5 +379,7 @@
         private System.Windows.Forms.Panel categoryStylePanel;
         private System.Windows.Forms.TextBox lateFeeTextBox;
         private System.Windows.Forms.Label lateFeeLabel;
+        private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button deleteButton;
     }
 }

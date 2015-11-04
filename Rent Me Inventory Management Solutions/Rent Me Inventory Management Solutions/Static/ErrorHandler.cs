@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Rent_Me_Inventory_Management_Solutions
 {
-    static class ErrorHandler
+    internal static class ErrorHandler
     {
         public static void DisplayErrorMessageToUserAndLog(string title, string message, Exception exception)
         {
@@ -19,7 +15,7 @@ namespace Rent_Me_Inventory_Management_Solutions
 
         private static void writeErrorToLogFile(string title, string message, Exception exception)
         {
-            using (StreamWriter w = File.AppendText("RentMeLogs.txt"))
+            using (var w = File.AppendText("RentMeLogs.txt"))
             {
                 w.Write("\r\n");
                 w.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
@@ -27,7 +23,7 @@ namespace Rent_Me_Inventory_Management_Solutions
                 w.WriteLine("  :");
                 w.WriteLine("  :{0}", title.ToUpper());
                 w.WriteLine("  :{0}", message);
-                w.WriteLine("  :{0}", exception.ToString());
+                w.WriteLine("  :{0}", exception);
                 w.WriteLine("-------------------------------");
             }
         }

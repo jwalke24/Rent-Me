@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
@@ -17,53 +10,51 @@ namespace Rent_Me_Inventory_Management_Solutions
         public LoginForm()
         {
             this.InitializeComponent();
-            this.TopMost = false;
+            TopMost = false;
         }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            EmployeeController theController = new EmployeeController();
-            int id = 0;
+            var theController = new EmployeeController();
+            var id = 0;
 
-            Int32.TryParse(this.usernameTextBox.Text, out id);
+            int.TryParse(this.usernameTextBox.Text, out id);
 
-            this.DialogResult = DialogResult.None;
+            DialogResult = DialogResult.None;
 
             if (id != 0)
             {
-                LoginSession theUser = new LoginSession();
+                var theUser = new LoginSession();
                 try
                 {
                     theUser = theController.ValidateUserOnNetwork(id, this.passwordTextBox.Text);
                 }
                 catch (Exception exception)
                 {
-                    ErrorHandler.DisplayErrorMessageToUserAndLog("Network Error", "Unable to connect to SQL Database. Please try again.", exception);
+                    ErrorHandler.DisplayErrorMessageToUserAndLog("Network Error",
+                        "Unable to connect to SQL Database. Please try again.", exception);
                 }
 
                 if (theUser.isAuthenticated)
                 {
-                    this.Tag = theUser;
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    Tag = theUser;
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
                 else
                 {
                     ErrorHandler.displayErrorBox("Login Error", "Invalid login information. Please try again.");
                 }
-
             }
             else
             {
                 ErrorHandler.displayErrorBox("Login Error", "Invalid login information. Please try again.");
             }
-
-
         }
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this.DialogResult == DialogResult.None)
+            if (DialogResult == DialogResult.None)
             {
                 e.Cancel = true;
             }

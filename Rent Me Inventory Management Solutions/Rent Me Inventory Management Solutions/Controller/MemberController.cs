@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.Controller
 {
-    class MemberController
+    internal class MemberController
     {
-        private MemberRepository memberRepository;
+        private readonly MemberRepository memberRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemberController"/> class.
+        ///     Initializes a new instance of the <see cref="MemberController" /> class.
         /// </summary>
         public MemberController()
         {
@@ -21,7 +17,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         }
 
         /// <summary>
-        /// Adds the member to the database.
+        ///     Adds the member to the database.
         /// </summary>
         /// <param name="aMember">a member.</param>
         public void AddMember(Member aMember)
@@ -30,7 +26,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         }
 
         /// <summary>
-        /// Gets all the members from the database.
+        ///     Gets all the members from the database.
         /// </summary>
         /// <returns></returns>
         public IList<Member> GetAll()
@@ -39,7 +35,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         }
 
         /// <summary>
-        /// Deletes the member by identifier.
+        ///     Deletes the member by identifier.
         /// </summary>
         /// <param name="customerId">The customer identifier.</param>
         public void DeleteMemberById(string customerId)

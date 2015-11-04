@@ -1,65 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 {
-    class Address
+    internal class Address
     {
-
-        private string state;
-        private string zip;
-        private int id;
-
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>
-        /// The identifier.
+        ///     The identifier.
         /// </value>
-        public int Id
-        {
-            get { return this.id; }
-            set
-            {
-                this.id = value;
-            }
-        }
+        public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the street1.
+        ///     Gets or sets the street1.
         /// </summary>
         /// <value>
-        /// The street1.
+        ///     The street1.
         /// </value>
         public string Street1 { get; set; }
 
         /// <summary>
-        /// Gets or sets the street2.
+        ///     Gets or sets the street2.
         /// </summary>
         /// <value>
-        /// The street2.
+        ///     The street2.
         /// </value>
         public string Street2 { get; set; }
 
         /// <summary>
-        /// Gets or sets the city.
+        ///     Gets or sets the city.
         /// </summary>
         /// <value>
-        /// The city.
+        ///     The city.
         /// </value>
         public string City { get; set; }
 
         /// <summary>
-        /// Gets or sets the state.
+        ///     Gets or sets the state.
         /// </summary>
         /// <value>
-        /// The state.
+        ///     The state.
         /// </value>
         /// <exception cref="ArgumentException">Returns an error if the length does not equal 2.</exception>
-        public string State {
+        public string State
+        {
             get { return this.state; }
             set
             {
@@ -72,13 +57,14 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
         }
 
         /// <summary>
-        /// Gets or sets the zip.
+        ///     Gets or sets the zip.
         /// </summary>
         /// <value>
-        /// The zip.
+        ///     The zip.
         /// </value>
         /// <exception cref="ArgumentException">Returns an error if the length does not equal 5.</exception>
-        public string Zip {
+        public string Zip
+        {
             get { return this.zip; }
             set
             {
@@ -89,5 +75,8 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
                 this.zip = value;
             }
         }
+
+        private string state;
+        private string zip;
     }
 }

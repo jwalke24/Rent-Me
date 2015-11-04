@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL
 {
-    class DBConnection
+    internal class DBConnection
     {
         /// <summary>
-        /// Gets the connection string.
+        ///     Gets the connection string.
         /// </summary>
         /// <returns></returns>
         public static string GetConnectionString()

@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.View;
 
 namespace Rent_Me_Inventory_Management_Solutions
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -23,9 +20,7 @@ namespace Rent_Me_Inventory_Management_Solutions
             }
             catch (ObjectDisposedException)
             {
-                
             }
-
         }
     }
 }

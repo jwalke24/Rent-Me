@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
-using MySql.Data.MySqlClient;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
-    class MemberRepository : IRepository<Member>
+    internal class MemberRepository : IRepository<Member>
     {
         private readonly string CONNECTION_STRING;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemberRepository"/> class.
+        ///     Initializes a new instance of the <see cref="MemberRepository" /> class.
         /// </summary>
         public MemberRepository()
         {
@@ -27,7 +24,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         }
 
         /// <summary>
-        /// Adds one item to the database.
+        ///     Adds one item to the database.
         /// </summary>
         /// <param name="item">The item.</param>
         /// <exception cref="ArgumentNullException"></exception>
@@ -39,11 +36,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
 
             const string statement = "INSERT INTO Customer (fname, lname, minit, phone, Address_id)" +
-                                        " VALUES (@Fname, @Lname, @Minit, @Phone, @Address)";
+                                     " VALUES (@Fname, @Lname, @Minit, @Phone, @Address)";
 
-            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
 
-            using (MySqlCommand command = new MySqlCommand(statement))
+            using (var command = new MySqlCommand(statement))
             {
                 command.Parameters.AddWithValue("@Fname", item.Fname);
                 command.Parameters.AddWithValue("@Lname", item.Lname);
@@ -71,16 +68,16 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         }
 
         /// <summary>
-        /// Deletes the item from the database by the identifier.
+        ///     Deletes the item from the database by the identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         public void DeleteById(string id)
         {
-            string sqlStatement = "DELETE FROM Customer WHERE id = @id";
+            var sqlStatement = "DELETE FROM Customer WHERE id = @id";
 
-            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
 
-            MySqlCommand command = new MySqlCommand(sqlStatement);
+            var command = new MySqlCommand(sqlStatement);
 
             command.Parameters.AddWithValue("@id", id);
 
@@ -91,7 +88,6 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 command.Connection.Open();
 
                 command.ExecuteNonQuery();
-
             }
             finally
             {
@@ -100,18 +96,18 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         }
 
         /// <summary>
-        /// Gets all the items in the database.
+        ///     Gets all the items in the database.
         /// </summary>
         /// <returns></returns>
         public IList<Member> GetAll()
         {
-            List<Member> members = new List<Member>();
+            var members = new List<Member>();
 
             const string query = "SELECT * FROM Customer";
 
-            MySqlConnection connection = new MySqlConnection(this.CONNECTION_STRING);
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
 
-            using (MySqlCommand command = new MySqlCommand(query))
+            using (var command = new MySqlCommand(query))
             {
                 command.Connection = connection;
 
@@ -119,17 +115,21 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 {
                     command.Connection.Open();
 
-                    MySqlDataReader reader = command.ExecuteReader();
+                    var reader = command.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Member theMember = new Member();
-                        theMember.Id = (int)reader["id"];
-                        theMember.Fname = reader["fname"] == DBNull.Value ? String.Empty : (string)reader["fname"];
-                        theMember.Minit = reader["minit"] == DBNull.Value ? String.Empty : (string)reader["minit"];
-                        theMember.Lname = reader["lname"] == DBNull.Value ? String.Empty : (string)reader["lname"];
-                        theMember.PhoneNumber = reader["phone"] == DBNull.Value ? String.Empty : (string)reader["phone"];
-                        theMember.AddressId = reader["Address_id"] == DBNull.Value ? String.Empty : ((int)reader["Address_id"]).ToString();
+                        var theMember = new Member();
+                        theMember.Id = (int) reader["id"];
+                        theMember.Fname = reader["fname"] == DBNull.Value ? string.Empty : (string) reader["fname"];
+                        theMember.Minit = reader["minit"] == DBNull.Value ? string.Empty : (string) reader["minit"];
+                        theMember.Lname = reader["lname"] == DBNull.Value ? string.Empty : (string) reader["lname"];
+                        theMember.PhoneNumber = reader["phone"] == DBNull.Value
+                            ? string.Empty
+                            : (string) reader["phone"];
+                        theMember.AddressId = reader["Address_id"] == DBNull.Value
+                            ? string.Empty
+                            : ((int) reader["Address_id"]).ToString();
                         members.Add(theMember);
                     }
                 }

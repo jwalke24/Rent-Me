@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
@@ -18,32 +12,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         AddAddress
     }
 
-    public partial class AddressUC :BSMiddleClass
+    public partial class AddressUC : BSMiddleClass
     {
-        private AddressController theController;
-
-
-        public AddressUC(DataGridView theGrid)
-        {
-            this.UserControlType = UserControls.Address;
-            this.DataGrid = theGrid;
-
-            InitializeComponent();
-
-            this.theController = new AddressController();
-
-            this.loadAddresses();
-        }
-
-        private void loadAddresses()
-        {
-            BindingList<Address> theAddresses = new BindingList<Address>(this.theController.GetAllAddresses());
-
-            this.DataGrid.DataSource = theAddresses;
-        }
-
-        private AddressStates internalState;
-
         private AddressStates InternalState
         {
             get { return this.internalState; }
@@ -63,35 +33,53 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         }
 
         /// <summary>
-        /// Gets the address identifier.
+        ///     Gets the address identifier.
         /// </summary>
         /// <value>
-        /// The address identifier.
+        ///     The address identifier.
         /// </value>
         public string AddressID { get; private set; }
 
+        private readonly AddressController theController;
+        private AddressStates internalState;
+
+        public AddressUC(DataGridView theGrid)
+        {
+            UserControlType = UserControls.Address;
+            DataGrid = theGrid;
+
+            this.InitializeComponent();
+
+            this.theController = new AddressController();
+
+            this.loadAddresses();
+        }
+
+        private void loadAddresses()
+        {
+            var theAddresses = new BindingList<Address>(this.theController.GetAllAddresses());
+
+            DataGrid.DataSource = theAddresses;
+        }
 
         public override void processChild()
         {
-            
         }
 
         public override void processParentIntention()
         {
-            
         }
 
         private void selectAddressButton_Click(object sender, EventArgs e)
         {
-
-            if (this.DataGrid.SelectedRows.Count == 0)
+            if (DataGrid.SelectedRows.Count == 0)
             {
                 MessageBox.Show(@"Please select an address.");
             }
             else
             {
-                this.AddressID = ((int)this.DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
-                this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+                this.AddressID = ((int) DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
+                CurrentState = RentMeUserControlPrimaryStates.Deleting;
             }
         }
 
@@ -100,11 +88,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.InternalState = AddressStates.AddAddress;
         }
 
-
         private void saveAddressButton_Click(object sender, EventArgs e)
         {
-            if (this.street1TextBox.Text == string.Empty || this.cityTextBox.Text == String.Empty ||
-                this.stateTextBox.Text == String.Empty || this.zipTextBox.Text == String.Empty)
+            if (this.street1TextBox.Text == string.Empty || this.cityTextBox.Text == string.Empty ||
+                this.stateTextBox.Text == string.Empty || this.zipTextBox.Text == string.Empty)
             {
                 ErrorHandler.displayErrorBox("Error", "Please enter a value for required fields.");
                 return;
@@ -112,7 +99,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             try
             {
-                int.Parse(zipTextBox.Text);
+                int.Parse(this.zipTextBox.Text);
             }
             catch (Exception exception)
             {
@@ -136,17 +123,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to add address to database. Please try again.", exception);
-                return;
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error",
+                    "Failed to add address to database. Please try again.", exception);
             }
         }
-
 
         private void cancelAddressButton_Click(object sender, EventArgs e)
         {
             if (this.InternalState == AddressStates.Main)
             {
-                this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+                CurrentState = RentMeUserControlPrimaryStates.Deleting;
             }
             else
             {
@@ -171,6 +157,5 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.selectAddressButton.Visible = true;
             this.createAddressButton.Visible = true;
         }
-
     }
 }

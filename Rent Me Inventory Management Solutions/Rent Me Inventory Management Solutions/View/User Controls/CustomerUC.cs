@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq.Expressions;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
@@ -16,17 +15,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
     public partial class CustomerUserControl : BSMiddleClass
     {
-        
-
-        public CustomerUserControl(DataGridView theGrid)
-        {
-            DataGrid = theGrid;
-            this.InitializeComponent();
-            UserControlType = UserControls.Customer;
-            this.controller = new MemberController();
-            this.loadMembers();
-        }
-
         private CustomerStates InternalState
         {
             get { return this.internalState; }
@@ -45,17 +33,26 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
+        /// <summary>
+        ///     Gets the customer identifier.
+        /// </summary>
+        /// <value>
+        ///     The customer identifier.
+        /// </value>
+        public string CustomerID { get; private set; }
+
         private readonly MemberController controller;
         private CustomerStates internalState;
         private LoginSession theSession;
 
-        /// <summary>
-        /// Gets the customer identifier.
-        /// </summary>
-        /// <value>
-        /// The customer identifier.
-        /// </value>
-        public string CustomerID { get; private set; }
+        public CustomerUserControl(DataGridView theGrid)
+        {
+            DataGrid = theGrid;
+            this.InitializeComponent();
+            UserControlType = UserControls.Customer;
+            this.controller = new MemberController();
+            this.loadMembers();
+        }
 
         public override void processChild()
         {
@@ -70,15 +67,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         public override void processParentIntention()
         {
-            if (this.ParentParameter == null)
+            if (ParentParameter == null)
             {
                 return;
             }
 
-            switch (this.ParentParameter.UserControlType)
+            switch (ParentParameter.UserControlType)
             {
-                  case UserControls.Admin:
-                    this.proccessAdminParent(this.ParentParameter as AdminUC);
+                case UserControls.Admin:
+                    this.proccessAdminParent(ParentParameter as AdminUC);
                     break;
             }
         }
@@ -102,7 +99,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database", "An error occured while loading this form.", exception);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database",
+                    "An error occured while loading this form.", exception);
             }
         }
 
@@ -128,8 +126,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.panel1.Visible = false;
 
             this.verifyAdminButtonsMainState();
-
-
         }
 
         private void verifyAdminButtonsMainState()
@@ -192,7 +188,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                ErrorHandler.displayErrorBox("Phone Number Invalid","Please enter a valid 10 digit phone number.");
+                ErrorHandler.displayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
                 return;
             }
 
@@ -215,7 +211,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to add member to database. Please try again.", exception);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error",
+                    "Failed to add member to database. Please try again.", exception);
             }
         }
 
@@ -244,7 +241,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             else
             {
                 this.CustomerID = ((int) DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
-                this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+                CurrentState = RentMeUserControlPrimaryStates.Deleting;
             }
         }
 
@@ -258,14 +255,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             try
             {
-                string customerID = ((int) DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
+                var customerID = ((int) DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
                 this.controller.DeleteMemberById(customerID);
 
                 this.loadMembers();
             }
             catch (Exception exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to delete employee from database.", exception);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to delete employee from database.",
+                    exception);
             }
         }
     }

@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
-using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
@@ -18,31 +11,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         Main,
         AddEmployee
     }
-    public partial class EmployeeUC :BSMiddleClass
+
+    public partial class EmployeeUC : BSMiddleClass
     {
-        private EmployeeController theController;
-        public EmployeeUC(DataGridView theGrid)
-        {
-            this.UserControlType = UserControls.Employee;
-            this.DataGrid = theGrid;
-            InitializeComponent();
-            this.theController = new EmployeeController();
-            this.loadEmployees();
-        }
-
-        private void loadEmployees()
-        {
-            BindingList<Employee> theList = new BindingList<Employee>(this.theController.GetAll());
-
-            this.DataGrid.DataSource = theList;
-        }
-
-        private void createEmployeeButton_Click(object sender, EventArgs e)
-        {
-            this.InternalState = EmployeeStates.AddEmployee;
-        }
-        private EmployeeStates internalState;
-
         private EmployeeStates InternalState
         {
             get { return this.internalState; }
@@ -59,6 +30,30 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                     this.changeToAddEmployeeState();
                 }
             }
+        }
+
+        private readonly EmployeeController theController;
+        private EmployeeStates internalState;
+
+        public EmployeeUC(DataGridView theGrid)
+        {
+            UserControlType = UserControls.Employee;
+            DataGrid = theGrid;
+            this.InitializeComponent();
+            this.theController = new EmployeeController();
+            this.loadEmployees();
+        }
+
+        private void loadEmployees()
+        {
+            var theList = new BindingList<Employee>(this.theController.GetAll());
+
+            DataGrid.DataSource = theList;
+        }
+
+        private void createEmployeeButton_Click(object sender, EventArgs e)
+        {
+            this.InternalState = EmployeeStates.AddEmployee;
         }
 
         private void changeToAddEmployeeState()
@@ -85,7 +80,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.phoneTextBox.Text = "";
             this.passwordTextBox.Text = "";
             this.addressTextBox.Text = "";
-
         }
 
         public override void processChild()
@@ -93,34 +87,32 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             switch (ChildReturned.UserControlType)
             {
                 case UserControls.Address:
-                    AddressUC test = (AddressUC) this.ChildReturned;
+                    var test = (AddressUC) ChildReturned;
                     this.addressTextBox.Text = test.AddressID;
                     break;
-
             }
         }
 
         public override void processParentIntention()
         {
-            
         }
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+            CurrentState = RentMeUserControlPrimaryStates.Deleting;
         }
 
         private void selectButton_Click(object sender, EventArgs e)
         {
-            this.SwitchTo = UserControls.Address;
-            this.CurrentState = RentMeUserControlPrimaryStates.Hiding;
+            SwitchTo = UserControls.Address;
+            CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if (this.addressTextBox.Text == String.Empty || this.firstNameTextBox.Text == String.Empty ||
-                this.lastNameTextBox.Text == String.Empty || this.phoneTextBox.Text == String.Empty ||
-                this.ssnTextBox.Text == String.Empty || this.passwordTextBox.Text == String.Empty)
+            if (this.addressTextBox.Text == string.Empty || this.firstNameTextBox.Text == string.Empty ||
+                this.lastNameTextBox.Text == string.Empty || this.phoneTextBox.Text == string.Empty ||
+                this.ssnTextBox.Text == string.Empty || this.passwordTextBox.Text == string.Empty)
             {
                 MessageBox.Show(@"Please enter a value for every field.");
                 return;
@@ -175,9 +167,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to add employee to database. Please try again.", exception);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error",
+                    "Failed to add employee to database. Please try again.", exception);
             }
-
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -187,7 +179,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void deleteEmployeeButton_Click(object sender, EventArgs e)
         {
-            if (this.DataGrid.SelectedRows.Count == 0)
+            if (DataGrid.SelectedRows.Count == 0)
             {
                 ErrorHandler.displayErrorBox("Error", "Please select an employee to delete.");
                 return;
@@ -195,7 +187,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             try
             {
-                string deleteId = ((string) this.DataGrid.SelectedRows[0].Cells["ID"].Value);
+                var deleteId = ((string) DataGrid.SelectedRows[0].Cells["ID"].Value);
 
                 this.theController.DeleteEmployeeById(deleteId);
 
@@ -203,9 +195,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Error","Failed to delete employee from database.",exception);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to delete employee from database.",
+                    exception);
             }
-
         }
     }
 }

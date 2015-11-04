@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
@@ -21,13 +15,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
     public partial class InventoryUC : BSMiddleClass
     {
-        private readonly Point categoryStyleDefaultLocation = new Point(1, -1);
-
-        private FurnitureController theController;
-
-        private InventoryStates internalState;
-        private LoginSession theSession;
-
         private InventoryStates InternalState
         {
             get { return this.internalState; }
@@ -47,26 +34,28 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
-       
+        private readonly Point categoryStyleDefaultLocation = new Point(1, -1);
+        private readonly FurnitureController theController;
+        private InventoryStates internalState;
+        private LoginSession theSession;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InventoryUC"/> class.
+        ///     Initializes a new instance of the <see cref="InventoryUC" /> class.
         /// </summary>
         public InventoryUC(DataGridView theGrid)
         {
-            this.DataGrid = theGrid;
+            DataGrid = theGrid;
             this.theController = new FurnitureController();
             this.InitializeComponent();
-            this.UserControlType = UserControls.Inventory;
+            UserControlType = UserControls.Inventory;
             this.loadAllData();
         }
 
-
         private void loadAllData()
         {
-                this.loadInventory();
-                this.LoadCategories();
-                this.LoadStyles();
+            this.loadInventory();
+            this.LoadCategories();
+            this.LoadStyles();
         }
 
         private void LoadStyles()
@@ -75,10 +64,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 this.styleComboBox.Items.Add("All");
 
-                CategoryStyleController catController = new CategoryStyleController();
+                var catController = new CategoryStyleController();
 
 
-                IList<Style> styles = catController.GetAllStyles();
+                var styles = catController.GetAllStyles();
 
 
                 foreach (var style in styles)
@@ -90,7 +79,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database", "An error occured while loading this form.", exception);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database",
+                    "An error occured while loading this form.", exception);
             }
         }
 
@@ -99,9 +89,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             try
             {
                 this.categoryComboBox.Items.Add("All");
-                CategoryStyleController catController = new CategoryStyleController();
+                var catController = new CategoryStyleController();
 
-                IList<Category> categories = catController.GetAllCategories();
+                var categories = catController.GetAllCategories();
 
                 foreach (var category in categories)
                 {
@@ -112,21 +102,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database", "An error occured while loading this form.", exception);
-
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database",
+                    "An error occured while loading this form.", exception);
             }
-}
+        }
 
         private void loadInventory()
         {
-            try {
-            BindingList<Furniture> theList = new BindingList<Furniture>(this.theController.GetAll());
+            try
+            {
+                var theList = new BindingList<Furniture>(this.theController.GetAll());
 
-            this.DataGrid.DataSource = theList;
+                DataGrid.DataSource = theList;
             }
             catch (Exception exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database", "An error occured while loading this form.", exception);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Cannot Access Database",
+                    "An error occured while loading this form.", exception);
             }
         }
 
@@ -134,7 +126,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (this.InternalState == InventoryStates.Main)
             {
-                this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+                CurrentState = RentMeUserControlPrimaryStates.Deleting;
             }
             else
             {
@@ -144,20 +136,19 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         public override void processChild()
         {
-            
         }
 
         public override void processParentIntention()
         {
-            if (this.ParentParameter == null)
+            if (ParentParameter == null)
             {
                 return;
             }
 
-            switch (this.ParentParameter.UserControlType)
+            switch (ParentParameter.UserControlType)
             {
                 case UserControls.Admin:
-                    this.proccessAdminParent(this.ParentParameter as AdminUC);
+                    this.proccessAdminParent(ParentParameter as AdminUC);
                     break;
             }
         }
@@ -177,13 +168,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.itemPanel.Visible = false;
             this.selectItemButton.Visible = false;
             this.addItemButton.Visible = false;
+            this.editButton.Visible = false;
+            this.deleteButton.Visible = false;
 
             this.addPanel.Visible = true;
             this.saveItemButton.Visible = true;
 
             this.categoryStylePanel.Location = this.itemPanel.Location;
-
-
         }
 
         private void changeToMainState()
@@ -198,7 +189,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.categoryStylePanel.Location = this.categoryStyleDefaultLocation;
 
             this.verifyAdminButtonsMainState();
-
         }
 
         private void verifyAdminButtonsMainState()
@@ -206,41 +196,41 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             if (this.theSession != null && this.theSession.isAuthenticated && this.theSession.isAdmin)
             {
                 this.addItemButton.Visible = true;
+                this.editButton.Visible = true;
+                this.deleteButton.Visible = true;
             }
         }
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            IList<Furniture> result = this.theController.GetItemsByCategoryStyle(this.categoryComboBox.SelectedItem as Category, this.styleComboBox.SelectedItem as Style);
-            this.DataGrid.DataSource = new BindingList<Furniture>(result);
+            var result = this.theController.GetItemsByCategoryStyle(this.categoryComboBox.SelectedItem as Category,
+                this.styleComboBox.SelectedItem as Style);
+            DataGrid.DataSource = new BindingList<Furniture>(result);
         }
 
         private void idGoButton_Click(object sender, EventArgs e)
         {
             try
             {
-                int id = Int32.Parse(this.idSearchTextBox.Text);
-                IList<Furniture> result = this.theController.GetItemsFromIDWildcard(id);
-                this.DataGrid.DataSource = new BindingList<Furniture>(result);
+                var id = int.Parse(this.idSearchTextBox.Text);
+                var result = this.theController.GetItemsFromIDWildcard(id);
+                DataGrid.DataSource = new BindingList<Furniture>(result);
             }
             catch (Exception)
             {
                 MessageBox.Show(@"Please enter a numerical value.");
             }
-            
-            
         }
 
         private void addItemButton_Click(object sender, EventArgs e)
         {
             this.InternalState = InventoryStates.Adding;
-            
         }
 
         private void saveItemButton_Click(object sender, EventArgs e)
         {
-            Category theCategory = this.categoryComboBox.SelectedItem as Category;
-            Style theStyle = this.styleComboBox.SelectedItem as Style;
+            var theCategory = this.categoryComboBox.SelectedItem as Category;
+            var theStyle = this.styleComboBox.SelectedItem as Style;
             decimal price;
             uint quantity;
             decimal lateFee;
@@ -269,10 +259,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch
             {
-                lateFee = Decimal.Zero;
+                lateFee = decimal.Zero;
                 return;
             }
-
 
 
             try
@@ -292,13 +281,35 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Error","Failed to add item to inventory. Please try again.", exception);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error",
+                    "Failed to add item to inventory. Please try again.", exception);
             }
 
             this.loadAllData();
 
             this.InternalState = InventoryStates.Main;
+        }
 
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            if (DataGrid.SelectedRows.Count == 0)
+            {
+                ErrorHandler.displayErrorBox("Error", "Please select an item to delete.");
+                return;
+            }
+
+            try
+            {
+                var deleteId = ((string) DataGrid.SelectedRows[0].Cells["ID"].Value);
+
+                this.theController.DeleteFurnitureById(deleteId);
+
+                this.loadAllData();
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to delete item from database.", exception);
+            }
         }
     }
 }

@@ -1,44 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Rent_Me_Inventory_Management_Solutions.Model
 {
     public class LoginSession
     {
-        public LoginSession(int id, string password)
-        {
-            if (password == null)
-            {
-                throw new NullReferenceException();
-            }
-
-            this.Id = id;
-            this.Password = password;
-        }
-
-        public int Id { get;}
-
-        private string password;
-
-        public LoginSession()
-        {
-        }
-
+        public int Id { get; }
         public bool isAuthenticated { get; set; }
-
         public bool isAdmin { get; set; }
 
         public string Password
         {
-            get
-            {
-                return this.password;
-            }
+            get { return this.password; }
             private set
             {
                 if (value == null)
@@ -50,17 +24,36 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
             }
         }
 
+        private string password;
+
+        public LoginSession(int id, string password)
+        {
+            if (password == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            this.Id = id;
+            this.Password = password;
+        }
+
+        public LoginSession()
+        {
+        }
+
         private string hashPassword(string value)
         {
-            StringBuilder Sb = new StringBuilder();
+            var Sb = new StringBuilder();
 
-            using (SHA256 hash = SHA256Managed.Create())
+            using (var hash = SHA256.Create())
             {
-                Encoding enc = Encoding.UTF8;
-                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+                var enc = Encoding.UTF8;
+                var result = hash.ComputeHash(enc.GetBytes(value));
 
-                foreach (Byte b in result)
+                foreach (var b in result)
+                {
                     Sb.Append(b.ToString("x2"));
+                }
             }
 
             return Sb.ToString();
