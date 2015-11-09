@@ -56,5 +56,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             this.theRepository.DeleteById(deleteId);
         }
+
+        public Furniture GetItemById(int id)
+        {
+            return this.theRepository.GetById(id.ToString());
+        }
     }
 }

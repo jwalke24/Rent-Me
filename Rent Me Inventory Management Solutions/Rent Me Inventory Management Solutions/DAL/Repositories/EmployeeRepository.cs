@@ -6,7 +6,7 @@ using Rent_Me_Inventory_Management_Solutions.Model;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
-    internal class EmployeeRepository : IRepository<Employee>
+    internal class EmployeeRepository : IEmployeeRepository
     {
         private readonly string CONNECTION_STRING;
 
@@ -119,7 +119,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         /// <param name="employee">The employee.</param>
         /// <param name="loginSession">The login session.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        internal void AddOne(Employee employee, LoginSession loginSession)
+        public void AddOne(Employee employee, LoginSession loginSession)
         {
             if (employee == null || loginSession == null || loginSession.Password == null)
             {

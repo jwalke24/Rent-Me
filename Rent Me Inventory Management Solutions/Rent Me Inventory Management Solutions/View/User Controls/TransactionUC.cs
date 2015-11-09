@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.Controller;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -11,12 +16,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
     public partial class TransactionUC : BSMiddleClass
     {
-        public TransactionUC()
-        {
-            this.InitializeComponent();
-            this.Subtotal = 0;
+        private BindingList<PurchaseTransaction_Item> itemsToPurchase;
 
-            this.numItemsLabel.Text = "0";
+        public TransactionUC(DataGridView theGrid)
+        {
+            this.DataGrid = theGrid;
+            this.InitializeComponent();
+            this.itemsToPurchase = new BindingList<PurchaseTransaction_Item>();
+            this.DataGrid.DataSource = this.itemsToPurchase;
+            this.Subtotal = 0;
+            this.dateTimePicker1.MinDate = DateTime.Now;
             UserControlType = UserControls.Transaction;
         }
 
@@ -29,6 +38,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.cancelItemConfirmButton.Visible = true;
             this.itemToAddTextBox.Enabled = true;
             this.itemToAddTextBox.Visible = true;
+            this.dateTimePicker1.Visible = true;
+            this.qtyTextBox.Visible = true;
+            this.qtyLabel.Visible = true;
 
             //Disable
             DataGrid.Enabled = false;
@@ -49,6 +61,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.cancelItemConfirmButton.Visible = false;
             this.itemToAddTextBox.Enabled = false;
             this.itemToAddTextBox.Visible = false;
+            this.dateTimePicker1.Visible = false;
+            this.qtyTextBox.Visible = false;
+            this.qtyLabel.Visible = false;
 
             //Enable
             DataGrid.Enabled = true;
@@ -71,6 +86,46 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void addItemConfirmButton_Click(object sender, EventArgs e)
         {
+            FurnitureController theController = new FurnitureController();
+            try
+            {
+                var id = int.Parse(this.itemToAddTextBox.Text);
+                var result = theController.GetItemById(id);
+                var quantity = int.Parse(this.qtyTextBox.Text);
+                var days = (this.dateTimePicker1.Value - DateTime.Now).Days + 1;
+
+                if (result == null)
+                {
+                    ErrorHandler.displayErrorBox("Error","Item not found. Please try again.");
+                    return;
+                }
+
+                if (result.Quantity < quantity)
+                {
+                    ErrorHandler.displayErrorBox("Quantity Error", "There are not enough items in stock. You can only rent " + result.Quantity + " items or less.");
+                    return;
+                }
+
+                if (days <= 0)
+                {
+                    ErrorHandler.displayErrorBox("Lease Time Error", "You must rent for at least one day.");
+                    return;
+                }
+
+                PurchaseTransaction_Item theItem = new PurchaseTransaction_Item();
+                theItem.FurnitureID = result.ID;
+                theItem.Quantity = quantity;
+                theItem.LeaseTime = days;
+
+
+
+                this.itemsToPurchase.Add(theItem);
+            }
+            catch (Exception)
+            {
+                ErrorHandler.displayErrorBox("Error", "Please enter a numerical value.");
+            }
+
             this.InternalState = TransactionStates.Main;
         }
 

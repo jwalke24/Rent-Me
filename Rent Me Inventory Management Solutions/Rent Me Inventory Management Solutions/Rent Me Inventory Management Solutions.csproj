@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=6.9.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -55,6 +55,8 @@
     <Compile Include="Controller\FurnitureController.cs" />
     <Compile Include="Controller\MemberController.cs" />
     <Compile Include="DAL\DBConnection.cs" />
+    <Compile Include="DAL\Interfaces\IEmployeeRepository.cs" />
+    <Compile Include="DAL\Interfaces\IFurnitureRepository.cs" />
     <Compile Include="DAL\Interfaces\IRepository.cs" />
     <Compile Include="DAL\Repositories\AddressRepository.cs" />
     <Compile Include="DAL\Repositories\CategoryRepository.cs" />
@@ -62,15 +64,15 @@
     <Compile Include="DAL\Repositories\FurnitureRepository.cs" />
     <Compile Include="DAL\Repositories\MemberRepository.cs" />
     <Compile Include="DAL\Repositories\StyleRepository.cs" />
+    <Compile Include="Model\Database Objects\PurchaseTransaction.cs" />
+    <Compile Include="Model\Database Objects\PurchaseTransaction_Item.cs" />
     <Compile Include="Static\ErrorHandler.cs" />
     <Compile Include="Model\Database Objects\Address.cs" />
     <Compile Include="Model\Database Objects\Category.cs" />
     <Compile Include="Model\Database Objects\Member.cs" />
     <Compile Include="Model\Database Objects\Employee.cs" />
     <Compile Include="Model\Database Objects\Furniture.cs" />
-    <Compile Include="Model\Database Objects\ReturnTransaction.cs" />
     <Compile Include="Model\Database Objects\Style.cs" />
-    <Compile Include="Model\Database Objects\Transcaction.cs" />
     <Compile Include="Model\LoginSession.cs" />
     <Compile Include="View\User Controls\AddressUC.cs">
       <SubType>UserControl</SubType>

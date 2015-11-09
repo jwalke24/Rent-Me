@@ -6,7 +6,7 @@ using Rent_Me_Inventory_Management_Solutions.Model;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
-    internal class FurnitureRepository : IRepository<Furniture>
+    internal class FurnitureRepository : IFurnitureRepository
     {
         private readonly string CONNECTION_STRING;
 
@@ -96,7 +96,39 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public Furniture GetById(string id)
         {
-            throw new NotImplementedException();
+            var furnitures = new List<Furniture>();
+
+            const string query = "SELECT * FROM Furniture WHERE id = @id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+
+                command.Parameters.AddWithValue("@id", id);
+                try
+                {
+                    command.Connection.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    this.furnitureLoader(reader, furnitures);
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+
+                if (furnitures.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return furnitures[0];
+                }
+            }
         }
 
         public void DeleteById(string id)

@@ -267,7 +267,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception)
             {
-                MessageBox.Show(@"Please enter a numerical value.");
+                ErrorHandler.displayErrorBox("Error", "Please enter a numerical value.");
             }
         }
 

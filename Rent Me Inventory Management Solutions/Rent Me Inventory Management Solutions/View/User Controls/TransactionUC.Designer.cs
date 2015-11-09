@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.numItemsDispLabel = new System.Windows.Forms.Label();
-            this.numItemsLabel = new System.Windows.Forms.Label();
             this.subtotalDispLabel = new System.Windows.Forms.Label();
             this.subtotalLabel = new System.Windows.Forms.Label();
             this.taxDispLabel = new System.Windows.Forms.Label();
@@ -49,25 +47,10 @@
             this.selectedCustomerLabel = new System.Windows.Forms.Label();
             this.customerIDLabel = new System.Windows.Forms.Label();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.qtyTextBox = new System.Windows.Forms.TextBox();
+            this.qtyLabel = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
-            // 
-            // numItemsDispLabel
-            // 
-            this.numItemsDispLabel.AutoSize = true;
-            this.numItemsDispLabel.Location = new System.Drawing.Point(4, 4);
-            this.numItemsDispLabel.Name = "numItemsDispLabel";
-            this.numItemsDispLabel.Size = new System.Drawing.Size(92, 13);
-            this.numItemsDispLabel.TabIndex = 0;
-            this.numItemsDispLabel.Text = "Number Of Items: ";
-            // 
-            // numItemsLabel
-            // 
-            this.numItemsLabel.AutoSize = true;
-            this.numItemsLabel.Location = new System.Drawing.Point(105, 4);
-            this.numItemsLabel.Name = "numItemsLabel";
-            this.numItemsLabel.Size = new System.Drawing.Size(25, 13);
-            this.numItemsLabel.TabIndex = 1;
-            this.numItemsLabel.Text = "000";
             // 
             // subtotalDispLabel
             // 
@@ -217,7 +200,7 @@
             // cancelItemConfirmButton
             // 
             this.cancelItemConfirmButton.Enabled = false;
-            this.cancelItemConfirmButton.Location = new System.Drawing.Point(418, 112);
+            this.cancelItemConfirmButton.Location = new System.Drawing.Point(418, 110);
             this.cancelItemConfirmButton.Name = "cancelItemConfirmButton";
             this.cancelItemConfirmButton.Size = new System.Drawing.Size(75, 23);
             this.cancelItemConfirmButton.TabIndex = 19;
@@ -229,26 +212,55 @@
             // selectedCustomerLabel
             // 
             this.selectedCustomerLabel.AutoSize = true;
-            this.selectedCustomerLabel.Location = new System.Drawing.Point(4, 17);
+            this.selectedCustomerLabel.Location = new System.Drawing.Point(4, 4);
             this.selectedCustomerLabel.Name = "selectedCustomerLabel";
-            this.selectedCustomerLabel.Size = new System.Drawing.Size(99, 13);
+            this.selectedCustomerLabel.Size = new System.Drawing.Size(93, 13);
             this.selectedCustomerLabel.TabIndex = 20;
             this.selectedCustomerLabel.Text = "Selected Member:";
             // 
             // customerIDLabel
             // 
             this.customerIDLabel.AutoSize = true;
-            this.customerIDLabel.Location = new System.Drawing.Point(105, 17);
+            this.customerIDLabel.Location = new System.Drawing.Point(100, 4);
             this.customerIDLabel.Name = "customerIDLabel";
             this.customerIDLabel.Size = new System.Drawing.Size(67, 13);
             this.customerIDLabel.TabIndex = 21;
             this.customerIDLabel.Text = "0000000000";
+            // 
+            // qtyTextBox
+            // 
+            this.qtyTextBox.Location = new System.Drawing.Point(313, 114);
+            this.qtyTextBox.Name = "qtyTextBox";
+            this.qtyTextBox.Size = new System.Drawing.Size(99, 20);
+            this.qtyTextBox.TabIndex = 22;
+            this.qtyTextBox.Visible = false;
+            // 
+            // qtyLabel
+            // 
+            this.qtyLabel.AutoSize = true;
+            this.qtyLabel.Location = new System.Drawing.Point(275, 117);
+            this.qtyLabel.Name = "qtyLabel";
+            this.qtyLabel.Size = new System.Drawing.Size(32, 13);
+            this.qtyLabel.TabIndex = 23;
+            this.qtyLabel.Text = "QTY:";
+            this.qtyLabel.Visible = false;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(274, 57);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(219, 20);
+            this.dateTimePicker1.TabIndex = 24;
+            this.dateTimePicker1.Visible = false;
             // 
             // TransactionUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.qtyLabel);
+            this.Controls.Add(this.qtyTextBox);
             this.Controls.Add(this.customerIDLabel);
             this.Controls.Add(this.selectedCustomerLabel);
             this.Controls.Add(this.cancelItemConfirmButton);
@@ -267,8 +279,6 @@
             this.Controls.Add(this.taxDispLabel);
             this.Controls.Add(this.subtotalLabel);
             this.Controls.Add(this.subtotalDispLabel);
-            this.Controls.Add(this.numItemsLabel);
-            this.Controls.Add(this.numItemsDispLabel);
             this.Name = "TransactionUC";
             this.Size = new System.Drawing.Size(676, 138);
             this.ResumeLayout(false);
@@ -277,9 +287,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label numItemsDispLabel;
-        private System.Windows.Forms.Label numItemsLabel;
         private System.Windows.Forms.Label subtotalDispLabel;
         private System.Windows.Forms.Label subtotalLabel;
         private System.Windows.Forms.Label taxDispLabel;
@@ -299,5 +306,8 @@
         private System.Windows.Forms.Label selectedCustomerLabel;
         private System.Windows.Forms.Label customerIDLabel;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
+        private System.Windows.Forms.TextBox qtyTextBox;
+        private System.Windows.Forms.Label qtyLabel;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }
