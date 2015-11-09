@@ -78,5 +78,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateByID(Style item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

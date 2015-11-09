@@ -186,7 +186,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 long.Parse(this.phoneTextBox.Text);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 ErrorHandler.displayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
                 return;

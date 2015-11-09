@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
@@ -24,7 +25,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 this.internalState = value;
                 this.DataGrid.SelectionChanged -= this.DataGridOnSelectionChanged;
-
+                this.clearValues();
                 switch (value)
                 {   
                     case InventoryStates.Main:
@@ -34,13 +35,20 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                         this.changeToAddingState();
                         break;
                     case InventoryStates.Editing:
-
-
                         this.DataGrid.SelectionChanged += DataGridOnSelectionChanged;
                         this.changeToAddingState();
                         break;
                 }
             }
+        }
+
+        private void clearValues()
+        {
+            this.nameTextBox.Text = string.Empty;
+            this.descriptionTextBox.Text = string.Empty;
+            this.quantityTextBox.Text = string.Empty;
+            this.lateFeeTextBox.Text = string.Empty;
+            this.priceTextBox.Text = string.Empty;
         }
 
         private void DataGridOnSelectionChanged(object sender, EventArgs eventArgs)
@@ -295,16 +303,25 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void UpdateItem()
         {
+            string itemID = string.Empty;
+            try
+            {
+                itemID = (DataGrid.SelectedRows[0].DataBoundItem as Furniture)?.ID;
+            }
+            catch (Exception)
+            {
+                ErrorHandler.displayErrorBox("Error", "No item selected.");
+            }
             var theCategory = this.categoryComboBox.SelectedItem as Category;
             var theStyle = this.styleComboBox.SelectedItem as Style;
             decimal price;
             uint quantity;
             decimal lateFee;
-            if (theCategory == null || theStyle == null || this.nameTextBox.Text == string.Empty ||
+            if (string.IsNullOrEmpty(itemID) || theCategory == null || theStyle == null || this.nameTextBox.Text == string.Empty ||
                 this.priceTextBox.Text == string.Empty || this.quantityTextBox.Text == string.Empty ||
                 this.descriptionTextBox.Text == string.Empty)
             {
-                MessageBox.Show(@"Please enter a value for every field.");
+                MessageBox.Show(@"Please enter a valid value for every field.");
                 return;
             }
 
@@ -341,14 +358,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             try
             {
-                this.theController.AddItem(theCategory, theStyle, this.nameTextBox.Text, this.descriptionTextBox.Text,
+                this.theController.UpdateItem(theCategory, theStyle, this.nameTextBox.Text, this.descriptionTextBox.Text,
                     price,
-                    quantity, lateFee);
+                    quantity, lateFee, itemID);
             }
             catch (Exception exception)
             {
                 ErrorHandler.DisplayErrorMessageToUserAndLog("Error",
-                    "Failed to add item to inventory. Please try again.", exception);
+                    "Failed to update item in the inventory. Please try again.", exception);
             }
 
             this.loadAllData();

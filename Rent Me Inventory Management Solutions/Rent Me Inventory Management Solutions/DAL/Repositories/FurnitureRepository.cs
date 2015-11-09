@@ -160,6 +160,46 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public void UpdateByID(Furniture item)
+        {
+            if (item == null)
+            {
+                throw new ArgumentNullException(@"Item is null");
+            }
+
+            const string statement =
+                "UPDATE Furniture " + 
+                "SET quantity = @quantity, name = @name, description = @description, price = @price, lateFee = @late, Category_id = @cat, Style_id = @style" +
+                " WHERE id = @id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(statement))
+            {
+                command.Parameters.AddWithValue("@quantity", item.Quantity);
+                command.Parameters.AddWithValue("@name", item.Name);
+                command.Parameters.AddWithValue("@description", item.Description);
+                command.Parameters.AddWithValue("@price", item.Price);
+                command.Parameters.AddWithValue("@late", item.LateFee);
+                command.Parameters.AddWithValue("@cat", item.CategoryID);
+                command.Parameters.AddWithValue("@style", item.StyleID);
+                command.Parameters.AddWithValue("@id", item.ID);
+
+
+                command.Connection = connection;
+
+                try
+                {
+                    command.Connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+        }
+
         private void furnitureLoader(MySqlDataReader reader, List<Furniture> furnitures)
         {
             while (reader.Read())

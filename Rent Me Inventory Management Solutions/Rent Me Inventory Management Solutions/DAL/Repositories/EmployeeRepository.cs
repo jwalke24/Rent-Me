@@ -113,6 +113,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public void UpdateByID(Employee item)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Adds the one.
         /// </summary>

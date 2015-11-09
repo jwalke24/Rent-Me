@@ -67,6 +67,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public void UpdateByID(Member item)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Deletes the item from the database by the identifier.
         /// </summary>

@@ -61,5 +61,21 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             return this.theRepository.GetById(id.ToString());
         }
+
+        public void UpdateItem(Category theCategory, Style theStyle, string name, string description, decimal price, uint quantity, decimal lateFee, string itemId)
+        {
+            var tempFurniture = new Furniture
+            {
+                Name = name,
+                Description = description,
+                Price = price,
+                Quantity = quantity,
+                CategoryID = theCategory.ID,
+                StyleID = theStyle.ID,
+                LateFee = lateFee,
+                ID = itemId
+            };
+            this.theRepository.UpdateByID(tempFurniture);
+        }
     }
 }

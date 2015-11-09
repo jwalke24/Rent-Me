@@ -101,7 +101,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 int.Parse(this.zipTextBox.Text);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 ErrorHandler.displayErrorBox("Error", "Please enter a valid zip code.");
                 return;

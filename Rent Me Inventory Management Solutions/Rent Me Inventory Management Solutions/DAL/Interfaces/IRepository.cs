@@ -40,5 +40,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
         /// </summary>
         /// <param name="item">The item.</param>
         void Delete(T item);
+
+        void UpdateByID(T item);
     }
 }

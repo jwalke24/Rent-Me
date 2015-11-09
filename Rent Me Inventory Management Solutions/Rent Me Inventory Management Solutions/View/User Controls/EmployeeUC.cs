@@ -20,7 +20,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             set
             {
                 this.internalState = value;
-
                 if (value == EmployeeStates.Main)
                 {
                     this.changeToMainState();
@@ -31,6 +30,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 }
             }
         }
+
 
         private readonly EmployeeController theController;
         private EmployeeStates internalState;
@@ -128,7 +128,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 long.Parse(this.phoneTextBox.Text);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 ErrorHandler.displayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
                 return;
@@ -144,7 +144,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 uint.Parse(this.ssnTextBox.Text);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 ErrorHandler.displayErrorBox("SSN Invalid", "Please enter a valid 9 digit SSN.");
                 return;
