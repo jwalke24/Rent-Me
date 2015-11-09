@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
 
@@ -264,6 +265,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 var id = int.Parse(this.idSearchTextBox.Text);
                 var result = this.theController.GetItemsFromIDWildcard(id);
                 DataGrid.DataSource = new BindingList<Furniture>(result);
+            }
+            catch (MySqlException exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Network Error","Unable to search the database for this object. Please try again.", exception);
             }
             catch (Exception)
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
@@ -96,13 +97,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
                 if (result == null)
                 {
-                    ErrorHandler.displayErrorBox("Error","Item not found. Please try again.");
+                    ErrorHandler.displayErrorBox("Error", "Item not found. Please try again.");
                     return;
                 }
 
                 if (result.Quantity < quantity)
                 {
-                    ErrorHandler.displayErrorBox("Quantity Error", "There are not enough items in stock. You can only rent " + result.Quantity + " items or less.");
+                    ErrorHandler.displayErrorBox("Quantity Error",
+                        "There are not enough items in stock. You can only rent " + result.Quantity + " items or less.");
                     return;
                 }
 
@@ -120,6 +122,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
 
                 this.itemsToPurchase.Add(theItem);
+            }
+            catch (MySqlException error)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Network Error", "There was a problem adding this item to the transaciton. Please try again.", error);
             }
             catch (Exception)
             {

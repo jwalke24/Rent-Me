@@ -247,6 +247,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             theNewView.MultiSelect = false;
             theNewView.AllowUserToAddRows = false;
             theNewView.BackgroundColor = DefaultBackColor;
+            theNewView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
 
             return theNewView;
