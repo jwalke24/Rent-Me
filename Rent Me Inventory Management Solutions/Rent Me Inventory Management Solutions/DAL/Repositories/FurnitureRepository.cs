@@ -18,12 +18,14 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             this.CONNECTION_STRING = DBConnection.GetConnectionString();
         }
 
-        public void AddOne(Furniture item)
+        public string AddOne(Furniture item)
         {
             if (item == null)
             {
                 throw new ArgumentNullException(@"Item is null");
             }
+
+            string id = string.Empty;
 
             const string statement =
                 "INSERT INTO Furniture (quantity, name, description, price, lateFee, Category_id, Style_id)" +
@@ -48,12 +50,15 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 {
                     command.Connection.Open();
                     command.ExecuteNonQuery();
+                    id = command.LastInsertedId.ToString();
                 }
                 finally
                 {
                     command.Connection.Close();
                 }
             }
+
+            return id;
         }
 
         public void AddList(IList<Furniture> theList)

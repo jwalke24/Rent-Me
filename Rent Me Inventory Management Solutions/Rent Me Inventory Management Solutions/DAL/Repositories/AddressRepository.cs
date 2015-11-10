@@ -28,12 +28,14 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         /// </summary>
         /// <param name="item">The item.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public void AddOne(Address item)
+        public string AddOne(Address item)
         {
             if (item == null)
             {
                 throw new ArgumentNullException();
             }
+
+            string id = string.Empty;
 
             const string statement = "INSERT INTO Address (street1, street2, city, state, zip)" +
                                      " VALUES (@street1, @street2, @city, @state, @zip)";
@@ -54,12 +56,15 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 {
                     command.Connection.Open();
                     command.ExecuteNonQuery();
+                    id = command.LastInsertedId.ToString();
                 }
                 finally
                 {
                     command.Connection.Close();
                 }
             }
+
+            return id;
         }
 
         public void Delete(Address item)

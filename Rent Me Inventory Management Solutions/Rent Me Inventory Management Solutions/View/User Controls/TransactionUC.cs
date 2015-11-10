@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
+using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
@@ -18,12 +20,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
     public partial class TransactionUC : BSMiddleClass
     {
         private BindingList<PurchaseTransaction_Item> itemsToPurchase;
+        private LoginSession session;
 
-        public TransactionUC(DataGridView theGrid)
+        public TransactionUC(DataGridView theGrid, LoginSession session)
         {
             this.DataGrid = theGrid;
             this.InitializeComponent();
             this.itemsToPurchase = new BindingList<PurchaseTransaction_Item>();
+            this.session = session;
             this.DataGrid.DataSource = this.itemsToPurchase;
             this.Subtotal = 0;
             this.dateTimePicker1.MinDate = DateTime.Now;
@@ -232,5 +236,35 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         }
 
         #endregion
+
+        private void submitTransactionButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var theController = new TransactionController();
+
+                var transaction = new PurchaseTransaction
+                {
+                    TransactionTime = DateTime.Now,
+                    CustomerID = this.customerID,
+                    EmployeeID = this.session.Id.ToString()
+                };
+
+
+                theController.AddPurchaseTransaction(transaction, this.itemsToPurchase);
+            }
+            catch (NullReferenceException nullReference)
+            {
+                ErrorHandler.displayErrorBox("Session Error", "The login session is null.");
+            }
+            catch (InvalidCastException invalidCast)
+            {
+                ErrorHandler.displayErrorBox("Session Error", "The tag cannot be cast as a login session.");
+            }
+            catch (MySqlException sqlException)
+            {
+                ErrorHandler.displayErrorBox("SQL Error", "The transaction could not be added to the database.");
+            }
+        }
     }
 }

@@ -201,7 +201,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void displayNewTransaction()
         {
-            var transactionUc = new TransactionUC(this.createNewDataGridView());
+            var transactionUc = new TransactionUC(this.createNewDataGridView(), this.loginSession);
 
             this.userControlStack.Add(transactionUc);
 

@@ -8,7 +8,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
         ///     Adds one item to the database.
         /// </summary>
         /// <param name="item">The item.</param>
-        void AddOne(T item);
+        string AddOne(T item);
 
         /// <summary>
         ///     Adds a list of items to the database.

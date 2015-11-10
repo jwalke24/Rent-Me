@@ -18,7 +18,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             this.CONNECTION_STRING = DBConnection.GetConnectionString();
         }
 
-        public void AddOne(Employee item)
+        public string AddOne(Employee item)
         {
             throw new NotImplementedException();
         }

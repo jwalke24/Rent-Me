@@ -135,6 +135,7 @@
             this.submitTransactionButton.TabIndex = 12;
             this.submitTransactionButton.Text = "Submit Transaction";
             this.submitTransactionButton.UseVisualStyleBackColor = true;
+            this.submitTransactionButton.Click += new System.EventHandler(this.submitTransactionButton_Click);
             // 
             // customerButton
             // 
