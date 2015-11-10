@@ -263,7 +263,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (MySqlException sqlException)
             {
-                ErrorHandler.displayErrorBox("SQL Error", "The transaction could not be added to the database.");
+                ErrorHandler.DisplayErrorMessageToUserAndLog("SQL Error", "The transaction could not be added to the database.",sqlException);
             }
         }
     }
