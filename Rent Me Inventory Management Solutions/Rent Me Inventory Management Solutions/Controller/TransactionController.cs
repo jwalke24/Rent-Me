@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             
             string id = this.purchaseRepository.AddOne(transaction);
+            transaction.ID = id;
 
             try
             {
@@ -52,6 +54,8 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
                         
                     }
                 }
+
+                    this.purchaseRepository.DeleteById(id);
 
                 throw;
             }
