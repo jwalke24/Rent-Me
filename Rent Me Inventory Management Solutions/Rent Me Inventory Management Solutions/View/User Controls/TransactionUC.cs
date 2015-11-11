@@ -141,6 +141,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 theItem.LeaseTime = days;
 
 
+                foreach (var purchaseTransactionItem in this.itemsToPurchase)
+                {
+                    if (purchaseTransactionItem.FurnitureID == theItem.FurnitureID)
+                    {
+                        ErrorHandler.displayErrorBox("Duplicate Error", "Cannot add duplicate item to transaction");
+                        return;
+                    }
+                }
 
                 this.itemsToPurchase.Add(theItem);
             }
