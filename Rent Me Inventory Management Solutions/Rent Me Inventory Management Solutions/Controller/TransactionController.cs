@@ -41,23 +41,34 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
             }
             catch (Exception e)
             {
-                //Deletes all the items that were added to the database. 
-
-                foreach (var item in items)
-                {
-                    try
-                    {
-                        this.purchaseItemRepository.Delete(item);
-                    }
-                    catch (Exception)
-                    {
-                        
-                    }
-                }
-
-                    this.purchaseRepository.DeleteById(id);
+                this.DeleteChangesFromDatabase(items, id);
 
                 throw;
+            }
+        }
+
+        private void DeleteChangesFromDatabase(BindingList<PurchaseTransaction_Item> items, string id)
+        {
+            
+            //Deletes all the items that were added to the database. 
+
+            foreach (var item in items)
+            {
+                try
+                {
+                    this.purchaseItemRepository.Delete(item);
+                }
+                catch (Exception)
+                {
+                }
+            }
+            try
+            {
+                this.purchaseRepository.DeleteById(id);
+            }
+            catch (Exception)
+            {
+                
             }
         }
     }
