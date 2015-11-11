@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,14 +25,36 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
 
         public void AddPurchaseTransaction(PurchaseTransaction transaction, BindingList<PurchaseTransaction_Item> items)
         {
+            
             string id = this.purchaseRepository.AddOne(transaction);
 
-            foreach (var item in items)
+            try
             {
-                item.PurchaseTransactionID = id;
-            }
+                foreach (var item in items)
+                {
+                    item.PurchaseTransactionID = id;
+                }
 
-            this.purchaseItemRepository.AddList(items);
+                this.purchaseItemRepository.AddList(items);
+            }
+            catch (Exception e)
+            {
+                //Deletes all the items that were added to the database. 
+
+                foreach (var item in items)
+                {
+                    try
+                    {
+                        this.purchaseItemRepository.Delete(item);
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+                }
+
+                throw;
+            }
         }
     }
 }

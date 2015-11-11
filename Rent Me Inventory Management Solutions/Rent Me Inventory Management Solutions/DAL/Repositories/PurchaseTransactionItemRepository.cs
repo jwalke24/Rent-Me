@@ -83,7 +83,29 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public void Delete(PurchaseTransaction_Item item)
         {
-            throw new NotImplementedException();
+            var sqlStatement = "DELETE FROM PurchaseTransaction_Item WHERE Furniture_id = @id AND leaseTime = @lease AND quantity = @quantity AND PurchaseTransaction_id = @pid";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            var command = new MySqlCommand(sqlStatement);
+
+            command.Parameters.AddWithValue("@id", item.FurnitureID);
+            command.Parameters.AddWithValue("@lease", item.LeaseTime);
+            command.Parameters.AddWithValue("@quantity", item.Quantity);
+            command.Parameters.AddWithValue("@pid", item.PurchaseTransactionID);
+
+            command.Connection = connection;
+
+            try
+            {
+                command.Connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+            finally
+            {
+                command.Connection.Close();
+            }
         }
 
         public void UpdateByID(PurchaseTransaction_Item item)
