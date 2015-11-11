@@ -82,6 +82,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(@"You must select an item before you can void it.");
+            }
+            else
+            {
+                string id = DataGrid.SelectedRows[0].Cells["FurnitureID"].Value.ToString();
+
+                foreach (var purchaseTransactionItem in this.itemsToPurchase)
+                {
+                    if (purchaseTransactionItem.FurnitureID == id)
+                    {
+                        this.itemsToPurchase.Remove(purchaseTransactionItem);
+                        break;
+                    }
+                }
+            }
         }
 
         private void addItemButton_Click(object sender, EventArgs e)
@@ -130,10 +147,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             catch (MySqlException error)
             {
                 ErrorHandler.DisplayErrorMessageToUserAndLog("Network Error", "There was a problem adding this item to the transaciton. Please try again.", error);
+                return;
             }
             catch (Exception)
             {
                 ErrorHandler.displayErrorBox("Error", "Please enter a numerical value.");
+                return;
             }
 
             this.InternalState = TransactionStates.Main;
@@ -239,6 +258,18 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void submitTransactionButton_Click(object sender, EventArgs e)
         {
+            if (this.itemsToPurchase.Count == 0)
+            {
+                ErrorHandler.displayErrorBox("Error","Cannot submit an empty transaction.");
+                return;
+            }
+
+            if (this.customerID == "null")
+            {
+                ErrorHandler.displayErrorBox("Error","Must select a customer.");
+                return;
+            }
+
             try
             {
                 var theController = new TransactionController();

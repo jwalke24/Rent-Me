@@ -224,9 +224,9 @@
             this.customerIDLabel.AutoSize = true;
             this.customerIDLabel.Location = new System.Drawing.Point(100, 4);
             this.customerIDLabel.Name = "customerIDLabel";
-            this.customerIDLabel.Size = new System.Drawing.Size(67, 13);
+            this.customerIDLabel.Size = new System.Drawing.Size(23, 13);
             this.customerIDLabel.TabIndex = 21;
-            this.customerIDLabel.Text = "0000000000";
+            this.customerIDLabel.Text = "null";
             // 
             // qtyTextBox
             // 
