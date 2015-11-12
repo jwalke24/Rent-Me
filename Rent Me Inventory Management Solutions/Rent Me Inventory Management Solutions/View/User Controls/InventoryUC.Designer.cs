@@ -161,6 +161,7 @@
             this.selectItemButton.TabIndex = 9;
             this.selectItemButton.Text = "Select Item";
             this.selectItemButton.UseVisualStyleBackColor = true;
+            this.selectItemButton.Click += new System.EventHandler(this.selectItemButton_Click);
             // 
             // addItemButton
             // 

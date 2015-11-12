@@ -92,6 +92,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
+        public string FurnitureID { get; private set; }
         private readonly Point categoryStyleDefaultLocation = new Point(1, -1);
         private readonly FurnitureController theController;
         private InventoryStates internalState;
@@ -461,6 +462,19 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private void editButton_Click(object sender, EventArgs e)
         {
             this.InternalState = InventoryStates.Editing;
+        }
+
+        private void selectItemButton_Click(object sender, EventArgs e)
+        {
+            if (DataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(@"You must select an item before you can add it.");
+            }
+            else
+            {
+                this.FurnitureID = (DataGrid.SelectedRows[0].DataBoundItem as Furniture)?.ID;
+                this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+            }
         }
     }
 }

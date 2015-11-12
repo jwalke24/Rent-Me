@@ -175,7 +175,7 @@
             this.voidItemButton.TabIndex = 16;
             this.voidItemButton.Text = "Void Item";
             this.voidItemButton.UseVisualStyleBackColor = true;
-            this.voidItemButton.Click += new System.EventHandler(this.button2_Click);
+            this.voidItemButton.Click += new System.EventHandler(this.voidButton_Click);
             // 
             // itemToAddTextBox
             // 

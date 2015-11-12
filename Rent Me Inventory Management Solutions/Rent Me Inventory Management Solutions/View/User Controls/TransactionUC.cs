@@ -80,7 +80,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.inventoryButton.Enabled = true;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void voidButton_Click(object sender, EventArgs e)
         {
             if (DataGrid.SelectedRows.Count == 0)
             {
@@ -103,7 +103,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void addItemButton_Click(object sender, EventArgs e)
         {
+            this.clearPreviousItemToAddData();
             this.InternalState = TransactionStates.AddItem;
+        }
+
+        private void clearPreviousItemToAddData()
+        {
+            this.itemToAddTextBox.Text = String.Empty;
+            this.qtyTextBox.Text = String.Empty;
+            this.dateTimePicker1.Value = this.dateTimePicker1.MinDate;
         }
 
         private void addItemConfirmButton_Click(object sender, EventArgs e)
@@ -197,12 +205,28 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             switch (ChildReturned.UserControlType)
             {
+                case UserControls.Inventory:
+                    this.processInventoryChild(ChildReturned as InventoryUC);
+                    break;
                 case UserControls.Customer:
                     this.processCustomerChild(ChildReturned as CustomerUserControl);
                     break;
                 case UserControls.Transaction:
-                    throw new Exception("Invalid child type.");
+                    ErrorHandler.DisplayErrorMessageToUserAndLog("Fatal Error", "An unknown error occured.", new Exception("Transaction cannot be child of parent."));
+                    this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
+                    break;
+
             }
+        }
+
+        private void processInventoryChild(InventoryUC inventoryUc)
+        {
+            if (inventoryUc?.FurnitureID != null)
+            {
+                this.itemToAddTextBox.Text = inventoryUc?.FurnitureID;
+                this.InternalState = TransactionStates.AddItem;
+            }
+            
         }
 
         private void processCustomerChild(CustomerUserControl theUC)
