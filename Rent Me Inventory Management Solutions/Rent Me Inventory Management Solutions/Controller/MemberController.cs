@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
@@ -41,6 +42,19 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         public void DeleteMemberById(string customerId)
         {
             this.memberRepository.DeleteById(customerId);
+        }
+
+        public IList<Member> SearchMember(string text)
+        {
+            try
+            {
+                long.Parse(text);
+                return this.memberRepository.SearchByIDOrPhone(text);
+            }
+            catch (Exception)
+            {
+                return this.memberRepository.SearchByName(text);
+            }
         }
     }
 }

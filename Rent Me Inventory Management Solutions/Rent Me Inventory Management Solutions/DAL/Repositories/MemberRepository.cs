@@ -156,5 +156,92 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public IList<Member> SearchByIDOrPhone(string id)
+        {
+            var members = new List<Member>();
+
+            const string query = "SELECT * FROM Customer WHERE id LIKE @id or phone LIKE @id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+                command.Parameters.AddWithValue("@id", id + "%");
+
+                try
+                {
+                    command.Connection.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var theMember = new Member();
+                        theMember.Id = (int)reader["id"];
+                        theMember.Fname = reader["fname"] == DBNull.Value ? string.Empty : (string)reader["fname"];
+                        theMember.Minit = reader["minit"] == DBNull.Value ? string.Empty : (string)reader["minit"];
+                        theMember.Lname = reader["lname"] == DBNull.Value ? string.Empty : (string)reader["lname"];
+                        theMember.PhoneNumber = reader["phone"] == DBNull.Value
+                            ? string.Empty
+                            : (string)reader["phone"];
+                        theMember.AddressId = reader["Address_id"] == DBNull.Value
+                            ? string.Empty
+                            : ((int)reader["Address_id"]).ToString();
+                        members.Add(theMember);
+                    }
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+
+            return members;
+        }
+
+        public IList<Member> SearchByName(string text)
+        {
+            var members = new List<Member>();
+
+            const string query = "SELECT * FROM Customer WHERE fname LIKE @text OR lname LIKE @text OR CONCAT(fname,' ',lname) LIKE @text";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+                command.Parameters.AddWithValue("@text", text + "%");
+                try
+                {
+                    command.Connection.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var theMember = new Member();
+                        theMember.Id = (int)reader["id"];
+                        theMember.Fname = reader["fname"] == DBNull.Value ? string.Empty : (string)reader["fname"];
+                        theMember.Minit = reader["minit"] == DBNull.Value ? string.Empty : (string)reader["minit"];
+                        theMember.Lname = reader["lname"] == DBNull.Value ? string.Empty : (string)reader["lname"];
+                        theMember.PhoneNumber = reader["phone"] == DBNull.Value
+                            ? string.Empty
+                            : (string)reader["phone"];
+                        theMember.AddressId = reader["Address_id"] == DBNull.Value
+                            ? string.Empty
+                            : ((int)reader["Address_id"]).ToString();
+                        members.Add(theMember);
+                    }
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+
+            return members;
+        }
     }
 }

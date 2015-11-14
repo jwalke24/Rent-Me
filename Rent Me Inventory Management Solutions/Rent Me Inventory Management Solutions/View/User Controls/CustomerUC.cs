@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
@@ -264,6 +266,27 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to delete employee from database.",
                     exception);
+            }
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            if (this.searchTextBox.Text == null)
+            {
+                return;
+            }
+            try
+            {
+                IList<Member> resultList = this.controller.SearchMember(this.searchTextBox.Text);
+                this.DataGrid.DataSource = new BindingList<Member>(resultList);
+            }
+            catch (MySqlException exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "An error occured while searching the database. Please try again.",exception);
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Unknown Error","An unknown error has occured. Please try again.",exception);
             }
         }
     }

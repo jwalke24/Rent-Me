@@ -11,8 +11,6 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
         public string FurnitureID { get; set; }
         public int Quantity { get; set; }
         public int LeaseTime { get; set; }
-        
-        
         public string PurchaseTransactionID { get; set; }
     }
 }
