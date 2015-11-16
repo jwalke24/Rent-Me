@@ -46,6 +46,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.dateTimePicker1.Visible = true;
             this.qtyTextBox.Visible = true;
             this.qtyLabel.Visible = true;
+            this.itemIDLabel.Visible = true;
 
             //Disable
             DataGrid.Enabled = false;
@@ -69,6 +70,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.dateTimePicker1.Visible = false;
             this.qtyTextBox.Visible = false;
             this.qtyLabel.Visible = false;
+            this.itemIDLabel.Visible = false;
 
             //Enable
             DataGrid.Enabled = true;
@@ -88,16 +90,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             else
             {
-                string id = DataGrid.SelectedRows[0].Cells["FurnitureID"].Value.ToString();
-
-                foreach (var purchaseTransactionItem in this.itemsToPurchase)
-                {
-                    if (purchaseTransactionItem.FurnitureID == id)
-                    {
-                        this.itemsToPurchase.Remove(purchaseTransactionItem);
-                        break;
-                    }
-                }
+                this.itemsToPurchase.Remove(DataGrid.SelectedRows[0].DataBoundItem as PurchaseTransaction_Item);
             }
         }
 

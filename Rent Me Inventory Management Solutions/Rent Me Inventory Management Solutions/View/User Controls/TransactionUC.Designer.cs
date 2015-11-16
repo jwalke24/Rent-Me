@@ -50,7 +50,7 @@
             this.qtyTextBox = new System.Windows.Forms.TextBox();
             this.qtyLabel = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
+            this.itemIDLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // subtotalDispLabel
@@ -256,21 +256,22 @@
             this.dateTimePicker1.TabIndex = 24;
             this.dateTimePicker1.Visible = false;
             // 
-            // label1
+            // itemIDLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(271, 91);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Item#:";
+            this.itemIDLabel.AutoSize = true;
+            this.itemIDLabel.Location = new System.Drawing.Point(271, 91);
+            this.itemIDLabel.Name = "itemIDLabel";
+            this.itemIDLabel.Size = new System.Drawing.Size(37, 13);
+            this.itemIDLabel.TabIndex = 25;
+            this.itemIDLabel.Text = "Item#:";
+            this.itemIDLabel.Visible = false;
             // 
             // TransactionUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.itemIDLabel);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.qtyLabel);
             this.Controls.Add(this.qtyTextBox);
@@ -322,6 +323,6 @@
         private System.Windows.Forms.TextBox qtyTextBox;
         private System.Windows.Forms.Label qtyLabel;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label itemIDLabel;
     }
 }
