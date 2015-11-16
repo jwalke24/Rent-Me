@@ -12,5 +12,6 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
         public DateTime TransactionTime { get; set; }
         public string CustomerID { get; set; }
         public string EmployeeID { get; set; }
+        public List<PurchaseTransaction_Item> Items { get; set; } 
     }
 }

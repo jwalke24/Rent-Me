@@ -24,7 +24,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
             this.purchaseItemRepository = new PurchaseTransactionItemRepository();
         }
 
-        public void AddPurchaseTransaction(PurchaseTransaction transaction, BindingList<PurchaseTransaction_Item> items)
+        public void AddPurchaseTransaction(PurchaseTransaction transaction)
         {
             
             string id = this.purchaseRepository.AddOne(transaction);
@@ -32,22 +32,22 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
 
             try
             {
-                foreach (var item in items)
+                foreach (var item in transaction.Items)
                 {
                     item.PurchaseTransactionID = id;
                 }
 
-                this.purchaseItemRepository.AddList(items);
+                this.purchaseItemRepository.AddList(transaction.Items);
             }
             catch (Exception e)
             {
-                this.DeleteChangesFromDatabase(items, id);
+                this.DeleteChangesFromDatabase(transaction.Items, id);
 
                 throw;
             }
         }
 
-        private void DeleteChangesFromDatabase(BindingList<PurchaseTransaction_Item> items, string id)
+        private void DeleteChangesFromDatabase(List<PurchaseTransaction_Item> items, string id)
         {
             
             //Deletes all the items that were added to the database. 

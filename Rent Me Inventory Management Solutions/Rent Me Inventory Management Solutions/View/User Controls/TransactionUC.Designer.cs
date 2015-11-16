@@ -126,6 +126,7 @@
             this.voidTransactionButton.TabIndex = 11;
             this.voidTransactionButton.Text = "Void Transaction";
             this.voidTransactionButton.UseVisualStyleBackColor = true;
+            this.voidTransactionButton.Click += new System.EventHandler(this.voidTransactionButton_Click);
             // 
             // submitTransactionButton
             // 

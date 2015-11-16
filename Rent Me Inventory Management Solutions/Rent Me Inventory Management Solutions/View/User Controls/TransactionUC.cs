@@ -310,11 +310,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 {
                     TransactionTime = DateTime.Now,
                     CustomerID = this.customerID,
-                    EmployeeID = this.session.Id.ToString()
+                    EmployeeID = this.session.Id.ToString(),
+                    Items = new List<PurchaseTransaction_Item>(this.itemsToPurchase)
                 };
 
 
-                theController.AddPurchaseTransaction(transaction, this.itemsToPurchase);
+                theController.AddPurchaseTransaction(transaction);
+
+                this.clearTransaction();
             }
             catch (NullReferenceException nullReference)
             {
@@ -328,6 +331,18 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 ErrorHandler.DisplayErrorMessageToUserAndLog("SQL Error", "The transaction could not be added to the database.",sqlException);
             }
+        }
+
+        private void clearTransaction()
+        {
+            this.itemsToPurchase.Clear();
+            this.customerID = "null";
+            this.clearPreviousItemToAddData();
+        }
+
+        private void voidTransactionButton_Click(object sender, EventArgs e)
+        {
+            this.clearTransaction();
         }
     }
 }
