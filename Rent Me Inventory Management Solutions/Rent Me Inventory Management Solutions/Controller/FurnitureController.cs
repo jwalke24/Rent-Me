@@ -77,5 +77,10 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
             };
             this.theRepository.UpdateByID(tempFurniture);
         }
+
+        public void UpdateQuantitiesByIds(Dictionary<string, int> furnitureIdQuantities)
+        {
+            this.theRepository.UpdateQuantitiesFromListOfIds(furnitureIdQuantities);
+        }
     }
 }

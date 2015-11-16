@@ -305,6 +305,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             try
             {
                 var theController = new TransactionController();
+                var furnitureController = new FurnitureController();
 
                 var transaction = new PurchaseTransaction
                 {
@@ -316,6 +317,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
 
                 theController.AddPurchaseTransaction(transaction);
+
+                var furnitureIdQuantities = new Dictionary<string, int>();
+
+                foreach (var item in transaction.Items)
+                {
+                    furnitureIdQuantities.Add(item.FurnitureID, item.Quantity);
+                }
+
+                furnitureController.UpdateQuantitiesByIds(furnitureIdQuantities);
 
                 this.clearTransaction();
             }
@@ -329,7 +339,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (MySqlException sqlException)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("SQL Error", "The transaction could not be added to the database.",sqlException);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("SQL Error",
+                    "The transaction could not be added to the database.", sqlException);
+            }
+            catch (ArgumentOutOfRangeException rangeException)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Quantity Error",
+                    rangeException.Message, rangeException);
             }
         }
 

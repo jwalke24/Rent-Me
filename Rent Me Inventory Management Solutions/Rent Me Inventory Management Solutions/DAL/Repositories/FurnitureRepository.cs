@@ -285,5 +285,77 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 return furnitures;
             }
         }
+
+        public void UpdateQuantitiesFromListOfIds(Dictionary<string, int> furnitureIdQuantities)
+        {
+            //this.checkStock(furnitureIdQuantities);
+
+            const string updateQuery = "UPDATE Furniture SET quantity=quantity - @Quantity WHERE id=@Id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(updateQuery))
+            {
+                command.Connection = connection;
+
+                try
+                {
+                    command.Connection.Open();
+
+                    command.Parameters.Add("@Quantity", MySqlDbType.Int32);
+                    command.Parameters.Add("@Id", MySqlDbType.Int32);
+
+                    foreach (var key in furnitureIdQuantities.Keys)
+                    {
+                        command.Parameters["@Id"].Value = int.Parse(key);
+                        command.Parameters["@Quantity"].Value = furnitureIdQuantities[key];
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+
+        }
+
+        private void checkStock(Dictionary<string, int> furnitureIdQuantities)
+        {
+            const string query = "SELECT quantity FROM Furniture WHERE id=@Id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+
+                try
+                {
+                    command.Parameters.Add("@Id", MySqlDbType.Int32);
+
+                    command.Connection.Open();
+
+                    foreach (var key in furnitureIdQuantities.Keys)
+                    {
+                        command.Parameters["@Id"].Value = int.Parse(key);
+                        var reader = command.ExecuteReader();
+
+                        var quantity = reader["quantity"] as uint? ?? uint.MinValue;
+
+                        if (quantity < furnitureIdQuantities[key])
+                        {
+                            throw new ArgumentOutOfRangeException("You are trying to rent " + furnitureIdQuantities[key] +
+                                " items of id " + key + ". There are only " + quantity + " of that item in stock.");
+                        }
+                    }
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+        }
     }
 }
