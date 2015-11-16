@@ -124,6 +124,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 var quantity = int.Parse(this.qtyTextBox.Text);
                 var days = (this.dateTimePicker1.Value - DateTime.Now).Days + 1;
 
+                if (quantity <= 0)
+                {
+                    ErrorHandler.displayErrorBox("Error","Please enter a valid quantity. ");
+                    return;
+                }
+
                 if (result == null)
                 {
                     ErrorHandler.displayErrorBox("Error", "Item not found. Please try again.");

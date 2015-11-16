@@ -50,6 +50,7 @@
             this.qtyTextBox = new System.Windows.Forms.TextBox();
             this.qtyLabel = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // subtotalDispLabel
@@ -181,9 +182,9 @@
             // itemToAddTextBox
             // 
             this.itemToAddTextBox.Enabled = false;
-            this.itemToAddTextBox.Location = new System.Drawing.Point(274, 83);
+            this.itemToAddTextBox.Location = new System.Drawing.Point(313, 88);
             this.itemToAddTextBox.Name = "itemToAddTextBox";
-            this.itemToAddTextBox.Size = new System.Drawing.Size(138, 20);
+            this.itemToAddTextBox.Size = new System.Drawing.Size(99, 20);
             this.itemToAddTextBox.TabIndex = 17;
             this.itemToAddTextBox.Visible = false;
             // 
@@ -202,7 +203,7 @@
             // cancelItemConfirmButton
             // 
             this.cancelItemConfirmButton.Enabled = false;
-            this.cancelItemConfirmButton.Location = new System.Drawing.Point(418, 110);
+            this.cancelItemConfirmButton.Location = new System.Drawing.Point(418, 112);
             this.cancelItemConfirmButton.Name = "cancelItemConfirmButton";
             this.cancelItemConfirmButton.Size = new System.Drawing.Size(75, 23);
             this.cancelItemConfirmButton.TabIndex = 19;
@@ -255,11 +256,21 @@
             this.dateTimePicker1.TabIndex = 24;
             this.dateTimePicker1.Visible = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(271, 91);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Item#:";
+            // 
             // TransactionUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.qtyLabel);
             this.Controls.Add(this.qtyTextBox);
@@ -311,5 +322,6 @@
         private System.Windows.Forms.TextBox qtyTextBox;
         private System.Windows.Forms.Label qtyLabel;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label1;
     }
 }
