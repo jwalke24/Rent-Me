@@ -58,6 +58,7 @@
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="DAL\Interfaces\IEmployeeRepository.cs" />
     <Compile Include="DAL\Interfaces\IFurnitureRepository.cs" />
+    <Compile Include="DAL\Interfaces\IMemberRepository.cs" />
     <Compile Include="DAL\Interfaces\IPurchaseTransactionItemRepository.cs" />
     <Compile Include="DAL\Interfaces\IRepository.cs" />
     <Compile Include="DAL\Interfaces\IPurchaseTransactionRepository.cs" />
@@ -106,6 +107,9 @@
     <Compile Include="View\User Controls\CustomerUC.Designer.cs">
       <DependentUpon>CustomerUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\User Controls\ReturnTransactionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="View\Views\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\User Controls\CustomerUC.resx">
       <DependentUpon>CustomerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User Controls\ReturnTransactionUC.resx">
+      <DependentUpon>ReturnTransactionUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Views\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

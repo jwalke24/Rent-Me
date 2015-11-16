@@ -22,7 +22,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         Customer,
         Address,
         Employee,
-        CategoryStyle
+        CategoryStyle,
+        Return
     }
 
 

@@ -28,13 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.subtotalDispLabel = new System.Windows.Forms.Label();
-            this.subtotalLabel = new System.Windows.Forms.Label();
-            this.taxDispLabel = new System.Windows.Forms.Label();
-            this.taxPercentLabel = new System.Windows.Forms.Label();
-            this.taxLabel = new System.Windows.Forms.Label();
-            this.totalDispLabel = new System.Windows.Forms.Label();
-            this.totalLabel = new System.Windows.Forms.Label();
             this.voidTransactionButton = new System.Windows.Forms.Button();
             this.submitTransactionButton = new System.Windows.Forms.Button();
             this.customerButton = new System.Windows.Forms.Button();
@@ -51,73 +44,8 @@
             this.qtyLabel = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.itemIDLabel = new System.Windows.Forms.Label();
+            this.startReturnTransactionButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // subtotalDispLabel
-            // 
-            this.subtotalDispLabel.AutoSize = true;
-            this.subtotalDispLabel.Location = new System.Drawing.Point(4, 93);
-            this.subtotalDispLabel.Name = "subtotalDispLabel";
-            this.subtotalDispLabel.Size = new System.Drawing.Size(52, 13);
-            this.subtotalDispLabel.TabIndex = 2;
-            this.subtotalDispLabel.Text = "Subtotal: ";
-            // 
-            // subtotalLabel
-            // 
-            this.subtotalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.subtotalLabel.Location = new System.Drawing.Point(62, 94);
-            this.subtotalLabel.Name = "subtotalLabel";
-            this.subtotalLabel.Size = new System.Drawing.Size(105, 12);
-            this.subtotalLabel.TabIndex = 3;
-            this.subtotalLabel.Text = "$999.99";
-            this.subtotalLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // taxDispLabel
-            // 
-            this.taxDispLabel.AutoSize = true;
-            this.taxDispLabel.Location = new System.Drawing.Point(4, 107);
-            this.taxDispLabel.Name = "taxDispLabel";
-            this.taxDispLabel.Size = new System.Drawing.Size(25, 13);
-            this.taxDispLabel.TabIndex = 6;
-            this.taxDispLabel.Text = "Tax";
-            // 
-            // taxPercentLabel
-            // 
-            this.taxPercentLabel.AutoSize = true;
-            this.taxPercentLabel.Location = new System.Drawing.Point(35, 107);
-            this.taxPercentLabel.Name = "taxPercentLabel";
-            this.taxPercentLabel.Size = new System.Drawing.Size(45, 13);
-            this.taxPercentLabel.TabIndex = 7;
-            this.taxPercentLabel.Text = "(0.07%):";
-            // 
-            // taxLabel
-            // 
-            this.taxLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.taxLabel.Location = new System.Drawing.Point(86, 107);
-            this.taxLabel.Name = "taxLabel";
-            this.taxLabel.Size = new System.Drawing.Size(81, 13);
-            this.taxLabel.TabIndex = 8;
-            this.taxLabel.Text = "$999.99";
-            this.taxLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // totalDispLabel
-            // 
-            this.totalDispLabel.AutoSize = true;
-            this.totalDispLabel.Location = new System.Drawing.Point(4, 120);
-            this.totalDispLabel.Name = "totalDispLabel";
-            this.totalDispLabel.Size = new System.Drawing.Size(34, 13);
-            this.totalDispLabel.TabIndex = 9;
-            this.totalDispLabel.Text = "Total:";
-            // 
-            // totalLabel
-            // 
-            this.totalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalLabel.Location = new System.Drawing.Point(44, 120);
-            this.totalLabel.Name = "totalLabel";
-            this.totalLabel.Size = new System.Drawing.Size(123, 13);
-            this.totalLabel.TabIndex = 10;
-            this.totalLabel.Text = "$999.99";
-            this.totalLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // voidTransactionButton
             // 
@@ -266,11 +194,22 @@
             this.itemIDLabel.Text = "Item#:";
             this.itemIDLabel.Visible = false;
             // 
+            // startReturnTransactionButton
+            // 
+            this.startReturnTransactionButton.Location = new System.Drawing.Point(3, 111);
+            this.startReturnTransactionButton.Name = "startReturnTransactionButton";
+            this.startReturnTransactionButton.Size = new System.Drawing.Size(135, 23);
+            this.startReturnTransactionButton.TabIndex = 26;
+            this.startReturnTransactionButton.Text = "Start Return Transaction";
+            this.startReturnTransactionButton.UseVisualStyleBackColor = true;
+            this.startReturnTransactionButton.Click += new System.EventHandler(this.startReturnTransactionButton_Click);
+            // 
             // TransactionUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.startReturnTransactionButton);
             this.Controls.Add(this.itemIDLabel);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.qtyLabel);
@@ -286,13 +225,6 @@
             this.Controls.Add(this.customerButton);
             this.Controls.Add(this.submitTransactionButton);
             this.Controls.Add(this.voidTransactionButton);
-            this.Controls.Add(this.totalLabel);
-            this.Controls.Add(this.totalDispLabel);
-            this.Controls.Add(this.taxLabel);
-            this.Controls.Add(this.taxPercentLabel);
-            this.Controls.Add(this.taxDispLabel);
-            this.Controls.Add(this.subtotalLabel);
-            this.Controls.Add(this.subtotalDispLabel);
             this.Name = "TransactionUC";
             this.Size = new System.Drawing.Size(676, 138);
             this.ResumeLayout(false);
@@ -301,13 +233,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label subtotalDispLabel;
-        private System.Windows.Forms.Label subtotalLabel;
-        private System.Windows.Forms.Label taxDispLabel;
-        private System.Windows.Forms.Label taxPercentLabel;
-        private System.Windows.Forms.Label taxLabel;
-        private System.Windows.Forms.Label totalDispLabel;
-        private System.Windows.Forms.Label totalLabel;
         private System.Windows.Forms.Button voidTransactionButton;
         private System.Windows.Forms.Button submitTransactionButton;
         private System.Windows.Forms.Button customerButton;
@@ -324,5 +249,6 @@
         private System.Windows.Forms.Label qtyLabel;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label itemIDLabel;
+        private System.Windows.Forms.Button startReturnTransactionButton;
     }
 }

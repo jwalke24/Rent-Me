@@ -86,6 +86,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                     case UserControls.CategoryStyle:
                         this.displayNewCategoryStyle();
                         break;
+                    case UserControls.Return:
+                        this.displayNewReturn();
+                        break;
                 }
             }
             else if (theSender.CurrentState == RentMeUserControlPrimaryStates.Deleting)
@@ -94,6 +97,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
                 this.popOffUserControlStack(theSender);
             }
         }
+
+       
 
         private void removeUCFromDisplay(RentMeUserControl userControl)
         {
@@ -161,6 +166,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             this.userControlStack.Add(custUC);
 
             this.addUCToDisplay(custUC);
+        }
+
+        private void displayNewReturn()
+        {
+            var returnUC = new ReturnTransactionUC(this.createNewDataGridView());
+
+            this.userControlStack.Add(returnUC);
+
+            this.addUCToDisplay(returnUC);
         }
 
         private void displayNewCategoryStyle()

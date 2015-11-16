@@ -29,7 +29,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.itemsToPurchase = new BindingList<PurchaseTransaction_Item>();
             this.session = session;
             this.DataGrid.DataSource = this.itemsToPurchase;
-            this.Subtotal = 0;
+
             this.dateTimePicker1.MinDate = DateTime.Now;
             UserControlType = UserControls.Transaction;
         }
@@ -271,19 +271,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             set { this.customerIDLabel.Text = value; }
         }
 
-        private double subtotal;
 
-        private double Subtotal
-        {
-            get { return this.subtotal; }
-            set
-            {
-                this.subtotal = value;
-                this.taxLabel.Text = (value*TAX_RATE).ToString("C", CultureInfo.CurrentCulture);
-                this.subtotalLabel.Text = this.subtotal.ToString("C", CultureInfo.CurrentCulture);
-                this.totalLabel.Text = (value*(1 + TAX_RATE)).ToString("C", CultureInfo.CurrentCulture);
-            }
-        }
 
         #endregion
 
@@ -358,6 +346,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private void voidTransactionButton_Click(object sender, EventArgs e)
         {
             this.clearTransaction();
+        }
+
+        private void startReturnTransactionButton_Click(object sender, EventArgs e)
+        {
+            SwitchTo = UserControls.Return;
+            CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
     }
 }

@@ -6,7 +6,7 @@ using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
-    internal class MemberRepository : IRepository<Member>
+    internal class MemberRepository : IMemberRepository
     {
         private readonly string CONNECTION_STRING;
 
@@ -157,6 +157,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Searches the database by identifier or phone.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public IList<Member> SearchByIDOrPhone(string id)
         {
             var members = new List<Member>();
@@ -201,6 +206,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             return members;
         }
 
+        /// <summary>
+        /// Searches the database by name for a customer.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns></returns>
         public IList<Member> SearchByName(string text)
         {
             var members = new List<Member>();
