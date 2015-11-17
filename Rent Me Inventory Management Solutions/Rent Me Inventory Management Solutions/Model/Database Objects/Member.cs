@@ -2,6 +2,11 @@
 {
     internal class Member
     {
+        public Member()
+        {
+            this.MemberAddress = new Address();
+        }
+
         /// <summary>
         ///     Gets or sets the identifier.
         /// </summary>
@@ -42,12 +47,6 @@
         /// </value>
         public string PhoneNumber { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the address identifier.
-        /// </summary>
-        /// <value>
-        ///     The address identifier.
-        /// </value>
-        public string AddressId { get; set; }
+        public Address MemberAddress { get; set; }
     }
 }

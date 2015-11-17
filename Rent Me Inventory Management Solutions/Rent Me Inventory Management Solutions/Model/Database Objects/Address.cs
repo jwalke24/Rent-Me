@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 {
@@ -10,7 +11,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
         /// <value>
         ///     The identifier.
         /// </value>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the street1.
@@ -78,5 +79,21 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 
         private string state;
         private string zip;
+
+        public override string ToString()
+        {
+            string address = "";
+
+            if (string.IsNullOrEmpty(this.Street2))
+            {
+                address = this.Street1 + ", " + this.City + ", " + this.State + " " + this.Zip;
+            }
+            else
+            {
+                address = this.Street1 + ", " + this.Street2 + ", " + this.City + ", " + this.State + " " + this.Zip;
+            }
+
+            return address;
+        }
     }
 }

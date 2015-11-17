@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
+using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
@@ -200,7 +201,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 Minit = this.minitTextBox.Text,
                 Lname = this.lNameTextBox.Text,
                 PhoneNumber = this.phoneTextBox.Text,
-                AddressId = this.addressTextBox.Text
+                MemberAddress = (new AddressRepository()).GetById(this.addressTextBox.Text)
             };
 
             try

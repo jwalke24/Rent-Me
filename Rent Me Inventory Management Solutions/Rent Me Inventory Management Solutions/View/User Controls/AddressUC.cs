@@ -78,7 +78,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             else
             {
-                this.AddressID = ((int) DataGrid.SelectedRows[0].Cells["Id"].Value).ToString();
+                this.AddressID = DataGrid.SelectedRows[0].Cells["Id"].Value.ToString();
                 CurrentState = RentMeUserControlPrimaryStates.Deleting;
             }
         }

@@ -48,7 +48,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 command.Parameters.AddWithValue("@Lname", item.Lname);
                 command.Parameters.AddWithValue("@Minit", item.Minit);
                 command.Parameters.AddWithValue("@Phone", item.PhoneNumber);
-                command.Parameters.AddWithValue("@Address", item.AddressId);
+                command.Parameters.AddWithValue("@Address", item.MemberAddress.Id);
 
                 command.Connection = connection;
 
@@ -137,9 +137,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                         theMember.PhoneNumber = reader["phone"] == DBNull.Value
                             ? string.Empty
                             : (string) reader["phone"];
-                        theMember.AddressId = reader["Address_id"] == DBNull.Value
+                        var addressId = reader["Address_id"] == DBNull.Value
                             ? string.Empty
-                            : ((int) reader["Address_id"]).ToString();
+                            : reader["Address_id"].ToString();
+                        theMember.MemberAddress = (new AddressRepository()).GetById(addressId);
                         members.Add(theMember);
                     }
                 }
@@ -191,9 +192,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                         theMember.PhoneNumber = reader["phone"] == DBNull.Value
                             ? string.Empty
                             : (string)reader["phone"];
-                        theMember.AddressId = reader["Address_id"] == DBNull.Value
+                        var addressId = reader["Address_id"] == DBNull.Value
                             ? string.Empty
-                            : ((int)reader["Address_id"]).ToString();
+                            : reader["Address_id"].ToString();
+                        theMember.MemberAddress = (new AddressRepository()).GetById(addressId);
                         members.Add(theMember);
                     }
                 }
@@ -239,9 +241,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                         theMember.PhoneNumber = reader["phone"] == DBNull.Value
                             ? string.Empty
                             : (string)reader["phone"];
-                        theMember.AddressId = reader["Address_id"] == DBNull.Value
-                            ? string.Empty
-                            : ((int)reader["Address_id"]).ToString();
+                        var addressId = reader["Address_id"] == DBNull.Value
+                             ? string.Empty
+                             : reader["Address_id"].ToString();
+                        theMember.MemberAddress = (new AddressRepository()).GetById(addressId);
                         members.Add(theMember);
                     }
                 }

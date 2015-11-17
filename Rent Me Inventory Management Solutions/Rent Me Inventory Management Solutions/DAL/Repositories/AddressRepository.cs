@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
@@ -107,7 +108,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                     while (reader.Read())
                     {
                         var anAddress = new Address();
-                        anAddress.Id = (int) reader["id"];
+                        anAddress.Id = reader["id"].ToString();
                         anAddress.Street1 = reader["street1"] == DBNull.Value
                             ? string.Empty
                             : (string) reader["street1"];
@@ -131,7 +132,50 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public Address GetById(string id)
         {
-            throw new NotImplementedException();
+            if (String.IsNullOrEmpty(id))
+            {
+                throw new ArgumentException("id is null or empty");
+            }
+
+            var address = new Address();
+
+            const string query = "SELECT * FROM Address WHERE id=@Id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+
+                command.Parameters.AddWithValue("@Id", id);
+
+                try
+                {
+                    command.Connection.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        address.Street1 = reader["street1"] == DBNull.Value
+                            ? String.Empty
+                            : reader["street1"].ToString();
+                        address.Street2 = reader["street2"] == DBNull.Value
+                            ? String.Empty
+                            : reader["street2"].ToString();
+                        address.City = reader["city"] == DBNull.Value ? String.Empty : reader["city"].ToString();
+                        address.State = reader["state"] == DBNull.Value ? String.Empty : reader["state"].ToString();
+                        address.Zip = reader["zip"] == DBNull.Value ? String.Empty : reader["zip"].ToString();
+                        address.Id = id;
+                    }
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+
+            return address;
         }
     }
 }

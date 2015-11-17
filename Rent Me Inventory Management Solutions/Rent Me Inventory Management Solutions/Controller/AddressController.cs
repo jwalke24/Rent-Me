@@ -37,7 +37,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         {
             var newAddress = new Address
             {
-                City = street1,
+                City = city,
                 State = state,
                 Street1 = street1,
                 Street2 = street2,
