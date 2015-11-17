@@ -220,6 +220,8 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 furniture.LateFee = reader["lateFee"] as decimal? ?? decimal.Zero;
                 furniture.CategoryID = (reader["Category_id"] as int? ?? int.MinValue).ToString();
                 furniture.StyleID = (reader["Style_id"] as int? ?? int.MinValue).ToString();
+                furniture.CategoryName = (new CategoryRepository()).GetById(furniture.CategoryID).Name;
+                furniture.StyleName = (new StyleRepository()).GetById(furniture.StyleID).Name;
 
                 furnitures.Add(furniture);
             }

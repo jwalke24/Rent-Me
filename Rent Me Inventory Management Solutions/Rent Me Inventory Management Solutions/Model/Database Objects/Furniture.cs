@@ -1,4 +1,6 @@
-﻿namespace Rent_Me_Inventory_Management_Solutions.Model
+﻿using System.ComponentModel;
+
+namespace Rent_Me_Inventory_Management_Solutions.Model
 {
     internal class Furniture
     {
@@ -56,7 +58,10 @@
         /// <value>
         ///     The category identifier.
         /// </value>
+        [Browsable(false)]
         public string CategoryID { get; set; }
+
+        public string CategoryName { get; set; }
 
         /// <summary>
         ///     Gets or sets the style identifier.
@@ -64,6 +69,9 @@
         /// <value>
         ///     The style identifier.
         /// </value>
+        [Browsable(false)]
         public string StyleID { get; set; }
+
+        public string StyleName { get; set; }
     }
 }

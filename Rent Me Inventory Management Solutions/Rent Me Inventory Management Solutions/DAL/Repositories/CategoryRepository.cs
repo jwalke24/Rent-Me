@@ -66,7 +66,45 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public Category GetById(string id)
         {
-            throw new NotImplementedException();
+            if (String.IsNullOrEmpty(id))
+            {
+                throw new ArgumentException("id is null or empty");   
+            }
+
+            var category = new Category();
+            const string query = "SELECT * FROM Category WHERE id=@Id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+
+                command.Parameters.AddWithValue("@Id", id);
+
+                try
+                {
+                    command.Connection.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        category.Name = reader["name"] == DBNull.Value ? string.Empty : reader["name"].ToString();
+                        category.Description = reader["description"] == DBNull.Value
+                            ? string.Empty
+                            : reader["description"].ToString();
+                        category.ID = id;
+                    }
+
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+
+            return category;
         }
 
         public void DeleteById(string id)
