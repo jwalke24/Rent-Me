@@ -119,6 +119,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void LoadStyles()
         {
+            this.styleComboBox.Items.Clear();
             try
             {
                 this.styleComboBox.Items.Add("All");
@@ -145,6 +146,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void LoadCategories()
         {
+            this.categoryComboBox.Items.Clear();
+
             try
             {
                 this.categoryComboBox.Items.Add("All");
