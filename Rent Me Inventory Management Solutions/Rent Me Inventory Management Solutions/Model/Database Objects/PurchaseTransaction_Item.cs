@@ -10,6 +10,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
     class PurchaseTransaction_Item
     {
         public string FurnitureID { get; set; }
+        public string FurnitureName { get; set; }
         public int Quantity { get; set; }
         public int LeaseTime { get; set; }
 

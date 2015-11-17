@@ -146,6 +146,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 theItem.FurnitureID = result.ID;
                 theItem.Quantity = quantity;
                 theItem.LeaseTime = days;
+                theItem.FurnitureName = result.Name;
 
 
                 foreach (var purchaseTransactionItem in this.itemsToPurchase)
