@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.Controller
 {

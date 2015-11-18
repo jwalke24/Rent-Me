@@ -1,7 +1,12 @@
-﻿namespace Rent_Me_Inventory_Management_Solutions.Model
+﻿namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 {
     internal class Employee
     {
+        public Employee ()
+        {
+            this.EmployeeAddress = new Address();
+        }
+
         /// <summary>
         ///     Gets or sets the identifier.
         /// </summary>
@@ -42,13 +47,7 @@
         /// </value>
         public string PhoneNumber { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the address identifier.
-        /// </summary>
-        /// <value>
-        ///     The address identifier.
-        /// </value>
-        public string AddressId { get; set; }
+        public Address EmployeeAddress { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is admin.

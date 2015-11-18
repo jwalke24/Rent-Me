@@ -113,7 +113,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var members = new List<Member>();
 
-            const string query = "SELECT * FROM Customer";
+            const string query = "SELECT * FROM Customer, Address WHERE Customer.Address_id=Address.id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
@@ -129,18 +129,19 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
                     while (reader.Read())
                     {
-                        var theMember = new Member();
-                        theMember.Id = (int) reader["id"];
-                        theMember.Fname = reader["fname"] == DBNull.Value ? string.Empty : (string) reader["fname"];
-                        theMember.Minit = reader["minit"] == DBNull.Value ? string.Empty : (string) reader["minit"];
-                        theMember.Lname = reader["lname"] == DBNull.Value ? string.Empty : (string) reader["lname"];
-                        theMember.PhoneNumber = reader["phone"] == DBNull.Value
-                            ? string.Empty
-                            : (string) reader["phone"];
-                        var addressId = reader["Address_id"] == DBNull.Value
-                            ? string.Empty
-                            : reader["Address_id"].ToString();
-                        theMember.MemberAddress = (new AddressRepository()).GetById(addressId);
+                        var theMember = new Member
+                        {
+                            Id = (int) reader["id"],
+                            Fname = reader["fname"] == DBNull.Value ? string.Empty : (string) reader["fname"],
+                            Minit = reader["minit"] == DBNull.Value ? string.Empty : (string) reader["minit"],
+                            Lname = reader["lname"] == DBNull.Value ? string.Empty : (string) reader["lname"],
+                            PhoneNumber = reader["phone"] == DBNull.Value
+                                ? string.Empty
+                                : (string) reader["phone"]
+                        };
+
+                        this.loadAddress(theMember, reader);
+
                         members.Add(theMember);
                     }
                 }
@@ -151,6 +152,28 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
 
             return members;
+        }
+
+        private void loadAddress(Member theMember, MySqlDataReader reader)
+        {
+            theMember.MemberAddress.Id = reader["Address_id"] == DBNull.Value
+                ? string.Empty
+                : reader["Address_id"].ToString();
+            theMember.MemberAddress.Street1 = reader["street1"] == DBNull.Value
+                ? string.Empty
+                : reader["street1"].ToString();
+            theMember.MemberAddress.Street2 = reader["street2"] == DBNull.Value
+                ? string.Empty
+                : reader["street2"].ToString();
+            theMember.MemberAddress.City = reader["city"] == DBNull.Value
+                ? string.Empty
+                : reader["city"].ToString();
+            theMember.MemberAddress.State = reader["state"] == DBNull.Value
+                ? string.Empty
+                : reader["state"].ToString();
+            theMember.MemberAddress.Zip = reader["zip"] == DBNull.Value
+                ? string.Empty
+                : reader["zip"].ToString();
         }
 
         public Member GetById(string id)
@@ -167,7 +190,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var members = new List<Member>();
 
-            const string query = "SELECT * FROM Customer WHERE id LIKE @id or phone LIKE @id";
+            const string query = "SELECT * FROM Customer, Address WHERE (Customer.id LIKE @id or Customer.phone LIKE @id) AND Customer.Address_id=Address.id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
@@ -192,10 +215,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                         theMember.PhoneNumber = reader["phone"] == DBNull.Value
                             ? string.Empty
                             : (string)reader["phone"];
-                        var addressId = reader["Address_id"] == DBNull.Value
-                            ? string.Empty
-                            : reader["Address_id"].ToString();
-                        theMember.MemberAddress = (new AddressRepository()).GetById(addressId);
+                        this.loadAddress(theMember, reader);
                         members.Add(theMember);
                     }
                 }
@@ -217,7 +237,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var members = new List<Member>();
 
-            const string query = "SELECT * FROM Customer WHERE fname LIKE @text OR lname LIKE @text OR CONCAT(fname,' ',lname) LIKE @text";
+            const string query = "SELECT * FROM Customer, Address WHERE (Customer.fname LIKE @text OR Customer.lname LIKE @text OR CONCAT(Customer.fname,' ',Customer.lname) LIKE @text) AND Customer.Address_id=Address.id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
@@ -241,10 +261,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                         theMember.PhoneNumber = reader["phone"] == DBNull.Value
                             ? string.Empty
                             : (string)reader["phone"];
-                        var addressId = reader["Address_id"] == DBNull.Value
-                             ? string.Empty
-                             : reader["Address_id"].ToString();
-                        theMember.MemberAddress = (new AddressRepository()).GetById(addressId);
+                        this.loadAddress(theMember, reader);
                         members.Add(theMember);
                     }
                 }

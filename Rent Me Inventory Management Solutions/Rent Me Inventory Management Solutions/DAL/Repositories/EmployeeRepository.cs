@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.Model;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
@@ -36,7 +37,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var employees = new List<Employee>();
 
-            const string query = "SELECT fname, lname, ssn, phone, isAdmin, id, Address_id FROM Employee";
+            const string query = "SELECT Employee.fname, Employee.lname, Employee.ssn, Employee.phone, Employee.isAdmin, Employee.id, Employee.Address_id, " +
+                                 "Address.id, Address.street1, Address.street2, Address.city, Address.state, Address.zip " + 
+                                 "FROM Employee, Address " + 
+                                 "WHERE Employee.Address_id = Address.id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
@@ -57,9 +61,9 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                         employee.FirstName = reader["fname"] == DBNull.Value ? string.Empty : (string) reader["fname"];
                         employee.LastName = reader["lname"] == DBNull.Value ? string.Empty : (string) reader["lname"];
                         employee.PhoneNumber = reader["phone"] == DBNull.Value ? string.Empty : (string) reader["phone"];
-                        employee.AddressId = reader["Address_id"] == DBNull.Value
-                            ? string.Empty
-                            : ((int) reader["Address_id"]).ToString();
+
+                        this.loadAddress(employee, reader);
+
                         employee.SSN = reader["ssn"] == DBNull.Value ? string.Empty : (string) reader["ssn"];
                         employee.isAdmin = reader["isAdmin"] == DBNull.Value ? false : (bool) reader["isAdmin"];
 
@@ -73,6 +77,28 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
 
             return employees;
+        }
+
+        private void loadAddress(Employee employee, MySqlDataReader reader)
+        {
+            employee.EmployeeAddress.Id = reader["Address_id"] == DBNull.Value
+                ? string.Empty
+                : reader["Address_id"].ToString();
+            employee.EmployeeAddress.Street1 = reader["street1"] == DBNull.Value
+                ? string.Empty
+                : reader["street1"].ToString();
+            employee.EmployeeAddress.Street2 = reader["street2"] == DBNull.Value
+                ? string.Empty
+                : reader["street2"].ToString();
+            employee.EmployeeAddress.City = reader["city"] == DBNull.Value
+                ? string.Empty
+                : reader["city"].ToString();
+            employee.EmployeeAddress.State = reader["state"] == DBNull.Value
+                ? string.Empty
+                : reader["state"].ToString();
+            employee.EmployeeAddress.Zip = reader["zip"] == DBNull.Value
+                ? string.Empty
+                : reader["zip"].ToString();
         }
 
         public Employee GetById(string id)
@@ -141,7 +167,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 command.Parameters.AddWithValue("@Fname", employee.FirstName);
                 command.Parameters.AddWithValue("@Lname", employee.LastName);
                 command.Parameters.AddWithValue("@Phone", employee.PhoneNumber);
-                command.Parameters.AddWithValue("@Address", employee.AddressId);
+                command.Parameters.AddWithValue("@Address", employee.EmployeeAddress.Id);
                 command.Parameters.AddWithValue("@Admin", employee.isAdmin);
                 command.Parameters.AddWithValue("@Ssn", employee.SSN);
                 command.Parameters.AddWithValue("@Password", loginSession.Password);

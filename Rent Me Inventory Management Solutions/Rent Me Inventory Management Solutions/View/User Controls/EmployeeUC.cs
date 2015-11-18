@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -152,15 +153,18 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             try
             {
-                this.theController.AddEmployee(new Employee
+                Employee anEmployee = new Employee
                 {
-                    AddressId = this.addressTextBox.Text,
                     FirstName = this.firstNameTextBox.Text,
                     LastName = this.lastNameTextBox.Text,
                     PhoneNumber = this.phoneTextBox.Text,
                     SSN = this.ssnTextBox.Text,
-                    isAdmin = this.adminCheckBox.Checked
-                }, this.passwordTextBox.Text);
+                    isAdmin = this.adminCheckBox.Checked,
+                    EmployeeAddress = {Id = this.addressTextBox.Text}
+                };
+
+
+                this.theController.AddEmployee(anEmployee, this.passwordTextBox.Text);
 
                 this.loadEmployees();
                 this.InternalState = EmployeeStates.Main;
