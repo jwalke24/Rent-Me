@@ -314,7 +314,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 }
 
                 furnitureController.UpdateQuantitiesByIds(furnitureIdQuantities);
-
+                MessageBox.Show("Your transaction was completed successfully.", "Transaction Successful",
+                    MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 this.clearTransaction();
             }
             catch (NullReferenceException nullReference)
