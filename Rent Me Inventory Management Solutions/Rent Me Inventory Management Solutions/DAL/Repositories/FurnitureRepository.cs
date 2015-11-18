@@ -74,7 +74,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var furnitures = new List<Furniture>();
 
-            const string query = "SELECT * FROM Furniture";
+            const string query = "SELECT Furniture.id, Furniture.quantity, Furniture.name, Furniture.description, Furniture.price, Furniture.Category_id, Furniture.Style_id, Furniture.lateFee, " +
+                                 "Category.name AS CategoryName, Style.name AS StyleName " +
+                                 "FROM Furniture, Category, Style " +
+                                 "WHERE Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
@@ -103,7 +106,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var furnitures = new List<Furniture>();
 
-            const string query = "SELECT * FROM Furniture WHERE id = @id";
+            const string query = "SELECT Furniture.id, Furniture.quantity, Furniture.name, Furniture.description, Furniture.price, Furniture.Category_id, Furniture.Style_id, Furniture.lateFee, " +
+                                 "Category.name AS CategoryName, Style.name AS StyleName " +
+                                 "FROM Furniture, Category, Style " +
+                                 "WHERE Furniture.id = @id AND Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
@@ -220,8 +226,8 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 furniture.LateFee = reader["lateFee"] as decimal? ?? decimal.Zero;
                 furniture.CategoryID = (reader["Category_id"] as int? ?? int.MinValue).ToString();
                 furniture.StyleID = (reader["Style_id"] as int? ?? int.MinValue).ToString();
-                furniture.CategoryName = (new CategoryRepository()).GetById(furniture.CategoryID).Name;
-                furniture.StyleName = (new StyleRepository()).GetById(furniture.StyleID).Name;
+                furniture.CategoryName = reader["CategoryName"] == DBNull.Value ? string.Empty : reader["CategoryName"].ToString();
+                furniture.StyleName = reader["StyleName"] == DBNull.Value ? string.Empty : reader["StyleName"].ToString();
 
                 furnitures.Add(furniture);
             }
@@ -231,7 +237,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var furnitures = new List<Furniture>();
 
-            const string query = "SELECT * FROM Furniture WHERE Category_id LIKE @cat AND Style_id LIKE @style";
+            const string query =
+                "SELECT Furniture.id, Furniture.quantity, Furniture.name, Furniture.description, Furniture.price, Furniture.Category_id, Furniture.Style_id, Furniture.lateFee, " +
+                "Category.name AS CategoryName, Style.name AS StyleName " +
+                "FROM Furniture, Category, Style " +
+                "WHERE (Furniture.Category_id LIKE @cat AND Furniture.Style_id LIKE @style) AND Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
@@ -262,7 +272,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var furnitures = new List<Furniture>();
 
-            const string query = "SELECT * FROM Furniture WHERE id LIKE @id";
+            const string query = "SELECT Furniture.id, Furniture.quantity, Furniture.name, Furniture.description, Furniture.price, Furniture.Category_id, Furniture.Style_id, Furniture.lateFee, " +
+                "Category.name AS CategoryName, Style.name AS StyleName " +
+                "FROM Furniture, Category, Style " +
+                "WHERE Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id AND Furniture.id LIKE @id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
