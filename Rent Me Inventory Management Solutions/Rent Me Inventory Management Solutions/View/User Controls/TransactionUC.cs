@@ -20,7 +20,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
     public partial class TransactionUC : BSMiddleClass
     {
         private BindingList<PurchaseTransaction_Item> itemsToPurchase;
-        private LoginSession session;
+        public LoginSession session;
 
         public TransactionUC(DataGridView theGrid, LoginSession session)
         {

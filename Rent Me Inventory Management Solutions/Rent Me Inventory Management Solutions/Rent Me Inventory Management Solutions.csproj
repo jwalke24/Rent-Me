@@ -107,6 +107,12 @@
     <Compile Include="View\User Controls\CustomerUC.Designer.cs">
       <DependentUpon>CustomerUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\User Controls\PurchaseTransactionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\User Controls\PurchaseTransactionUC.Designer.cs">
+      <DependentUpon>PurchaseTransactionUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\User Controls\ReturnTransactionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\User Controls\CustomerUC.resx">
       <DependentUpon>CustomerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User Controls\PurchaseTransactionUC.resx">
+      <DependentUpon>PurchaseTransactionUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\User Controls\ReturnTransactionUC.resx">
       <DependentUpon>ReturnTransactionUC.cs</DependentUpon>

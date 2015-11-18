@@ -103,5 +103,54 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public IList<PurchaseTransaction> GetTransactionsByCustomerID(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+
+            var purchaseTransactions = new List<PurchaseTransaction>();
+
+            const string query = "SELECT * FROM PurchaseTransaction WHERE Customer_id = @id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+                command.Parameters.AddWithValue("@id", id);
+
+                try
+                {
+                    command.Connection.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+
+                        var theTransaction = new PurchaseTransaction
+                        {
+                            ID = reader["id"].ToString(),
+                            TransactionTime = reader["transactionTime"] as DateTime? ?? DateTime.MinValue,
+                            CustomerID = reader["Customer_id"] == DBNull.Value ? "NULL" : reader["Customer_id"].ToString(),
+                            EmployeeID = reader["Employee_id"] as string ?? string.Empty,
+                        };
+
+
+                        purchaseTransactions.Add(theTransaction);
+                    }
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+
+            return purchaseTransactions;
+        }
     }
 }

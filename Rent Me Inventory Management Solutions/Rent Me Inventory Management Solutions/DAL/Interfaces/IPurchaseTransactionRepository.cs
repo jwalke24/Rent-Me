@@ -9,6 +9,6 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
 {
     interface IPurchaseTransactionRepository : IRepository<PurchaseTransaction>
     {
-        
+        IList<PurchaseTransaction> GetTransactionsByCustomerID(string id);
     }
 }

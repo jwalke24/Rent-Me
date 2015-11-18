@@ -23,7 +23,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         Address,
         Employee,
         CategoryStyle,
-        Return
+        Return,
+        PurchaseTransaction
     }
 
 

@@ -38,7 +38,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             var employees = new List<Employee>();
 
             const string query = "SELECT Employee.fname, Employee.lname, Employee.ssn, Employee.phone, Employee.isAdmin, Employee.id, Employee.Address_id, " +
-                                 "Address.id, Address.street1, Address.street2, Address.city, Address.state, Address.zip " + 
+                                 "Address.* " + 
                                  "FROM Employee, Address " + 
                                  "WHERE Employee.Address_id = Address.id";
 

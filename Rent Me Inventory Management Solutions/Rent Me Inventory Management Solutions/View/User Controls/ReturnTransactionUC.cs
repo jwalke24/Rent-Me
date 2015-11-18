@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.Model;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -14,8 +16,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private Label selectedCustomerLabel;
         private Button customerButton;
         private Button cancelButton;
+        private LoginSession theSession;
 
-        private string customerID
+        public string customerID
         {
             get { return this.customerIDLabel.Text; }
 
@@ -52,12 +55,19 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             if (theUC != null && theUC.CustomerID != null)
             {
                 this.customerID = theUC.CustomerID;
+                SwitchTo = UserControls.PurchaseTransaction;
+                CurrentState = RentMeUserControlPrimaryStates.Hiding;
             }
         }
 
         public override void processParentIntention()
         {
-            
+            TransactionUC transaction;
+
+            using (transaction = ParentParameter as TransactionUC)
+            {
+                this.theSession = transaction?.session;
+            }
         }
 
         private void InitializeComponent()

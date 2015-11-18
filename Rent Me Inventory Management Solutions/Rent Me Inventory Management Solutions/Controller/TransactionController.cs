@@ -71,5 +71,13 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
                 
             }
         }
+
+        public IList<PurchaseTransaction> GetPurchaseTransactionsByCustomerID(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+
+            return this.purchaseRepository.GetTransactionsByCustomerID(id);
+        }
     }
 }
