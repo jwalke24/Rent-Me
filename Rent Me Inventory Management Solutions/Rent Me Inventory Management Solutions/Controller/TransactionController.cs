@@ -39,7 +39,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
 
                 this.purchaseItemRepository.AddList(transaction.Items);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 this.DeleteChangesFromDatabase(transaction.Items, id);
 

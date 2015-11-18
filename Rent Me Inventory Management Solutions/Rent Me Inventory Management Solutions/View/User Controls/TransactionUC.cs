@@ -320,11 +320,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (NullReferenceException nullReference)
             {
-                ErrorHandler.displayErrorBox("Session Error", "The login session is null.");
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Session Error", "The login session is null.", nullReference);
             }
             catch (InvalidCastException invalidCast)
             {
-                ErrorHandler.displayErrorBox("Session Error", "The tag cannot be cast as a login session.");
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Session Error", "The tag cannot be cast as a login session.",invalidCast);
             }
             catch (MySqlException sqlException)
             {

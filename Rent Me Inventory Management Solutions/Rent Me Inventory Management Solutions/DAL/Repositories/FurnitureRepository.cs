@@ -74,7 +74,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var furnitures = new List<Furniture>();
 
-            const string query = "SELECT Furniture.id, Furniture.quantity, Furniture.name, Furniture.description, Furniture.price, Furniture.Category_id, Furniture.Style_id, Furniture.lateFee, " +
+            const string query = "SELECT Furniture.*, " +   
                                  "Category.name AS CategoryName, Style.name AS StyleName " +
                                  "FROM Furniture, Category, Style " +
                                  "WHERE Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id";
@@ -106,7 +106,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var furnitures = new List<Furniture>();
 
-            const string query = "SELECT Furniture.id, Furniture.quantity, Furniture.name, Furniture.description, Furniture.price, Furniture.Category_id, Furniture.Style_id, Furniture.lateFee, " +
+            const string query = "SELECT Furniture.*, " +
                                  "Category.name AS CategoryName, Style.name AS StyleName " +
                                  "FROM Furniture, Category, Style " +
                                  "WHERE Furniture.id = @id AND Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id";
@@ -238,7 +238,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             var furnitures = new List<Furniture>();
 
             const string query =
-                "SELECT Furniture.id, Furniture.quantity, Furniture.name, Furniture.description, Furniture.price, Furniture.Category_id, Furniture.Style_id, Furniture.lateFee, " +
+                "SELECT Furniture.*, " +
                 "Category.name AS CategoryName, Style.name AS StyleName " +
                 "FROM Furniture, Category, Style " +
                 "WHERE (Furniture.Category_id LIKE @cat AND Furniture.Style_id LIKE @style) AND Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id";
@@ -272,8 +272,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var furnitures = new List<Furniture>();
 
-            const string query = "SELECT Furniture.id, Furniture.quantity, Furniture.name, Furniture.description, Furniture.price, Furniture.Category_id, Furniture.Style_id, Furniture.lateFee, " +
-                "Category.name AS CategoryName, Style.name AS StyleName " +
+            const string query = "SELECT Furniture.*, Category.name AS CategoryName, Style.name AS StyleName " +
                 "FROM Furniture, Category, Style " +
                 "WHERE Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id AND Furniture.id LIKE @id";
 
@@ -303,7 +302,6 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
         public void UpdateQuantitiesFromListOfIds(Dictionary<string, int> furnitureIdQuantities)
         {
-            //this.checkStock(furnitureIdQuantities);
 
             const string updateQuery = "UPDATE Furniture SET quantity=quantity - @Quantity WHERE id=@Id";
 
@@ -334,43 +332,6 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 }
             }
 
-        }
-
-        private void checkStock(Dictionary<string, int> furnitureIdQuantities)
-        {
-            const string query = "SELECT quantity FROM Furniture WHERE id=@Id";
-
-            var connection = new MySqlConnection(this.CONNECTION_STRING);
-
-            using (var command = new MySqlCommand(query))
-            {
-                command.Connection = connection;
-
-                try
-                {
-                    command.Parameters.Add("@Id", MySqlDbType.Int32);
-
-                    command.Connection.Open();
-
-                    foreach (var key in furnitureIdQuantities.Keys)
-                    {
-                        command.Parameters["@Id"].Value = int.Parse(key);
-                        var reader = command.ExecuteReader();
-
-                        var quantity = reader["quantity"] as uint? ?? uint.MinValue;
-
-                        if (quantity < furnitureIdQuantities[key])
-                        {
-                            throw new ArgumentOutOfRangeException("You are trying to rent " + furnitureIdQuantities[key] +
-                                " items of id " + key + ". There are only " + quantity + " of that item in stock.");
-                        }
-                    }
-                }
-                finally
-                {
-                    command.Connection.Close();
-                }
-            }
         }
     }
 }
