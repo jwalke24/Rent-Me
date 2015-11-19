@@ -12,5 +12,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
         IList<Furniture> GetAllByIDPrefix(int id);
 
         IList<Furniture> GetAllByCategoryStyleCriteria(Category category, Style style);
+
+        void UpdateQuantitiesFromListOfIds(Dictionary<string, int> furnitureIdQuantities);
     }
 }

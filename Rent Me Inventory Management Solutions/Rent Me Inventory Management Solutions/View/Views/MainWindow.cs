@@ -69,28 +69,31 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             {
                 this.removeUCFromDisplay(theSender);
 
+                DataGridView dataGrid = this.createNewDataGridView();
+
                 switch (theSender.SwitchTo)
                 {
                     case UserControls.Inventory:
-                        this.displayNewInventory();
+                        
+                        this.displayNewUserControl(new InventoryUC(dataGrid));
                         break;
                     case UserControls.Customer:
-                        this.displayNewCustomer();
+                        this.displayNewUserControl(new CustomerUserControl(dataGrid));
                         break;
                     case UserControls.Address:
-                        this.displayNewAddress();
+                        this.displayNewUserControl(new AddressUC(dataGrid));
                         break;
                     case UserControls.Employee:
-                        this.displayNewEmployee();
+                        this.displayNewUserControl(new EmployeeUC(dataGrid));
                         break;
                     case UserControls.CategoryStyle:
-                        this.displayNewCategoryStyle();
+                        this.displayNewUserControl(new CategoryStyleUC(dataGrid));
                         break;
                     case UserControls.Return:
-                        this.displayNewReturn();
+                        this.displayNewUserControl(new ReturnTransactionUC(dataGrid));
                         break;
                     case UserControls.PurchaseTransaction:
-                        this.displayPurchaseTransaction();
+                        this.displayNewUserControl(new PurchaseTransactionUC(dataGrid));
                         break;
                 }
             }
@@ -160,67 +163,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View
             newUcInterface.processChild();
         }
 
-        private void displayNewCustomer()
+        private void displayNewUserControl(RentMeUserControl uc)
         {
-            var custUC = new CustomerUserControl(this.createNewDataGridView());
-
-            this.userControlStack.Add(custUC);
-
-            this.addUCToDisplay(custUC);
-        }
-
-
-        private void displayPurchaseTransaction()
-        {
-            var purchaseUC = new PurchaseTransactionUC(this.createNewDataGridView());
-            this.userControlStack.Add(purchaseUC);
-
-            this.addUCToDisplay(purchaseUC);
-        }
-
-        private void displayNewReturn()
-        {
-            var returnUC = new ReturnTransactionUC(this.createNewDataGridView());
-
-            this.userControlStack.Add(returnUC);
-
-            this.addUCToDisplay(returnUC);
-        }
-
-        private void displayNewCategoryStyle()
-        {
-            var categoryUC = new CategoryStyleUC(this.createNewDataGridView());
-
-            this.userControlStack.Add(categoryUC);
-
-            this.addUCToDisplay(categoryUC);
-        }
-
-        private void displayNewEmployee()
-        {
-            var employeeUC = new EmployeeUC(this.createNewDataGridView());
-
-            this.userControlStack.Add(employeeUC);
-
-            this.addUCToDisplay(employeeUC);
-        }
-
-        private void displayNewAddress()
-        {
-            var addressUc = new AddressUC(this.createNewDataGridView());
-
-            this.userControlStack.Add(addressUc);
-
-            this.addUCToDisplay(addressUc);
-        }
-
-        private void displayNewInventory()
-        {
-            var inventoryUc = new InventoryUC(this.createNewDataGridView());
-
-            this.userControlStack.Add(inventoryUc);
-
-            this.addUCToDisplay(inventoryUc);
+            this.userControlStack.Add(uc);
+            this.addUCToDisplay(uc);
         }
 
         private void displayNewTransaction()
