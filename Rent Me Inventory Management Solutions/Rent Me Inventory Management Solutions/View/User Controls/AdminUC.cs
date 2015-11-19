@@ -1,5 +1,8 @@
 ﻿using System;
+using System.CodeDom;
+using System.Data;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
 
@@ -68,7 +71,27 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void executeSQLButton_Click(object sender, EventArgs e)
         {
-            DataGrid.DataSource = this.theController.ExecuteQuery(this.sqlQueryBox.Text).Tables[0];
+            try
+            {
+                DataSet result = this.theController.ExecuteQuery(this.sqlQueryBox.Text);
+                try
+                {
+                    DataGrid.DataSource = result.Tables[0];
+                }
+                catch
+                {
+                    MessageBox.Show("Query successful. ", "SQL Successful", MessageBoxButtons.OK);
+                }
+            }
+            catch (MySqlException exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("SQL Error",
+                    "There was an issue with your SQL statement. Please try again.", exception);
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Unknown Error", "There was an unknown error. Please try again.", exception);
+            }
         }
     }
 }
