@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
@@ -14,6 +15,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// </value>
         public LoginSession theSession { get; private set; }
 
+        private GenericSQLController theController;
+
         public AdminUC(DataGridView theGrid, LoginSession theSession)
         {
             if (theSession.isAdmin && theSession.isAuthenticated)
@@ -22,6 +25,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 this.InitializeComponent();
                 UserControlType = UserControls.Admin;
                 this.theSession = theSession;
+                this.theController = new GenericSQLController();
             }
         }
 
@@ -60,6 +64,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             SwitchTo = UserControls.CategoryStyle;
             CurrentState = RentMeUserControlPrimaryStates.Hiding;
+        }
+
+        private void executeSQLButton_Click(object sender, EventArgs e)
+        {
+            DataGrid.DataSource = this.theController.ExecuteQuery(this.sqlQueryBox.Text).Tables[0];
         }
     }
 }

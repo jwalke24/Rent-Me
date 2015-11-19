@@ -35,6 +35,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.editEmployeesButton = new System.Windows.Forms.Button();
             this.editInventoryButton = new System.Windows.Forms.Button();
             this.editCatStyleButton = new System.Windows.Forms.Button();
+            this.sqlQueryBox = new System.Windows.Forms.TextBox();
+            this.executeSQLQueryLabel = new System.Windows.Forms.Label();
+            this.executeSQLButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // returnEmployeeButton
@@ -87,11 +90,41 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.editCatStyleButton.UseVisualStyleBackColor = true;
             this.editCatStyleButton.Click += new System.EventHandler(this.editCatStyleButton_Click);
             // 
+            // sqlQueryBox
+            // 
+            this.sqlQueryBox.Location = new System.Drawing.Point(4, 23);
+            this.sqlQueryBox.Multiline = true;
+            this.sqlQueryBox.Name = "sqlQueryBox";
+            this.sqlQueryBox.Size = new System.Drawing.Size(379, 110);
+            this.sqlQueryBox.TabIndex = 5;
+            // 
+            // executeSQLQueryLabel
+            // 
+            this.executeSQLQueryLabel.AutoSize = true;
+            this.executeSQLQueryLabel.Location = new System.Drawing.Point(3, 3);
+            this.executeSQLQueryLabel.Name = "executeSQLQueryLabel";
+            this.executeSQLQueryLabel.Size = new System.Drawing.Size(112, 13);
+            this.executeSQLQueryLabel.TabIndex = 6;
+            this.executeSQLQueryLabel.Text = "Execute SQL Queries:";
+            // 
+            // executeSQLButton
+            // 
+            this.executeSQLButton.Location = new System.Drawing.Point(389, 110);
+            this.executeSQLButton.Name = "executeSQLButton";
+            this.executeSQLButton.Size = new System.Drawing.Size(85, 23);
+            this.executeSQLButton.TabIndex = 7;
+            this.executeSQLButton.Text = "Execute SQL";
+            this.executeSQLButton.UseVisualStyleBackColor = true;
+            this.executeSQLButton.Click += new System.EventHandler(this.executeSQLButton_Click);
+            // 
             // AdminUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.executeSQLButton);
+            this.Controls.Add(this.executeSQLQueryLabel);
+            this.Controls.Add(this.sqlQueryBox);
             this.Controls.Add(this.editCatStyleButton);
             this.Controls.Add(this.editInventoryButton);
             this.Controls.Add(this.editEmployeesButton);
@@ -100,6 +133,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.Name = "AdminUC";
             this.Size = new System.Drawing.Size(674, 136);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -110,5 +144,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private System.Windows.Forms.Button editEmployeesButton;
         private System.Windows.Forms.Button editInventoryButton;
         private Button editCatStyleButton;
+        private TextBox sqlQueryBox;
+        private Label executeSQLQueryLabel;
+        private Button executeSQLButton;
     }
 }

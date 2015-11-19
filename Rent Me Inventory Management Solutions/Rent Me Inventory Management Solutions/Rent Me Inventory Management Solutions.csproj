@@ -53,11 +53,13 @@
     <Compile Include="Controller\CategoryStyleController.cs" />
     <Compile Include="Controller\EmployeeController.cs" />
     <Compile Include="Controller\FurnitureController.cs" />
+    <Compile Include="Controller\GenericSQLController.cs" />
     <Compile Include="Controller\MemberController.cs" />
     <Compile Include="Controller\TransactionController.cs" />
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="DAL\Interfaces\IEmployeeRepository.cs" />
     <Compile Include="DAL\Interfaces\IFurnitureRepository.cs" />
+    <Compile Include="DAL\Interfaces\IGenericSQL.cs" />
     <Compile Include="DAL\Interfaces\IMemberRepository.cs" />
     <Compile Include="DAL\Interfaces\IPurchaseTransactionItemRepository.cs" />
     <Compile Include="DAL\Interfaces\IRepository.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="DAL\Repositories\CategoryRepository.cs" />
     <Compile Include="DAL\Repositories\EmployeeRepository.cs" />
     <Compile Include="DAL\Repositories\FurnitureRepository.cs" />
+    <Compile Include="DAL\Repositories\GenericSQL.cs" />
     <Compile Include="DAL\Repositories\MemberRepository.cs" />
     <Compile Include="DAL\Repositories\PurchaseTransactionItemRepository.cs" />
     <Compile Include="DAL\Repositories\PurchaseTransactionRepository.cs" />
