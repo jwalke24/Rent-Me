@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
+using Rent_Me_Inventory_Management_Solutions.Static;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -20,7 +22,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private Button cancelButton;
         private LoginSession theSession;
         private Button viewPurchaseTransactionsButton;
-        private BindingList<PurchaseTransaction_Item> items; 
+        private BindingList<PurchaseTransaction_Item> items;
+        private ReturnTransactionController theController;
 
         /// <summary>
         /// Gets or sets the customer identifier.
@@ -85,6 +88,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (theUC != null && theUC.SelectedItem != null)
             {
+                
                 this.items.Add(theUC.SelectedItem);
             }
         }
@@ -125,6 +129,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.submitTransactionButton.TabIndex = 0;
             this.submitTransactionButton.Text = "Submit Transaction";
             this.submitTransactionButton.UseVisualStyleBackColor = true;
+            this.submitTransactionButton.Click += new System.EventHandler(this.submitTransactionButton_Click);
             // 
             // cancelButton
             // 
@@ -207,6 +212,24 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             SwitchTo = UserControls.PurchaseTransaction;
             CurrentState = RentMeUserControlPrimaryStates.Hiding;
+        }
+
+        private void submitTransactionButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(customerID) || customerID == "null")
+            {
+                ErrorHandler.DisplayErrorBox("Error","Please select a customer before submitting the transaction.");
+                return;
+            }
+
+            if (this.items.Count < 1)
+            {
+                ErrorHandler.DisplayErrorBox("Error", "You must add at least one item before submitting the transaction.");
+                return;
+            }
+
+            this.theController.ReturnItems(this.items,this.theSession);
+
         }
     }
 }

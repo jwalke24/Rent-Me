@@ -79,11 +79,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (DataGrid.SelectedRows.Count == 0)
             {
-                MessageBox.Show(@"Please select a customer for the transaction.");
+                MessageBox.Show(@"Please select an item to return.");
+            }else if (this.quantityTextBox.Text == "")
+            {
+                MessageBox.Show(@"Please set the quantity of the item you would like to return. ")
             }
             else
             {
                 this.SelectedItem = DataGrid.SelectedRows[0].DataBoundItem as PurchaseTransaction_Item;
+                try
+                {
+                    this.SelectedItem.Quantity = int.Parse(this.quantityTextBox.Text);
+                }
+                catch
+                {
+                    ErrorHandler.DisplayErrorBox("Invalid Quantity","Please enter a valid quantity.");
+                    return;
+                }
                 CurrentState = RentMeUserControlPrimaryStates.Deleting;
             }
         }
