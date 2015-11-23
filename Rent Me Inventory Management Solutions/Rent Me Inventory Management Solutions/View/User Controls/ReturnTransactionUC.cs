@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Model;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
-    class ReturnTransactionUC : BSMiddleClass
+    /// <summary>
+    /// This class represents a Return Transaction User Control.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
+    public partial class ReturnTransactionUC : BSMiddleClass
     {
         private Button submitTransactionButton;
         private Label customerIDLabel;
@@ -18,6 +18,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private Button cancelButton;
         private LoginSession theSession;
 
+        /// <summary>
+        /// Gets or sets the customer identifier.
+        /// </summary>
+        /// <value>
+        /// The customer identifier.
+        /// </value>
         public string customerID
         {
             get { return this.customerIDLabel.Text; }
@@ -27,6 +33,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReturnTransactionUC"/> class.
+        /// </summary>
+        /// <param name="theGrid">The grid.</param>
         public ReturnTransactionUC(DataGridView theGrid)
         {
             DataGrid = theGrid;
@@ -34,6 +44,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Processes the child element in the parent class.
+        /// </summary>
         public override void processChild()
         {
             if (ChildReturned == null)
@@ -60,6 +73,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
+        /// <summary>
+        /// Processes the parent intention.
+        /// </summary>
         public override void processParentIntention()
         {
             TransactionUC transaction;

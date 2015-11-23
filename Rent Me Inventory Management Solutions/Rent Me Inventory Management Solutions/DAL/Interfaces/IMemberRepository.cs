@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rent_Me_Inventory_Management_Solutions.Model;
+﻿using System.Collections.Generic;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
 {
-    interface IMemberRepository : IRepository<Member>
+    /// <summary>
+    /// This is an interface for the Member Repository.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
+    internal interface IMemberRepository : IRepository<Member>
     {
         /// <summary>
         /// Searches the database by name for a customer.
@@ -22,6 +22,6 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        IList<Member> SearchByIDOrPhone(string id);
+        IList<Member> SearchByIdOrPhone(string id);
     }
 }

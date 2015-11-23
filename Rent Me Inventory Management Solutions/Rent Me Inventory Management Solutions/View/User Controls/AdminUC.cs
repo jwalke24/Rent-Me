@@ -1,13 +1,18 @@
 ﻿using System;
-using System.CodeDom;
 using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
+using Rent_Me_Inventory_Management_Solutions.Static;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
+    /// <summary>
+    /// This class represents an Admin User Control.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     public partial class AdminUC : BSMiddleClass
     {
         /// <summary>
@@ -18,24 +23,35 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// </value>
         public LoginSession theSession { get; private set; }
 
-        private GenericSQLController theController;
+        private GenericSqlController theController;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdminUC"/> class.
+        /// </summary>
+        /// <param name="theGrid">The grid.</param>
+        /// <param name="theSession">The session.</param>
         public AdminUC(DataGridView theGrid, LoginSession theSession)
         {
-            if (theSession.isAdmin && theSession.isAuthenticated)
+            if (theSession.IsAdmin && theSession.IsAuthenticated)
             {
                 DataGrid = theGrid;
                 this.InitializeComponent();
                 UserControlType = UserControls.Admin;
                 this.theSession = theSession;
-                this.theController = new GenericSQLController();
+                this.theController = new GenericSqlController();
             }
         }
 
+        /// <summary>
+        /// Processes the child.
+        /// </summary>
         public override void processChild()
         {
         }
 
+        /// <summary>
+        /// Processes the parent intention.
+        /// </summary>
         public override void processParentIntention()
         {
         }

@@ -1,7 +1,15 @@
 ﻿namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 {
+    /// <summary>
+    /// This class represents an Employee of RentMe Furniture.
+    /// </summary>
+    /// <author>Jonathan Walker and Jonah Nestrick</author>
+    /// <version>Fall 2015</version>
     internal class Employee
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Employee"/> class.
+        /// </summary>
         public Employee ()
         {
             this.EmployeeAddress = new Address();
@@ -13,7 +21,7 @@
         /// <value>
         ///     The identifier.
         /// </value>
-        public string ID { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the first name.
@@ -47,6 +55,12 @@
         /// </value>
         public string PhoneNumber { get; set; }
 
+        /// <summary>
+        /// Gets or sets the employee address.
+        /// </summary>
+        /// <value>
+        /// The employee address.
+        /// </value>
         public Address EmployeeAddress { get; set; }
 
         /// <summary>
@@ -55,6 +69,6 @@
         /// <value>
         ///     <c>true</c> if this instance is admin; otherwise, <c>false</c>.
         /// </value>
-        public bool isAdmin { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

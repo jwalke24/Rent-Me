@@ -1,8 +1,12 @@
 ﻿using System;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 {
+    /// <summary>
+    /// This class represents an Address for an Employee or Member of RentMe Furniture.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     internal class Address
     {
         /// <summary>
@@ -80,6 +84,12 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
         private string state;
         private string zip;
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             string address = "";

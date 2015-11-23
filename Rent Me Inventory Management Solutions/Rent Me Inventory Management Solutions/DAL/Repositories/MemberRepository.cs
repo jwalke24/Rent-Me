@@ -6,6 +6,11 @@ using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
+    /// <summary>
+    /// This class is responsible for querying Members with the database.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     internal class MemberRepository : IMemberRepository
     {
         private readonly string CONNECTION_STRING;
@@ -15,9 +20,14 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         /// </summary>
         public MemberRepository()
         {
-            this.CONNECTION_STRING = DBConnection.GetConnectionString();
+            this.CONNECTION_STRING = DbConnection.GetConnectionString();
         }
 
+        /// <summary>
+        /// Adds a list of items to the database.
+        /// </summary>
+        /// <param name="theList">The list.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void AddList(IList<Member> theList)
         {
             throw new NotImplementedException();
@@ -67,12 +77,21 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             return id;
         }
 
+        /// <summary>
+        /// Deletes the specified item from the database.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Delete(Member item)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateByID(Member item)
+        /// <summary>
+        /// Updates the item by identifier.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        public void UpdateById(Member item)
         {
             throw new NotImplementedException();
         }
@@ -176,29 +195,34 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 : reader["zip"].ToString();
         }
 
+        /// <summary>
+        /// Gets the item from the database by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public Member GetById(string id)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Searches the database by identifier or phone.
+        /// Searches the database by name for a customer.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="text">The text.</param>
         /// <returns></returns>
-        public IList<Member> SearchByIDOrPhone(string id)
+        public IList<Member> SearchByName(string text)
         {
             var members = new List<Member>();
 
-            const string query = "SELECT * FROM Customer, Address WHERE (Customer.id LIKE @id or Customer.phone LIKE @id) AND Customer.Address_id=Address.id";
+            const string query = "SELECT * FROM Customer, Address WHERE (Customer.fname LIKE @text OR Customer.lname LIKE @text OR CONCAT(Customer.fname,' ',Customer.lname) LIKE @text) AND Customer.Address_id=Address.id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
             using (var command = new MySqlCommand(query))
             {
                 command.Connection = connection;
-                command.Parameters.AddWithValue("@id", id + "%");
-
+                command.Parameters.AddWithValue("@text", text + "%");
                 try
                 {
                     command.Connection.Open();
@@ -229,22 +253,23 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         }
 
         /// <summary>
-        /// Searches the database by name for a customer.
+        /// Searches the database by identifier or phone.
         /// </summary>
-        /// <param name="text">The text.</param>
+        /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public IList<Member> SearchByName(string text)
+        public IList<Member> SearchByIdOrPhone(string id)
         {
             var members = new List<Member>();
 
-            const string query = "SELECT * FROM Customer, Address WHERE (Customer.fname LIKE @text OR Customer.lname LIKE @text OR CONCAT(Customer.fname,' ',Customer.lname) LIKE @text) AND Customer.Address_id=Address.id";
+            const string query = "SELECT * FROM Customer, Address WHERE (Customer.id LIKE @id or Customer.phone LIKE @id) AND Customer.Address_id=Address.id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
             using (var command = new MySqlCommand(query))
             {
                 command.Connection = connection;
-                command.Parameters.AddWithValue("@text", text + "%");
+                command.Parameters.AddWithValue("@id", id + "%");
+
                 try
                 {
                     command.Connection.Open();

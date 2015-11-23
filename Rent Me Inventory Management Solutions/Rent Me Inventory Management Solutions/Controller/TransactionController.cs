@@ -1,53 +1,58 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.Controller
 {
-    class TransactionController
+    /// <summary>
+    /// This class is responsible for managing Transactions.
+    /// </summary>
+    /// <author>Jonathan Walker and Jonah Nestrick</author>
+    /// <version>Fall 2015</version>
+    internal class TransactionController
     {
         private readonly IPurchaseTransactionRepository purchaseRepository;
         private readonly IPurchaseTransactionItemRepository purchaseItemRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransactionController"/> class.
+        /// </summary>
         public TransactionController()
         {
             this.purchaseRepository = new PurchaseTransactionRepository();
             this.purchaseItemRepository = new PurchaseTransactionItemRepository();
         }
 
+        /// <summary>
+        /// Adds the purchase transaction.
+        /// </summary>
+        /// <param name="transaction">The transaction.</param>
         public void AddPurchaseTransaction(PurchaseTransaction transaction)
         {
             
-            string id = this.purchaseRepository.AddOne(transaction);
-            transaction.ID = id;
+            var id = this.purchaseRepository.AddOne(transaction);
+            transaction.Id = id;
 
             try
             {
                 foreach (var item in transaction.Items)
                 {
-                    item.PurchaseTransactionID = id;
+                    item.PurchaseTransactionId = id;
                 }
 
                 this.purchaseItemRepository.AddList(transaction.Items);
             }
             catch (Exception)
             {
-                this.DeleteChangesFromDatabase(transaction.Items, id);
+                this.deleteChangesFromDatabase(transaction.Items, id);
 
                 throw;
             }
         }
 
-        private void DeleteChangesFromDatabase(List<PurchaseTransaction_Item> items, string id)
+        private void deleteChangesFromDatabase(List<PurchaseTransaction_Item> items, string id)
         {
             
             //Deletes all the items that were added to the database. 
@@ -60,6 +65,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
                 }
                 catch (Exception)
                 {
+                    // ignored
                 }
             }
             try
@@ -68,16 +74,22 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
             }
             catch (Exception)
             {
-                
+                // ignored
             }
         }
 
-        public IList<PurchaseTransaction> GetPurchaseTransactionsByCustomerID(string id)
+        /// <summary>
+        /// Gets the purchase transactions by customer identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public IList<PurchaseTransaction> GetPurchaseTransactionsByCustomerId(string id)
         {
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
 
-            return this.purchaseRepository.GetTransactionsByCustomerID(id);
+            return this.purchaseRepository.GetTransactionsByCustomerId(id);
         }
     }
 }

@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
+    /// <summary>
+    /// This class is responsible for querying Addresses with the database.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     internal class AddressRepository : IRepository<Address>
     {
         private readonly string CONNECTION_STRING;
@@ -16,9 +20,14 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         /// </summary>
         public AddressRepository()
         {
-            this.CONNECTION_STRING = DBConnection.GetConnectionString();
+            this.CONNECTION_STRING = DbConnection.GetConnectionString();
         }
 
+        /// <summary>
+        /// Adds a list of items to the database.
+        /// </summary>
+        /// <param name="theList">The list.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void AddList(IList<Address> theList)
         {
             throw new NotImplementedException();
@@ -36,7 +45,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 throw new ArgumentNullException();
             }
 
-            string id = string.Empty;
+            var id = string.Empty;
 
             const string statement = "INSERT INTO Address (street1, street2, city, state, zip)" +
                                      " VALUES (@street1, @street2, @city, @state, @zip)";
@@ -68,16 +77,30 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             return id;
         }
 
+        /// <summary>
+        /// Deletes the specified item from the database.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Delete(Address item)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateByID(Address item)
+        /// <summary>
+        /// Updates the item by identifier.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        public void UpdateById(Address item)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Deletes the item from the database by the identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void DeleteById(string id)
         {
             throw new NotImplementedException();
@@ -130,6 +153,12 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             return addresses;
         }
 
+        /// <summary>
+        /// Gets the item from the database by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">id is null or empty</exception>
         public Address GetById(string id)
         {
             if (String.IsNullOrEmpty(id))

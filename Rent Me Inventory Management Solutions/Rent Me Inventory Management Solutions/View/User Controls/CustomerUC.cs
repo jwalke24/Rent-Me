@@ -7,6 +7,7 @@ using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
+using Rent_Me_Inventory_Management_Solutions.Static;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -16,6 +17,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         EnrollCustomer
     }
 
+    /// <summary>
+    /// This class represents a Customer User Control.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     public partial class CustomerUserControl : BSMiddleClass
     {
         private CustomerStates InternalState
@@ -48,6 +54,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private CustomerStates internalState;
         private LoginSession theSession;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomerUserControl"/> class.
+        /// </summary>
+        /// <param name="theGrid">The grid.</param>
         public CustomerUserControl(DataGridView theGrid)
         {
             DataGrid = theGrid;
@@ -57,6 +67,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.loadMembers();
         }
 
+        /// <summary>
+        /// Processes the child.
+        /// </summary>
         public override void processChild()
         {
             using (var temp = ChildReturned as AddressUC)
@@ -68,6 +81,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
+        /// <summary>
+        /// Processes the parent intention.
+        /// </summary>
         public override void processParentIntention()
         {
             if (ParentParameter == null)
@@ -85,7 +101,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void proccessAdminParent(AdminUC adminUc)
         {
-            if (adminUc != null && adminUc.theSession.isAdmin && adminUc.theSession.isAuthenticated)
+            if (adminUc != null && adminUc.theSession.IsAdmin && adminUc.theSession.IsAuthenticated)
             {
                 this.theSession = adminUc.theSession;
                 this.verifyAdminButtonsMainState();
@@ -133,7 +149,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void verifyAdminButtonsMainState()
         {
-            if (this.theSession != null && this.theSession.isAuthenticated && this.theSession.isAdmin)
+            if (this.theSession != null && this.theSession.IsAuthenticated && this.theSession.IsAdmin)
             {
                 this.deleteMemberButton.Visible = true;
             }
@@ -175,13 +191,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 this.phoneTextBox.Text == string.Empty ||
                 this.addressTextBox.Text == string.Empty)
             {
-                ErrorHandler.displayErrorBox("Invalid Data", "Please enter member information into every textbox.");
+                ErrorHandler.DisplayErrorBox("Invalid Data", "Please enter member information into every textbox.");
                 return;
             }
 
             if (this.phoneTextBox.Text.Length != 10)
             {
-                ErrorHandler.displayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
+                ErrorHandler.DisplayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
                 return;
             }
 
@@ -191,7 +207,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception)
             {
-                ErrorHandler.displayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
+                ErrorHandler.DisplayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
                 return;
             }
 
@@ -252,7 +268,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (DataGrid.SelectedRows.Count == 0)
             {
-                ErrorHandler.displayErrorBox("Error", "Please select a customer to delete.");
+                ErrorHandler.DisplayErrorBox("Error", "Please select a customer to delete.");
                 return;
             }
 

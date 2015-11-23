@@ -8,11 +8,19 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
     /// </summary>
     public class BSMiddleClass : RentMeUserControl
     {
+        /// <summary>
+        /// Processes the child element in the parent class.
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
         public override void processChild()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Processes the parameters.
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
         public override void processParentIntention()
         {
             throw new NotImplementedException();

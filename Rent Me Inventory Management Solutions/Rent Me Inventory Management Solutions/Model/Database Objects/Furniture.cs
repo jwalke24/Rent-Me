@@ -1,7 +1,12 @@
 ﻿using System.ComponentModel;
 
-namespace Rent_Me_Inventory_Management_Solutions.Model
+namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 {
+    /// <summary>
+    /// This class represents an item of Furniture at RentMe Furniture.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     internal class Furniture
     {
         /// <summary>
@@ -10,7 +15,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
         /// <value>
         ///     The identifier.
         /// </value>
-        public string ID { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the quantity.
@@ -59,8 +64,14 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
         ///     The category identifier.
         /// </value>
         [Browsable(false)]
-        public string CategoryID { get; set; }
+        public string CategoryId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the name of the category.
+        /// </summary>
+        /// <value>
+        /// The name of the category.
+        /// </value>
         public string CategoryName { get; set; }
 
         /// <summary>
@@ -70,8 +81,14 @@ namespace Rent_Me_Inventory_Management_Solutions.Model
         ///     The style identifier.
         /// </value>
         [Browsable(false)]
-        public string StyleID { get; set; }
+        public string StyleId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the name of the style.
+        /// </summary>
+        /// <value>
+        /// The name of the style.
+        /// </value>
         public string StyleName { get; set; }
     }
 }

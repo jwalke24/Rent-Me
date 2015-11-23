@@ -2,6 +2,12 @@
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
 {
+    /// <summary>
+    /// This is the super interface for all other interfaces and repositories.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
+    /// <typeparam name="T"></typeparam>
     internal interface IRepository<T>
     {
         /// <summary>
@@ -41,6 +47,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
         /// <param name="item">The item.</param>
         void Delete(T item);
 
-        void UpdateByID(T item);
+        /// <summary>
+        /// Updates the item by identifier.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        void UpdateById(T item);
     }
 }

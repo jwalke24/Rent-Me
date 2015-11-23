@@ -1,7 +1,15 @@
 ﻿namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 {
+    /// <summary>
+    /// This class represents a Member of RentMe Furniture.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     internal class Member
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Member"/> class.
+        /// </summary>
         public Member()
         {
             this.MemberAddress = new Address();
@@ -47,6 +55,12 @@
         /// </value>
         public string PhoneNumber { get; set; }
 
+        /// <summary>
+        /// Gets or sets the member address.
+        /// </summary>
+        /// <value>
+        /// The member address.
+        /// </value>
         public Address MemberAddress { get; set; }
     }
 }

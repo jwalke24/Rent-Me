@@ -5,6 +5,11 @@ using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.Controller
 {
+    /// <summary>
+    /// This class is responsible for managing Members and their repositories.
+    /// </summary>
+    /// <author>Jonathan Walker and Jonah Nestrick</author>
+    /// <version>Fall 2015</version>
     internal class MemberController
     {
         private readonly MemberRepository memberRepository;
@@ -44,12 +49,17 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
             this.memberRepository.DeleteById(customerId);
         }
 
+        /// <summary>
+        /// Searches the member.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns></returns>
         public IList<Member> SearchMember(string text)
         {
             try
             {
                 long.Parse(text);
-                return this.memberRepository.SearchByIDOrPhone(text);
+                return this.memberRepository.SearchByIdOrPhone(text);
             }
             catch (Exception)
             {

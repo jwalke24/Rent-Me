@@ -6,8 +6,13 @@ using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
 
-namespace Rent_Me_Inventory_Management_Solutions.View
+namespace Rent_Me_Inventory_Management_Solutions.View.Views
 {
+    /// <summary>
+    /// This class represents the applications main window.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     public partial class MainWindow : Form
     {
         private readonly Point dataGridViewLocation = new Point(13, 13);
@@ -18,6 +23,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         private LoginSession loginSession;
         private List<RentMeUserControl> userControlStack;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             this.InitializeComponent();
@@ -243,7 +251,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void verifyAdminRights()
         {
-            if (this.loginSession.isAdmin)
+            if (this.loginSession.IsAdmin)
             {
                 this.adminOptionButton.Visible = true;
             }
@@ -262,7 +270,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View
 
         private void adminOptionButton_Click(object sender, EventArgs e)
         {
-            if (this.loginSession.isAdmin)
+            if (this.loginSession.IsAdmin)
             {
                 this.StateChange(null, null);
             }

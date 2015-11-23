@@ -4,6 +4,11 @@ using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.Controller
 {
+    /// <summary>
+    /// This class is responsible for managing Address objects and the Address repositories.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     internal class AddressController
     {
         private readonly AddressRepository addressRepository;

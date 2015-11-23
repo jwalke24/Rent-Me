@@ -1,23 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
-    class PurchaseTransactionRepository : IPurchaseTransactionRepository
+    /// <summary>
+    /// This class is responsible for querying Purchase Transactions.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
+    internal class PurchaseTransactionRepository : IPurchaseTransactionRepository
     {
         private readonly string CONNECTION_STRING;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PurchaseTransactionRepository"/> class.
+        /// </summary>
         public PurchaseTransactionRepository()
         {
-            this.CONNECTION_STRING = DBConnection.GetConnectionString();
+            this.CONNECTION_STRING = DbConnection.GetConnectionString();
         }
 
+        /// <summary>
+        /// Adds one item to the database.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public string AddOne(PurchaseTransaction item)
         {
             if (item == null)
@@ -25,18 +36,18 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 throw new ArgumentNullException();
             }
 
-            string id = string.Empty;
+            var id = string.Empty;
 
             const string statement = "INSERT INTO PurchaseTransaction (transactionTime, Customer_id, Employee_id)" +
-                                     " VALUES (@TransactionTime, @CustomerID, @EmployeeID)";
+                                     " VALUES (@TransactionTime, @CustomerId, @EmployeeId)";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
             using (var command = new MySqlCommand(statement))
             {
                 command.Parameters.AddWithValue("@TransactionTime", item.TransactionTime);
-                command.Parameters.AddWithValue("@CustomerID", item.CustomerID);
-                command.Parameters.AddWithValue("@EmployeeID", item.EmployeeID);
+                command.Parameters.AddWithValue("@CustomerId", item.CustomerId);
+                command.Parameters.AddWithValue("@EmployeeId", item.EmployeeId);
 
                 command.Connection = connection;
 
@@ -55,21 +66,41 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             return id;
         }
 
+        /// <summary>
+        /// Adds a list of items to the database.
+        /// </summary>
+        /// <param name="theList">The list.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void AddList(IList<PurchaseTransaction> theList)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets all the items in the database.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public IList<PurchaseTransaction> GetAll()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets the item from the database by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public PurchaseTransaction GetById(string id)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Deletes the item from the database by the identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
         public void DeleteById(string id)
         {
             var sqlStatement = "DELETE FROM PurchaseTransaction WHERE id = @id";
@@ -94,17 +125,31 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Deletes the specified item from the database.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Delete(PurchaseTransaction item)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateByID(PurchaseTransaction item)
+        /// <summary>
+        /// Updates the item by identifier.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        public void UpdateById(PurchaseTransaction item)
         {
             throw new NotImplementedException();
         }
 
-        public IList<PurchaseTransaction> GetTransactionsByCustomerID(string id)
+        /// <summary>
+        /// Gets the transactions by customer identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public IList<PurchaseTransaction> GetTransactionsByCustomerId(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -134,10 +179,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
                         var theTransaction = new PurchaseTransaction
                         {
-                            ID = reader["id"].ToString(),
+                            Id = reader["id"].ToString(),
                             TransactionTime = reader["transactionTime"] as DateTime? ?? DateTime.MinValue,
-                            CustomerID = reader["Customer_id"] == DBNull.Value ? "NULL" : reader["Customer_id"].ToString(),
-                            EmployeeID = reader["Employee_id"] as string ?? string.Empty,
+                            CustomerId = reader["Customer_id"] == DBNull.Value ? "NULL" : reader["Customer_id"].ToString(),
+                            EmployeeId = reader["Employee_id"] as string ?? string.Empty,
                         };
 
 

@@ -2,17 +2,25 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
-using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
+using Rent_Me_Inventory_Management_Solutions.Static;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
+    /// <summary>
+    /// The various employee states.
+    /// </summary>
     internal enum EmployeeStates
     {
         Main,
         AddEmployee
     }
 
+    /// <summary>
+    /// This class represents an Employee User Control.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     public partial class EmployeeUC : BSMiddleClass
     {
         private EmployeeStates InternalState
@@ -36,6 +44,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private readonly EmployeeController theController;
         private EmployeeStates internalState;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeeUC"/> class.
+        /// </summary>
+        /// <param name="theGrid">The grid.</param>
         public EmployeeUC(DataGridView theGrid)
         {
             UserControlType = UserControls.Employee;
@@ -83,6 +95,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.addressTextBox.Text = "";
         }
 
+        /// <summary>
+        /// Processes the child element in the parent class.
+        /// </summary>
         public override void processChild()
         {
             switch (ChildReturned.UserControlType)
@@ -94,6 +109,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
+        /// <summary>
+        /// Processes the parameters.
+        /// </summary>
         public override void processParentIntention()
         {
         }
@@ -121,7 +139,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             if (this.phoneTextBox.Text.Length != 10)
             {
-                ErrorHandler.displayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
+                ErrorHandler.DisplayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
                 return;
             }
 
@@ -131,13 +149,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception)
             {
-                ErrorHandler.displayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
+                ErrorHandler.DisplayErrorBox("Phone Number Invalid", "Please enter a valid 10 digit phone number.");
                 return;
             }
 
             if (this.ssnTextBox.Text.Length != 9)
             {
-                ErrorHandler.displayErrorBox("SSN Invalid", "Please enter a valid 9 digit SSN.");
+                ErrorHandler.DisplayErrorBox("SSN Invalid", "Please enter a valid 9 digit SSN.");
                 return;
             }
 
@@ -147,7 +165,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception)
             {
-                ErrorHandler.displayErrorBox("SSN Invalid", "Please enter a valid 9 digit SSN.");
+                ErrorHandler.DisplayErrorBox("SSN Invalid", "Please enter a valid 9 digit SSN.");
                 return;
             }
 
@@ -159,7 +177,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                     LastName = this.lastNameTextBox.Text,
                     PhoneNumber = this.phoneTextBox.Text,
                     SSN = this.ssnTextBox.Text,
-                    isAdmin = this.adminCheckBox.Checked,
+                    IsAdmin = this.adminCheckBox.Checked,
                     EmployeeAddress = {Id = this.addressTextBox.Text}
                 };
 
@@ -185,13 +203,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (DataGrid.SelectedRows.Count == 0)
             {
-                ErrorHandler.displayErrorBox("Error", "Please select an employee to delete.");
+                ErrorHandler.DisplayErrorBox("Error", "Please select an employee to delete.");
                 return;
             }
 
             try
             {
-                var deleteId = ((string) DataGrid.SelectedRows[0].Cells["ID"].Value);
+                var deleteId = ((string) DataGrid.SelectedRows[0].Cells["Id"].Value);
 
                 this.theController.DeleteEmployeeById(deleteId);
 

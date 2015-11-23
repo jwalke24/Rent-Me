@@ -1,14 +1,18 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq.Expressions;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
+using Rent_Me_Inventory_Management_Solutions.Static;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
+    /// <summary>
+    /// The various inventory states.
+    /// </summary>
     public enum InventoryStates
     {
         Main,
@@ -16,6 +20,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         Editing
     }
 
+    /// <summary>
+    /// This class represents an Inventory User Control.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     public partial class InventoryUC : BSMiddleClass
     {
         private InventoryStates InternalState
@@ -27,7 +36,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 this.DataGrid.SelectionChanged -= this.DataGridOnSelectionChanged;
                 this.clearValues();
                 switch (value)
-                {   
+                {
                     case InventoryStates.Main:
                         this.changeToMainState();
                         break;
@@ -60,7 +69,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                     return;
                 }
 
-                Furniture item = (Furniture) this.DataGrid.SelectedRows[0].DataBoundItem;
+                Furniture item = (Furniture)this.DataGrid.SelectedRows[0].DataBoundItem;
 
                 this.nameTextBox.Text = item.Name;
                 this.priceTextBox.Text = item.Price.ToString();
@@ -72,7 +81,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 {
                     Style tempStyle = style as Style;
 
-                    if (tempStyle != null && tempStyle.ID == item.StyleID)
+                    if (tempStyle != null && tempStyle.Id == item.StyleId)
                     {
                         this.styleComboBox.SelectedItem = tempStyle;
                     }
@@ -82,7 +91,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 {
                     Category tempCategory = category as Category;
 
-                    if (tempCategory != null && tempCategory.ID == item.StyleID)
+                    if (tempCategory != null && tempCategory.Id == item.StyleId)
                     {
                         this.categoryComboBox.SelectedItem = tempCategory;
                     }
@@ -92,6 +101,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
+        /// <summary>
+        /// Gets the furniture identifier.
+        /// </summary>
+        /// <value>
+        /// The furniture identifier.
+        /// </value>
         public string FurnitureID { get; private set; }
         private readonly Point categoryStyleDefaultLocation = new Point(1, -1);
         private readonly FurnitureController theController;
@@ -196,10 +211,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
+        /// <summary>
+        /// Processes the child element in the parent class.
+        /// </summary>
         public override void processChild()
         {
         }
 
+        /// <summary>
+        /// Processes the parameters.
+        /// </summary>
         public override void processParentIntention()
         {
             if (ParentParameter == null)
@@ -217,7 +238,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void proccessAdminParent(AdminUC adminUc)
         {
-            if (adminUc != null && adminUc.theSession.isAdmin && adminUc.theSession.isAuthenticated)
+            if (adminUc != null && adminUc.theSession.IsAdmin && adminUc.theSession.IsAuthenticated)
             {
                 this.theSession = adminUc.theSession;
                 this.verifyAdminButtonsMainState();
@@ -255,7 +276,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void verifyAdminButtonsMainState()
         {
-            if (this.theSession != null && this.theSession.isAuthenticated && this.theSession.isAdmin)
+            if (this.theSession != null && this.theSession.IsAuthenticated && this.theSession.IsAdmin)
             {
                 this.addItemButton.Visible = true;
                 this.editButton.Visible = true;
@@ -275,16 +296,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             try
             {
                 var id = int.Parse(this.idSearchTextBox.Text);
-                var result = this.theController.GetItemsFromIDWildcard(id);
+                var result = this.theController.GetItemsFromIdWildcard(id);
                 DataGrid.DataSource = new BindingList<Furniture>(result);
             }
             catch (MySqlException exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Network Error","Unable to search the database for this object. Please try again.", exception);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Network Error", "Unable to search the database for this object. Please try again.", exception);
             }
             catch (Exception)
             {
-                ErrorHandler.displayErrorBox("Error", "Please enter a numerical value.");
+                ErrorHandler.DisplayErrorBox("Error", "Please enter a numerical value.");
             }
         }
 
@@ -310,11 +331,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             string itemID = string.Empty;
             try
             {
-                itemID = (DataGrid.SelectedRows[0].DataBoundItem as Furniture)?.ID;
+                itemID = (DataGrid.SelectedRows[0].DataBoundItem as Furniture)?.Id;
             }
             catch (Exception)
             {
-                ErrorHandler.displayErrorBox("Error", "No item selected.");
+                ErrorHandler.DisplayErrorBox("Error", "No item selected.");
             }
             var theCategory = this.categoryComboBox.SelectedItem as Category;
             var theStyle = this.styleComboBox.SelectedItem as Style;
@@ -444,13 +465,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (DataGrid.SelectedRows.Count == 0)
             {
-                ErrorHandler.displayErrorBox("Error", "Please select an item to delete.");
+                ErrorHandler.DisplayErrorBox("Error", "Please select an item to delete.");
                 return;
             }
 
             try
             {
-                var deleteId = ((string) DataGrid.SelectedRows[0].Cells["ID"].Value);
+                var deleteId = ((string)DataGrid.SelectedRows[0].Cells["Id"].Value);
 
                 this.theController.DeleteFurnitureById(deleteId);
 
@@ -475,7 +496,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             else
             {
-                this.FurnitureID = (DataGrid.SelectedRows[0].DataBoundItem as Furniture)?.ID;
+                this.FurnitureID = (DataGrid.SelectedRows[0].DataBoundItem as Furniture)?.Id;
                 this.CurrentState = RentMeUserControlPrimaryStates.Deleting;
             }
         }

@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
-using Rent_Me_Inventory_Management_Solutions.Model;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
+    /// <summary>
+    /// This class is responsible for querying Furniture with the database.
+    /// </summary>
+    /// <author>Jonathan Walker and Jonah Nestrick</author>
+    /// <version>Fall 2015</version>
     internal class FurnitureRepository : IFurnitureRepository
     {
         private readonly string CONNECTION_STRING;
@@ -15,9 +20,15 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         /// </summary>
         public FurnitureRepository()
         {
-            this.CONNECTION_STRING = DBConnection.GetConnectionString();
+            this.CONNECTION_STRING = DbConnection.GetConnectionString();
         }
 
+        /// <summary>
+        /// Adds one item to the database.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">@Item is null</exception>
         public string AddOne(Furniture item)
         {
             if (item == null)
@@ -40,8 +51,8 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 command.Parameters.AddWithValue("@description", item.Description);
                 command.Parameters.AddWithValue("@price", item.Price);
                 command.Parameters.AddWithValue("@late", item.LateFee);
-                command.Parameters.AddWithValue("@cat", item.CategoryID);
-                command.Parameters.AddWithValue("@style", item.StyleID);
+                command.Parameters.AddWithValue("@cat", item.CategoryId);
+                command.Parameters.AddWithValue("@style", item.StyleId);
 
 
                 command.Connection = connection;
@@ -61,6 +72,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             return id;
         }
 
+        /// <summary>
+        /// Adds a list of items to the database.
+        /// </summary>
+        /// <param name="theList">The list.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void AddList(IList<Furniture> theList)
         {
             throw new NotImplementedException();
@@ -74,7 +90,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         {
             var furnitures = new List<Furniture>();
 
-            const string query = "SELECT Furniture.*, " +   
+            const string query = "SELECT Furniture.*, " +
                                  "Category.name AS CategoryName, Style.name AS StyleName " +
                                  "FROM Furniture, Category, Style " +
                                  "WHERE Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id";
@@ -102,6 +118,11 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets the item from the database by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public Furniture GetById(string id)
         {
             var furnitures = new List<Furniture>();
@@ -142,6 +163,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Deletes the item from the database by the identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
         public void DeleteById(string id)
         {
             var sqlStatement = "DELETE FROM Furniture WHERE id = @id";
@@ -166,12 +191,21 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Deletes the specified item from the database.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Delete(Furniture item)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateByID(Furniture item)
+        /// <summary>
+        /// Updates the item by identifier.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        public void UpdateById(Furniture item)
         {
             if (item == null)
             {
@@ -179,7 +213,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
 
             const string statement =
-                "UPDATE Furniture " + 
+                "UPDATE Furniture " +
                 "SET quantity = @quantity, name = @name, description = @description, price = @price, lateFee = @late, Category_id = @cat, Style_id = @style" +
                 " WHERE id = @id";
 
@@ -192,9 +226,9 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                 command.Parameters.AddWithValue("@description", item.Description);
                 command.Parameters.AddWithValue("@price", item.Price);
                 command.Parameters.AddWithValue("@late", item.LateFee);
-                command.Parameters.AddWithValue("@cat", item.CategoryID);
-                command.Parameters.AddWithValue("@style", item.StyleID);
-                command.Parameters.AddWithValue("@id", item.ID);
+                command.Parameters.AddWithValue("@cat", item.CategoryId);
+                command.Parameters.AddWithValue("@style", item.StyleId);
+                command.Parameters.AddWithValue("@id", item.Id);
 
 
                 command.Connection = connection;
@@ -216,16 +250,16 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             while (reader.Read())
             {
                 var furniture = new Furniture();
-                furniture.ID = ((int) reader["id"]).ToString();
+                furniture.Id = ((int)reader["id"]).ToString();
                 furniture.Quantity = reader["quantity"] as uint? ?? uint.MinValue;
-                furniture.Name = reader["name"] == DBNull.Value ? string.Empty : (string) reader["name"];
+                furniture.Name = reader["name"] == DBNull.Value ? string.Empty : (string)reader["name"];
                 furniture.Description = reader["description"] == DBNull.Value
                     ? string.Empty
-                    : (string) reader["description"];
+                    : (string)reader["description"];
                 furniture.Price = reader["price"] as decimal? ?? decimal.Zero;
                 furniture.LateFee = reader["lateFee"] as decimal? ?? decimal.Zero;
-                furniture.CategoryID = (reader["Category_id"] as int? ?? int.MinValue).ToString();
-                furniture.StyleID = (reader["Style_id"] as int? ?? int.MinValue).ToString();
+                furniture.CategoryId = (reader["Category_id"] as int? ?? int.MinValue).ToString();
+                furniture.StyleId = (reader["Style_id"] as int? ?? int.MinValue).ToString();
                 furniture.CategoryName = reader["CategoryName"] == DBNull.Value ? string.Empty : reader["CategoryName"].ToString();
                 furniture.StyleName = reader["StyleName"] == DBNull.Value ? string.Empty : reader["StyleName"].ToString();
 
@@ -233,42 +267,12 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
         }
 
-        public IList<Furniture> GetAllByCategoryStyleCriteria(Category category, Style style)
-        {
-            var furnitures = new List<Furniture>();
-
-            const string query =
-                "SELECT Furniture.*, " +
-                "Category.name AS CategoryName, Style.name AS StyleName " +
-                "FROM Furniture, Category, Style " +
-                "WHERE (Furniture.Category_id LIKE @cat AND Furniture.Style_id LIKE @style) AND Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id";
-
-            var connection = new MySqlConnection(this.CONNECTION_STRING);
-
-            using (var command = new MySqlCommand(query))
-            {
-                command.Connection = connection;
-
-                command.Parameters.AddWithValue("@cat", category?.ID ?? "%");
-                command.Parameters.AddWithValue("@style", style?.ID ?? "%");
-                try
-                {
-                    command.Connection.Open();
-
-                    var reader = command.ExecuteReader();
-
-                    this.furnitureLoader(reader, furnitures);
-                }
-                finally
-                {
-                    command.Connection.Close();
-                }
-
-                return furnitures;
-            }
-        }
-
-        public IList<Furniture> GetAllByIDPrefix(int id)
+        /// <summary>
+        /// Gets all by identifier prefix.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public IList<Furniture> GetAllByIdPrefix(int id)
         {
             var furnitures = new List<Furniture>();
 
@@ -300,6 +304,51 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets all by category style criteria.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <param name="style">The style.</param>
+        /// <returns></returns>
+        public IList<Furniture> GetAllByCategoryStyleCriteria(Category category, Style style)
+        {
+            var furnitures = new List<Furniture>();
+
+            const string query =
+                "SELECT Furniture.*, " +
+                "Category.name AS CategoryName, Style.name AS StyleName " +
+                "FROM Furniture, Category, Style " +
+                "WHERE (Furniture.Category_id LIKE @cat AND Furniture.Style_id LIKE @style) AND Furniture.Category_id = Category.id AND Furniture.Style_id = Style.id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(query))
+            {
+                command.Connection = connection;
+
+                command.Parameters.AddWithValue("@cat", category?.Id ?? "%");
+                command.Parameters.AddWithValue("@style", style?.Id ?? "%");
+                try
+                {
+                    command.Connection.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    this.furnitureLoader(reader, furnitures);
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+
+                return furnitures;
+            }
+        }
+
+        /// <summary>
+        /// Updates the quantities from list of ids.
+        /// </summary>
+        /// <param name="furnitureIdQuantities">The furniture identifier quantities.</param>
         public void UpdateQuantitiesFromListOfIds(Dictionary<string, int> furnitureIdQuantities)
         {
 

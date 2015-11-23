@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
+using Rent_Me_Inventory_Management_Solutions.Static;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -17,11 +16,21 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         AddItem
     }
 
+    /// <summary>
+    /// This class represents a Transaction User Control.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     public partial class TransactionUC : BSMiddleClass
     {
         private BindingList<PurchaseTransaction_Item> itemsToPurchase;
         public LoginSession session;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransactionUC"/> class.
+        /// </summary>
+        /// <param name="theGrid">The grid.</param>
+        /// <param name="session">The session.</param>
         public TransactionUC(DataGridView theGrid, LoginSession session)
         {
             this.DataGrid = theGrid;
@@ -119,31 +128,31 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
                 if (quantity <= 0)
                 {
-                    ErrorHandler.displayErrorBox("Error","Please enter a valid quantity. ");
+                    ErrorHandler.DisplayErrorBox("Error", "Please enter a valid quantity. ");
                     return;
                 }
 
                 if (result == null)
                 {
-                    ErrorHandler.displayErrorBox("Error", "Item not found. Please try again.");
+                    ErrorHandler.DisplayErrorBox("Error", "Item not found. Please try again.");
                     return;
                 }
 
                 if (result.Quantity < quantity)
                 {
-                    ErrorHandler.displayErrorBox("Quantity Error",
+                    ErrorHandler.DisplayErrorBox("Quantity Error",
                         "There are not enough items in stock. You can only rent " + result.Quantity + " items or less.");
                     return;
                 }
 
                 if (days <= 0)
                 {
-                    ErrorHandler.displayErrorBox("Lease Time Error", "You must rent for at least one day.");
+                    ErrorHandler.DisplayErrorBox("Lease Time Error", "You must rent for at least one day.");
                     return;
                 }
 
                 PurchaseTransaction_Item theItem = new PurchaseTransaction_Item();
-                theItem.FurnitureID = result.ID;
+                theItem.FurnitureId = result.Id;
                 theItem.Quantity = quantity;
                 theItem.LeaseTime = days;
                 theItem.FurnitureName = result.Name;
@@ -151,9 +160,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
                 foreach (var purchaseTransactionItem in this.itemsToPurchase)
                 {
-                    if (purchaseTransactionItem.FurnitureID == theItem.FurnitureID)
+                    if (purchaseTransactionItem.FurnitureId == theItem.FurnitureId)
                     {
-                        ErrorHandler.displayErrorBox("Duplicate Error", "Cannot add duplicate item to transaction");
+                        ErrorHandler.DisplayErrorBox("Duplicate Error", "Cannot add duplicate item to transaction");
                         return;
                     }
                 }
@@ -167,7 +176,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception)
             {
-                ErrorHandler.displayErrorBox("Error", "Please enter a numerical value.");
+                ErrorHandler.DisplayErrorBox("Error", "Please enter a numerical value.");
                 return;
             }
 
@@ -226,7 +235,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 this.itemToAddTextBox.Text = inventoryUc?.FurnitureID;
                 this.InternalState = TransactionStates.AddItem;
             }
-            
+
         }
 
         private void processCustomerChild(CustomerUserControl theUC)
@@ -237,6 +246,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
         }
 
+        /// <summary>
+        /// Processes the parent intention.
+        /// </summary>
         public override void processParentIntention()
         {
         }
@@ -280,13 +292,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (this.itemsToPurchase.Count == 0)
             {
-                ErrorHandler.displayErrorBox("Error","Cannot submit an empty transaction.");
+                ErrorHandler.DisplayErrorBox("Error", "Cannot submit an empty transaction.");
                 return;
             }
 
             if (this.customerID == "null")
             {
-                ErrorHandler.displayErrorBox("Error","Must select a customer.");
+                ErrorHandler.DisplayErrorBox("Error", "Must select a customer.");
                 return;
             }
 
@@ -298,8 +310,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 var transaction = new PurchaseTransaction
                 {
                     TransactionTime = DateTime.Now,
-                    CustomerID = this.customerID,
-                    EmployeeID = this.session.Id.ToString(),
+                    CustomerId = this.customerID,
+                    EmployeeId = this.session.Id.ToString(),
                     Items = new List<PurchaseTransaction_Item>(this.itemsToPurchase)
                 };
 
@@ -310,7 +322,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
                 foreach (var item in transaction.Items)
                 {
-                    furnitureIdQuantities.Add(item.FurnitureID, item.Quantity);
+                    furnitureIdQuantities.Add(item.FurnitureId, item.Quantity);
                 }
 
                 furnitureController.UpdateQuantitiesByIds(furnitureIdQuantities);
@@ -324,7 +336,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (InvalidCastException invalidCast)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Session Error", "The tag cannot be cast as a login session.",invalidCast);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Session Error", "The tag cannot be cast as a login session.", invalidCast);
             }
             catch (MySqlException sqlException)
             {

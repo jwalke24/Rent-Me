@@ -1,6 +1,4 @@
-﻿using Rent_Me_Inventory_Management_Solutions.View.User_Controls;
-
-namespace Rent_Me_Inventory_Management_Solutions.View
+﻿namespace Rent_Me_Inventory_Management_Solutions.View.Views
 {
     partial class MainWindow
     {
@@ -15,9 +13,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }

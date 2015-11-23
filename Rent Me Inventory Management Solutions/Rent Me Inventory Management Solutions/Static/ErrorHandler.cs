@@ -2,17 +2,34 @@
 using System.IO;
 using System.Windows.Forms;
 
-namespace Rent_Me_Inventory_Management_Solutions
+namespace Rent_Me_Inventory_Management_Solutions.Static
 {
+    /// <summary>
+    /// This class is responsible for handling and logging any errors encountered by the application.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     internal static class ErrorHandler
     {
+        /// <summary>
+        /// Displays the error message to user and log.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception.</param>
         public static void DisplayErrorMessageToUserAndLog(string title, string message, Exception exception)
         {
             writeErrorToLogFile(title, message, exception);
 
-            displayErrorBox(title, message);
+            DisplayErrorBox(title, message);
         }
 
+        /// <summary>
+        /// Writes the error to log file.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception.</param>
         private static void writeErrorToLogFile(string title, string message, Exception exception)
         {
             using (var w = File.AppendText("RentMeLogs.txt"))
@@ -28,7 +45,12 @@ namespace Rent_Me_Inventory_Management_Solutions
             }
         }
 
-        public static void displayErrorBox(string title, string message)
+        /// <summary>
+        /// Displays the error box.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="message">The message.</param>
+        public static void DisplayErrorBox(string title, string message)
         {
             MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

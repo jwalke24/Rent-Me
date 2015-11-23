@@ -6,10 +6,18 @@ using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.Controller
 {
+    /// <summary>
+    /// This class is responsible for managing Employees and their repositories.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     internal class EmployeeController
     {
         private readonly EmployeeRepository employeeRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeeController"/> class.
+        /// </summary>
         public EmployeeController()
         {
             this.employeeRepository = new EmployeeRepository();

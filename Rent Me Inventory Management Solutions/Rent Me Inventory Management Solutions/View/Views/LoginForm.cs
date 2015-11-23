@@ -2,11 +2,20 @@
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
+using Rent_Me_Inventory_Management_Solutions.Static;
 
-namespace Rent_Me_Inventory_Management_Solutions
+namespace Rent_Me_Inventory_Management_Solutions.View.Views
 {
+    /// <summary>
+    /// This class represents the login form window.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     public partial class LoginForm : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginForm"/> class.
+        /// </summary>
         public LoginForm()
         {
             this.InitializeComponent();
@@ -35,7 +44,7 @@ namespace Rent_Me_Inventory_Management_Solutions
                         "Unable to connect to SQL Database. Please try again.", exception);
                 }
 
-                if (theUser.isAuthenticated)
+                if (theUser.IsAuthenticated)
                 {
                     Tag = theUser;
                     DialogResult = DialogResult.OK;
@@ -43,12 +52,12 @@ namespace Rent_Me_Inventory_Management_Solutions
                 }
                 else
                 {
-                    ErrorHandler.displayErrorBox("Login Error", "Invalid login information. Please try again.");
+                    ErrorHandler.DisplayErrorBox("Login Error", "Invalid login information. Please try again.");
                 }
             }
             else
             {
-                ErrorHandler.displayErrorBox("Login Error", "Invalid login information. Please try again.");
+                ErrorHandler.DisplayErrorBox("Login Error", "Invalid login information. Please try again.");
             }
         }
 

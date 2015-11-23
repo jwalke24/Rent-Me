@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
+using Rent_Me_Inventory_Management_Solutions.Static;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -12,6 +13,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         AddAddress
     }
 
+    /// <summary>
+    /// This class represents an Address User Control.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     public partial class AddressUC : BSMiddleClass
     {
         private AddressStates InternalState
@@ -43,6 +49,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private readonly AddressController theController;
         private AddressStates internalState;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddressUC"/> class.
+        /// </summary>
+        /// <param name="theGrid">The grid.</param>
         public AddressUC(DataGridView theGrid)
         {
             UserControlType = UserControls.Address;
@@ -62,10 +72,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             DataGrid.DataSource = theAddresses;
         }
 
+        /// <summary>
+        /// Processes the child.
+        /// </summary>
         public override void processChild()
         {
         }
 
+        /// <summary>
+        /// Processes the parent intention.
+        /// </summary>
         public override void processParentIntention()
         {
         }
@@ -93,7 +109,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             if (this.street1TextBox.Text == string.Empty || this.cityTextBox.Text == string.Empty ||
                 this.stateTextBox.Text == string.Empty || this.zipTextBox.Text == string.Empty)
             {
-                ErrorHandler.displayErrorBox("Error", "Please enter a value for required fields.");
+                ErrorHandler.DisplayErrorBox("Error", "Please enter a value for required fields.");
                 return;
             }
 
@@ -103,13 +119,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (Exception)
             {
-                ErrorHandler.displayErrorBox("Error", "Please enter a valid zip code.");
+                ErrorHandler.DisplayErrorBox("Error", "Please enter a valid zip code.");
                 return;
             }
 
             if (this.stateTextBox.Text.Length != 2)
             {
-                ErrorHandler.displayErrorBox("Error", "Please enter a valid state.");
+                ErrorHandler.DisplayErrorBox("Error", "Please enter a valid state.");
             }
 
 

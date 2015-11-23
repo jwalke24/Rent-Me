@@ -28,6 +28,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View
     }
 
 
+    /// <summary>
+    /// This class provides a template for all other User Controls.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    /// <version>Fall 2015</version>
     public abstract class RentMeUserControl : UserControl
     {
         /// <summary>
@@ -103,6 +108,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         /// </summary>
         public abstract void processParentIntention();
 
+        /// <summary>
+        /// Called when [state changed].
+        /// </summary>
         protected virtual void OnStateChanged()
         {
             this.StateChanged?.Invoke(this, EventArgs.Empty);

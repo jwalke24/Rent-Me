@@ -1,27 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
-using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 {
-    class GenericSQL : IGenericSQL
+    /// <summary>
+    /// This class is responsible for handling generic SQL queries.
+    /// </summary>
+    /// <author>Jonah Nestrick and Jonathan Walker</author>
+    internal class GenericSql : IGenericSql
     {
         private readonly string CONNECTION_STRING;
 
-        public GenericSQL()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenericSql"/> class.
+        /// </summary>
+        public GenericSql()
         {
-            this.CONNECTION_STRING = DBConnection.GetConnectionString();
+            this.CONNECTION_STRING = DbConnection.GetConnectionString();
         }
 
-
-
+        /// <summary>
+        /// Executes the query.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <returns></returns>
         public DataSet ExecuteQuery(string x)
         {
             DataSet objDataSet = new DataSet();
