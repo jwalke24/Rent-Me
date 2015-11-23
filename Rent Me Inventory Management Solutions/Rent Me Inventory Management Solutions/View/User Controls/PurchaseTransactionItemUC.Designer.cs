@@ -1,6 +1,6 @@
 ﻿namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
-    partial class PurchaseTransactionUC
+    partial class PurchaseTransactionItemUC
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,33 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.viewPurchaseTransactionItemsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // viewPurchaseTransactionItemsButton
-            // 
-            this.viewPurchaseTransactionItemsButton.Location = new System.Drawing.Point(3, 3);
-            this.viewPurchaseTransactionItemsButton.Name = "viewPurchaseTransactionItemsButton";
-            this.viewPurchaseTransactionItemsButton.Size = new System.Drawing.Size(140, 23);
-            this.viewPurchaseTransactionItemsButton.TabIndex = 0;
-            this.viewPurchaseTransactionItemsButton.Text = "View Transaction Items";
-            this.viewPurchaseTransactionItemsButton.UseVisualStyleBackColor = true;
-            this.viewPurchaseTransactionItemsButton.Click += new System.EventHandler(this.viewPurchaseTransactionItemsButton_Click);
-            // 
-            // PurchaseTransactionUC
+            // PurchaseTransactionItemUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.viewPurchaseTransactionItemsButton);
-            this.Name = "PurchaseTransactionUC";
+            this.Name = "PurchaseTransactionItemUC";
             this.Size = new System.Drawing.Size(672, 134);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button viewPurchaseTransactionItemsButton;
     }
 }

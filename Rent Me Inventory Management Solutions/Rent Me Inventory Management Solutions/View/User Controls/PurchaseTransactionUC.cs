@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
+using Rent_Me_Inventory_Management_Solutions.Static;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -14,6 +16,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
     {
         private TransactionController theController;
         private string CustomerID;
+
+        public PurchaseTransaction SelectedTransaction { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PurchaseTransactionUC"/> class.
@@ -54,6 +58,21 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         public void LoadData()
         {
             DataGrid.DataSource = new BindingList<PurchaseTransaction>(this.theController.GetPurchaseTransactionsByCustomerId(this.CustomerID));
+        }
+
+        private void viewPurchaseTransactionItemsButton_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                this.SelectedTransaction = this.DataGrid.SelectedRows[0].DataBoundItem as PurchaseTransaction;
+
+                SwitchTo = UserControls.PurchaseTransactionItem;
+                CurrentState = RentMeUserControlPrimaryStates.Hiding;
+            }
+            catch (Exception)
+            {
+                ErrorHandler.DisplayErrorBox("No Purchase Transaction Selected", "Please select a purchase transaction to view the items.");
+            }
         }
     }
 }

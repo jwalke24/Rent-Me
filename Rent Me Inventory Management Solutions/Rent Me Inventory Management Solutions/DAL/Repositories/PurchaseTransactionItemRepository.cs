@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
@@ -151,6 +152,61 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         public void UpdateById(PurchaseTransaction_Item item)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets all items by purchase transaction.
+        /// </summary>
+        /// <param name="transaction">The transaction.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public IList<PurchaseTransaction_Item> GetAllItemsByPurchaseTransaction(PurchaseTransaction transaction)
+        {
+            if (transaction == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var items = new List<PurchaseTransaction_Item>();
+
+            var query = "SELECT PurchaseTransaction_Item.*, Furniture.name AS FurnitureName FROM PurchaseTransaction_Item, Furniture WHERE PurchaseTransaction_id=@Id AND PurchaseTransaction_Item.Furniture_id=Furniture.id";
+
+            var connection = new MySqlConnection(this.CONNECTION_STRING);
+
+            using (var command = new MySqlCommand(query))
+            {
+                command.Parameters.AddWithValue("@Id", transaction.Id);
+
+                command.Connection = connection;
+
+                try
+                {
+                    command.Connection.Open();
+
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var item = new PurchaseTransaction_Item
+                        {
+                            PurchaseTransactionId = transaction.Id,
+                            FurnitureId =
+                                reader["Furniture_id"] == DBNull.Value ? "NULL" : reader["Furniture_id"].ToString(),
+                            Quantity = reader["quantity"] == DBNull.Value ? 0 : (int) reader["quantity"],
+                            LeaseTime = reader["leaseTime"] == DBNull.Value ? 0 : (int) reader["leaseTime"],
+                            FurnitureName = reader["FurnitureName"] == DBNull.Value ? "NULL" : reader["FurnitureName"].ToString()
+                        };
+                        items.Add(item);
+                    }
+
+                }
+                finally
+                {
+                    command.Connection.Close();
+                }
+            }
+
+            return items;
         }
     }
 }

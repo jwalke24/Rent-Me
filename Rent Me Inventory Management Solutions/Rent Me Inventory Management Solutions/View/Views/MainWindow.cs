@@ -103,6 +103,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.Views
                     case UserControls.PurchaseTransaction:
                         this.displayNewUserControl(new PurchaseTransactionUC(dataGrid));
                         break;
+                    case UserControls.PurchaseTransactionItem:
+                        this.displayNewUserControl(new PurchaseTransactionItemUC(dataGrid));
+                        break;
                 }
             }
             else if (theSender.CurrentState == RentMeUserControlPrimaryStates.Deleting)

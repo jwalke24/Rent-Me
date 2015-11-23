@@ -55,6 +55,7 @@
     <Compile Include="Controller\FurnitureController.cs" />
     <Compile Include="Controller\GenericSQLController.cs" />
     <Compile Include="Controller\MemberController.cs" />
+    <Compile Include="Controller\PurchaseTransactionItemController.cs" />
     <Compile Include="Controller\TransactionController.cs" />
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="DAL\Interfaces\IEmployeeRepository.cs" />
@@ -109,6 +110,12 @@
     </Compile>
     <Compile Include="View\User Controls\CustomerUC.Designer.cs">
       <DependentUpon>CustomerUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\User Controls\PurchaseTransactionItemUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\User Controls\PurchaseTransactionItemUC.Designer.cs">
+      <DependentUpon>PurchaseTransactionItemUC.cs</DependentUpon>
     </Compile>
     <Compile Include="View\User Controls\PurchaseTransactionUC.cs">
       <SubType>UserControl</SubType>
@@ -165,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\User Controls\CustomerUC.resx">
       <DependentUpon>CustomerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User Controls\PurchaseTransactionItemUC.resx">
+      <DependentUpon>PurchaseTransactionItemUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\User Controls\PurchaseTransactionUC.resx">
       <DependentUpon>PurchaseTransactionUC.cs</DependentUpon>

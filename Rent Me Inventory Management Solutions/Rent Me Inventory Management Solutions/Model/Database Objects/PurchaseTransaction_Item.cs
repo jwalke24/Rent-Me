@@ -7,7 +7,7 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
     /// </summary>
     /// <author>Jonah Nestrick and Jonathan Walker</author>
     /// <version>Fall 2015</version>
-    internal class PurchaseTransaction_Item
+    public class PurchaseTransaction_Item
     {
         /// <summary>
         /// Gets or sets the furniture identifier.

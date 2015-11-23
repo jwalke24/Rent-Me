@@ -24,7 +24,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View
         Employee,
         CategoryStyle,
         Return,
-        PurchaseTransaction
+        PurchaseTransaction,
+        PurchaseTransactionItem
     }
 
 
