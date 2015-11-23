@@ -130,7 +130,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.Views
         private void addUCToDisplay(RentMeUserControl ucInterface)
         {
             UserControl userControl = ucInterface;
-
             userControl.Enabled = true;
             userControl.Visible = true;
             userControl.Location = this.userControlLocation;
@@ -214,7 +213,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.Views
 
             Controls.Add(newView);
 
-            Invalidate();
+            //Invalidate();
         }
 
         private DataGridView createNewDataGridView()

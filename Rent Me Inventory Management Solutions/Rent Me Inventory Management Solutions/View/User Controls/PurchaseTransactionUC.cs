@@ -44,13 +44,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// </summary>
         public override void processParentIntention()
         {
-            ReturnTransactionUC theReturnTransactionUc;
-
-            using (theReturnTransactionUc = ParentParameter as ReturnTransactionUC)
-            {
-                this.CustomerID = theReturnTransactionUc?.customerID;
-                this.LoadData();
-            }
+            this.CustomerID = (ParentParameter as ReturnTransactionUC)?.customerID;
+            this.LoadData();
         }
 
         /// <summary>

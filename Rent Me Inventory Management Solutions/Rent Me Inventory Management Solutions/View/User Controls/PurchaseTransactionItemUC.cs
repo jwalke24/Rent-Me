@@ -69,13 +69,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// </summary>
         public override void processParentIntention()
         {
-            PurchaseTransactionUC purchaseTransactionUc;
+            this.transaction = (ParentParameter as PurchaseTransactionUC)?.SelectedTransaction;
+            this.loadItems();
 
-            using (purchaseTransactionUc = ParentParameter as PurchaseTransactionUC)
-            {
-                this.transaction = purchaseTransactionUc?.SelectedTransaction;
-                this.loadItems();
-            }
 
         }
 

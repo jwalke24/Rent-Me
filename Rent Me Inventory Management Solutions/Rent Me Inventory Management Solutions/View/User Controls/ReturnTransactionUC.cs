@@ -78,12 +78,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// </summary>
         public override void processParentIntention()
         {
-            TransactionUC transaction;
-
-            using (transaction = ParentParameter as TransactionUC)
-            {
-                this.theSession = transaction?.session;
-            }
+            this.theSession = (ParentParameter as TransactionUC)?.session;
         }
 
         private void InitializeComponent()
