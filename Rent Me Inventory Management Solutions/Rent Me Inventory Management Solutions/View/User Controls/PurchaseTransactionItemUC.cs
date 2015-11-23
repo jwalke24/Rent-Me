@@ -25,14 +25,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private PurchaseTransaction transaction;
 
         /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
+        /// <value>
+        /// The selected item.
+        /// </value>
+        public PurchaseTransaction_Item SelectedItem { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="PurchaseTransactionItemUC" /> class.
         /// </summary>
         /// <param name="theGrid">The grid.</param>
         public PurchaseTransactionItemUC(DataGridView theGrid)
         {
-            InitializeComponent();
             DataGrid = theGrid;
             this.theController = new PurchaseTransactionItemController();
+            InitializeComponent();
+            UserControlType = UserControls.PurchaseTransactionItem;
         }
 
         private void loadItems()
@@ -64,10 +73,23 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             using (purchaseTransactionUc = ParentParameter as PurchaseTransactionUC)
             {
-                this.transaction = purchaseTransactionUc.SelectedTransaction;
+                this.transaction = purchaseTransactionUc?.SelectedTransaction;
                 this.loadItems();
             }
 
+        }
+
+        private void selectItemButton_Click(object sender, EventArgs e)
+        {
+            if (DataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(@"Please select a customer for the transaction.");
+            }
+            else
+            {
+                this.SelectedItem = DataGrid.SelectedRows[0].DataBoundItem as PurchaseTransaction_Item;
+                CurrentState = RentMeUserControlPrimaryStates.Deleting;
+            }
         }
     }
 }

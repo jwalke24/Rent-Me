@@ -40,8 +40,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         public ReturnTransactionUC(DataGridView theGrid)
         {
             DataGrid = theGrid;
-            UserControlType = UserControls.Return;
             this.InitializeComponent();
+            UserControlType = UserControls.Return;
         }
 
         /// <summary>

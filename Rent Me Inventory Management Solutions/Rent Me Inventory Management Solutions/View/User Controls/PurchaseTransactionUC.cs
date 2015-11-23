@@ -28,6 +28,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             DataGrid = theGrid;
             this.theController = new TransactionController();
             InitializeComponent();
+            UserControlType = UserControls.PurchaseTransaction;
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
             using (theReturnTransactionUc = ParentParameter as ReturnTransactionUC)
             {
-                this.CustomerID = theReturnTransactionUc.customerID;
+                this.CustomerID = theReturnTransactionUc?.customerID;
                 this.LoadData();
             }
         }
