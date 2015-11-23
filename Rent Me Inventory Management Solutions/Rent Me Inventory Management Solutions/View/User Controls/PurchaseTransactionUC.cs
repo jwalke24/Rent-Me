@@ -18,6 +18,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private string CustomerID;
 
         public PurchaseTransaction SelectedTransaction { get; set; }
+        public PurchaseTransaction_Item SelectedItem { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PurchaseTransactionUC"/> class.
@@ -36,7 +37,26 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// </summary>
         public override void processChild()
         {
+            if (ChildReturned == null)
+            {
+                return;
+            }
 
+            switch (ChildReturned.UserControlType)
+            {
+                case UserControls.PurchaseTransactionItem:
+                    this.processPurchaseTransactionItemChild(ChildReturned as PurchaseTransactionItemUC);
+                    break;
+            }
+        }
+
+        private void processPurchaseTransactionItemChild(PurchaseTransactionItemUC purchaseTransactionItemUc)
+        {
+            if (purchaseTransactionItemUc != null && purchaseTransactionItemUc.SelectedItem != null)
+            {
+                this.SelectedItem = purchaseTransactionItemUc.SelectedItem;
+                CurrentState = RentMeUserControlPrimaryStates.Deleting;
+            }
         }
 
         /// <summary>
@@ -69,6 +89,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 ErrorHandler.DisplayErrorBox("No Purchase Transaction Selected", "Please select a purchase transaction to view the items.");
             }
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            CurrentState = RentMeUserControlPrimaryStates.Deleting;
         }
     }
 }

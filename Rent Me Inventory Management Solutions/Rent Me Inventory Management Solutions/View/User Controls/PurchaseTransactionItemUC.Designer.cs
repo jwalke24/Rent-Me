@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.selectItemButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // selectItemButton
             // 
-            this.selectItemButton.Location = new System.Drawing.Point(3, 3);
+            this.selectItemButton.Location = new System.Drawing.Point(592, 77);
             this.selectItemButton.Name = "selectItemButton";
             this.selectItemButton.Size = new System.Drawing.Size(75, 23);
             this.selectItemButton.TabIndex = 0;
@@ -41,11 +42,22 @@
             this.selectItemButton.UseVisualStyleBackColor = true;
             this.selectItemButton.Click += new System.EventHandler(this.selectItemButton_Click);
             // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(592, 106);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 1;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // PurchaseTransactionItemUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.selectItemButton);
             this.Name = "PurchaseTransactionItemUC";
             this.Size = new System.Drawing.Size(670, 132);
@@ -56,5 +68,6 @@
         #endregion
 
         private System.Windows.Forms.Button selectItemButton;
+        private System.Windows.Forms.Button cancelButton;
     }
 }

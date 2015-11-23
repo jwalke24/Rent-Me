@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using Rent_Me_Inventory_Management_Solutions.Model;
+using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 {
@@ -17,6 +19,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private Button customerButton;
         private Button cancelButton;
         private LoginSession theSession;
+        private Button viewPurchaseTransactionsButton;
+        private BindingList<PurchaseTransaction_Item> items; 
 
         /// <summary>
         /// Gets or sets the customer identifier.
@@ -31,8 +35,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             set { this.customerIDLabel.Text = value; }
         }
 
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ReturnTransactionUC"/> class.
         /// </summary>
@@ -42,6 +44,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             DataGrid = theGrid;
             this.InitializeComponent();
             UserControlType = UserControls.Return;
+            this.items = new BindingList<PurchaseTransaction_Item>();
+            theGrid.DataSource = this.items;
         }
 
         /// <summary>
@@ -60,6 +64,28 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 case UserControls.Customer:
                     this.processCustomerChild(ChildReturned as CustomerUserControl);
                     break;
+                case UserControls.PurchaseTransaction:
+                    this.processPurchaseTransactionChild(ChildReturned as PurchaseTransactionUC);
+                    break;
+            }
+
+            this.displayViewTransactionsButton();
+        }
+
+        private void displayViewTransactionsButton()
+        {
+            if (this.customerID != "null")
+            {
+                this.viewPurchaseTransactionsButton.Enabled = true;
+                this.viewPurchaseTransactionsButton.Visible = true;
+            }
+        }
+
+        private void processPurchaseTransactionChild(PurchaseTransactionUC theUC)
+        {
+            if (theUC != null && theUC.SelectedItem != null)
+            {
+                this.items.Add(theUC.SelectedItem);
             }
         }
 
@@ -88,6 +114,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.customerIDLabel = new System.Windows.Forms.Label();
             this.selectedCustomerLabel = new System.Windows.Forms.Label();
             this.customerButton = new System.Windows.Forms.Button();
+            this.viewPurchaseTransactionsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // submitTransactionButton
@@ -112,7 +139,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             // customerIDLabel
             // 
             this.customerIDLabel.AutoSize = true;
-            this.customerIDLabel.Location = new System.Drawing.Point(99, 0);
+            this.customerIDLabel.Location = new System.Drawing.Point(102, 8);
             this.customerIDLabel.Name = "customerIDLabel";
             this.customerIDLabel.Size = new System.Drawing.Size(23, 13);
             this.customerIDLabel.TabIndex = 23;
@@ -121,7 +148,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             // selectedCustomerLabel
             // 
             this.selectedCustomerLabel.AutoSize = true;
-            this.selectedCustomerLabel.Location = new System.Drawing.Point(3, 0);
+            this.selectedCustomerLabel.Location = new System.Drawing.Point(3, 8);
             this.selectedCustomerLabel.Name = "selectedCustomerLabel";
             this.selectedCustomerLabel.Size = new System.Drawing.Size(93, 13);
             this.selectedCustomerLabel.TabIndex = 22;
@@ -137,9 +164,22 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.customerButton.UseVisualStyleBackColor = true;
             this.customerButton.Click += new System.EventHandler(this.customerButton_Click);
             // 
+            // viewPurchaseTransactionsButton
+            // 
+            this.viewPurchaseTransactionsButton.Enabled = false;
+            this.viewPurchaseTransactionsButton.Location = new System.Drawing.Point(131, 3);
+            this.viewPurchaseTransactionsButton.Name = "viewPurchaseTransactionsButton";
+            this.viewPurchaseTransactionsButton.Size = new System.Drawing.Size(107, 23);
+            this.viewPurchaseTransactionsButton.TabIndex = 25;
+            this.viewPurchaseTransactionsButton.Text = "View Transactions";
+            this.viewPurchaseTransactionsButton.UseVisualStyleBackColor = true;
+            this.viewPurchaseTransactionsButton.Visible = false;
+            this.viewPurchaseTransactionsButton.Click += new System.EventHandler(this.viewPurchaseTransactionsButton_Click);
+            // 
             // ReturnTransactionUC
             // 
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.viewPurchaseTransactionsButton);
             this.Controls.Add(this.customerButton);
             this.Controls.Add(this.customerIDLabel);
             this.Controls.Add(this.selectedCustomerLabel);
@@ -160,6 +200,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private void customerButton_Click(object sender, EventArgs e)
         {
             SwitchTo = UserControls.Customer;
+            CurrentState = RentMeUserControlPrimaryStates.Hiding;
+        }
+
+        private void viewPurchaseTransactionsButton_Click(object sender, EventArgs e)
+        {
+            SwitchTo = UserControls.PurchaseTransaction;
             CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
     }

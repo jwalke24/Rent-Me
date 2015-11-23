@@ -87,5 +87,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 CurrentState = RentMeUserControlPrimaryStates.Deleting;
             }
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            CurrentState = RentMeUserControlPrimaryStates.Deleting;
+        }
     }
 }
