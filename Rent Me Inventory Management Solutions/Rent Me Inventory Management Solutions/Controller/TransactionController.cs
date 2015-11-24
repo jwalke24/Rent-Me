@@ -81,15 +81,25 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         /// <summary>
         /// Gets the purchase transactions by customer identifier.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="customerID">The identifier.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public IList<PurchaseTransaction> GetPurchaseTransactionsByCustomerId(string id)
+        public IList<PurchaseTransaction> GetPurchaseTransactionsByCustomerId(string customerID)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(customerID))
+                throw new ArgumentNullException(nameof(customerID));
 
-            return this.purchaseRepository.GetTransactionsByCustomerId(id);
+            return this.purchaseRepository.GetTransactionsByCustomerId(customerID);
+        }
+
+        public PurchaseTransaction GetByID(string purchaseTransactionId)
+        {
+            if (string.IsNullOrEmpty(purchaseTransactionId))
+            {
+                throw new ArgumentNullException(nameof(purchaseTransactionId));
+            }
+
+            return this.purchaseRepository.GetById(purchaseTransactionId);
         }
     }
 }

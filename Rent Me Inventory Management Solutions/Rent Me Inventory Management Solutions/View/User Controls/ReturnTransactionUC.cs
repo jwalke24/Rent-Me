@@ -25,6 +25,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private Button viewPurchaseTransactionsButton;
         private BindingList<PurchaseTransaction_Item> items;
         private Label label1;
+        private Label extraFeesLabel;
+        private Label extraFeesValueLabel;
         private ReturnTransactionController theController;
 
         /// <summary>
@@ -51,7 +53,42 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.InitializeComponent();
             UserControlType = UserControls.Return;
             this.items = new BindingList<PurchaseTransaction_Item>();
-            theGrid.DataSource = this.items;
+            DataGrid.DataSource = this.items;
+            this.DataGrid.RowsAdded += this.DataGridOnRowsChanged;
+            this.DataGrid.RowsRemoved += this.DataGridOnRowsChanged;
+        }
+
+        private void DataGridOnRowsChanged(object sender, object dataGridViewRowsAddedEventArgs)
+        {
+            try
+            {
+                FurnitureController tempFurnitureController = new FurnitureController();
+                TransactionController tempTransactionController = new TransactionController();
+                decimal total = 0;
+                foreach (var purchaseTransactionItem in DataGrid.DataSource as BindingList<PurchaseTransaction_Item>)
+                {
+                    int daysOut =
+                        (DateTime.Now -
+                         tempTransactionController.GetByID(purchaseTransactionItem.PurchaseTransactionId)
+                                                  .TransactionTime).Days;
+
+                    daysOut -= purchaseTransactionItem.LeaseTime;
+                    if (daysOut < 0)
+                        daysOut = 0;
+                    total += daysOut * tempFurnitureController.GetItemById(int.Parse(purchaseTransactionItem.FurnitureId)).LateFee;
+
+                }
+
+                this.extraFeesValueLabel.Text = string.Format("{0:C}", total);
+            }
+            catch (MySqlException exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Network Exception", "There was an error connecting to the database. Please try again.", exception);
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Unknown Error", "An unknown error occured.", exception);
+            }
         }
 
         /// <summary>
@@ -123,6 +160,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.customerButton = new System.Windows.Forms.Button();
             this.viewPurchaseTransactionsButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.extraFeesLabel = new System.Windows.Forms.Label();
+            this.extraFeesValueLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // submitTransactionButton
@@ -197,9 +236,29 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.label1.Text = "To get started, select a customer, then choose items to return from previous tran" +
     "sactions. ";
             // 
+            // extraFeesLabel
+            // 
+            this.extraFeesLabel.AutoSize = true;
+            this.extraFeesLabel.Location = new System.Drawing.Point(6, 110);
+            this.extraFeesLabel.Name = "extraFeesLabel";
+            this.extraFeesLabel.Size = new System.Drawing.Size(63, 13);
+            this.extraFeesLabel.TabIndex = 27;
+            this.extraFeesLabel.Text = "Extra Fees: ";
+            // 
+            // extraFeesValueLabel
+            // 
+            this.extraFeesValueLabel.AutoSize = true;
+            this.extraFeesValueLabel.Location = new System.Drawing.Point(75, 110);
+            this.extraFeesValueLabel.Name = "extraFeesValueLabel";
+            this.extraFeesValueLabel.Size = new System.Drawing.Size(34, 13);
+            this.extraFeesValueLabel.TabIndex = 28;
+            this.extraFeesValueLabel.Text = "$0.00";
+            // 
             // ReturnTransactionUC
             // 
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.extraFeesValueLabel);
+            this.Controls.Add(this.extraFeesLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.viewPurchaseTransactionsButton);
             this.Controls.Add(this.customerButton);

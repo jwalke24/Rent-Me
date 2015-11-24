@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
@@ -38,9 +39,35 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.itemsToPurchase = new BindingList<PurchaseTransaction_Item>();
             this.session = session;
             this.DataGrid.DataSource = this.itemsToPurchase;
-
+            this.DataGrid.RowsAdded += this.DataGridOnRowsChanged;
+            this.DataGrid.RowsRemoved += this.DataGridOnRowsChanged;
             this.dateTimePicker1.MinDate = DateTime.Now;
             UserControlType = UserControls.Transaction;
+        }
+
+        private void DataGridOnRowsChanged(object sender, object dataGridViewRowsAddedEventArgs)
+        {
+            try
+            {
+                FurnitureController tempFurnitureController = new FurnitureController();
+                decimal total = 0;
+                foreach (var purchaseTransactionItem in DataGrid.DataSource as BindingList<PurchaseTransaction_Item>)
+                {
+                    total += purchaseTransactionItem.LeaseTime *
+                         tempFurnitureController.GetItemById(int.Parse(purchaseTransactionItem.FurnitureId)).Price *
+                         purchaseTransactionItem.Quantity;
+                }
+
+                this.totalPriceLabel.Text = string.Format("{0:C}", total);
+            }
+            catch (MySqlException exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Network Exception", "There was an error connecting to the database. Please try again.", exception);
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Unknown Error","An unknown error occured.", exception);
+            }
         }
 
         private void changeToAddItemState()

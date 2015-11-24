@@ -45,6 +45,8 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.itemIDLabel = new System.Windows.Forms.Label();
             this.startReturnTransactionButton = new System.Windows.Forms.Button();
+            this.totalLabel = new System.Windows.Forms.Label();
+            this.totalPriceLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // voidTransactionButton
@@ -204,11 +206,31 @@
             this.startReturnTransactionButton.UseVisualStyleBackColor = true;
             this.startReturnTransactionButton.Click += new System.EventHandler(this.startReturnTransactionButton_Click);
             // 
+            // totalLabel
+            // 
+            this.totalLabel.AutoSize = true;
+            this.totalLabel.Location = new System.Drawing.Point(7, 57);
+            this.totalLabel.Name = "totalLabel";
+            this.totalLabel.Size = new System.Drawing.Size(37, 13);
+            this.totalLabel.TabIndex = 27;
+            this.totalLabel.Text = "Total: ";
+            // 
+            // totalPriceLabel
+            // 
+            this.totalPriceLabel.AutoSize = true;
+            this.totalPriceLabel.Location = new System.Drawing.Point(50, 57);
+            this.totalPriceLabel.Name = "totalPriceLabel";
+            this.totalPriceLabel.Size = new System.Drawing.Size(34, 13);
+            this.totalPriceLabel.TabIndex = 28;
+            this.totalPriceLabel.Text = "$0.00";
+            // 
             // TransactionUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.totalPriceLabel);
+            this.Controls.Add(this.totalLabel);
             this.Controls.Add(this.startReturnTransactionButton);
             this.Controls.Add(this.itemIDLabel);
             this.Controls.Add(this.dateTimePicker1);
@@ -250,5 +272,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label itemIDLabel;
         private System.Windows.Forms.Button startReturnTransactionButton;
+        private System.Windows.Forms.Label totalLabel;
+        private System.Windows.Forms.Label totalPriceLabel;
     }
 }
