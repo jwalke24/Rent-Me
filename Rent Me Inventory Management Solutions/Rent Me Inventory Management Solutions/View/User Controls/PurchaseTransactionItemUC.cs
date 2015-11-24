@@ -89,7 +89,15 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 this.SelectedItem = DataGrid.SelectedRows[0].DataBoundItem as PurchaseTransaction_Item;
                 try
                 {
-                    this.SelectedItem.Quantity = int.Parse(this.quantityTextBox.Text);
+                    int quantity = int.Parse(this.quantityTextBox.Text);
+                    if (quantity > this.SelectedItem.Quantity)
+                        throw new ArgumentException();
+                    this.SelectedItem.Quantity = quantity;
+                }
+                catch (ArgumentException)
+                {
+                    ErrorHandler.DisplayErrorBox("Quantity Error", "You must select a value that is less than or equal to " + this.SelectedItem.Quantity + ".");
+                    return;
                 }
                 catch
                 {

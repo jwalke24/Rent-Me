@@ -24,6 +24,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private LoginSession theSession;
         private Button viewPurchaseTransactionsButton;
         private BindingList<PurchaseTransaction_Item> items;
+        private Label label1;
         private ReturnTransactionController theController;
 
         /// <summary>
@@ -121,6 +122,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.selectedCustomerLabel = new System.Windows.Forms.Label();
             this.customerButton = new System.Windows.Forms.Button();
             this.viewPurchaseTransactionsButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // submitTransactionButton
@@ -183,9 +185,22 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.viewPurchaseTransactionsButton.Visible = false;
             this.viewPurchaseTransactionsButton.Click += new System.EventHandler(this.viewPurchaseTransactionsButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Location = new System.Drawing.Point(322, 81);
+            this.label1.MaximumSize = new System.Drawing.Size(250, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(232, 28);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "To get started, select a customer, then choose items to return from previous tran" +
+    "sactions. ";
+            // 
             // ReturnTransactionUC
             // 
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.viewPurchaseTransactionsButton);
             this.Controls.Add(this.customerButton);
             this.Controls.Add(this.customerIDLabel);
@@ -246,6 +261,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 return;
             }
 
+            MessageBox.Show(@"Items returned successfully!");
+            this.clearScreen();
+
+        }
+
+        private void clearScreen()
+        {
+            (this.DataGrid.DataSource as BindingList<PurchaseTransaction_Item>)?.Clear();
+            this.customerID = "null";
+            this.displayViewTransactionsButton();
         }
     }
 }
