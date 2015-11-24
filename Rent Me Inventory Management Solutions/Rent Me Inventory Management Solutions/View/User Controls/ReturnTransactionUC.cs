@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.Controller;
 using Rent_Me_Inventory_Management_Solutions.Model;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
@@ -44,6 +45,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         /// <param name="theGrid">The grid.</param>
         public ReturnTransactionUC(DataGridView theGrid)
         {
+            this.theController = new ReturnTransactionController();
             DataGrid = theGrid;
             this.InitializeComponent();
             UserControlType = UserControls.Return;
@@ -228,7 +230,21 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 return;
             }
 
-            this.theController.ReturnItems(this.items,this.theSession);
+            try
+            {
+                this.theController.ReturnItems(this.items, this.theSession);
+            }
+            catch (MySqlException exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Error",
+                    "Unable to process this return transaction. Please try again.", exception);
+                return;
+            }
+            catch (Exception exception)
+            {
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Unknown Error", "An unknown error has occured.", exception);
+                return;
+            }
 
         }
     }

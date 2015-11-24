@@ -82,7 +82,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 MessageBox.Show(@"Please select an item to return.");
             }else if (this.quantityTextBox.Text == "")
             {
-                MessageBox.Show(@"Please set the quantity of the item you would like to return. ")
+                MessageBox.Show(@"Please set the quantity of the item you would like to return. ");
             }
             else
             {
