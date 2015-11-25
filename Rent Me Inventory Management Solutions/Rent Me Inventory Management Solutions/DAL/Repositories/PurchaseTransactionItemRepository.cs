@@ -206,13 +206,14 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
                         var returnedQuantity = reader["ReturnedQuantity"] == DBNull.Value ? 0 : Int32.Parse(reader["ReturnedQuantity"].ToString());
 
-                        if (reader["ReturnTransaction_id"] != DBNull.Value && returnedQuantity >= item.Quantity)
+
+                        if (reader["ReturnTransaction_id"] != DBNull.Value)
                         {
-                            item.Returned = true;
+                            item.ReturnableQuantity = item.Quantity - returnedQuantity;
                         }
                         else
                         {
-                            item.Returned = false;
+                            item.ReturnableQuantity = item.Quantity;
                         }
 
                         items.Add(item);

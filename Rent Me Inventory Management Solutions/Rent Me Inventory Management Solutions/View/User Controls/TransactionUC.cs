@@ -38,7 +38,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.InitializeComponent();
             this.itemsToPurchase = new BindingList<PurchaseTransaction_Item>();
             this.session = session;
-            this.DataGrid.DataSource = this.itemsToPurchase;
             this.DataGrid.RowsAdded += this.DataGridOnRowsChanged;
             this.DataGrid.RowsRemoved += this.DataGridOnRowsChanged;
             this.dateTimePicker1.MinDate = DateTime.Now;
@@ -195,6 +194,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 }
 
                 this.itemsToPurchase.Add(theItem);
+
+                if (this.DataGrid.DataSource == null)
+                {
+                    this.DataGrid.DataSource = this.itemsToPurchase;
+                    this.DataGrid.Columns["ReturnableQuantity"].Visible = false;
+                }
             }
             catch (MySqlException error)
             {

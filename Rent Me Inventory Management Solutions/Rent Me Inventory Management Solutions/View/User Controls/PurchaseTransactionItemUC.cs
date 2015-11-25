@@ -88,23 +88,24 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 this.SelectedItem = DataGrid.SelectedRows[0].DataBoundItem as PurchaseTransaction_Item;
 
-                if (this.SelectedItem.Returned)
-                {
-                    MessageBox.Show(@"That item has already been returned.");
-                    this.SelectedItem = null;
-                    return;
-                }
-
                 try
                 {
                     int quantity = int.Parse(this.quantityTextBox.Text);
-                    if (quantity > this.SelectedItem.Quantity)
+                    if (quantity > this.SelectedItem.ReturnableQuantity || quantity <= 0)
                         throw new ArgumentException();
                     this.SelectedItem.Quantity = quantity;
                 }
                 catch (ArgumentException)
                 {
-                    ErrorHandler.DisplayErrorBox("Quantity Error", "You must select a value that is less than or equal to " + this.SelectedItem.Quantity + ".");
+                    if (this.SelectedItem.ReturnableQuantity == 0)
+                    {
+                        ErrorHandler.DisplayErrorBox("Quantity Error", "Those items have already been returned.");
+                    }
+                    else
+                    {
+                        ErrorHandler.DisplayErrorBox("Quantity Error", "You must select a non-zero value less than or equal to " + this.SelectedItem.ReturnableQuantity + ".");
+                    }
+                    
                     return;
                 }
                 catch

@@ -51,12 +51,11 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
         public string PurchaseTransactionId { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="PurchaseTransaction_Item"/> is returned.
+        /// Gets or sets the returnable quantity.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if returned; otherwise <c>false</c>.
+        /// The returnable quantity.
         /// </value>
-        [Browsable(false)]
-        public bool Returned { get; set; }
+        public int ReturnableQuantity { get; set; }
     }
 }

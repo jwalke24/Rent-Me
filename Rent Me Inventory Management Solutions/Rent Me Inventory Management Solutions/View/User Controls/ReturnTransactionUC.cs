@@ -54,7 +54,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.InitializeComponent();
             UserControlType = UserControls.Return;
             this.items = new BindingList<PurchaseTransaction_Item>();
-            DataGrid.DataSource = this.items;
             this.DataGrid.RowsAdded += this.DataGridOnRowsChanged;
             this.DataGrid.RowsRemoved += this.DataGridOnRowsChanged;
         }
@@ -131,6 +130,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
 
                 this.items.Add(theUC.SelectedItem);
+
+                if (this.DataGrid.DataSource == null)
+                {
+                    this.DataGrid.DataSource = this.items;
+                    this.DataGrid.Columns["ReturnableQuantity"].Visible = false;
+                }
             }
         }
 
