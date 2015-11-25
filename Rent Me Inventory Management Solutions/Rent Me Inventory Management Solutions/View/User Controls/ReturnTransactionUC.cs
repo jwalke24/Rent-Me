@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -307,6 +308,16 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             try
             {
                 this.theController.ReturnItems(this.items, this.theSession);
+
+                var furnitureController = new FurnitureController();
+                var furnitureIdQuantities = new Dictionary<string, int>();
+
+                foreach (var item in this.items)
+                {
+                    furnitureIdQuantities.Add(item.FurnitureId, -(item.Quantity));
+                }
+
+                furnitureController.UpdateQuantitiesByIds(furnitureIdQuantities);
             }
             catch (MySqlException exception)
             {
