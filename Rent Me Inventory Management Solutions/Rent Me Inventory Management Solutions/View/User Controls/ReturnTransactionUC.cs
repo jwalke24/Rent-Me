@@ -128,7 +128,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (theUC != null && theUC.SelectedItem != null)
             {
-                
+
                 this.items.Add(theUC.SelectedItem);
             }
         }

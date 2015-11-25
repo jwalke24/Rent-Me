@@ -87,6 +87,14 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             else
             {
                 this.SelectedItem = DataGrid.SelectedRows[0].DataBoundItem as PurchaseTransaction_Item;
+
+                if (this.SelectedItem.Returned)
+                {
+                    MessageBox.Show(@"That item has already been returned.");
+                    this.SelectedItem = null;
+                    return;
+                }
+
                 try
                 {
                     int quantity = int.Parse(this.quantityTextBox.Text);

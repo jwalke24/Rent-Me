@@ -169,7 +169,14 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
 
             var items = new List<PurchaseTransaction_Item>();
 
-            var query = "SELECT PurchaseTransaction_Item.*, Furniture.name AS FurnitureName FROM PurchaseTransaction_Item, Furniture WHERE PurchaseTransaction_id=@Id AND PurchaseTransaction_Item.Furniture_id=Furniture.id";
+            var query = "SELECT PurchaseTransaction_Item.*, Furniture.name AS FurnitureName, ReturnTransaction_Item.ReturnTransaction_id, SUM(ReturnTransaction_Item.quantity) AS ReturnedQuantity " +
+                        "FROM PurchaseTransaction_Item " +
+                        "INNER JOIN Furniture " +
+                        "ON PurchaseTransaction_Item.Furniture_id=Furniture.id " +
+                        "LEFT JOIN ReturnTransaction_Item " +
+                        "ON PurchaseTransaction_Item.PurchaseTransaction_id=ReturnTransaction_Item.PurchaseTransaction_Item_PurchaseTransaction_id " +
+                        "WHERE PurchaseTransaction_id=@Id " +
+                        "GROUP BY PurchaseTransaction_Item.Furniture_id, PurchaseTransaction_Item.PurchaseTransaction_id";
 
             var connection = new MySqlConnection(this.CONNECTION_STRING);
 
@@ -196,6 +203,18 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                             LeaseTime = reader["leaseTime"] == DBNull.Value ? 0 : (int) reader["leaseTime"],
                             FurnitureName = reader["FurnitureName"] == DBNull.Value ? "NULL" : reader["FurnitureName"].ToString()
                         };
+
+                        var returnedQuantity = reader["ReturnedQuantity"] == DBNull.Value ? 0 : Int32.Parse(reader["ReturnedQuantity"].ToString());
+
+                        if (reader["ReturnTransaction_id"] != DBNull.Value && returnedQuantity >= item.Quantity)
+                        {
+                            item.Returned = true;
+                        }
+                        else
+                        {
+                            item.Returned = false;
+                        }
+
                         items.Add(item);
                     }
 
