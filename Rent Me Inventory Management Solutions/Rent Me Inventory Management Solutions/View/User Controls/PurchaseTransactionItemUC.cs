@@ -49,6 +49,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             try
             {
                 DataGrid.DataSource = new BindingList<PurchaseTransaction_Item>(this.theController.GetAllItemsByPurchaseTransaction(this.transaction));
+                var dataGridViewColumn = DataGrid.Columns["FurnitureId"];
+                if (dataGridViewColumn != null)
+                {
+                    dataGridViewColumn.Visible = false;
+                }
             }
             catch (MySqlException)
             {

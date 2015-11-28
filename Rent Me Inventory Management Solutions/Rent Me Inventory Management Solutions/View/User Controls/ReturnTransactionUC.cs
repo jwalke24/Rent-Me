@@ -60,6 +60,12 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void DataGridOnRowsChanged(object sender, object dataGridViewRowsAddedEventArgs)
         {
+            var dataGridViewColumn = DataGrid.Columns["FurnitureId"];
+            if (dataGridViewColumn != null)
+            {
+                dataGridViewColumn.Visible = false;
+            }
+
             try
             {
                 FurnitureController tempFurnitureController = new FurnitureController();
@@ -75,7 +81,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                     daysOut -= purchaseTransactionItem.LeaseTime;
                     if (daysOut < 0)
                         daysOut = 0;
-                    total += daysOut * tempFurnitureController.GetItemById(int.Parse(purchaseTransactionItem.FurnitureId)).LateFee;
+                    Furniture tempFurniture =
+                        tempFurnitureController.GetItemById(int.Parse(purchaseTransactionItem.FurnitureId));
+                    total += daysOut * (tempFurniture.LateFee + tempFurniture.Price);
 
                 }
 
