@@ -94,9 +94,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.Views
                     case UserControls.Employee:
                         this.displayNewUserControl(new EmployeeUC(dataGrid));
                         break;
-                    case UserControls.CategoryStyle:
-                        this.displayNewUserControl(new CategoryStyleUC(dataGrid));
-                        break;
                     case UserControls.Return:
                         this.displayNewUserControl(new ReturnTransactionUC(dataGrid));
                         break;

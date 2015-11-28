@@ -79,12 +79,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             CurrentState = RentMeUserControlPrimaryStates.Hiding;
         }
 
-        private void editCatStyleButton_Click(object sender, EventArgs e)
-        {
-            SwitchTo = UserControls.CategoryStyle;
-            CurrentState = RentMeUserControlPrimaryStates.Hiding;
-        }
-
         private void executeSQLButton_Click(object sender, EventArgs e)
         {
             try

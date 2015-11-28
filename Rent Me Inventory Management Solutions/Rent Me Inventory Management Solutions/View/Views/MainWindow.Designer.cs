@@ -37,9 +37,9 @@
             // 
             // logoutButton
             // 
-            this.logoutButton.Location = new System.Drawing.Point(782, 423);
+            this.logoutButton.Location = new System.Drawing.Point(700, 423);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(71, 23);
+            this.logoutButton.Size = new System.Drawing.Size(153, 23);
             this.logoutButton.TabIndex = 5;
             this.logoutButton.Text = "Log Out";
             this.logoutButton.UseVisualStyleBackColor = true;
@@ -58,7 +58,7 @@
             // dateLabel
             // 
             this.dateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateLabel.Location = new System.Drawing.Point(702, 332);
+            this.dateLabel.Location = new System.Drawing.Point(697, 332);
             this.dateLabel.Name = "dateLabel";
             this.dateLabel.Size = new System.Drawing.Size(71, 13);
             this.dateLabel.TabIndex = 7;

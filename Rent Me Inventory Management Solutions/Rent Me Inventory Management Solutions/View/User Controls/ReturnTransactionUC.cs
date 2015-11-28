@@ -134,7 +134,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 if (this.DataGrid.DataSource == null)
                 {
                     this.DataGrid.DataSource = this.items;
-                    this.DataGrid.Columns["ReturnableQuantity"].Visible = false;
+                    var dataGridViewColumn = this.DataGrid.Columns["ReturnableQuantity"];
+                    if (dataGridViewColumn != null)
+                    {
+                        dataGridViewColumn.Visible = false;
+                    }
                 }
             }
         }

@@ -104,12 +104,6 @@
     <Compile Include="View\User Controls\BSMiddleClass.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\User Controls\CategoryStyleUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\User Controls\CategoryStyleUC.Designer.cs">
-      <DependentUpon>CategoryStyleUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\User Controls\CustomerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -171,9 +165,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\User Controls\AdminUC.resx">
       <DependentUpon>AdminUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\User Controls\CategoryStyleUC.resx">
-      <DependentUpon>CategoryStyleUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\User Controls\CustomerUC.resx">
       <DependentUpon>CustomerUC.cs</DependentUpon>

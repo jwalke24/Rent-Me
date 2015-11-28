@@ -1,4 +1,6 @@
-﻿namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
+﻿using System;
+
+namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 {
     /// <summary>
     /// This class represents an Employee of RentMe Furniture.
@@ -7,6 +9,9 @@
     /// <version>Fall 2015</version>
     internal class Employee
     {
+        private string phoneNumber;
+        private string ssn;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Employee"/> class.
         /// </summary>
@@ -45,7 +50,24 @@
         /// <value>
         ///     The SSN.
         /// </value>
-        public string SSN { get; set; }
+        public string SSN {
+            get { return this.ssn; }
+            set
+            {
+                if (value.Length != 9)
+                {
+                    throw new ArgumentException("Invalid SSN");
+                }
+                try
+                {
+                    long.Parse(value);
+                    this.ssn = value;
+                }
+                catch
+                {
+                    throw new ArgumentException("Invalid SSN");
+                }
+            } }
 
         /// <summary>
         ///     Gets or sets the phone number.
@@ -53,7 +75,27 @@
         /// <value>
         ///     The phone number.
         /// </value>
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber {
+            get { return this.phoneNumber; }
+            set
+            {
+                if (value.Length != 10)
+                {
+                    throw new ArgumentException("Invalid phone number");
+                }
+
+                try
+                {
+                    
+                    long.Parse(value);
+                    this.phoneNumber = value;
+
+                }
+                catch
+                {
+                    throw new ArgumentException("Invalid phone number");
+                }
+            } }
 
         /// <summary>
         /// Gets or sets the employee address.
