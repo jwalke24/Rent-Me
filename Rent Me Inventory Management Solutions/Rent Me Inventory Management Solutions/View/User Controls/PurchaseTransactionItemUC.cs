@@ -84,10 +84,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (DataGrid.SelectedRows.Count == 0)
             {
-                MessageBox.Show(@"Please select an item to return.");
+                ErrorHandler.DisplayErrorBox("No Item Selected", "Please select an item to return.");
             }else if (this.quantityTextBox.Text == "")
             {
-                MessageBox.Show(@"Please set the quantity of the item you would like to return. ");
+                ErrorHandler.DisplayErrorBox("Quantity Not Specified", "Please set the quantity of the item you would like to return.");
             }
             else
             {

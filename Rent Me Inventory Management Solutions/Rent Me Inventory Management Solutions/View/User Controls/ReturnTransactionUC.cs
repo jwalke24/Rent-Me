@@ -93,7 +93,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             }
             catch (MySqlException exception)
             {
-                ErrorHandler.DisplayErrorMessageToUserAndLog("Network Exception", "There was an error connecting to the database. Please try again.", exception);
+                ErrorHandler.DisplayErrorMessageToUserAndLog("Network Error", "There was an error connecting to the database. Please try again.", exception);
             }
             catch (Exception exception)
             {
@@ -145,8 +145,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                     var totalQty = dupItem.Quantity + theUC.SelectedItem.Quantity;
                     if (totalQty > theUC.SelectedItem.ReturnableQuantity)
                     {
-                        MessageBox.Show(@"The selected item has already been added to the transaction.",
-                            @"Duplicate Item");
+                        ErrorHandler.DisplayErrorBox("Duplicate Item", "The selected item has already been added to the transaction.");
                     }
                     else
                     {
@@ -354,13 +353,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (string.IsNullOrEmpty(customerID) || customerID == "null")
             {
-                ErrorHandler.DisplayErrorBox("Error","Please select a customer before submitting the transaction.");
+                ErrorHandler.DisplayErrorBox("Customer Not Selected","Please select a customer before submitting the transaction.");
                 return;
             }
 
             if (this.items.Count < 1)
             {
-                ErrorHandler.DisplayErrorBox("Error", "You must add at least one item before submitting the transaction.");
+                ErrorHandler.DisplayErrorBox("Items Not Selected", "You must add at least one item before submitting the transaction.");
                 return;
             }
 
@@ -390,7 +389,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 return;
             }
 
-            MessageBox.Show(@"Items returned successfully!");
+            MessageBox.Show(@"Items returned successfully!", @"Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.clearScreen();
 
         }
@@ -406,7 +405,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (DataGrid.SelectedRows.Count == 0)
             {
-                MessageBox.Show(@"You must select an item before you can void it.");
+                ErrorHandler.DisplayErrorBox("Item Not Selected", "You must select an item before you can void it.");
             }
             else
             {
