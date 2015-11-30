@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using MySql.Data.MySqlClient;
 using Rent_Me_Inventory_Management_Solutions.DAL.Interfaces;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
@@ -349,7 +350,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
         /// Updates the quantities from list of ids.
         /// </summary>
         /// <param name="furnitureIdQuantities">The furniture identifier quantities.</param>
-        public void UpdateQuantitiesFromListOfIds(Dictionary<string, int> furnitureIdQuantities)
+        public void UpdateQuantitiesFromListOfIds(IList<PurchaseTransaction_Item> furnitureId)
         {
 
             const string updateQuery = "UPDATE Furniture SET quantity=quantity - @Quantity WHERE id=@Id";
@@ -367,10 +368,10 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                     command.Parameters.Add("@Quantity", MySqlDbType.Int32);
                     command.Parameters.Add("@Id", MySqlDbType.Int32);
 
-                    foreach (var key in furnitureIdQuantities.Keys)
+                    foreach (var item in furnitureId)
                     {
-                        command.Parameters["@Id"].Value = int.Parse(key);
-                        command.Parameters["@Quantity"].Value = furnitureIdQuantities[key];
+                        command.Parameters["@Id"].Value = item.FurnitureId;
+                        command.Parameters["@Quantity"].Value = item.Quantity;
                         command.ExecuteNonQuery();
                     }
 

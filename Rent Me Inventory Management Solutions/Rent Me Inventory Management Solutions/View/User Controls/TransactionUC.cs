@@ -350,14 +350,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
                 theController.AddPurchaseTransaction(transaction);
 
-                var furnitureIdQuantities = new Dictionary<string, int>();
-
-                foreach (var item in transaction.Items)
-                {
-                    furnitureIdQuantities.Add(item.FurnitureId, item.Quantity);
-                }
-
-                furnitureController.UpdateQuantitiesByIds(furnitureIdQuantities);
+                furnitureController.UpdateQuantitiesByIds(transaction.Items);
                 MessageBox.Show("Your transaction was completed successfully.", "Transaction Successful",
                     MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 this.clearTransaction();

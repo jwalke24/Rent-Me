@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
 namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
@@ -29,6 +30,6 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Interfaces
         /// Updates the quantities from list of ids.
         /// </summary>
         /// <param name="furnitureIdQuantities">The furniture identifier quantities.</param>
-        void UpdateQuantitiesFromListOfIds(Dictionary<string, int> furnitureIdQuantities);
+        void UpdateQuantitiesFromListOfIds(IList<PurchaseTransaction_Item> furnitureIdQuantities);
     }
 }

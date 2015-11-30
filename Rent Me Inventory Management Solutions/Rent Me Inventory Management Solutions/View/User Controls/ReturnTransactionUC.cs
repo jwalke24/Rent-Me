@@ -368,14 +368,13 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 this.theController.ReturnItems(this.items, this.theSession);
 
                 var furnitureController = new FurnitureController();
-                var furnitureIdQuantities = new Dictionary<string, int>();
 
                 foreach (var item in this.items)
                 {
-                    furnitureIdQuantities.Add(item.FurnitureId, -(item.Quantity));
+                    item.Quantity = -item.Quantity;
                 }
 
-                furnitureController.UpdateQuantitiesByIds(furnitureIdQuantities);
+                furnitureController.UpdateQuantitiesByIds(this.items);
             }
             catch (MySqlException exception)
             {

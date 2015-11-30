@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Rent_Me_Inventory_Management_Solutions.DAL.Repositories;
 using Rent_Me_Inventory_Management_Solutions.Model.Database_Objects;
 
@@ -126,10 +127,11 @@ namespace Rent_Me_Inventory_Management_Solutions.Controller
         /// <summary>
         /// Updates the quantities by ids.
         /// </summary>
+        /// <param name="items"></param>
         /// <param name="furnitureIdQuantities">The furniture identifier quantities.</param>
-        public void UpdateQuantitiesByIds(Dictionary<string, int> furnitureIdQuantities)
+        public void UpdateQuantitiesByIds(IList<PurchaseTransaction_Item> items)
         {
-            this.theRepository.UpdateQuantitiesFromListOfIds(furnitureIdQuantities);
+            this.theRepository.UpdateQuantitiesFromListOfIds(items);
         }
     }
 }
