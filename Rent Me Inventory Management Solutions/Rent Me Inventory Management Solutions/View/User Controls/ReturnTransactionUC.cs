@@ -28,6 +28,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private Label label1;
         private Label extraFeesLabel;
         private Label extraFeesValueLabel;
+        private Button voidItemButton;
+        private Button voidTransactionButton;
         private readonly ReturnTransactionController theController;
 
         /// <summary>
@@ -196,6 +198,8 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.label1 = new System.Windows.Forms.Label();
             this.extraFeesLabel = new System.Windows.Forms.Label();
             this.extraFeesValueLabel = new System.Windows.Forms.Label();
+            this.voidItemButton = new System.Windows.Forms.Button();
+            this.voidTransactionButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // submitTransactionButton
@@ -262,7 +266,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             // 
             this.label1.AutoSize = true;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Location = new System.Drawing.Point(322, 81);
+            this.label1.Location = new System.Drawing.Point(320, 4);
             this.label1.MaximumSize = new System.Drawing.Size(250, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(232, 28);
@@ -288,9 +292,31 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.extraFeesValueLabel.TabIndex = 28;
             this.extraFeesValueLabel.Text = "$0.00";
             // 
+            // voidItemButton
+            // 
+            this.voidItemButton.Location = new System.Drawing.Point(457, 81);
+            this.voidItemButton.Name = "voidItemButton";
+            this.voidItemButton.Size = new System.Drawing.Size(95, 23);
+            this.voidItemButton.TabIndex = 29;
+            this.voidItemButton.Text = "Void Item";
+            this.voidItemButton.UseVisualStyleBackColor = true;
+            this.voidItemButton.Click += new System.EventHandler(this.voidItemButton_Click);
+            // 
+            // voidTransactionButton
+            // 
+            this.voidTransactionButton.Location = new System.Drawing.Point(457, 110);
+            this.voidTransactionButton.Name = "voidTransactionButton";
+            this.voidTransactionButton.Size = new System.Drawing.Size(95, 23);
+            this.voidTransactionButton.TabIndex = 30;
+            this.voidTransactionButton.Text = "Void Transaction";
+            this.voidTransactionButton.UseVisualStyleBackColor = true;
+            this.voidTransactionButton.Click += new System.EventHandler(this.voidTransactionButton_Click);
+            // 
             // ReturnTransactionUC
             // 
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.voidTransactionButton);
+            this.Controls.Add(this.voidItemButton);
             this.Controls.Add(this.extraFeesValueLabel);
             this.Controls.Add(this.extraFeesLabel);
             this.Controls.Add(this.label1);
@@ -374,6 +400,26 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             (this.DataGrid.DataSource as BindingList<PurchaseTransaction_Item>)?.Clear();
             this.customerID = "null";
             this.displayViewTransactionsButton();
+        }
+
+        private void voidItemButton_Click(object sender, EventArgs e)
+        {
+            if (DataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(@"You must select an item before you can void it.");
+            }
+            else
+            {
+                this.items.Remove(DataGrid.SelectedRows[0].DataBoundItem as PurchaseTransaction_Item);
+            }
+        }
+
+        private void voidTransactionButton_Click(object sender, EventArgs e)
+        {
+            this.items.Clear();
+            this.customerID = "null";
+            this.viewPurchaseTransactionsButton.Enabled = false;
+            this.viewPurchaseTransactionsButton.Visible = false;
         }
     }
 }

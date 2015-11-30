@@ -110,7 +110,6 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                     {
                         ErrorHandler.DisplayErrorBox("Quantity Error", "You must select a non-zero value less than or equal to " + this.SelectedItem.ReturnableQuantity + ".");
                     }
-                    
                     return;
                 }
                 catch
@@ -124,6 +123,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            this.SelectedItem = null;
             CurrentState = RentMeUserControlPrimaryStates.Deleting;
         }
     }
