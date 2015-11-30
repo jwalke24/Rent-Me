@@ -174,7 +174,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                         "INNER JOIN Furniture " +
                         "ON PurchaseTransaction_Item.Furniture_id=Furniture.id " +
                         "LEFT JOIN ReturnTransaction_Item " +
-                        "ON PurchaseTransaction_Item.PurchaseTransaction_id=ReturnTransaction_Item.PurchaseTransaction_Item_PurchaseTransaction_id " +
+                        "ON PurchaseTransaction_Item.PurchaseTransaction_id=ReturnTransaction_Item.PurchaseTransaction_Item_PurchaseTransaction_id AND PurchaseTransaction_Item.Furniture_id = ReturnTransaction_Item.PurchaseTransaction_Item_Furniture_id " +
                         "WHERE PurchaseTransaction_id=@Id " +
                         "GROUP BY PurchaseTransaction_Item.Furniture_id, PurchaseTransaction_Item.PurchaseTransaction_id";
 
@@ -204,7 +204,7 @@ namespace Rent_Me_Inventory_Management_Solutions.DAL.Repositories
                             FurnitureName = reader["FurnitureName"] == DBNull.Value ? "NULL" : reader["FurnitureName"].ToString()
                         };
 
-                        var returnedQuantity = reader["ReturnedQuantity"] == DBNull.Value ? 0 : Int32.Parse(reader["ReturnedQuantity"].ToString());
+                        var returnedQuantity = reader["ReturnedQuantity"] == DBNull.Value ? 0: Int32.Parse(reader["ReturnedQuantity"].ToString());
 
 
                         if (reader["ReturnTransaction_id"] != DBNull.Value)

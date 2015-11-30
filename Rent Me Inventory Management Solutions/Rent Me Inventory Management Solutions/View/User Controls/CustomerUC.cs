@@ -151,7 +151,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (this.theSession != null && this.theSession.IsAuthenticated && this.theSession.IsAdmin)
             {
-                this.deleteMemberButton.Visible = true;
+                //this.deleteMemberButton.Visible = true;
             }
         }
 
@@ -171,7 +171,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.cancelButton.Visible = true;
 
             this.panel1.Visible = true;
-            this.deleteMemberButton.Visible = false;
+            //this.deleteMemberButton.Visible = false;
 
             this.clearTextBoxes();
         }
