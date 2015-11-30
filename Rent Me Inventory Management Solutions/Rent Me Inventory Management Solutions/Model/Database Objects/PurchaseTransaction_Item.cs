@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
 {
@@ -57,5 +58,23 @@ namespace Rent_Me_Inventory_Management_Solutions.Model.Database_Objects
         /// The returnable quantity.
         /// </value>
         public int ReturnableQuantity { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                var item = (PurchaseTransaction_Item) obj;
+                return this.FurnitureId == item.FurnitureId && this.PurchaseTransactionId == item.PurchaseTransactionId;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

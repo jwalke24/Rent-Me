@@ -24,11 +24,11 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         private Button cancelButton;
         private LoginSession theSession;
         private Button viewPurchaseTransactionsButton;
-        private BindingList<PurchaseTransaction_Item> items;
+        private readonly BindingList<PurchaseTransaction_Item> items;
         private Label label1;
         private Label extraFeesLabel;
         private Label extraFeesValueLabel;
-        private ReturnTransactionController theController;
+        private readonly ReturnTransactionController theController;
 
         /// <summary>
         /// Gets or sets the customer identifier.
@@ -136,6 +136,22 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
         {
             if (theUC != null && theUC.SelectedItem != null)
             {
+                if (this.items.Contains(theUC.SelectedItem))
+                {
+                    var dupIndex = this.items.IndexOf(theUC.SelectedItem);
+                    var dupItem = this.items[dupIndex];
+                    var totalQty = dupItem.Quantity + theUC.SelectedItem.Quantity;
+                    if (totalQty > theUC.SelectedItem.ReturnableQuantity)
+                    {
+                        MessageBox.Show(@"The selected item has already been added to the transaction.",
+                            @"Duplicate Item");
+                    }
+                    else
+                    {
+                        dupItem.Quantity += theUC.SelectedItem.Quantity;
+                    }
+                    return;
+                }
 
                 this.items.Add(theUC.SelectedItem);
 
