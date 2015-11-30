@@ -201,7 +201,10 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void deleteEmployeeButton_Click(object sender, EventArgs e)
         {
-            if (DataGrid.SelectedRows.Count == 0)
+            ErrorHandler.DisplayErrorBox("Not Implemented", "This feature is not implemented.");
+
+
+            /*if (DataGrid.SelectedRows.Count == 0)
             {
                 ErrorHandler.DisplayErrorBox("Error", "Please select an employee to delete.");
                 return;
@@ -219,7 +222,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             {
                 ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to delete employee from database.",
                     exception);
-            }
+            }*/
         }
     }
 }

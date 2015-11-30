@@ -463,7 +463,9 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            if (DataGrid.SelectedRows.Count == 0)
+            ErrorHandler.DisplayErrorBox("Not Implemented","This feature is not implemented.");
+
+            /*if (DataGrid.SelectedRows.Count == 0)
             {
                 ErrorHandler.DisplayErrorBox("Error", "Please select an item to delete.");
                 return;
@@ -480,7 +482,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             catch (Exception exception)
             {
                 ErrorHandler.DisplayErrorMessageToUserAndLog("Error", "Failed to delete item from database.", exception);
-            }
+            }*/
         }
 
         private void editButton_Click(object sender, EventArgs e)

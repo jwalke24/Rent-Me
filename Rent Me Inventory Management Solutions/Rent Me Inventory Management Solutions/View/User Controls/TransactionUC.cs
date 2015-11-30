@@ -91,6 +91,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.submitTransactionButton.Enabled = false;
             this.customerButton.Enabled = false;
             this.inventoryButton.Enabled = false;
+            this.startReturnTransactionButton.Enabled = false;
         }
 
         private void changeToMainState()
@@ -115,6 +116,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
             this.submitTransactionButton.Enabled = true;
             this.customerButton.Enabled = true;
             this.inventoryButton.Enabled = true;
+            this.startReturnTransactionButton.Enabled = true;
         }
 
         private void voidButton_Click(object sender, EventArgs e)
