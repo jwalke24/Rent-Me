@@ -353,7 +353,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 theController.AddPurchaseTransaction(transaction);
 
                 furnitureController.UpdateQuantitiesByIds(transaction.Items);
-                MessageBox.Show("Your transaction was completed successfully.", "Transaction Successful",
+                MessageBox.Show(this.itemsToPurchase.Count + @" item(s) were purchased for a total of " + this.totalPriceLabel.Text + ".", @"Transaction Successful",
                     MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 this.clearTransaction();
             }

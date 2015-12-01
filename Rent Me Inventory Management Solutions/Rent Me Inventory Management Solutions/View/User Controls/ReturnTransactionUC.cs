@@ -79,7 +79,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                         (DateTime.Now -
                          tempTransactionController.GetByID(purchaseTransactionItem.PurchaseTransactionId)
                                                   .TransactionTime).Days;
-
+                    daysOut++;
                     daysOut -= purchaseTransactionItem.LeaseTime;
                     if (daysOut < 0)
                         daysOut = 0;
@@ -388,7 +388,7 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 return;
             }
 
-            MessageBox.Show(@"Items returned successfully!", @"Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this.items.Count + @" item(s) returned successfully! Extra Fees: " + this.extraFeesValueLabel.Text, @"Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.clearScreen();
 
         }
