@@ -73,20 +73,24 @@ namespace Rent_Me_Inventory_Management_Solutions.View.User_Controls
                 FurnitureController tempFurnitureController = new FurnitureController();
                 TransactionController tempTransactionController = new TransactionController();
                 decimal total = 0;
-                foreach (var purchaseTransactionItem in DataGrid.DataSource as BindingList<PurchaseTransaction_Item>)
+                var purchaseTransactionItems = DataGrid.DataSource as BindingList<PurchaseTransaction_Item>;
+                if (purchaseTransactionItems != null)
                 {
-                    int daysOut =
-                        (DateTime.Now -
-                         tempTransactionController.GetByID(purchaseTransactionItem.PurchaseTransactionId)
-                                                  .TransactionTime).Days;
-                    daysOut++;
-                    daysOut -= purchaseTransactionItem.LeaseTime;
-                    if (daysOut < 0)
-                        daysOut = 0;
-                    Furniture tempFurniture =
-                        tempFurnitureController.GetItemById(int.Parse(purchaseTransactionItem.FurnitureId));
-                    total += daysOut * (tempFurniture.LateFee + tempFurniture.Price);
+                    foreach (var purchaseTransactionItem in purchaseTransactionItems)
+                    {
+                        int daysOut =
+                            (DateTime.Now -
+                             tempTransactionController.GetByID(purchaseTransactionItem.PurchaseTransactionId)
+                                                      .TransactionTime).Days;
+                        daysOut++;
+                        daysOut -= purchaseTransactionItem.LeaseTime;
+                        if (daysOut < 0)
+                            daysOut = 0;
+                        Furniture tempFurniture =
+                            tempFurnitureController.GetItemById(int.Parse(purchaseTransactionItem.FurnitureId));
+                        total += daysOut * (tempFurniture.LateFee + tempFurniture.Price);
 
+                    }
                 }
 
                 this.extraFeesValueLabel.Text = string.Format("{0:C}", total);
